@@ -4,6 +4,9 @@
 
 package com.mycompany.proyecto_final_abd_autosamistosos;
 
+import UI.VentanaLogin;
+import javax.swing.SwingUtilities;
+
 /**
  *
  * @author Eduardo
@@ -11,6 +14,17 @@ package com.mycompany.proyecto_final_abd_autosamistosos;
 public class Proyecto_Final_ABD_AutosAmistosos {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+       
+               SwingUtilities.invokeLater(new Runnable() {
+
+            @Override
+            public void run() {
+
+                new VentanaLogin();
+
+            }
+        });
+        
+        
     }
 }
