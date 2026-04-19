@@ -8,7 +8,6 @@ package UI;
 
 
 import java.sql.ResultSet;
-
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
@@ -19,11 +18,10 @@ import javax.swing.*;
 
 public class VentanaInicio extends javax.swing.JFrame{
    
-   
+    private NavegacionController nav = new NavegacionController();
     
     LocalDate hoy = LocalDate.now();
     
-    ResultSet rs;
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VentanaInicio.class.getName());
 
@@ -1060,30 +1058,7 @@ public class VentanaInicio extends javax.swing.JFrame{
     }// </editor-fold>//GEN-END:initComponents
 
    
-    public void ocultarInternal(JInternalFrame internalVisible, JInternalFrame... internals){
-        
-        for(JInternalFrame i : internals){
-            
-            i.setVisible(false);
-            
-        }
-        
-        internalVisible.setVisible(true);
-        internalVisible.toFront();
-        
-    }
-    
-    public void cambiarColorBoton(JButton btnCorrecto, JButton... btnMenu){
-        
-        btnCorrecto.setBackground(new java.awt.Color(214,198,152));
-        
-        for(JButton i : btnMenu){
-            
-            i.setBackground(new java.awt.Color(227,211,163));
-            
-        }
-        
-    }
+ 
     
     // ============================================== VENTANA VEHICULOS ================================================================
     
@@ -1108,9 +1083,9 @@ public class VentanaInicio extends javax.swing.JFrame{
 
     private void btnHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeActionPerformed
         
-        cambiarColorBoton(btnHome, btnVehiculos, btnModelos, btnVentas, btnClientes, btnEmpleados, btnDocumentacion);
+        nav.marcarBotonActivo(btnHome, btnVehiculos, btnModelos, btnVentas, btnClientes, btnEmpleados, btnDocumentacion);
         
-        ocultarInternal(internalHome, internalVehiculos, internalModelos, internalVentas, internalProximamente, internalVehiculosEliminados);
+        nav.mostrarPanel(internalHome, internalVehiculos, internalModelos, internalVentas, internalProximamente, internalVehiculosEliminados);
         
 
        
@@ -1118,51 +1093,51 @@ public class VentanaInicio extends javax.swing.JFrame{
 
     private void btnVehiculosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVehiculosActionPerformed
 
-        cambiarColorBoton(btnVehiculos, btnHome, btnModelos, btnVentas, btnClientes, btnEmpleados, btnDocumentacion);
+        nav.marcarBotonActivo(btnVehiculos, btnHome, btnModelos, btnVentas, btnClientes, btnEmpleados, btnDocumentacion);
         
-        ocultarInternal(internalVehiculos, internalHome, internalModelos, internalVentas, internalProximamente, internalVehiculosEliminados);
+         nav.mostrarPanel(internalVehiculos, internalHome, internalModelos, internalVentas, internalProximamente, internalVehiculosEliminados);
         
     }//GEN-LAST:event_btnVehiculosActionPerformed
 
     private void btnModelosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModelosActionPerformed
 
-        cambiarColorBoton(btnModelos, btnVehiculos, btnHome, btnVentas, btnClientes, btnEmpleados, btnDocumentacion);
+        nav.marcarBotonActivo(btnModelos, btnVehiculos, btnHome, btnVentas, btnClientes, btnEmpleados, btnDocumentacion);
         
-        ocultarInternal(internalModelos, internalVehiculos, internalHome, internalVentas, internalProximamente, internalVehiculosEliminados);
+         nav.mostrarPanel(internalModelos, internalVehiculos, internalHome, internalVentas, internalProximamente, internalVehiculosEliminados);
         
     }//GEN-LAST:event_btnModelosActionPerformed
 
     private void btnVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVentasActionPerformed
 
-        cambiarColorBoton(btnVentas, btnVehiculos, btnHome, btnModelos, btnClientes, btnEmpleados, btnDocumentacion);
+        nav.marcarBotonActivo(btnVentas, btnVehiculos, btnHome, btnModelos, btnClientes, btnEmpleados, btnDocumentacion);
         
-        ocultarInternal(internalVentas, internalVehiculos, internalModelos, internalHome, internalProximamente, internalVehiculosEliminados);
+         nav.mostrarPanel(internalVentas, internalVehiculos, internalModelos, internalHome, internalProximamente, internalVehiculosEliminados);
         
     }//GEN-LAST:event_btnVentasActionPerformed
 
     private void btnEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmpleadosActionPerformed
 
-        cambiarColorBoton(btnEmpleados, btnVehiculos, btnHome, btnModelos, btnVentas, btnClientes, btnDocumentacion);
+        nav.marcarBotonActivo(btnEmpleados, btnVehiculos, btnHome, btnModelos, btnVentas, btnClientes, btnDocumentacion);
         
-        ocultarInternal(internalProximamente, internalVehiculos, internalModelos, internalVentas, internalHome, internalVehiculosEliminados);
+         nav.mostrarPanel(internalProximamente, internalVehiculos, internalModelos, internalVentas, internalHome, internalVehiculosEliminados);
         
     }//GEN-LAST:event_btnEmpleadosActionPerformed
 
     private void btnClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesActionPerformed
         
 
-        cambiarColorBoton(btnClientes, btnVehiculos, btnHome, btnModelos, btnVentas, btnEmpleados, btnDocumentacion);
+        nav.marcarBotonActivo(btnClientes, btnVehiculos, btnHome, btnModelos, btnVentas, btnEmpleados, btnDocumentacion);
         
-        ocultarInternal(internalProximamente, internalVehiculos, internalModelos, internalVentas, internalHome, internalVehiculosEliminados);
+         nav.mostrarPanel(internalProximamente, internalVehiculos, internalModelos, internalVentas, internalHome, internalVehiculosEliminados);
         
     }//GEN-LAST:event_btnClientesActionPerformed
 
     private void btnDocumentacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDocumentacionActionPerformed
         
  
-        cambiarColorBoton(btnDocumentacion, btnVehiculos, btnHome, btnModelos, btnVentas, btnEmpleados, btnClientes);
+        nav.marcarBotonActivo(btnDocumentacion, btnVehiculos, btnHome, btnModelos, btnVentas, btnEmpleados, btnClientes);
         
-        ocultarInternal(internalProximamente, internalVehiculos, internalModelos, internalVentas, internalHome, internalVehiculosEliminados);
+        nav.mostrarPanel(internalProximamente, internalVehiculos, internalModelos, internalVentas, internalHome, internalVehiculosEliminados);
         
     }//GEN-LAST:event_btnDocumentacionActionPerformed
 
