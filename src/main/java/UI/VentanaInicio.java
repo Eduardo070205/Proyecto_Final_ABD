@@ -1060,6 +1060,19 @@ public class VentanaInicio extends javax.swing.JFrame{
     }// </editor-fold>//GEN-END:initComponents
 
    
+    public void ocultarInternal(JInternalFrame internalVisible, JInternalFrame... internals){
+        
+        for(JInternalFrame i : internals){
+            
+            i.setVisible(false);
+            
+        }
+        
+        internalVisible.setVisible(true);
+        internalVisible.toFront();
+        
+    }
+    
     public void cambiarColorBoton(JButton btnCorrecto, JButton... btnMenu){
         
         btnCorrecto.setBackground(new java.awt.Color(214,198,152));
@@ -1097,7 +1110,9 @@ public class VentanaInicio extends javax.swing.JFrame{
         
         cambiarColorBoton(btnHome, btnVehiculos, btnModelos, btnVentas, btnClientes, btnEmpleados, btnDocumentacion);
         
-        internalHome.setVisible(true);
+        ocultarInternal(internalHome, internalVehiculos, internalModelos, internalVentas, internalProximamente, internalVehiculosEliminados);
+        
+
        
     }//GEN-LAST:event_btnHomeActionPerformed
 
@@ -1105,7 +1120,7 @@ public class VentanaInicio extends javax.swing.JFrame{
 
         cambiarColorBoton(btnVehiculos, btnHome, btnModelos, btnVentas, btnClientes, btnEmpleados, btnDocumentacion);
         
-        internalVehiculos.setVisible(true);
+        ocultarInternal(internalVehiculos, internalHome, internalModelos, internalVentas, internalProximamente, internalVehiculosEliminados);
         
     }//GEN-LAST:event_btnVehiculosActionPerformed
 
@@ -1113,7 +1128,7 @@ public class VentanaInicio extends javax.swing.JFrame{
 
         cambiarColorBoton(btnModelos, btnVehiculos, btnHome, btnVentas, btnClientes, btnEmpleados, btnDocumentacion);
         
-        internalModelos.setVisible(true);
+        ocultarInternal(internalModelos, internalVehiculos, internalHome, internalVentas, internalProximamente, internalVehiculosEliminados);
         
     }//GEN-LAST:event_btnModelosActionPerformed
 
@@ -1121,7 +1136,7 @@ public class VentanaInicio extends javax.swing.JFrame{
 
         cambiarColorBoton(btnVentas, btnVehiculos, btnHome, btnModelos, btnClientes, btnEmpleados, btnDocumentacion);
         
-        internalVentas.setVisible(true);
+        ocultarInternal(internalVentas, internalVehiculos, internalModelos, internalHome, internalProximamente, internalVehiculosEliminados);
         
     }//GEN-LAST:event_btnVentasActionPerformed
 
@@ -1129,7 +1144,7 @@ public class VentanaInicio extends javax.swing.JFrame{
 
         cambiarColorBoton(btnEmpleados, btnVehiculos, btnHome, btnModelos, btnVentas, btnClientes, btnDocumentacion);
         
-        internalProximamente.setVisible(true);
+        ocultarInternal(internalProximamente, internalVehiculos, internalModelos, internalVentas, internalHome, internalVehiculosEliminados);
         
     }//GEN-LAST:event_btnEmpleadosActionPerformed
 
@@ -1138,7 +1153,7 @@ public class VentanaInicio extends javax.swing.JFrame{
 
         cambiarColorBoton(btnClientes, btnVehiculos, btnHome, btnModelos, btnVentas, btnEmpleados, btnDocumentacion);
         
-        internalProximamente.setVisible(true);
+        ocultarInternal(internalProximamente, internalVehiculos, internalModelos, internalVentas, internalHome, internalVehiculosEliminados);
         
     }//GEN-LAST:event_btnClientesActionPerformed
 
@@ -1147,7 +1162,7 @@ public class VentanaInicio extends javax.swing.JFrame{
  
         cambiarColorBoton(btnDocumentacion, btnVehiculos, btnHome, btnModelos, btnVentas, btnEmpleados, btnClientes);
         
-        internalProximamente.setVisible(true);
+        ocultarInternal(internalProximamente, internalVehiculos, internalModelos, internalVentas, internalHome, internalVehiculosEliminados);
         
     }//GEN-LAST:event_btnDocumentacionActionPerformed
 
