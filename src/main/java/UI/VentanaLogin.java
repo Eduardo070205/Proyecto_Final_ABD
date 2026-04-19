@@ -218,21 +218,8 @@ public class VentanaLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_cajaContrasenaLoginActionPerformed
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        /*
        
-       user = cajaUsuarioLogin.getText();
-       
-       contra = new String(cajaContrasenaLogin.getPassword());
-       
-       ConexionBD con = ConexionBD.getInstancia();
-       
-       con.setUsuario(user);
-       
-       con.setContraseña(contra);
-
-       if(con.conectar()){
-           
-            SwingUtilities.invokeLater(new Runnable() {
+        SwingUtilities.invokeLater(new Runnable() {
 
             @Override
             public void run() {
@@ -241,16 +228,7 @@ public class VentanaLogin extends javax.swing.JFrame {
 
             }
         });
-       
-        setVisible(false);
-           
-       }else{
-           
-           JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos");
-           
-       }
         
-       */
         
     }//GEN-LAST:event_btnLoginActionPerformed
 

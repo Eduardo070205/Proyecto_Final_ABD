@@ -15,7 +15,7 @@ public class Proyecto_Final_ABD_AutosAmistosos {
 
     public static void main(String[] args) {
        
-               SwingUtilities.invokeLater(new Runnable() {
+        SwingUtilities.invokeLater(new Runnable() {
 
             @Override
             public void run() {
