@@ -15,6 +15,8 @@ import javax.swing.SwingUtilities;
  */
 public class VentanaLogin extends javax.swing.JFrame {
     
+    LoginController loginController = new LoginController();
+    
     //ConexionBD con;
     
     public String user = "";
@@ -219,15 +221,15 @@ public class VentanaLogin extends javax.swing.JFrame {
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
        
-        SwingUtilities.invokeLater(new Runnable() {
+        String user = cajaUsuarioLogin.getText();
+        String pass = new String(cajaContrasenaLogin.getPassword());
 
-            @Override
-            public void run() {
-
-                new VentanaInicio();
-
-            }
-        });
+        if (loginController.validarCredenciales(user, pass)) {
+            SwingUtilities.invokeLater(() -> new VentanaInicio());
+            setVisible(false);
+        } else {
+            JOptionPane.showMessageDialog(this, "Usuario o contraseña inválidos");
+        }
         
         
     }//GEN-LAST:event_btnLoginActionPerformed
