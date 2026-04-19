@@ -204,7 +204,7 @@ public class VentanaInicio extends javax.swing.JFrame{
         btnHome.setBackground(new java.awt.Color(214, 198, 152));
         btnHome.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnHome.setForeground(new java.awt.Color(0, 0, 0));
-        btnHome.setIcon(new javax.swing.ImageIcon("C:\\Users\\eduar\\Documents\\ITSJ\\5. Quinto Semestre\\Taller de bases de datos\\Proyecto final\\Proyecto_Final_TBD_Escritorio\\src\\main\\java\\img\\home.png")); // NOI18N
+        btnHome.setIcon(new javax.swing.ImageIcon("C:\\Users\\eduar\\Documents\\ITSJ\\6. Sexto Semestre\\Administración de Bases de Datos\\Proyecto Final\\Proyecto_Final_ABD_AutosAmistosos\\src\\main\\java\\img\\home.png")); // NOI18N
         btnHome.setText("Home");
         btnHome.setToolTipText("");
         btnHome.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -1060,7 +1060,17 @@ public class VentanaInicio extends javax.swing.JFrame{
     }// </editor-fold>//GEN-END:initComponents
 
    
-    
+    public void cambiarColorBoton(JButton btnCorrecto, JButton... btnMenu){
+        
+        btnCorrecto.setBackground(new java.awt.Color(214,198,152));
+        
+        for(JButton i : btnMenu){
+            
+            i.setBackground(new java.awt.Color(227,211,163));
+            
+        }
+        
+    }
     
     // ============================================== VENTANA VEHICULOS ================================================================
     
@@ -1085,41 +1095,59 @@ public class VentanaInicio extends javax.swing.JFrame{
 
     private void btnHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeActionPerformed
         
-
+        cambiarColorBoton(btnHome, btnVehiculos, btnModelos, btnVentas, btnClientes, btnEmpleados, btnDocumentacion);
+        
+        internalHome.setVisible(true);
        
     }//GEN-LAST:event_btnHomeActionPerformed
 
     private void btnVehiculosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVehiculosActionPerformed
 
-
+        cambiarColorBoton(btnVehiculos, btnHome, btnModelos, btnVentas, btnClientes, btnEmpleados, btnDocumentacion);
+        
+        internalVehiculos.setVisible(true);
         
     }//GEN-LAST:event_btnVehiculosActionPerformed
 
     private void btnModelosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModelosActionPerformed
 
-    
+        cambiarColorBoton(btnModelos, btnVehiculos, btnHome, btnVentas, btnClientes, btnEmpleados, btnDocumentacion);
+        
+        internalModelos.setVisible(true);
         
     }//GEN-LAST:event_btnModelosActionPerformed
 
     private void btnVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVentasActionPerformed
 
+        cambiarColorBoton(btnVentas, btnVehiculos, btnHome, btnModelos, btnClientes, btnEmpleados, btnDocumentacion);
+        
+        internalVentas.setVisible(true);
         
     }//GEN-LAST:event_btnVentasActionPerformed
 
     private void btnEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmpleadosActionPerformed
 
+        cambiarColorBoton(btnEmpleados, btnVehiculos, btnHome, btnModelos, btnVentas, btnClientes, btnDocumentacion);
+        
+        internalProximamente.setVisible(true);
         
     }//GEN-LAST:event_btnEmpleadosActionPerformed
 
     private void btnClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesActionPerformed
         
 
+        cambiarColorBoton(btnClientes, btnVehiculos, btnHome, btnModelos, btnVentas, btnEmpleados, btnDocumentacion);
+        
+        internalProximamente.setVisible(true);
         
     }//GEN-LAST:event_btnClientesActionPerformed
 
     private void btnDocumentacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDocumentacionActionPerformed
         
  
+        cambiarColorBoton(btnDocumentacion, btnVehiculos, btnHome, btnModelos, btnVentas, btnEmpleados, btnClientes);
+        
+        internalProximamente.setVisible(true);
         
     }//GEN-LAST:event_btnDocumentacionActionPerformed
 
@@ -1129,13 +1157,14 @@ public class VentanaInicio extends javax.swing.JFrame{
     private void rformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rformed
 
 
+     
 
         
     }//GEN-LAST:event_rformed
 
     private void cajaNombreModeloBusquedaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cajaNombreModeloBusquedaKeyReleased
 
-     
+ 
         
     }//GEN-LAST:event_cajaNombreModeloBusquedaKeyReleased
 
