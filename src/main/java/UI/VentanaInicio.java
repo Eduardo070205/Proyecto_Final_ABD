@@ -170,6 +170,33 @@ public class VentanaInicio extends javax.swing.JFrame{
         jScrollPane4 = new javax.swing.JScrollPane();
         tablaVehiculosEliminados = new javax.swing.JTable();
         btnVehiculosEliminadosCerrar = new javax.swing.JButton();
+        internalAgregarModelos = new javax.swing.JInternalFrame();
+        jPanel12 = new javax.swing.JPanel();
+        jPanel13 = new javax.swing.JPanel();
+        jLabel38 = new javax.swing.JLabel();
+        jLabel39 = new javax.swing.JLabel();
+        jLabel40 = new javax.swing.JLabel();
+        jLabel41 = new javax.swing.JLabel();
+        jLabel42 = new javax.swing.JLabel();
+        jLabel43 = new javax.swing.JLabel();
+        jLabel44 = new javax.swing.JLabel();
+        jLabel45 = new javax.swing.JLabel();
+        jLabel46 = new javax.swing.JLabel();
+        jLabel47 = new javax.swing.JLabel();
+        jLabel48 = new javax.swing.JLabel();
+        jLabel49 = new javax.swing.JLabel();
+        cajaModelosPaisAgregar = new javax.swing.JTextField();
+        cajaModelosNombreAgregar = new javax.swing.JTextField();
+        cajaModelosFabricanteAgregar = new javax.swing.JTextField();
+        cajaModelosColorAgregar = new javax.swing.JTextField();
+        comboModelosCilindrosAgregar = new javax.swing.JComboBox<>();
+        comboModelosAnioAgregar = new javax.swing.JComboBox<>();
+        btnModelosCancelarAgregar = new javax.swing.JButton();
+        btnModelosAgregarAgregar = new javax.swing.JButton();
+        btnModelosRestaurarAgregar = new javax.swing.JButton();
+        cajaModelosPasajerosAgregar = new javax.swing.JTextField();
+        cajaModelosPuertasAgregar = new javax.swing.JTextField();
+        cajaModelosPesoAgregar = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Autos Amistosos");
@@ -579,7 +606,7 @@ public class VentanaInicio extends javax.swing.JFrame{
         internalVehiculos.setBounds(0, 0, 770, 610);
 
         internalModelos.setTitle("Modelos");
-        internalModelos.setVisible(false);
+        internalModelos.setVisible(true);
         internalModelos.getContentPane().setLayout(null);
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
@@ -627,6 +654,11 @@ public class VentanaInicio extends javax.swing.JFrame{
         btnAgregarModelos.setIcon(new javax.swing.ImageIcon("C:\\Users\\eduar\\Documents\\ITSJ\\5. Quinto Semestre\\Taller de bases de datos\\Proyecto final\\Proyecto_Final_TBD_Escritorio\\src\\main\\java\\img\\agregar.png")); // NOI18N
         btnAgregarModelos.setText("Agregar");
         btnAgregarModelos.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        btnAgregarModelos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarModelosActionPerformed(evt);
+            }
+        });
         jPanel11.add(btnAgregarModelos);
         btnAgregarModelos.setBounds(230, 10, 120, 40);
 
@@ -788,7 +820,7 @@ public class VentanaInicio extends javax.swing.JFrame{
         internalModelos.setBounds(0, 0, 770, 610);
 
         internalVentas.setTitle("Ventas");
-        internalVentas.setVisible(true);
+        internalVentas.setVisible(false);
         internalVentas.getContentPane().setLayout(null);
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
@@ -1039,6 +1071,168 @@ public class VentanaInicio extends javax.swing.JFrame{
         jDesktopPane1.add(internalVehiculosEliminados);
         internalVehiculosEliminados.setBounds(120, 40, 420, 440);
 
+        internalAgregarModelos.setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
+        internalAgregarModelos.setTitle("Agregar Modelos");
+        internalAgregarModelos.setVisible(false);
+        internalAgregarModelos.getContentPane().setLayout(null);
+
+        jPanel12.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel12.setLayout(null);
+
+        jPanel13.setBackground(new java.awt.Color(214, 198, 152));
+        jPanel13.setLayout(null);
+
+        jLabel38.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel38.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel38.setText("Agregar Modelos");
+        jPanel13.add(jLabel38);
+        jLabel38.setBounds(20, 20, 140, 20);
+        jPanel13.add(jLabel39);
+        jLabel39.setBounds(330, 20, 0, 0);
+
+        jLabel40.setIcon(new javax.swing.ImageIcon("C:\\Users\\eduar\\Documents\\ITSJ\\5. Quinto Semestre\\Taller de bases de datos\\Proyecto final\\Proyecto_Final_TBD_Escritorio\\src\\main\\java\\img\\logo_oscuro.png")); // NOI18N
+        jPanel13.add(jLabel40);
+        jLabel40.setBounds(370, 0, 60, 60);
+
+        jPanel12.add(jPanel13);
+        jPanel13.setBounds(0, 0, 430, 60);
+
+        jLabel41.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel41.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel41.setText("País Fabricación");
+        jPanel12.add(jLabel41);
+        jLabel41.setBounds(10, 320, 150, 16);
+
+        jLabel42.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel42.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel42.setText("Nombre Modelo:");
+        jPanel12.add(jLabel42);
+        jLabel42.setBounds(10, 80, 150, 16);
+
+        jLabel43.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel43.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel43.setText("Año Modelo");
+        jPanel12.add(jLabel43);
+        jLabel43.setBounds(10, 110, 150, 16);
+
+        jLabel44.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel44.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel44.setText("Fabricante");
+        jPanel12.add(jLabel44);
+        jLabel44.setBounds(10, 140, 150, 16);
+
+        jLabel45.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel45.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel45.setText("Número Cilindros");
+        jPanel12.add(jLabel45);
+        jLabel45.setBounds(10, 170, 150, 16);
+
+        jLabel46.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel46.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel46.setText("Número Puertas");
+        jPanel12.add(jLabel46);
+        jLabel46.setBounds(10, 200, 150, 16);
+
+        jLabel47.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel47.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel47.setText("Peso (KG)");
+        jPanel12.add(jLabel47);
+        jLabel47.setBounds(10, 230, 150, 16);
+
+        jLabel48.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel48.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel48.setText("Capacidad Pasajeros");
+        jPanel12.add(jLabel48);
+        jLabel48.setBounds(10, 260, 150, 16);
+
+        jLabel49.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel49.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel49.setText("Color Base");
+        jPanel12.add(jLabel49);
+        jLabel49.setBounds(10, 290, 150, 16);
+
+        cajaModelosPaisAgregar.setBackground(new java.awt.Color(255, 255, 255));
+        cajaModelosPaisAgregar.setForeground(new java.awt.Color(0, 0, 0));
+        cajaModelosPaisAgregar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        jPanel12.add(cajaModelosPaisAgregar);
+        cajaModelosPaisAgregar.setBounds(160, 320, 250, 20);
+
+        cajaModelosNombreAgregar.setBackground(new java.awt.Color(255, 255, 255));
+        cajaModelosNombreAgregar.setForeground(new java.awt.Color(0, 0, 0));
+        cajaModelosNombreAgregar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        jPanel12.add(cajaModelosNombreAgregar);
+        cajaModelosNombreAgregar.setBounds(160, 80, 250, 20);
+
+        cajaModelosFabricanteAgregar.setBackground(new java.awt.Color(255, 255, 255));
+        cajaModelosFabricanteAgregar.setForeground(new java.awt.Color(0, 0, 0));
+        cajaModelosFabricanteAgregar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        jPanel12.add(cajaModelosFabricanteAgregar);
+        cajaModelosFabricanteAgregar.setBounds(160, 140, 250, 20);
+
+        cajaModelosColorAgregar.setBackground(new java.awt.Color(255, 255, 255));
+        cajaModelosColorAgregar.setForeground(new java.awt.Color(0, 0, 0));
+        cajaModelosColorAgregar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        jPanel12.add(cajaModelosColorAgregar);
+        cajaModelosColorAgregar.setBounds(160, 290, 250, 20);
+
+        comboModelosCilindrosAgregar.setBackground(new java.awt.Color(214, 198, 152));
+        comboModelosCilindrosAgregar.setForeground(new java.awt.Color(0, 0, 0));
+        jPanel12.add(comboModelosCilindrosAgregar);
+        comboModelosCilindrosAgregar.setBounds(160, 170, 250, 26);
+
+        comboModelosAnioAgregar.setBackground(new java.awt.Color(214, 198, 152));
+        comboModelosAnioAgregar.setForeground(new java.awt.Color(0, 0, 0));
+        jPanel12.add(comboModelosAnioAgregar);
+        comboModelosAnioAgregar.setBounds(160, 110, 250, 26);
+
+        btnModelosCancelarAgregar.setBackground(new java.awt.Color(227, 211, 163));
+        btnModelosCancelarAgregar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnModelosCancelarAgregar.setForeground(new java.awt.Color(0, 0, 0));
+        btnModelosCancelarAgregar.setIcon(new javax.swing.ImageIcon("C:\\Users\\eduar\\Documents\\ITSJ\\5. Quinto Semestre\\Taller de bases de datos\\Proyecto final\\Proyecto_Final_TBD_Escritorio\\src\\main\\java\\img\\cancelar.png")); // NOI18N
+        btnModelosCancelarAgregar.setText("Cancelar");
+        jPanel12.add(btnModelosCancelarAgregar);
+        btnModelosCancelarAgregar.setBounds(290, 400, 120, 40);
+
+        btnModelosAgregarAgregar.setBackground(new java.awt.Color(227, 211, 163));
+        btnModelosAgregarAgregar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnModelosAgregarAgregar.setForeground(new java.awt.Color(0, 0, 0));
+        btnModelosAgregarAgregar.setIcon(new javax.swing.ImageIcon("C:\\Users\\eduar\\Documents\\ITSJ\\5. Quinto Semestre\\Taller de bases de datos\\Proyecto final\\Proyecto_Final_TBD_Escritorio\\src\\main\\java\\img\\agregar.png")); // NOI18N
+        btnModelosAgregarAgregar.setText("Agregar");
+        jPanel12.add(btnModelosAgregarAgregar);
+        btnModelosAgregarAgregar.setBounds(10, 400, 120, 40);
+
+        btnModelosRestaurarAgregar.setBackground(new java.awt.Color(227, 211, 163));
+        btnModelosRestaurarAgregar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnModelosRestaurarAgregar.setForeground(new java.awt.Color(0, 0, 0));
+        btnModelosRestaurarAgregar.setIcon(new javax.swing.ImageIcon("C:\\Users\\eduar\\Documents\\ITSJ\\5. Quinto Semestre\\Taller de bases de datos\\Proyecto final\\Proyecto_Final_TBD_Escritorio\\src\\main\\java\\img\\restaurar.png")); // NOI18N
+        btnModelosRestaurarAgregar.setText("Restaurar");
+        jPanel12.add(btnModelosRestaurarAgregar);
+        btnModelosRestaurarAgregar.setBounds(150, 400, 120, 40);
+
+        cajaModelosPasajerosAgregar.setBackground(new java.awt.Color(255, 255, 255));
+        cajaModelosPasajerosAgregar.setForeground(new java.awt.Color(0, 0, 0));
+        cajaModelosPasajerosAgregar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        jPanel12.add(cajaModelosPasajerosAgregar);
+        cajaModelosPasajerosAgregar.setBounds(160, 260, 250, 20);
+
+        cajaModelosPuertasAgregar.setBackground(new java.awt.Color(255, 255, 255));
+        cajaModelosPuertasAgregar.setForeground(new java.awt.Color(0, 0, 0));
+        cajaModelosPuertasAgregar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        jPanel12.add(cajaModelosPuertasAgregar);
+        cajaModelosPuertasAgregar.setBounds(160, 200, 250, 20);
+
+        cajaModelosPesoAgregar.setBackground(new java.awt.Color(255, 255, 255));
+        cajaModelosPesoAgregar.setForeground(new java.awt.Color(0, 0, 0));
+        cajaModelosPesoAgregar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        jPanel12.add(cajaModelosPesoAgregar);
+        cajaModelosPesoAgregar.setBounds(160, 230, 250, 20);
+
+        internalAgregarModelos.getContentPane().add(jPanel12);
+        jPanel12.setBounds(0, 0, 430, 510);
+
+        jDesktopPane1.add(internalAgregarModelos);
+        internalAgregarModelos.setBounds(150, 30, 440, 540);
+
         bg.add(jDesktopPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 0, 770, 610));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -1128,7 +1322,7 @@ public class VentanaInicio extends javax.swing.JFrame{
 
         nav.marcarBotonActivo(btnClientes, btnVehiculos, btnHome, btnModelos, btnVentas, btnEmpleados, btnDocumentacion);
         
-         nav.mostrarPanel(internalProximamente, internalVehiculos, internalModelos, internalVentas, internalHome, internalVehiculosEliminados);
+        nav.mostrarPanel(internalProximamente, internalVehiculos, internalModelos, internalVentas, internalHome, internalVehiculosEliminados);
         
     }//GEN-LAST:event_btnClientesActionPerformed
 
@@ -1180,6 +1374,12 @@ public class VentanaInicio extends javax.swing.JFrame{
         // TODO add your handling code here:
     }//GEN-LAST:event_tablaVehiculosMouseReleased
 
+    private void btnAgregarModelosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarModelosActionPerformed
+        
+        nav.mostrarPanel(internalAgregarModelos);
+        
+    }//GEN-LAST:event_btnAgregarModelosActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1226,6 +1426,9 @@ public class VentanaInicio extends javax.swing.JFrame{
     private javax.swing.JButton btnHomeVehiculosEliminados;
     private javax.swing.JButton btnHomeVista;
     private javax.swing.JButton btnModelos;
+    private javax.swing.JButton btnModelosAgregarAgregar;
+    private javax.swing.JButton btnModelosCancelarAgregar;
+    private javax.swing.JButton btnModelosRestaurarAgregar;
     private javax.swing.JButton btnModificarVehiculos;
     private javax.swing.JButton btnVehiculos;
     private javax.swing.JButton btnVehiculosEliminadosCerrar;
@@ -1236,6 +1439,13 @@ public class VentanaInicio extends javax.swing.JFrame{
     private javax.swing.JTextField cajaModeloPasajerosBusqueda;
     private javax.swing.JTextField cajaModeloPesoBusqueda;
     private javax.swing.JTextField cajaModeloPuertasBusqueda;
+    private javax.swing.JTextField cajaModelosColorAgregar;
+    private javax.swing.JTextField cajaModelosFabricanteAgregar;
+    private javax.swing.JTextField cajaModelosNombreAgregar;
+    private javax.swing.JTextField cajaModelosPaisAgregar;
+    private javax.swing.JTextField cajaModelosPasajerosAgregar;
+    private javax.swing.JTextField cajaModelosPesoAgregar;
+    private javax.swing.JTextField cajaModelosPuertasAgregar;
     private javax.swing.JTextField cajaNombreModeloBusqueda;
     private javax.swing.JTextField cajaNumSerieBuscar;
     private javax.swing.JTextField cajaNumVehiculoBuscar;
@@ -1244,6 +1454,8 @@ public class VentanaInicio extends javax.swing.JFrame{
     private javax.swing.JComboBox<String> comboAnioModeloBuscar;
     private javax.swing.JComboBox<String> comboEstadoBusqueda;
     private javax.swing.JComboBox<String> comboModeloBusqueda;
+    private javax.swing.JComboBox<String> comboModelosAnioAgregar;
+    private javax.swing.JComboBox<String> comboModelosCilindrosAgregar;
     private javax.swing.JComboBox<String> comboNumeroCilindrosBuscar;
     private javax.swing.JComboBox<String> comboPrecioBusqueda1;
     private javax.swing.JComboBox<String> comboTipoBusqueda;
@@ -1256,6 +1468,7 @@ public class VentanaInicio extends javax.swing.JFrame{
     private javax.swing.ButtonGroup groupBusquedaModelos;
     private javax.swing.ButtonGroup groupBusquedaVehiculos;
     private javax.swing.ButtonGroup groupBusquedaVentas;
+    private javax.swing.JInternalFrame internalAgregarModelos;
     private javax.swing.JInternalFrame internalHome;
     private javax.swing.JInternalFrame internalModelos;
     private javax.swing.JInternalFrame internalProximamente;
@@ -1269,7 +1482,19 @@ public class VentanaInicio extends javax.swing.JFrame{
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel38;
+    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel40;
+    private javax.swing.JLabel jLabel41;
+    private javax.swing.JLabel jLabel42;
+    private javax.swing.JLabel jLabel43;
+    private javax.swing.JLabel jLabel44;
+    private javax.swing.JLabel jLabel45;
+    private javax.swing.JLabel jLabel46;
+    private javax.swing.JLabel jLabel47;
+    private javax.swing.JLabel jLabel48;
+    private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel62;
@@ -1279,6 +1504,8 @@ public class VentanaInicio extends javax.swing.JFrame{
     private javax.swing.JLabel jLabel84;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel21;
