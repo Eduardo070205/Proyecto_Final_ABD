@@ -1,10 +1,10 @@
 UI\VentanaLogin$3.class
 com\mycompany\proyecto_final_abd_autosamistosos\Proyecto_Final_ABD_AutosAmistosos.class
 UI\VentanaInicio$1.class
-UI\VentanaInicio$14.class
 UI\VentanaInicio$7.class
 UI\NavegacionController.class
 UI\VentanaInicio$5.class
+UI\Colores.class
 UI\VentanaInicio$10.class
 UI\VentanaInicio$2.class
 UI\VentanaInicio$11.class
@@ -20,5 +20,4 @@ UI\VentanaInicio$8.class
 UI\VentanaInicio$4.class
 UI\VentanaInicio.class
 UI\VentanaLogin$4.class
-UI\VentanaInicio$13.class
 UI\VentanaLogin.class

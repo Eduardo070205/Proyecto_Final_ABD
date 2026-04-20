@@ -20,7 +20,7 @@ public class NavegacionController {
     }
 
     public void marcarBotonActivo(JButton activo, JButton... resto) {
-        activo.setBackground(new java.awt.Color(214, 198, 152));
+        activo.setBackground(Colores.BOTONES_MENU);
         for (JButton b : resto) b.setBackground(new java.awt.Color(227, 211, 163));
     }
     

@@ -67,7 +67,7 @@ public class VentanaLogin extends javax.swing.JFrame {
         login_panel.setPreferredSize(new java.awt.Dimension(800, 500));
         login_panel.setLayout(null);
 
-        Left.setBackground(new java.awt.Color(247, 227, 178));
+        Left.setBackground(Colores.COLOR_PRINCIPAL);
         Left.setPreferredSize(new java.awt.Dimension(400, 500));
 
         jLabel5.setIcon(new javax.swing.ImageIcon("C:\\Users\\eduar\\Documents\\ITSJ\\5. Quinto Semestre\\Taller de bases de datos\\Proyecto final\\Proyecto_Final_TBD_Escritorio\\src\\main\\java\\img\\LOGO.png")); // NOI18N
@@ -92,7 +92,7 @@ public class VentanaLogin extends javax.swing.JFrame {
         login_panel.add(Left);
         Left.setBounds(0, 0, 400, 500);
 
-        Right.setBackground(new java.awt.Color(255, 255, 255));
+        Right.setBackground(Colores.COLOR_SECUNDARIO);
         Right.setMinimumSize(new java.awt.Dimension(400, 500));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 30)); // NOI18N

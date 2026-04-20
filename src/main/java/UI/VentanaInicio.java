@@ -115,25 +115,8 @@ public class VentanaInicio extends javax.swing.JFrame{
         jLabel20 = new javax.swing.JLabel();
         btnActualizarModelos = new javax.swing.JButton();
         jLabel23 = new javax.swing.JLabel();
-        radioNumeroCilindros = new javax.swing.JRadioButton();
-        radioidModeloBusqueda = new javax.swing.JRadioButton();
-        cajaNombreModeloBusqueda = new javax.swing.JTextField();
-        radioNombreModelo = new javax.swing.JRadioButton();
-        comboAnioModeloBuscar = new javax.swing.JComboBox<>();
-        radioAnioModeloBuscar = new javax.swing.JRadioButton();
-        radioFabricanteModelo = new javax.swing.JRadioButton();
-        comboNumeroCilindrosBuscar = new javax.swing.JComboBox<>();
-        radioPais = new javax.swing.JRadioButton();
-        radioNumeroPuertas = new javax.swing.JRadioButton();
-        radioPeso = new javax.swing.JRadioButton();
-        radioPasajeros = new javax.swing.JRadioButton();
-        radioTodosModelos = new javax.swing.JRadioButton();
-        cajaFabricanteModeloBusqueda = new javax.swing.JTextField();
-        cajaPaisModeloBusqueda = new javax.swing.JTextField();
-        cajaIDModeloBusqueda = new javax.swing.JTextField();
-        cajaModeloPesoBusqueda = new javax.swing.JTextField();
-        cajaModeloPasajerosBusqueda = new javax.swing.JTextField();
-        cajaModeloPuertasBusqueda = new javax.swing.JTextField();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jLabel7 = new javax.swing.JLabel();
         internalVentas = new javax.swing.JInternalFrame();
         jPanel4 = new javax.swing.JPanel();
         jPanel16 = new javax.swing.JPanel();
@@ -205,7 +188,7 @@ public class VentanaInicio extends javax.swing.JFrame{
         bg.setBackground(new java.awt.Color(255, 255, 255));
         bg.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        sidePane.setBackground(new java.awt.Color(247, 227, 178));
+        sidePane.setBackground(Colores.COLOR_PRINCIPAL);
         sidePane.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel13.setIcon(new javax.swing.ImageIcon("C:\\Users\\eduar\\Documents\\ITSJ\\5. Quinto Semestre\\Taller de bases de datos\\Proyecto final\\Proyecto_Final_TBD_Escritorio\\src\\main\\java\\img\\LOGO_chico.png")); // NOI18N
@@ -685,133 +668,14 @@ public class VentanaInicio extends javax.swing.JFrame{
         jPanel3.add(jPanel11);
         jPanel11.setBounds(0, 0, 760, 60);
 
-        groupBusquedaModelos.add(radioNumeroCilindros);
-        radioNumeroCilindros.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        radioNumeroCilindros.setForeground(new java.awt.Color(0, 0, 0));
-        radioNumeroCilindros.setText("Número Cilindros");
-        jPanel3.add(radioNumeroCilindros);
-        radioNumeroCilindros.setBounds(590, 70, 130, 20);
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jPanel3.add(jComboBox1);
+        jComboBox1.setBounds(270, 70, 150, 30);
 
-        groupBusquedaModelos.add(radioidModeloBusqueda);
-        radioidModeloBusqueda.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        radioidModeloBusqueda.setForeground(new java.awt.Color(0, 0, 0));
-        radioidModeloBusqueda.setText("ID Modelo");
-        jPanel3.add(radioidModeloBusqueda);
-        radioidModeloBusqueda.setBounds(30, 70, 83, 21);
-
-        cajaNombreModeloBusqueda.setBackground(new java.awt.Color(255, 255, 255));
-        cajaNombreModeloBusqueda.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        cajaNombreModeloBusqueda.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                cajaNombreModeloBusquedaKeyReleased(evt);
-            }
-        });
-        jPanel3.add(cajaNombreModeloBusqueda);
-        cajaNombreModeloBusqueda.setBounds(160, 100, 120, 18);
-
-        groupBusquedaModelos.add(radioNombreModelo);
-        radioNombreModelo.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        radioNombreModelo.setForeground(new java.awt.Color(0, 0, 0));
-        radioNombreModelo.setText("Nombre Modelo");
-        jPanel3.add(radioNombreModelo);
-        radioNombreModelo.setBounds(160, 70, 130, 21);
-
-        comboAnioModeloBuscar.setBackground(new java.awt.Color(214, 198, 152));
-        comboAnioModeloBuscar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        comboAnioModeloBuscar.setForeground(new java.awt.Color(0, 0, 0));
-        jPanel3.add(comboAnioModeloBuscar);
-        comboAnioModeloBuscar.setBounds(310, 100, 90, 26);
-
-        groupBusquedaModelos.add(radioAnioModeloBuscar);
-        radioAnioModeloBuscar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        radioAnioModeloBuscar.setForeground(new java.awt.Color(0, 0, 0));
-        radioAnioModeloBuscar.setText("Año Modelo");
-        radioAnioModeloBuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rformed(evt);
-            }
-        });
-        jPanel3.add(radioAnioModeloBuscar);
-        radioAnioModeloBuscar.setBounds(310, 70, 100, 21);
-
-        groupBusquedaModelos.add(radioFabricanteModelo);
-        radioFabricanteModelo.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        radioFabricanteModelo.setForeground(new java.awt.Color(0, 0, 0));
-        radioFabricanteModelo.setText("Fabricante");
-        jPanel3.add(radioFabricanteModelo);
-        radioFabricanteModelo.setBounds(440, 70, 100, 21);
-
-        comboNumeroCilindrosBuscar.setBackground(new java.awt.Color(214, 198, 152));
-        comboNumeroCilindrosBuscar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        comboNumeroCilindrosBuscar.setForeground(new java.awt.Color(0, 0, 0));
-        jPanel3.add(comboNumeroCilindrosBuscar);
-        comboNumeroCilindrosBuscar.setBounds(590, 100, 130, 26);
-
-        groupBusquedaModelos.add(radioPais);
-        radioPais.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        radioPais.setForeground(new java.awt.Color(0, 0, 0));
-        radioPais.setText("País Fabricación");
-        jPanel3.add(radioPais);
-        radioPais.setBounds(450, 150, 111, 20);
-
-        groupBusquedaModelos.add(radioNumeroPuertas);
-        radioNumeroPuertas.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        radioNumeroPuertas.setForeground(new java.awt.Color(0, 0, 0));
-        radioNumeroPuertas.setText("Número Puertas");
-        jPanel3.add(radioNumeroPuertas);
-        radioNumeroPuertas.setBounds(20, 150, 130, 20);
-
-        groupBusquedaModelos.add(radioPeso);
-        radioPeso.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        radioPeso.setForeground(new java.awt.Color(0, 0, 0));
-        radioPeso.setText("Peso (KG)");
-        jPanel3.add(radioPeso);
-        radioPeso.setBounds(170, 150, 130, 20);
-
-        groupBusquedaModelos.add(radioPasajeros);
-        radioPasajeros.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        radioPasajeros.setForeground(new java.awt.Color(0, 0, 0));
-        radioPasajeros.setText("Capacidad Pasajeros");
-        jPanel3.add(radioPasajeros);
-        radioPasajeros.setBounds(300, 150, 140, 20);
-
-        groupBusquedaModelos.add(radioTodosModelos);
-        radioTodosModelos.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        radioTodosModelos.setForeground(new java.awt.Color(0, 0, 0));
-        radioTodosModelos.setSelected(true);
-        radioTodosModelos.setText("Mostrar todos los Modelos");
-        jPanel3.add(radioTodosModelos);
-        radioTodosModelos.setBounds(570, 150, 180, 20);
-
-        cajaFabricanteModeloBusqueda.setBackground(new java.awt.Color(255, 255, 255));
-        cajaFabricanteModeloBusqueda.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        jPanel3.add(cajaFabricanteModeloBusqueda);
-        cajaFabricanteModeloBusqueda.setBounds(440, 100, 120, 18);
-
-        cajaPaisModeloBusqueda.setBackground(new java.awt.Color(255, 255, 255));
-        cajaPaisModeloBusqueda.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        jPanel3.add(cajaPaisModeloBusqueda);
-        cajaPaisModeloBusqueda.setBounds(450, 180, 120, 18);
-
-        cajaIDModeloBusqueda.setBackground(new java.awt.Color(255, 255, 255));
-        cajaIDModeloBusqueda.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        jPanel3.add(cajaIDModeloBusqueda);
-        cajaIDModeloBusqueda.setBounds(30, 100, 120, 18);
-
-        cajaModeloPesoBusqueda.setBackground(new java.awt.Color(255, 255, 255));
-        cajaModeloPesoBusqueda.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        jPanel3.add(cajaModeloPesoBusqueda);
-        cajaModeloPesoBusqueda.setBounds(160, 180, 120, 18);
-
-        cajaModeloPasajerosBusqueda.setBackground(new java.awt.Color(255, 255, 255));
-        cajaModeloPasajerosBusqueda.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        jPanel3.add(cajaModeloPasajerosBusqueda);
-        cajaModeloPasajerosBusqueda.setBounds(310, 180, 120, 18);
-
-        cajaModeloPuertasBusqueda.setBackground(new java.awt.Color(255, 255, 255));
-        cajaModeloPuertasBusqueda.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        jPanel3.add(cajaModeloPuertasBusqueda);
-        cajaModeloPuertasBusqueda.setBounds(20, 180, 120, 18);
+        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel7.setText("Buscar por");
+        jPanel3.add(jLabel7);
+        jLabel7.setBounds(50, 70, 170, 30);
 
         internalModelos.getContentPane().add(jPanel3);
         jPanel3.setBounds(0, 0, 760, 580);
@@ -1338,20 +1202,6 @@ public class VentanaInicio extends javax.swing.JFrame{
     
     
     
-    private void rformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rformed
-
-
-     
-
-        
-    }//GEN-LAST:event_rformed
-
-    private void cajaNombreModeloBusquedaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cajaNombreModeloBusquedaKeyReleased
-
- 
-        
-    }//GEN-LAST:event_cajaNombreModeloBusquedaKeyReleased
-
     
     
     
@@ -1433,12 +1283,7 @@ public class VentanaInicio extends javax.swing.JFrame{
     private javax.swing.JButton btnVehiculos;
     private javax.swing.JButton btnVehiculosEliminadosCerrar;
     private javax.swing.JButton btnVentas;
-    private javax.swing.JTextField cajaFabricanteModeloBusqueda;
-    private javax.swing.JTextField cajaIDModeloBusqueda;
     private javax.swing.JTextField cajaIDVentasBuscar;
-    private javax.swing.JTextField cajaModeloPasajerosBusqueda;
-    private javax.swing.JTextField cajaModeloPesoBusqueda;
-    private javax.swing.JTextField cajaModeloPuertasBusqueda;
     private javax.swing.JTextField cajaModelosColorAgregar;
     private javax.swing.JTextField cajaModelosFabricanteAgregar;
     private javax.swing.JTextField cajaModelosNombreAgregar;
@@ -1446,17 +1291,13 @@ public class VentanaInicio extends javax.swing.JFrame{
     private javax.swing.JTextField cajaModelosPasajerosAgregar;
     private javax.swing.JTextField cajaModelosPesoAgregar;
     private javax.swing.JTextField cajaModelosPuertasAgregar;
-    private javax.swing.JTextField cajaNombreModeloBusqueda;
     private javax.swing.JTextField cajaNumSerieBuscar;
     private javax.swing.JTextField cajaNumVehiculoBuscar;
-    private javax.swing.JTextField cajaPaisModeloBusqueda;
     private javax.swing.JComboBox<String> comboAnioBusqueda1;
-    private javax.swing.JComboBox<String> comboAnioModeloBuscar;
     private javax.swing.JComboBox<String> comboEstadoBusqueda;
     private javax.swing.JComboBox<String> comboModeloBusqueda;
     private javax.swing.JComboBox<String> comboModelosAnioAgregar;
     private javax.swing.JComboBox<String> comboModelosCilindrosAgregar;
-    private javax.swing.JComboBox<String> comboNumeroCilindrosBuscar;
     private javax.swing.JComboBox<String> comboPrecioBusqueda1;
     private javax.swing.JComboBox<String> comboTipoBusqueda;
     private javax.swing.JComboBox<String> comboVentasClienteBuscar;
@@ -1475,6 +1316,7 @@ public class VentanaInicio extends javax.swing.JFrame{
     private javax.swing.JInternalFrame internalVehiculos;
     private javax.swing.JInternalFrame internalVehiculosEliminados;
     private javax.swing.JInternalFrame internalVentas;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
@@ -1498,6 +1340,7 @@ public class VentanaInicio extends javax.swing.JFrame{
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel62;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel81;
     private javax.swing.JLabel jLabel82;
     private javax.swing.JLabel jLabel83;
@@ -1520,31 +1363,21 @@ public class VentanaInicio extends javax.swing.JFrame{
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JRadioButton radioAnioBusqueda1;
-    private javax.swing.JRadioButton radioAnioModeloBuscar;
     private javax.swing.JRadioButton radioEstadoBusqueda1;
-    private javax.swing.JRadioButton radioFabricanteModelo;
     private javax.swing.JRadioButton radioIDEmpleadoVentas;
     private javax.swing.JRadioButton radioIDVehiculoVentas;
     private javax.swing.JRadioButton radioIDVentaVentas;
     private javax.swing.JRadioButton radioIdClienteVentas;
     private javax.swing.JRadioButton radioMesVentas;
     private javax.swing.JRadioButton radioModeloBusqueda;
-    private javax.swing.JRadioButton radioNombreModelo;
     private javax.swing.JRadioButton radioNumSerieBusqueda;
     private javax.swing.JRadioButton radioNumVehiculoBusqueda;
-    private javax.swing.JRadioButton radioNumeroCilindros;
-    private javax.swing.JRadioButton radioNumeroPuertas;
-    private javax.swing.JRadioButton radioPais;
-    private javax.swing.JRadioButton radioPasajeros;
-    private javax.swing.JRadioButton radioPeso;
     private javax.swing.JRadioButton radioPrecioBusqueda1;
     private javax.swing.JRadioButton radioPrecioVentas;
     private javax.swing.JRadioButton radioTipoBusqueda;
     private javax.swing.JRadioButton radioTodosBusqueda;
-    private javax.swing.JRadioButton radioTodosModelos;
     private javax.swing.JRadioButton radioTodosVentas;
     private javax.swing.JRadioButton radioVentasPagoBuscar;
-    private javax.swing.JRadioButton radioidModeloBusqueda;
     private javax.swing.JPanel sidePane;
     private javax.swing.JTable tablaModelos;
     private javax.swing.JTable tablaVehiculos;
