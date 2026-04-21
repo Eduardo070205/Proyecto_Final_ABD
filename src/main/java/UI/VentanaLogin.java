@@ -6,6 +6,8 @@ package UI;
 
 //import Conexion.ConexionBD;
 //import Logica.Recursos;
+import BD.ConexionBD;
+import java.sql.Connection;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
@@ -16,6 +18,10 @@ import javax.swing.SwingUtilities;
 public class VentanaLogin extends javax.swing.JFrame {
     
     LoginController loginController = new LoginController();
+    
+
+
+
     
     //ConexionBD con;
     
@@ -265,6 +271,7 @@ public class VentanaLogin extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new VentanaLogin().setVisible(true));
+                
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -7,6 +7,7 @@ UI\VentanaInicio$5.class
 UI\Colores.class
 UI\VentanaInicio$10.class
 UI\VentanaInicio$2.class
+BD\ConexionBD.class
 UI\VentanaInicio$11.class
 com\mycompany\proyecto_final_abd_autosamistosos\Proyecto_Final_ABD_AutosAmistosos$1.class
 UI\LoginController.class
