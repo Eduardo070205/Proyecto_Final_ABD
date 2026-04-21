@@ -4,10 +4,9 @@
  */
 package Service;
 
-/**
- *
- * @author Eduardo
- */
+import Modelo.Modelo;
+import java.util.List;
+
 public interface IModeloService {
-    
+    List<Modelo> obtenerTodos();
 }

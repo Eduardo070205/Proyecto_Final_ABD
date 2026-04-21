@@ -4,10 +4,15 @@
  */
 package Repository;
 
+import Modelo.Modelo;
+import java.util.List;
+
 /**
  *
  * @author Eduardo
  */
 public interface IModeloRepository {
+    
+    List<Modelo> obtenerTodos();
     
 }

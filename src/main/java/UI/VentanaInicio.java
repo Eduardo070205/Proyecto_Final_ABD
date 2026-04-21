@@ -7,16 +7,23 @@ package UI;
 
 
 
+import Modelo.Modelo;
+import Repository.ModeloRepository;
+import Service.IModeloService;
+import Service.ModeloService;
 import java.sql.ResultSet;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 
 
 
 
 public class VentanaInicio extends javax.swing.JFrame{
+    
+    private final IModeloService modeloService = new ModeloService(new ModeloRepository());
    
     private NavegacionController nav = new NavegacionController();
     
@@ -1115,8 +1122,30 @@ public class VentanaInicio extends javax.swing.JFrame{
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-   
- 
+   private void cargarTablaModelos() {
+        String[] columnas = {"ID", "Nombre", "Año", "Fabricante", "Cilindros",
+                             "Puertas", "Peso (kg)", "Pasajeros", "Color", "País"};
+
+        DefaultTableModel tableModel = new DefaultTableModel(columnas, 0);
+
+        for (Modelo m : modeloService.obtenerTodos()) {
+            tableModel.addRow(new Object[]{
+                m.getIdModelo(),
+                m.getNombreModelo(),
+                m.getAnioModelo(),
+                m.getFabricante(),
+                m.getNumeroCilindros(),
+                m.getNumeroPuertas(),
+                m.getPesoKg(),
+                m.getCapacidadPasajeros(),
+                m.getColorBase(),
+                m.getPaisFabricacion()
+            });
+        }
+
+        tablaModelos.setModel(tableModel);
+    }
+
     
     // ============================================== VENTANA VEHICULOS ================================================================
     
@@ -1161,7 +1190,9 @@ public class VentanaInicio extends javax.swing.JFrame{
 
         nav.marcarBotonActivo(btnModelos, btnVehiculos, btnHome, btnVentas, btnClientes, btnEmpleados, btnDocumentacion);
         
-         nav.mostrarPanel(internalModelos, internalVehiculos, internalHome, internalVentas, internalProximamente, internalVehiculosEliminados);
+        nav.mostrarPanel(internalModelos, internalVehiculos, internalHome, internalVentas, internalProximamente, internalVehiculosEliminados);
+        
+        cargarTablaModelos();
         
     }//GEN-LAST:event_btnModelosActionPerformed
 
