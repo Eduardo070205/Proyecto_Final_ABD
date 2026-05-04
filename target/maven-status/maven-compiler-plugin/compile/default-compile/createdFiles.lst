@@ -17,6 +17,7 @@ UI\VentanaInicio.class
 UI\VentanaLogin$4.class
 Modelo\Modelo.class
 UI\VentanaLogin$3.class
+util\ComboBoxUtil.class
 com\mycompany\proyecto_final_abd_autosamistosos\Proyecto_Final_ABD_AutosAmistosos.class
 Repository\IModeloRepository.class
 UI\VentanaInicio$7.class
@@ -26,4 +27,5 @@ UI\VentanaInicio$2.class
 Repository\ModeloRepository.class
 UI\VentanaInicio$3.class
 UI\VentanaInicio$8.class
+UI\VentanaInicio$13.class
 UI\VentanaLogin.class

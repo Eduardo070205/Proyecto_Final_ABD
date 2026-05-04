@@ -15,4 +15,10 @@ public interface IModeloRepository {
     
     List<Modelo> obtenerTodos();
     
+    void agregar(Modelo modelo);
+    
+    void eliminar(int idModelo);
+    
+    Modelo obtenerPorId(int idModelo);
+    
 }

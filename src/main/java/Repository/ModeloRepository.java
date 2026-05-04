@@ -48,4 +48,72 @@ public class ModeloRepository implements IModeloRepository {
 
         return lista;
     }
+
+    @Override
+    public void agregar(Modelo modelo) {
+    
+        String sql = "INSERT INTO Modelos (Nombre_Modelo, Anio_Modelo, Fabricante, " +
+                 "Numero_Cilindros, Numero_Puertas, Peso_Kg, Capacidad_Pasajeros, " +
+                 "Color_Base, Pais_Fabricacion) " +
+                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        try {
+            Connection con = ConexionBD.getInstancia().getConnection();
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, modelo.getNombreModelo());
+            ps.setInt(2, modelo.getAnioModelo());
+            ps.setString(3, modelo.getFabricante());
+            ps.setInt(4, modelo.getNumeroCilindros());
+            ps.setInt(5, modelo.getNumeroPuertas());
+            ps.setDouble(6, modelo.getPesoKg());
+            ps.setInt(7, modelo.getCapacidadPasajeros());
+            ps.setString(8, modelo.getColorBase());
+            ps.setString(9, modelo.getPaisFabricacion());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            logger.log(Level.SEVERE, "Error al agregar modelo: " + e.getMessage(), e);
+        }
+        
+    }    
+    
+    @Override
+    public void eliminar(int idModelo) {
+        String sql = "DELETE FROM Modelos WHERE ID_Modelo = ?";
+        try {
+            Connection con = ConexionBD.getInstancia().getConnection();
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, idModelo);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            logger.log(Level.SEVERE, "Error al eliminar modelo: " + e.getMessage(), e);
+        }
+    }
+
+    @Override
+    public Modelo obtenerPorId(int idModelo) {
+        String sql = "SELECT * FROM Modelos WHERE ID_Modelo = ?";
+        try {
+            Connection con = ConexionBD.getInstancia().getConnection();
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, idModelo);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return new Modelo(
+                    rs.getInt("ID_Modelo"),
+                    rs.getString("Nombre_Modelo"),
+                    rs.getInt("Anio_Modelo"),
+                    rs.getString("Fabricante"),
+                    rs.getInt("Numero_Cilindros"),
+                    rs.getInt("Numero_Puertas"),
+                    rs.getDouble("Peso_Kg"),
+                    rs.getInt("Capacidad_Pasajeros"),
+                    rs.getString("Color_Base"),
+                    rs.getString("Pais_Fabricacion")
+                );
+            }
+        } catch (SQLException e) {
+            logger.log(Level.SEVERE, "Error al obtener modelo: " + e.getMessage(), e);
+        }
+        return null;
+    }
+     
 }

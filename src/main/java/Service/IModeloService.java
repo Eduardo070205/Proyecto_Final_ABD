@@ -9,4 +9,11 @@ import java.util.List;
 
 public interface IModeloService {
     List<Modelo> obtenerTodos();
+    
+    void agregar(Modelo modelo);
+    
+    void eliminar(int idModelo);
+    
+    Modelo obtenerPorId(int idModelo);
+    
 }

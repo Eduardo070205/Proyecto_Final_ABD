@@ -19,11 +19,25 @@ public class Modelo {
     private int capacidadPasajeros;
     private String colorBase;
     private String paisFabricacion;
-
+    
     public Modelo(int idModelo, String nombreModelo, int anioModelo, String fabricante,
                   int numeroCilindros, int numeroPuertas, double pesoKg,
                   int capacidadPasajeros, String colorBase, String paisFabricacion) {
-        this.idModelo = idModelo;
+        this.idModelo = idModelo;    
+        this.nombreModelo = nombreModelo;
+        this.anioModelo = anioModelo;
+        this.fabricante = fabricante;
+        this.numeroCilindros = numeroCilindros;
+        this.numeroPuertas = numeroPuertas;
+        this.pesoKg = pesoKg;
+        this.capacidadPasajeros = capacidadPasajeros;
+        this.colorBase = colorBase;
+        this.paisFabricacion = paisFabricacion;
+    }
+
+    public Modelo(String nombreModelo, int anioModelo, String fabricante,
+                  int numeroCilindros, int numeroPuertas, double pesoKg,
+                  int capacidadPasajeros, String colorBase, String paisFabricacion) {
         this.nombreModelo = nombreModelo;
         this.anioModelo = anioModelo;
         this.fabricante = fabricante;
@@ -36,6 +50,7 @@ public class Modelo {
     }
 
     // Getters
+   
     public int getIdModelo() { return idModelo; }
     public String getNombreModelo() { return nombreModelo; }
     public int getAnioModelo() { return anioModelo; }

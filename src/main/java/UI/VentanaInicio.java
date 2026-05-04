@@ -8,6 +8,7 @@ package UI;
 
 
 import Modelo.Modelo;
+import util.ComboBoxUtil;
 import Repository.ModeloRepository;
 import Service.IModeloService;
 import Service.ModeloService;
@@ -1069,6 +1070,11 @@ public class VentanaInicio extends javax.swing.JFrame{
         btnModelosAgregarAgregar.setForeground(new java.awt.Color(0, 0, 0));
         btnModelosAgregarAgregar.setIcon(new javax.swing.ImageIcon("C:\\Users\\eduar\\Documents\\ITSJ\\5. Quinto Semestre\\Taller de bases de datos\\Proyecto final\\Proyecto_Final_TBD_Escritorio\\src\\main\\java\\img\\agregar.png")); // NOI18N
         btnModelosAgregarAgregar.setText("Agregar");
+        btnModelosAgregarAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModelosAgregarAgregarActionPerformed(evt);
+            }
+        });
         jPanel12.add(btnModelosAgregarAgregar);
         btnModelosAgregarAgregar.setBounds(10, 400, 120, 40);
 
@@ -1122,7 +1128,21 @@ public class VentanaInicio extends javax.swing.JFrame{
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-   private void cargarTablaModelos() {
+    private void cargarCombosModelos() {
+        comboModelosAnioAgregar.removeAllItems();
+        comboModelosCilindrosAgregar.removeAllItems();
+
+        for (Integer anio : ComboBoxUtil.getAnios()) {
+            comboModelosAnioAgregar.addItem(String.valueOf(anio));
+        }
+
+        for (Integer cilindros : ComboBoxUtil.getCilindros()) {
+            comboModelosCilindrosAgregar.addItem(String.valueOf(cilindros));
+        }
+    }
+
+    
+    private void cargarTablaModelos() {
         String[] columnas = {"ID", "Nombre", "Año", "Fabricante", "Cilindros",
                              "Puertas", "Peso (kg)", "Pasajeros", "Color", "País"};
 
@@ -1259,7 +1279,36 @@ public class VentanaInicio extends javax.swing.JFrame{
         
         nav.mostrarPanel(internalAgregarModelos);
         
+        cargarCombosModelos();
+        
     }//GEN-LAST:event_btnAgregarModelosActionPerformed
+
+    private void btnModelosAgregarAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModelosAgregarAgregarActionPerformed
+        
+        try {
+        Modelo modelo = new Modelo(
+
+            cajaModelosNombreAgregar.getText().trim(),
+            Integer.parseInt((String) comboModelosAnioAgregar.getSelectedItem()),
+            cajaModelosFabricanteAgregar.getText().trim(),
+            Integer.parseInt((String) comboModelosCilindrosAgregar.getSelectedItem()),
+            Integer.parseInt(cajaModelosPuertasAgregar.getText().trim()),
+            Double.parseDouble(cajaModelosPesoAgregar.getText().trim()),
+            Integer.parseInt(cajaModelosPasajerosAgregar.getText().trim()),
+            cajaModelosColorAgregar.getText().trim(),
+            cajaModelosPaisAgregar.getText().trim()
+        );
+
+        modeloService.agregar(modelo);
+        JOptionPane.showMessageDialog(this, "Modelo agregado correctamente");
+        internalAgregarModelos.setVisible(false);
+        cargarTablaModelos(); // refresca la tabla
+
+    } catch (IllegalArgumentException e) {
+        JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
+        
+    }//GEN-LAST:event_btnModelosAgregarAgregarActionPerformed
 
     /**
      * @param args the command line arguments

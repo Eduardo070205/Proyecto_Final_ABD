@@ -25,4 +25,34 @@ public class ModeloService implements IModeloService {
     public List<Modelo> obtenerTodos() {
         return modeloRepository.obtenerTodos();
     }
+    
+    @Override
+    public void agregar(Modelo modelo) {
+        if (!validar(modelo)) {
+            throw new IllegalArgumentException("Todos los campos son obligatorios");
+        }
+        modeloRepository.agregar(modelo);
+    }
+
+    private boolean validar(Modelo modelo) {
+        return modelo.getNombreModelo() != null && !modelo.getNombreModelo().isBlank()
+            && modelo.getFabricante()   != null && !modelo.getFabricante().isBlank()
+            && modelo.getColorBase()    != null && !modelo.getColorBase().isBlank()
+            && modelo.getPaisFabricacion() != null && !modelo.getPaisFabricacion().isBlank()
+            && modelo.getAnioModelo()   > 0
+            && modelo.getNumeroCilindros() > 0
+            && modelo.getNumeroPuertas()   > 0
+            && modelo.getPesoKg()       > 0
+            && modelo.getCapacidadPasajeros() > 0;
+    }
+    
+    @Override
+    public void eliminar(int idModelo) {
+        modeloRepository.eliminar(idModelo);
+    }
+
+    @Override
+    public Modelo obtenerPorId(int idModelo) {
+        return modeloRepository.obtenerPorId(idModelo);
+    }
 }
