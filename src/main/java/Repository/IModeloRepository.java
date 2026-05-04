@@ -20,5 +20,7 @@ public interface IModeloRepository {
     void eliminar(int idModelo);
     
     Modelo obtenerPorId(int idModelo);
+
+    void actualizar(Modelo modelo);
     
 }

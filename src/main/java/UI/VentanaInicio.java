@@ -32,6 +32,8 @@ public class VentanaInicio extends javax.swing.JFrame{
     
     LocalDate hoy = LocalDate.now();
     
+    private int idModeloSeleccionado;
+    
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VentanaInicio.class.getName());
 
@@ -120,10 +122,8 @@ public class VentanaInicio extends javax.swing.JFrame{
         tablaModelos = new javax.swing.JTable();
         jPanel11 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        btnEliminarModelos = new javax.swing.JButton();
         btnAgregarModelos = new javax.swing.JButton();
         jLabel20 = new javax.swing.JLabel();
-        btnActualizarModelos = new javax.swing.JButton();
         jLabel23 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
@@ -657,16 +657,6 @@ public class VentanaInicio extends javax.swing.JFrame{
         jPanel11.add(jLabel3);
         jLabel3.setBounds(70, 130, 420, 90);
 
-        btnEliminarModelos.setBackground(new java.awt.Color(227, 211, 163));
-        btnEliminarModelos.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnEliminarModelos.setForeground(new java.awt.Color(0, 0, 0));
-        btnEliminarModelos.setIcon(new javax.swing.ImageIcon("C:\\Users\\eduar\\Documents\\ITSJ\\5. Quinto Semestre\\Taller de bases de datos\\Proyecto final\\Proyecto_Final_TBD_Escritorio\\src\\main\\java\\img\\eliminar.png")); // NOI18N
-        btnEliminarModelos.setText("Eliminar");
-        btnEliminarModelos.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        btnEliminarModelos.setEnabled(false);
-        jPanel11.add(btnEliminarModelos);
-        btnEliminarModelos.setBounds(520, 10, 120, 40);
-
         btnAgregarModelos.setBackground(new java.awt.Color(227, 211, 163));
         btnAgregarModelos.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnAgregarModelos.setForeground(new java.awt.Color(0, 0, 0));
@@ -679,21 +669,11 @@ public class VentanaInicio extends javax.swing.JFrame{
             }
         });
         jPanel11.add(btnAgregarModelos);
-        btnAgregarModelos.setBounds(230, 10, 120, 40);
+        btnAgregarModelos.setBounds(530, 10, 120, 40);
 
         jLabel20.setIcon(new javax.swing.ImageIcon("C:\\Users\\eduar\\Documents\\ITSJ\\5. Quinto Semestre\\Taller de bases de datos\\Proyecto final\\Proyecto_Final_TBD_Escritorio\\src\\main\\java\\img\\logo_oscuro.png")); // NOI18N
         jPanel11.add(jLabel20);
         jLabel20.setBounds(690, 0, 50, 58);
-
-        btnActualizarModelos.setBackground(new java.awt.Color(227, 211, 163));
-        btnActualizarModelos.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnActualizarModelos.setForeground(new java.awt.Color(0, 0, 0));
-        btnActualizarModelos.setIcon(new javax.swing.ImageIcon("C:\\Users\\eduar\\Documents\\ITSJ\\5. Quinto Semestre\\Taller de bases de datos\\Proyecto final\\Proyecto_Final_TBD_Escritorio\\src\\main\\java\\img\\actualizar.png")); // NOI18N
-        btnActualizarModelos.setText("Actualizar");
-        btnActualizarModelos.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        btnActualizarModelos.setEnabled(false);
-        jPanel11.add(btnActualizarModelos);
-        btnActualizarModelos.setBounds(370, 10, 130, 40);
 
         jLabel23.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel23.setForeground(new java.awt.Color(0, 0, 0));
@@ -1265,6 +1245,11 @@ public class VentanaInicio extends javax.swing.JFrame{
         btnModelosActualizarActualizar.setForeground(new java.awt.Color(0, 0, 0));
         btnModelosActualizarActualizar.setIcon(new javax.swing.ImageIcon("C:\\Users\\eduar\\Documents\\ITSJ\\5. Quinto Semestre\\Taller de bases de datos\\Proyecto final\\Proyecto_Final_TBD_Escritorio\\src\\main\\java\\img\\actualizar.png")); // NOI18N
         btnModelosActualizarActualizar.setText("Actualizar");
+        btnModelosActualizarActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModelosActualizarActualizarActionPerformed(evt);
+            }
+        });
         jPanel14.add(btnModelosActualizarActualizar);
         btnModelosActualizarActualizar.setBounds(50, 400, 120, 40);
 
@@ -1313,20 +1298,51 @@ public class VentanaInicio extends javax.swing.JFrame{
     private void cargarCombosModelos() {
         comboModelosAnioAgregar.removeAllItems();
         comboModelosCilindrosAgregar.removeAllItems();
+        comboModelosAnioActualizar.removeAllItems();
+        comboModelosCilindrosActualizar.removeAllItems();
 
         for (Integer anio : ComboBoxUtil.getAnios()) {
             comboModelosAnioAgregar.addItem(String.valueOf(anio));
+            comboModelosAnioActualizar.addItem(String.valueOf(anio));
+            
         }
 
         for (Integer cilindros : ComboBoxUtil.getCilindros()) {
             comboModelosCilindrosAgregar.addItem(String.valueOf(cilindros));
+            comboModelosCilindrosActualizar.addItem(String.valueOf(cilindros));
+        }
+    }
+    
+    private void actualizarModelo() {
+        try {
+            Modelo modelo = new Modelo(
+                idModeloSeleccionado,  
+                cajaModelosNombreActualizar.getText().trim(),
+                Integer.parseInt((String) comboModelosAnioActualizar.getSelectedItem()),
+                cajaModelosFabricanteActualizar.getText().trim(),
+                Integer.parseInt((String) comboModelosCilindrosActualizar.getSelectedItem()),
+                Integer.parseInt(cajaModelosPuertasActualizar.getText().trim()),
+                Double.parseDouble(cajaModelosPesoActualizar.getText().trim()),
+                Integer.parseInt(cajaModelosPasajerosActualizar.getText().trim()),
+                cajaModelosColorActualizar.getText().trim(),
+                cajaModelosPaisActualizar.getText().trim()
+            );
+
+            modeloService.actualizar(modelo);
+            JOptionPane.showMessageDialog(this, "Modelo actualizado correctamente");
+            internalCambiosModelos.setVisible(false);
+            cargarTablaModelos(); // refresca la tabla
+
+        } catch (IllegalArgumentException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
     
     private void abrirEditarModelo(int idModelo) {
         Modelo modelo = modeloService.obtenerPorId(idModelo);
         if (modelo != null) {
-
+            cargarCombosModelos();
+            idModeloSeleccionado = idModelo;
             cajaModelosNombreActualizar.setText(modelo.getNombreModelo());
             cajaModelosFabricanteActualizar.setText(modelo.getFabricante());
             cajaModelosPuertasActualizar.setText(String.valueOf(modelo.getNumeroPuertas()));
@@ -1336,7 +1352,6 @@ public class VentanaInicio extends javax.swing.JFrame{
             cajaModelosPaisActualizar.setText(modelo.getPaisFabricacion());
             comboModelosAnioActualizar.setSelectedItem(String.valueOf(modelo.getAnioModelo()));
             comboModelosCilindrosActualizar.setSelectedItem(String.valueOf(modelo.getNumeroCilindros()));
-
             internalCambiosModelos.setVisible(true);
             internalCambiosModelos.toFront();
         }
@@ -1553,6 +1568,10 @@ public class VentanaInicio extends javax.swing.JFrame{
         
     }//GEN-LAST:event_btnModelosAgregarAgregarActionPerformed
 
+    private void btnModelosActualizarActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModelosActualizarActualizarActionPerformed
+        actualizarModelo();
+    }//GEN-LAST:event_btnModelosActualizarActualizarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1580,7 +1599,6 @@ public class VentanaInicio extends javax.swing.JFrame{
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bg;
-    private javax.swing.JButton btnActualizarModelos;
     private javax.swing.JButton btnActualizarVentas;
     private javax.swing.JButton btnAgregarModelos;
     private javax.swing.JButton btnAgregarVehiculos;
@@ -1588,7 +1606,6 @@ public class VentanaInicio extends javax.swing.JFrame{
     private javax.swing.JButton btnCerrarSesion;
     private javax.swing.JButton btnClientes;
     private javax.swing.JButton btnDocumentacion;
-    private javax.swing.JButton btnEliminarModelos;
     private javax.swing.JButton btnEliminarVehiculos;
     private javax.swing.JButton btnEliminarVentas;
     private javax.swing.JButton btnEmpleados;

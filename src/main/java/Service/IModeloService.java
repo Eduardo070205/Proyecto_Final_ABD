@@ -16,4 +16,6 @@ public interface IModeloService {
     
     Modelo obtenerPorId(int idModelo);
     
+    void actualizar(Modelo modelo);
+    
 }

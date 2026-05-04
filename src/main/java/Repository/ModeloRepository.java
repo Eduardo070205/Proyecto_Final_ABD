@@ -115,5 +115,30 @@ public class ModeloRepository implements IModeloRepository {
         }
         return null;
     }
+    
+    @Override
+    public void actualizar(Modelo modelo) {
+        String sql = "UPDATE Modelos SET Nombre_Modelo = ?, Anio_Modelo = ?, Fabricante = ?, " +
+                     "Numero_Cilindros = ?, Numero_Puertas = ?, Peso_Kg = ?, " +
+                     "Capacidad_Pasajeros = ?, Color_Base = ?, Pais_Fabricacion = ? " +
+                     "WHERE ID_Modelo = ?";
+        try {
+            Connection con = ConexionBD.getInstancia().getConnection();
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, modelo.getNombreModelo());
+            ps.setInt(2, modelo.getAnioModelo());
+            ps.setString(3, modelo.getFabricante());
+            ps.setInt(4, modelo.getNumeroCilindros());
+            ps.setInt(5, modelo.getNumeroPuertas());
+            ps.setDouble(6, modelo.getPesoKg());
+            ps.setInt(7, modelo.getCapacidadPasajeros());
+            ps.setString(8, modelo.getColorBase());
+            ps.setString(9, modelo.getPaisFabricacion());
+            ps.setInt(10, modelo.getIdModelo());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            logger.log(Level.SEVERE, "Error al actualizar modelo: " + e.getMessage(), e);
+        }
+    }
      
 }

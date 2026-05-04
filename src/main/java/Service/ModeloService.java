@@ -55,4 +55,13 @@ public class ModeloService implements IModeloService {
     public Modelo obtenerPorId(int idModelo) {
         return modeloRepository.obtenerPorId(idModelo);
     }
+    
+    @Override
+    public void actualizar(Modelo modelo) {
+        if (!validar(modelo)) {
+            throw new IllegalArgumentException("Todos los campos son obligatorios");
+        }
+        modeloRepository.actualizar(modelo);
+    }
+    
 }
