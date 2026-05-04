@@ -12,6 +12,8 @@ import util.ComboBoxUtil;
 import Repository.ModeloRepository;
 import Service.IModeloService;
 import Service.ModeloService;
+import UI.tabla.ButtonEditor;
+import UI.tabla.ButtonRenderer;
 import java.sql.ResultSet;
 import java.time.LocalDate;
 import java.util.Arrays;
@@ -188,6 +190,32 @@ public class VentanaInicio extends javax.swing.JFrame{
         cajaModelosPasajerosAgregar = new javax.swing.JTextField();
         cajaModelosPuertasAgregar = new javax.swing.JTextField();
         cajaModelosPesoAgregar = new javax.swing.JTextField();
+        internalCambiosModelos = new javax.swing.JInternalFrame();
+        jPanel14 = new javax.swing.JPanel();
+        jPanel15 = new javax.swing.JPanel();
+        jLabel50 = new javax.swing.JLabel();
+        jLabel51 = new javax.swing.JLabel();
+        jLabel52 = new javax.swing.JLabel();
+        jLabel53 = new javax.swing.JLabel();
+        jLabel54 = new javax.swing.JLabel();
+        jLabel55 = new javax.swing.JLabel();
+        jLabel56 = new javax.swing.JLabel();
+        jLabel57 = new javax.swing.JLabel();
+        jLabel58 = new javax.swing.JLabel();
+        jLabel59 = new javax.swing.JLabel();
+        jLabel60 = new javax.swing.JLabel();
+        jLabel61 = new javax.swing.JLabel();
+        cajaModelosPaisActualizar = new javax.swing.JTextField();
+        cajaModelosNombreActualizar = new javax.swing.JTextField();
+        cajaModelosFabricanteActualizar = new javax.swing.JTextField();
+        cajaModelosColorActualizar = new javax.swing.JTextField();
+        comboModelosCilindrosActualizar = new javax.swing.JComboBox<>();
+        comboModelosAnioActualizar = new javax.swing.JComboBox<>();
+        btnModelosCancelarActualizar = new javax.swing.JButton();
+        btnModelosActualizarActualizar = new javax.swing.JButton();
+        cajaModelosPasajerosActualizar = new javax.swing.JTextField();
+        cajaModelosPuertasActualizar = new javax.swing.JTextField();
+        cajaModelosPesoActualizar = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Autos Amistosos");
@@ -1110,6 +1138,160 @@ public class VentanaInicio extends javax.swing.JFrame{
         jDesktopPane1.add(internalAgregarModelos);
         internalAgregarModelos.setBounds(150, 30, 440, 540);
 
+        internalCambiosModelos.setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
+        internalCambiosModelos.setTitle("Actualizar Modelos");
+        internalCambiosModelos.setVisible(false);
+        internalCambiosModelos.getContentPane().setLayout(null);
+
+        jPanel14.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel14.setLayout(null);
+
+        jPanel15.setBackground(new java.awt.Color(214, 198, 152));
+        jPanel15.setLayout(null);
+
+        jLabel50.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel50.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel50.setText("Actualizar Modelos");
+        jPanel15.add(jLabel50);
+        jLabel50.setBounds(20, 20, 140, 20);
+        jPanel15.add(jLabel51);
+        jLabel51.setBounds(330, 20, 0, 0);
+
+        jLabel52.setIcon(new javax.swing.ImageIcon("C:\\Users\\eduar\\Documents\\ITSJ\\5. Quinto Semestre\\Taller de bases de datos\\Proyecto final\\Proyecto_Final_TBD_Escritorio\\src\\main\\java\\img\\logo_oscuro.png")); // NOI18N
+        jPanel15.add(jLabel52);
+        jLabel52.setBounds(370, 0, 60, 60);
+
+        jPanel14.add(jPanel15);
+        jPanel15.setBounds(0, 0, 430, 60);
+
+        jLabel53.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel53.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel53.setText("País Fabricación");
+        jPanel14.add(jLabel53);
+        jLabel53.setBounds(10, 320, 150, 16);
+
+        jLabel54.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel54.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel54.setText("Nombre Modelo:");
+        jPanel14.add(jLabel54);
+        jLabel54.setBounds(10, 80, 150, 16);
+
+        jLabel55.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel55.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel55.setText("Año Modelo");
+        jPanel14.add(jLabel55);
+        jLabel55.setBounds(10, 110, 150, 16);
+
+        jLabel56.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel56.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel56.setText("Fabricante");
+        jPanel14.add(jLabel56);
+        jLabel56.setBounds(10, 140, 150, 16);
+
+        jLabel57.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel57.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel57.setText("Número Cilindros");
+        jPanel14.add(jLabel57);
+        jLabel57.setBounds(10, 170, 150, 16);
+
+        jLabel58.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel58.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel58.setText("Número Puertas");
+        jPanel14.add(jLabel58);
+        jLabel58.setBounds(10, 200, 150, 16);
+
+        jLabel59.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel59.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel59.setText("Peso (KG)");
+        jPanel14.add(jLabel59);
+        jLabel59.setBounds(10, 230, 150, 16);
+
+        jLabel60.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel60.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel60.setText("Capacidad Pasajeros");
+        jPanel14.add(jLabel60);
+        jLabel60.setBounds(10, 260, 150, 16);
+
+        jLabel61.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel61.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel61.setText("Color Base");
+        jPanel14.add(jLabel61);
+        jLabel61.setBounds(10, 290, 150, 16);
+
+        cajaModelosPaisActualizar.setBackground(new java.awt.Color(255, 255, 255));
+        cajaModelosPaisActualizar.setForeground(new java.awt.Color(0, 0, 0));
+        cajaModelosPaisActualizar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        jPanel14.add(cajaModelosPaisActualizar);
+        cajaModelosPaisActualizar.setBounds(160, 320, 250, 20);
+
+        cajaModelosNombreActualizar.setBackground(new java.awt.Color(255, 255, 255));
+        cajaModelosNombreActualizar.setForeground(new java.awt.Color(0, 0, 0));
+        cajaModelosNombreActualizar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        jPanel14.add(cajaModelosNombreActualizar);
+        cajaModelosNombreActualizar.setBounds(160, 80, 250, 20);
+
+        cajaModelosFabricanteActualizar.setBackground(new java.awt.Color(255, 255, 255));
+        cajaModelosFabricanteActualizar.setForeground(new java.awt.Color(0, 0, 0));
+        cajaModelosFabricanteActualizar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        jPanel14.add(cajaModelosFabricanteActualizar);
+        cajaModelosFabricanteActualizar.setBounds(160, 140, 250, 20);
+
+        cajaModelosColorActualizar.setBackground(new java.awt.Color(255, 255, 255));
+        cajaModelosColorActualizar.setForeground(new java.awt.Color(0, 0, 0));
+        cajaModelosColorActualizar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        jPanel14.add(cajaModelosColorActualizar);
+        cajaModelosColorActualizar.setBounds(160, 290, 250, 20);
+
+        comboModelosCilindrosActualizar.setBackground(new java.awt.Color(214, 198, 152));
+        comboModelosCilindrosActualizar.setForeground(new java.awt.Color(0, 0, 0));
+        jPanel14.add(comboModelosCilindrosActualizar);
+        comboModelosCilindrosActualizar.setBounds(160, 170, 250, 26);
+
+        comboModelosAnioActualizar.setBackground(new java.awt.Color(214, 198, 152));
+        comboModelosAnioActualizar.setForeground(new java.awt.Color(0, 0, 0));
+        jPanel14.add(comboModelosAnioActualizar);
+        comboModelosAnioActualizar.setBounds(160, 110, 250, 26);
+
+        btnModelosCancelarActualizar.setBackground(new java.awt.Color(227, 211, 163));
+        btnModelosCancelarActualizar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnModelosCancelarActualizar.setForeground(new java.awt.Color(0, 0, 0));
+        btnModelosCancelarActualizar.setIcon(new javax.swing.ImageIcon("C:\\Users\\eduar\\Documents\\ITSJ\\5. Quinto Semestre\\Taller de bases de datos\\Proyecto final\\Proyecto_Final_TBD_Escritorio\\src\\main\\java\\img\\cancelar.png")); // NOI18N
+        btnModelosCancelarActualizar.setText("Cancelar");
+        jPanel14.add(btnModelosCancelarActualizar);
+        btnModelosCancelarActualizar.setBounds(260, 400, 120, 40);
+
+        btnModelosActualizarActualizar.setBackground(new java.awt.Color(227, 211, 163));
+        btnModelosActualizarActualizar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnModelosActualizarActualizar.setForeground(new java.awt.Color(0, 0, 0));
+        btnModelosActualizarActualizar.setIcon(new javax.swing.ImageIcon("C:\\Users\\eduar\\Documents\\ITSJ\\5. Quinto Semestre\\Taller de bases de datos\\Proyecto final\\Proyecto_Final_TBD_Escritorio\\src\\main\\java\\img\\actualizar.png")); // NOI18N
+        btnModelosActualizarActualizar.setText("Actualizar");
+        jPanel14.add(btnModelosActualizarActualizar);
+        btnModelosActualizarActualizar.setBounds(50, 400, 120, 40);
+
+        cajaModelosPasajerosActualizar.setBackground(new java.awt.Color(255, 255, 255));
+        cajaModelosPasajerosActualizar.setForeground(new java.awt.Color(0, 0, 0));
+        cajaModelosPasajerosActualizar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        jPanel14.add(cajaModelosPasajerosActualizar);
+        cajaModelosPasajerosActualizar.setBounds(160, 260, 250, 20);
+
+        cajaModelosPuertasActualizar.setBackground(new java.awt.Color(255, 255, 255));
+        cajaModelosPuertasActualizar.setForeground(new java.awt.Color(0, 0, 0));
+        cajaModelosPuertasActualizar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        jPanel14.add(cajaModelosPuertasActualizar);
+        cajaModelosPuertasActualizar.setBounds(160, 200, 250, 20);
+
+        cajaModelosPesoActualizar.setBackground(new java.awt.Color(255, 255, 255));
+        cajaModelosPesoActualizar.setForeground(new java.awt.Color(0, 0, 0));
+        cajaModelosPesoActualizar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        jPanel14.add(cajaModelosPesoActualizar);
+        cajaModelosPesoActualizar.setBounds(160, 230, 250, 20);
+
+        internalCambiosModelos.getContentPane().add(jPanel14);
+        jPanel14.setBounds(0, 0, 430, 510);
+
+        jDesktopPane1.add(internalCambiosModelos);
+        internalCambiosModelos.setBounds(150, 30, 440, 540);
+
         bg.add(jDesktopPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 0, 770, 610));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -1140,13 +1322,57 @@ public class VentanaInicio extends javax.swing.JFrame{
             comboModelosCilindrosAgregar.addItem(String.valueOf(cilindros));
         }
     }
+    
+    private void abrirEditarModelo(int idModelo) {
+        Modelo modelo = modeloService.obtenerPorId(idModelo);
+        if (modelo != null) {
+
+            cajaModelosNombreActualizar.setText(modelo.getNombreModelo());
+            cajaModelosFabricanteActualizar.setText(modelo.getFabricante());
+            cajaModelosPuertasActualizar.setText(String.valueOf(modelo.getNumeroPuertas()));
+            cajaModelosPesoActualizar.setText(String.valueOf(modelo.getPesoKg()));
+            cajaModelosPasajerosActualizar.setText(String.valueOf(modelo.getCapacidadPasajeros()));
+            cajaModelosColorActualizar.setText(modelo.getColorBase());
+            cajaModelosPaisActualizar.setText(modelo.getPaisFabricacion());
+            comboModelosAnioActualizar.setSelectedItem(String.valueOf(modelo.getAnioModelo()));
+            comboModelosCilindrosActualizar.setSelectedItem(String.valueOf(modelo.getNumeroCilindros()));
+
+            internalCambiosModelos.setVisible(true);
+            internalCambiosModelos.toFront();
+        }
+    }
+
+    private void confirmarEliminar(int idModelo) {
+        int respuesta = JOptionPane.showConfirmDialog(
+            this,
+            "¿Estás seguro de eliminar el modelo con ID " + idModelo + "?",
+            "Confirmar eliminación",
+            JOptionPane.YES_NO_OPTION,
+            JOptionPane.WARNING_MESSAGE
+        );
+
+        if (respuesta == JOptionPane.YES_OPTION) {
+            modeloService.eliminar(idModelo);
+            JOptionPane.showMessageDialog(this, "Modelo eliminado correctamente");
+            cargarTablaModelos();
+        }
+    }
 
     
     private void cargarTablaModelos() {
         String[] columnas = {"ID", "Nombre", "Año", "Fabricante", "Cilindros",
-                             "Puertas", "Peso (kg)", "Pasajeros", "Color", "País"};
+                             "Puertas", "Peso (kg)", "Pasajeros", "Color", "País",
+                             "Editar", "Eliminar"};
 
-        DefaultTableModel tableModel = new DefaultTableModel(columnas, 0);
+        DefaultTableModel tableModel = new DefaultTableModel(columnas, 0){
+            
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                // Solo las columnas de botones son editables
+                return column == 10 || column == 11;
+            }
+            
+        };
 
         for (Modelo m : modeloService.obtenerTodos()) {
             tableModel.addRow(new Object[]{
@@ -1159,11 +1385,28 @@ public class VentanaInicio extends javax.swing.JFrame{
                 m.getPesoKg(),
                 m.getCapacidadPasajeros(),
                 m.getColorBase(),
-                m.getPaisFabricacion()
+                m.getPaisFabricacion(),
+                "Editar",
+                "Eliminar"    
             });
         }
 
         tablaModelos.setModel(tableModel);
+        
+        tablaModelos.getColumnModel().getColumn(10).setCellRenderer(new ButtonRenderer("Editar"));
+        tablaModelos.getColumnModel().getColumn(10).setCellEditor(new ButtonEditor("Editar", e -> {
+            int fila = tablaModelos.getSelectedRow();
+            int idModelo = (int) tablaModelos.getValueAt(fila, 0);
+            abrirEditarModelo(idModelo);
+        }));
+
+        tablaModelos.getColumnModel().getColumn(11).setCellRenderer(new ButtonRenderer("Eliminar"));
+        tablaModelos.getColumnModel().getColumn(11).setCellEditor(new ButtonEditor("Eliminar", e -> {
+            int fila = tablaModelos.getSelectedRow();
+            int idModelo = (int) tablaModelos.getValueAt(fila, 0);
+            confirmarEliminar(idModelo);
+        }));
+        
     }
 
     
@@ -1356,7 +1599,9 @@ public class VentanaInicio extends javax.swing.JFrame{
     private javax.swing.JButton btnHomeVehiculosEliminados;
     private javax.swing.JButton btnHomeVista;
     private javax.swing.JButton btnModelos;
+    private javax.swing.JButton btnModelosActualizarActualizar;
     private javax.swing.JButton btnModelosAgregarAgregar;
+    private javax.swing.JButton btnModelosCancelarActualizar;
     private javax.swing.JButton btnModelosCancelarAgregar;
     private javax.swing.JButton btnModelosRestaurarAgregar;
     private javax.swing.JButton btnModificarVehiculos;
@@ -1364,19 +1609,28 @@ public class VentanaInicio extends javax.swing.JFrame{
     private javax.swing.JButton btnVehiculosEliminadosCerrar;
     private javax.swing.JButton btnVentas;
     private javax.swing.JTextField cajaIDVentasBuscar;
+    private javax.swing.JTextField cajaModelosColorActualizar;
     private javax.swing.JTextField cajaModelosColorAgregar;
+    private javax.swing.JTextField cajaModelosFabricanteActualizar;
     private javax.swing.JTextField cajaModelosFabricanteAgregar;
+    private javax.swing.JTextField cajaModelosNombreActualizar;
     private javax.swing.JTextField cajaModelosNombreAgregar;
+    private javax.swing.JTextField cajaModelosPaisActualizar;
     private javax.swing.JTextField cajaModelosPaisAgregar;
+    private javax.swing.JTextField cajaModelosPasajerosActualizar;
     private javax.swing.JTextField cajaModelosPasajerosAgregar;
+    private javax.swing.JTextField cajaModelosPesoActualizar;
     private javax.swing.JTextField cajaModelosPesoAgregar;
+    private javax.swing.JTextField cajaModelosPuertasActualizar;
     private javax.swing.JTextField cajaModelosPuertasAgregar;
     private javax.swing.JTextField cajaNumSerieBuscar;
     private javax.swing.JTextField cajaNumVehiculoBuscar;
     private javax.swing.JComboBox<String> comboAnioBusqueda1;
     private javax.swing.JComboBox<String> comboEstadoBusqueda;
     private javax.swing.JComboBox<String> comboModeloBusqueda;
+    private javax.swing.JComboBox<String> comboModelosAnioActualizar;
     private javax.swing.JComboBox<String> comboModelosAnioAgregar;
+    private javax.swing.JComboBox<String> comboModelosCilindrosActualizar;
     private javax.swing.JComboBox<String> comboModelosCilindrosAgregar;
     private javax.swing.JComboBox<String> comboPrecioBusqueda1;
     private javax.swing.JComboBox<String> comboTipoBusqueda;
@@ -1390,6 +1644,7 @@ public class VentanaInicio extends javax.swing.JFrame{
     private javax.swing.ButtonGroup groupBusquedaVehiculos;
     private javax.swing.ButtonGroup groupBusquedaVentas;
     private javax.swing.JInternalFrame internalAgregarModelos;
+    private javax.swing.JInternalFrame internalCambiosModelos;
     private javax.swing.JInternalFrame internalHome;
     private javax.swing.JInternalFrame internalModelos;
     private javax.swing.JInternalFrame internalProximamente;
@@ -1418,7 +1673,19 @@ public class VentanaInicio extends javax.swing.JFrame{
     private javax.swing.JLabel jLabel48;
     private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel50;
+    private javax.swing.JLabel jLabel51;
+    private javax.swing.JLabel jLabel52;
+    private javax.swing.JLabel jLabel53;
+    private javax.swing.JLabel jLabel54;
+    private javax.swing.JLabel jLabel55;
+    private javax.swing.JLabel jLabel56;
+    private javax.swing.JLabel jLabel57;
+    private javax.swing.JLabel jLabel58;
+    private javax.swing.JLabel jLabel59;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel60;
+    private javax.swing.JLabel jLabel61;
     private javax.swing.JLabel jLabel62;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel81;
@@ -1429,6 +1696,8 @@ public class VentanaInicio extends javax.swing.JFrame{
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
+    private javax.swing.JPanel jPanel14;
+    private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel21;
