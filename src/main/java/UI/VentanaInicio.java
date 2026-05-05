@@ -21,6 +21,7 @@ import java.util.Arrays;
 import java.util.List;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import util.TablaUtil;
 
 
 
@@ -1447,6 +1448,8 @@ public class VentanaInicio extends javax.swing.JFrame{
 
     
     private void cargarTablaModelos() {
+        
+        
         String[] columnas = {"ID", "Nombre", "Año", "Fabricante", "Cilindros",
                              "Puertas", "Peso (kg)", "Pasajeros", "Color", "País",
                              "Editar", "Eliminar"};
@@ -1480,7 +1483,10 @@ public class VentanaInicio extends javax.swing.JFrame{
 
         tablaModelos.setModel(tableModel);
         
-      
+        TablaUtil.aplicarEstiloCebra(tablaModelos,
+            new java.awt.Color(247, 227, 178), // par - beige
+            java.awt.Color.WHITE               // impar - blanco
+        );
         
         ImageIcon iconoEditar = new ImageIcon(
             new ImageIcon("C:\\Users\\eduar\\Documents\\ITSJ\\6. Sexto Semestre\\Administración de Bases de Datos\\Proyecto Final\\Proyecto_Final_ABD_AutosAmistosos\\src\\main\\java\\img\\actualizar.png")
