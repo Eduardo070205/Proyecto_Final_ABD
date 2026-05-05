@@ -22,5 +22,17 @@ public interface IModeloRepository {
     Modelo obtenerPorId(int idModelo);
 
     void actualizar(Modelo modelo);
+ 
+    List<Modelo> buscarPorId(int id);
+    
+    List<Modelo> buscarPorNombre(String nombre);
+    
+    List<Modelo> buscarPorAnio(int anio);
+    
+    List<Modelo> buscarPorFabricante(String fabricante);
+    
+    List<Modelo> buscarPorCilindros(int cilindros);
+    
+    List<Modelo> buscarPorPais(String pais);
     
 }

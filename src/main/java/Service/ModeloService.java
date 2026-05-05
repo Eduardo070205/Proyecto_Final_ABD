@@ -64,4 +64,16 @@ public class ModeloService implements IModeloService {
         modeloRepository.actualizar(modelo);
     }
     
+    @Override public List<Modelo> buscarPorId(int id) { return modeloRepository.buscarPorId(id); }
+    
+    @Override public List<Modelo> buscarPorNombre(String nombre) { return modeloRepository.buscarPorNombre(nombre); }
+    
+    @Override public List<Modelo> buscarPorAnio(int anio) { return modeloRepository.buscarPorAnio(anio); }
+    
+    @Override public List<Modelo> buscarPorFabricante(String fabricante) { return modeloRepository.buscarPorFabricante(fabricante); }
+    
+    @Override public List<Modelo> buscarPorCilindros(int cilindros) { return modeloRepository.buscarPorCilindros(cilindros); }
+    
+    @Override public List<Modelo> buscarPorPais(String pais) { return modeloRepository.buscarPorPais(pais); }
+    
 }

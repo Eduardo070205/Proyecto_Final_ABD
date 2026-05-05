@@ -14,6 +14,7 @@ import Service.IModeloService;
 import Service.ModeloService;
 import UI.tabla.ButtonEditor;
 import UI.tabla.ButtonRenderer;
+import static com.sun.java.accessibility.util.SwingEventMonitor.addDocumentListener;
 import java.awt.Image;
 import java.sql.ResultSet;
 import java.time.LocalDate;
@@ -21,6 +22,7 @@ import java.util.Arrays;
 import java.util.List;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import util.CajasUtil;
 import util.TablaUtil;
 
 
@@ -51,8 +53,39 @@ public class VentanaInicio extends javax.swing.JFrame{
         internalModelos.setVisible(false);
         internalVentas.setVisible(false);
         internalProximamente.setVisible(false);
+        
+        
+        btnAgregarModelos.setBorder(new javax.swing.border.LineBorder(
+            new java.awt.Color(0, 0, 0), 2, true  // <- el "true" activa las esquinas redondeadas
+        ));
+        
+        //=================== MODELOS =============================
+        cajaModelosBuscarID.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
+        public void insertUpdate(javax.swing.event.DocumentEvent e)  { buscarModelos(); }
+        public void removeUpdate(javax.swing.event.DocumentEvent e)  { buscarModelos(); }
+        public void changedUpdate(javax.swing.event.DocumentEvent e) { buscarModelos(); }
+        });
 
-       
+        cajaModelosBuscarNombre.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
+        public void insertUpdate(javax.swing.event.DocumentEvent e)  { buscarModelos(); }
+        public void removeUpdate(javax.swing.event.DocumentEvent e)  { buscarModelos(); }
+        public void changedUpdate(javax.swing.event.DocumentEvent e) { buscarModelos(); }
+        });
+        
+        cajaModelosBuscarFabricante.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
+        public void insertUpdate(javax.swing.event.DocumentEvent e)  { buscarModelos(); }
+        public void removeUpdate(javax.swing.event.DocumentEvent e)  { buscarModelos(); }
+        public void changedUpdate(javax.swing.event.DocumentEvent e) { buscarModelos(); }
+        });
+        
+        cajaModelosBuscarPais.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
+        public void insertUpdate(javax.swing.event.DocumentEvent e)  { buscarModelos(); }
+        public void removeUpdate(javax.swing.event.DocumentEvent e)  { buscarModelos(); }
+        public void changedUpdate(javax.swing.event.DocumentEvent e) { buscarModelos(); }
+        });
+        
+        comboModelosBuscarAnio.addActionListener(e -> buscarModelos());
+        comboModelosBuscarCilindros.addActionListener(e -> buscarModelos());
         
         pack();
        
@@ -654,7 +687,7 @@ public class VentanaInicio extends javax.swing.JFrame{
         jScrollPane2.setViewportView(tablaModelos);
 
         jPanel3.add(jScrollPane2);
-        jScrollPane2.setBounds(20, 190, 720, 350);
+        jScrollPane2.setBounds(20, 140, 720, 400);
 
         jPanel11.setBackground(new java.awt.Color(214, 198, 152));
         jPanel11.setLayout(null);
@@ -1429,6 +1462,86 @@ public class VentanaInicio extends javax.swing.JFrame{
             internalCambiosModelos.toFront();
         }
     }
+    
+    private void actualizarTablaModelos(List<Modelo> modelos) {
+        DefaultTableModel tableModel = (DefaultTableModel) tablaModelos.getModel();
+        tableModel.setRowCount(0); // limpia sin recrear el modelo
+
+        for (Modelo m : modelos) {
+            tableModel.addRow(new Object[]{
+                m.getIdModelo(),
+                m.getNombreModelo(),
+                m.getAnioModelo(),
+                m.getFabricante(),
+                m.getNumeroCilindros(),
+                m.getNumeroPuertas(),
+                m.getPesoKg(),
+                m.getCapacidadPasajeros(),
+                m.getColorBase(),
+                m.getPaisFabricacion(),
+                "Editar",
+                "Eliminar"
+            });
+        }
+    }
+    
+    private void buscarModelos() {
+        String criterio = (String) comboModelosBuscar.getSelectedItem();
+
+        if (criterio == null) return;
+
+        List<Modelo> resultados;
+
+        switch (criterio) {
+            case "Todos" ->{
+                
+                actualizarTablaModelos(modeloService.obtenerTodos());
+                
+            }
+           
+            case "ID" -> {
+                String valor = cajaModelosBuscarID.getText().trim();
+                if (valor.isEmpty()) { actualizarTablaModelos(modeloService.obtenerTodos()); return; }
+                try { resultados = modeloService.buscarPorId(Integer.parseInt(valor)); }
+                catch (NumberFormatException e) { return; }
+                actualizarTablaModelos(resultados);
+            }
+            case "Nombre" -> {
+                String valor = cajaModelosBuscarNombre.getText().trim();
+                resultados = valor.isEmpty()
+                    ? modeloService.obtenerTodos()
+                    : modeloService.buscarPorNombre(valor);
+                actualizarTablaModelos(resultados);
+            }
+            case "Fabricante" -> {
+                String valor = cajaModelosBuscarFabricante.getText().trim();
+                resultados = valor.isEmpty()
+                    ? modeloService.obtenerTodos()
+                    : modeloService.buscarPorFabricante(valor);
+                actualizarTablaModelos(resultados);
+            }
+            case "País" -> {
+                String valor = cajaModelosBuscarPais.getText().trim();
+                resultados = valor.isEmpty()
+                    ? modeloService.obtenerTodos()
+                    : modeloService.buscarPorPais(valor);
+                actualizarTablaModelos(resultados);
+            }
+            case "Año" -> {
+                String anio = (String) comboModelosBuscarAnio.getSelectedItem();
+                if (anio == null) return;
+                actualizarTablaModelos(modeloService.buscarPorAnio(Integer.parseInt(anio)));
+            }
+            case "Cilindros" -> {
+                String cilindros = (String) comboModelosBuscarCilindros.getSelectedItem();
+                if (cilindros == null) return;
+                actualizarTablaModelos(modeloService.buscarPorCilindros(Integer.parseInt(cilindros)));
+            }
+            default -> actualizarTablaModelos(modeloService.obtenerTodos());
+        }
+    }
+    
+    
 
     private void confirmarEliminar(int idModelo) {
         int respuesta = JOptionPane.showConfirmDialog(
@@ -1451,15 +1564,14 @@ public class VentanaInicio extends javax.swing.JFrame{
         
         
         String[] columnas = {"ID", "Nombre", "Año", "Fabricante", "Cilindros",
-                             "Puertas", "Peso (kg)", "Pasajeros", "Color", "País",
-                             "Editar", "Eliminar"};
+                             "Pasajeros", "Editar", "Eliminar"};
 
         DefaultTableModel tableModel = new DefaultTableModel(columnas, 0){
             
             @Override
             public boolean isCellEditable(int row, int column) {
                 // Solo las columnas de botones son editables
-                return column == 10 || column == 11;
+                return column == 6 || column == 7;
             }
             
         };
@@ -1471,11 +1583,7 @@ public class VentanaInicio extends javax.swing.JFrame{
                 m.getAnioModelo(),
                 m.getFabricante(),
                 m.getNumeroCilindros(),
-                m.getNumeroPuertas(),
-                m.getPesoKg(),
                 m.getCapacidadPasajeros(),
-                m.getColorBase(),
-                m.getPaisFabricacion(),
                 "Editar",
                 "Eliminar"    
             });
@@ -1499,16 +1607,16 @@ public class VentanaInicio extends javax.swing.JFrame{
         );
         
         // Columna Editar
-        tablaModelos.getColumnModel().getColumn(10).setCellRenderer(new ButtonRenderer(iconoEditar));
-        tablaModelos.getColumnModel().getColumn(10).setCellEditor(new ButtonEditor(iconoEditar, e -> {
+        tablaModelos.getColumnModel().getColumn(6).setCellRenderer(new ButtonRenderer(iconoEditar));
+        tablaModelos.getColumnModel().getColumn(6).setCellEditor(new ButtonEditor(iconoEditar, e -> {
             int fila = tablaModelos.getSelectedRow();
             int idModelo = (int) tablaModelos.getValueAt(fila, 0);
             abrirEditarModelo(idModelo);
         }));
 
         // Columna Eliminar
-        tablaModelos.getColumnModel().getColumn(11).setCellRenderer(new ButtonRenderer(iconoEliminar));
-        tablaModelos.getColumnModel().getColumn(11).setCellEditor(new ButtonEditor(iconoEliminar, e -> {
+        tablaModelos.getColumnModel().getColumn(7).setCellRenderer(new ButtonRenderer(iconoEliminar));
+        tablaModelos.getColumnModel().getColumn(7).setCellEditor(new ButtonEditor(iconoEliminar, e -> {
             int fila = tablaModelos.getSelectedRow();
             int idModelo = (int) tablaModelos.getValueAt(fila, 0);
             confirmarEliminar(idModelo);
@@ -1566,7 +1674,7 @@ public class VentanaInicio extends javax.swing.JFrame{
         
         cargarCombosModelos();
         
-        comboModelosBuscar.setSelectedItem("ID");
+        comboModelosBuscar.setSelectedItem("Todos");
         
         mostrarCajas((String) comboModelosBuscar.getSelectedItem());
         
@@ -1672,8 +1780,47 @@ public class VentanaInicio extends javax.swing.JFrame{
         actualizarModelo();
     }//GEN-LAST:event_btnModelosActualizarActualizarActionPerformed
 
+    public void mostrarCajas(String opc){
+        
+        if (opc == null) return;
+
+        if (opc.equals("ID")) {
+            
+            CajasUtil.ocultarComponentes(cajaModelosBuscarID, cajaModelosBuscarNombre, comboModelosBuscarAnio, cajaModelosBuscarFabricante, comboModelosBuscarCilindros, cajaModelosBuscarPais);
+            
+        }else if(opc.equals("Nombre")){
+            
+            CajasUtil.ocultarComponentes( cajaModelosBuscarNombre, cajaModelosBuscarID, comboModelosBuscarAnio, cajaModelosBuscarFabricante, comboModelosBuscarCilindros, cajaModelosBuscarPais);
+            
+        }else if(opc.equals("Año")){
+            
+            CajasUtil.ocultarComponentes(comboModelosBuscarAnio, cajaModelosBuscarID, cajaModelosBuscarNombre,  cajaModelosBuscarFabricante, comboModelosBuscarCilindros, cajaModelosBuscarPais);
+            
+        }else if(opc.equals("Fabricante")){
+            
+            CajasUtil.ocultarComponentes(cajaModelosBuscarFabricante, cajaModelosBuscarID, cajaModelosBuscarNombre, comboModelosBuscarAnio,  comboModelosBuscarCilindros, cajaModelosBuscarPais);
+            
+        }else if(opc.equals("Cilindros")){
+            
+            CajasUtil.ocultarComponentes(comboModelosBuscarCilindros, cajaModelosBuscarID, cajaModelosBuscarNombre, comboModelosBuscarAnio, cajaModelosBuscarFabricante,  cajaModelosBuscarPais);
+            
+        }else if(opc.equals("País")){
+            
+            CajasUtil.ocultarComponentes(cajaModelosBuscarPais, cajaModelosBuscarID, cajaModelosBuscarNombre, comboModelosBuscarAnio, cajaModelosBuscarFabricante, comboModelosBuscarCilindros );
+            
+        }else if(opc.equals("Todos")){
+            
+            CajasUtil.ocultarComponentes(comboModelosBuscar, cajaModelosBuscarPais, cajaModelosBuscarID, cajaModelosBuscarNombre, comboModelosBuscarAnio, cajaModelosBuscarFabricante, comboModelosBuscarCilindros );
+            
+        }
+        
+       
+    }
+    
     private void comboModelosBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboModelosBuscarActionPerformed
         mostrarCajas((String) comboModelosBuscar.getSelectedItem());
+        
+        buscarModelos();
         
     }//GEN-LAST:event_comboModelosBuscarActionPerformed
 
@@ -1685,51 +1832,7 @@ public class VentanaInicio extends javax.swing.JFrame{
         // TODO add your handling code here:
     }//GEN-LAST:event_comboModelosBuscarCilindrosActionPerformed
 
-    public void ocultarComponentes(JComponent componente, JComponent... componentes){
-    
-        componente.setVisible(true);
-        
-        for(JComponent c : componentes){
-            
-            c.setVisible(false);
-            
-        }
-        
-    }
-    
-    public void mostrarCajas(String opc){
-        
-        if (opc == null) return;
 
-        if (opc.equals("ID")) {
-            
-            ocultarComponentes(cajaModelosBuscarID, cajaModelosBuscarNombre, comboModelosBuscarAnio, cajaModelosBuscarFabricante, comboModelosBuscarCilindros, cajaModelosBuscarPais);
-            
-        }else if(opc.equals("Nombre")){
-            
-            ocultarComponentes( cajaModelosBuscarNombre, cajaModelosBuscarID, comboModelosBuscarAnio, cajaModelosBuscarFabricante, comboModelosBuscarCilindros, cajaModelosBuscarPais);
-            
-        }else if(opc.equals("Año")){
-            
-            ocultarComponentes(comboModelosBuscarAnio, cajaModelosBuscarID, cajaModelosBuscarNombre,  cajaModelosBuscarFabricante, comboModelosBuscarCilindros, cajaModelosBuscarPais);
-            
-        }else if(opc.equals("Fabricante")){
-            
-            ocultarComponentes(cajaModelosBuscarFabricante, cajaModelosBuscarID, cajaModelosBuscarNombre, comboModelosBuscarAnio,  comboModelosBuscarCilindros, cajaModelosBuscarPais);
-            
-        }else if(opc.equals("Cilindros")){
-            
-            ocultarComponentes(comboModelosBuscarCilindros, cajaModelosBuscarID, cajaModelosBuscarNombre, comboModelosBuscarAnio, cajaModelosBuscarFabricante,  cajaModelosBuscarPais);
-            
-        }else if(opc.equals("País")){
-            
-            ocultarComponentes(cajaModelosBuscarPais, cajaModelosBuscarID, cajaModelosBuscarNombre, comboModelosBuscarAnio, cajaModelosBuscarFabricante, comboModelosBuscarCilindros );
-            
-        }
-        
-        
-        
-    }
     
     /**
      * @param args the command line arguments

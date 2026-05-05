@@ -4,10 +4,26 @@
  */
 package util;
 
+import javax.swing.JComponent;
+
 /**
  *
  * @author Eduardo
  */
 public class CajasUtil {
+    
+        public static void ocultarComponentes(JComponent componente, JComponent... componentes){
+    
+        componente.setVisible(true);
+        
+        for(JComponent c : componentes){
+            
+            c.setVisible(false);
+            
+        }
+        
+    }
+    
+    
     
 }

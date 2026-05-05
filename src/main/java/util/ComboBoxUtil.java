@@ -30,7 +30,7 @@ public class ComboBoxUtil {
     
     public static List<String> getOpcionesBusqueda(){
         
-        return List.of("ID", "Nombre", "Año", "Fabricante", "Cilindros", "País");
+        return List.of("Todos", "ID", "Nombre", "Año", "Fabricante", "Cilindros", "País");
         
     }
     
