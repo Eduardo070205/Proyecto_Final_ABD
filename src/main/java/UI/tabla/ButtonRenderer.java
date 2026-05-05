@@ -11,11 +11,14 @@ import java.awt.*;
 // SRP: solo se encarga de renderizar el botón en la celda
 public class ButtonRenderer extends JButton implements TableCellRenderer {
 
-    public ButtonRenderer(String texto) {
-        setText(texto);
+    
+    public ButtonRenderer(ImageIcon icono) {
+        setIcon(icono);
+        setText("");
         setBackground(new java.awt.Color(227, 211, 163));
-        setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 12));
-        setBorder(new javax.swing.border.LineBorder(Color.BLACK, 1, true));
+        setBorderPainted(false);
+        setContentAreaFilled(false); 
+        setCursor(new Cursor(Cursor.HAND_CURSOR));
     }
 
     @Override

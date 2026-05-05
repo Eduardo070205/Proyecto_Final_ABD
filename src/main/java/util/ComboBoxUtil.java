@@ -28,4 +28,10 @@ public class ComboBoxUtil {
         return List.of(2, 3, 4, 5, 6, 8, 10, 12, 16);
     }
     
+    public static List<String> getOpcionesBusqueda(){
+        
+        return List.of();
+        
+    }
+    
 }

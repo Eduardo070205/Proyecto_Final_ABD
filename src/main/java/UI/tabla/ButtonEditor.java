@@ -11,15 +11,16 @@ import java.awt.event.ActionListener;
 // SRP: solo se encarga de manejar el clic del botón en la celda
 public class ButtonEditor extends AbstractCellEditor implements TableCellEditor {
 
-    private final JButton boton;
-    private final ActionListener accion;
+   private final JButton boton;
 
-    public ButtonEditor(String texto, ActionListener accion) {
-        this.accion = accion;
-        boton = new JButton(texto);
+    public ButtonEditor(ImageIcon icono, ActionListener accion) {
+        boton = new JButton();
+        boton.setIcon(icono);
+        boton.setText(""); // sin texto
         boton.setBackground(new java.awt.Color(227, 211, 163));
-        boton.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 12));
-        boton.setBorder(new javax.swing.border.LineBorder(Color.BLACK, 1, true));
+        boton.setBorderPainted(false);
+        boton.setContentAreaFilled(false); // transparente
+        boton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         boton.addActionListener(e -> {
             fireEditingStopped();
             accion.actionPerformed(e);
@@ -34,6 +35,6 @@ public class ButtonEditor extends AbstractCellEditor implements TableCellEditor 
 
     @Override
     public Object getCellEditorValue() {
-        return boton.getText();
+        return "";
     }
 }

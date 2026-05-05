@@ -14,6 +14,7 @@ import Service.IModeloService;
 import Service.ModeloService;
 import UI.tabla.ButtonEditor;
 import UI.tabla.ButtonRenderer;
+import java.awt.Image;
 import java.sql.ResultSet;
 import java.time.LocalDate;
 import java.util.Arrays;
@@ -684,9 +685,12 @@ public class VentanaInicio extends javax.swing.JFrame{
         jPanel3.add(jPanel11);
         jPanel11.setBounds(0, 0, 760, 60);
 
+        jComboBox1.setBackground(new java.awt.Color(227, 211, 163));
+        jComboBox1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jComboBox1.setForeground(new java.awt.Color(0, 0, 0));
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jPanel3.add(jComboBox1);
-        jComboBox1.setBounds(270, 70, 150, 30);
+        jComboBox1.setBounds(160, 70, 150, 30);
 
         jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setText("Buscar por");
@@ -1408,15 +1412,29 @@ public class VentanaInicio extends javax.swing.JFrame{
 
         tablaModelos.setModel(tableModel);
         
-        tablaModelos.getColumnModel().getColumn(10).setCellRenderer(new ButtonRenderer("Editar"));
-        tablaModelos.getColumnModel().getColumn(10).setCellEditor(new ButtonEditor("Editar", e -> {
+      
+        
+        ImageIcon iconoEditar = new ImageIcon(
+            new ImageIcon("C:\\Users\\eduar\\Documents\\ITSJ\\6. Sexto Semestre\\Administración de Bases de Datos\\Proyecto Final\\Proyecto_Final_ABD_AutosAmistosos\\src\\main\\java\\img\\actualizar.png")
+                .getImage().getScaledInstance(24, 24, Image.SCALE_SMOOTH)
+        );
+
+        ImageIcon iconoEliminar = new ImageIcon(
+            new ImageIcon("C:\\Users\\eduar\\Documents\\ITSJ\\6. Sexto Semestre\\Administración de Bases de Datos\\Proyecto Final\\Proyecto_Final_ABD_AutosAmistosos\\src\\main\\java\\img\\eliminar.png")
+                .getImage().getScaledInstance(24, 24, Image.SCALE_SMOOTH)
+        );
+        
+        // Columna Editar
+        tablaModelos.getColumnModel().getColumn(10).setCellRenderer(new ButtonRenderer(iconoEditar));
+        tablaModelos.getColumnModel().getColumn(10).setCellEditor(new ButtonEditor(iconoEditar, e -> {
             int fila = tablaModelos.getSelectedRow();
             int idModelo = (int) tablaModelos.getValueAt(fila, 0);
             abrirEditarModelo(idModelo);
         }));
 
-        tablaModelos.getColumnModel().getColumn(11).setCellRenderer(new ButtonRenderer("Eliminar"));
-        tablaModelos.getColumnModel().getColumn(11).setCellEditor(new ButtonEditor("Eliminar", e -> {
+        // Columna Eliminar
+        tablaModelos.getColumnModel().getColumn(11).setCellRenderer(new ButtonRenderer(iconoEliminar));
+        tablaModelos.getColumnModel().getColumn(11).setCellEditor(new ButtonEditor(iconoEliminar, e -> {
             int fila = tablaModelos.getSelectedRow();
             int idModelo = (int) tablaModelos.getValueAt(fila, 0);
             confirmarEliminar(idModelo);
@@ -1469,6 +1487,8 @@ public class VentanaInicio extends javax.swing.JFrame{
         nav.marcarBotonActivo(btnModelos, btnVehiculos, btnHome, btnVentas, btnClientes, btnEmpleados, btnDocumentacion);
         
         nav.mostrarPanel(internalModelos, internalVehiculos, internalHome, internalVentas, internalProximamente, internalVehiculosEliminados);
+        
+        tablaModelos.setRowHeight(30);
         
         cargarTablaModelos();
         
