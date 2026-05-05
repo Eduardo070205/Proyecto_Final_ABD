@@ -4,6 +4,7 @@ Service\ModeloService.class
 UI\NavegacionController.class
 UI\Colores.class
 BD\ConexionBD.class
+UI\VentanaInicio$16.class
 UI\VentanaInicio$11.class
 com\mycompany\proyecto_final_abd_autosamistosos\Proyecto_Final_ABD_AutosAmistosos$1.class
 UI\LoginController.class
@@ -14,6 +15,7 @@ Service\IModeloService.class
 UI\VentanaInicio$12.class
 UI\VentanaLogin$1.class
 UI\tabla\ButtonRenderer.class
+UI\VentanaInicio$17.class
 UI\VentanaInicio$4.class
 UI\VentanaInicio.class
 UI\VentanaLogin$4.class
@@ -29,6 +31,7 @@ UI\VentanaInicio$5.class
 UI\VentanaInicio$10.class
 UI\VentanaInicio$2.class
 Repository\ModeloRepository.class
+UI\VentanaInicio$18.class
 UI\VentanaInicio$3.class
 UI\VentanaInicio$8.class
 UI\VentanaInicio$13.class

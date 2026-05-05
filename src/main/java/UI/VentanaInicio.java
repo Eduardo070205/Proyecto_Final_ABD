@@ -126,8 +126,14 @@ public class VentanaInicio extends javax.swing.JFrame{
         btnAgregarModelos = new javax.swing.JButton();
         jLabel20 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        comboModelosBuscar = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
+        cajaModelosBuscarID = new javax.swing.JTextField();
+        cajaModelosBuscarNombre = new javax.swing.JTextField();
+        comboModelosBuscarAnio = new javax.swing.JComboBox<>();
+        cajaModelosBuscarFabricante = new javax.swing.JTextField();
+        comboModelosBuscarCilindros = new javax.swing.JComboBox<>();
+        cajaModelosBuscarPais = new javax.swing.JTextField();
         internalVentas = new javax.swing.JInternalFrame();
         jPanel4 = new javax.swing.JPanel();
         jPanel16 = new javax.swing.JPanel();
@@ -647,7 +653,7 @@ public class VentanaInicio extends javax.swing.JFrame{
         jScrollPane2.setViewportView(tablaModelos);
 
         jPanel3.add(jScrollPane2);
-        jScrollPane2.setBounds(20, 260, 720, 280);
+        jScrollPane2.setBounds(20, 190, 720, 350);
 
         jPanel11.setBackground(new java.awt.Color(214, 198, 152));
         jPanel11.setLayout(null);
@@ -685,17 +691,67 @@ public class VentanaInicio extends javax.swing.JFrame{
         jPanel3.add(jPanel11);
         jPanel11.setBounds(0, 0, 760, 60);
 
-        jComboBox1.setBackground(new java.awt.Color(227, 211, 163));
-        jComboBox1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jComboBox1.setForeground(new java.awt.Color(0, 0, 0));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel3.add(jComboBox1);
-        jComboBox1.setBounds(160, 70, 150, 30);
+        comboModelosBuscar.setBackground(new java.awt.Color(227, 211, 163));
+        comboModelosBuscar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        comboModelosBuscar.setForeground(new java.awt.Color(0, 0, 0));
+        comboModelosBuscar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboModelosBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboModelosBuscarActionPerformed(evt);
+            }
+        });
+        jPanel3.add(comboModelosBuscar);
+        comboModelosBuscar.setBounds(170, 70, 150, 30);
 
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel7.setText("Buscar por");
+        jLabel7.setText("Buscar por:");
         jPanel3.add(jLabel7);
-        jLabel7.setBounds(50, 70, 170, 30);
+        jLabel7.setBounds(60, 70, 170, 30);
+
+        cajaModelosBuscarID.setBackground(new java.awt.Color(255, 255, 255));
+        cajaModelosBuscarID.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        jPanel3.add(cajaModelosBuscarID);
+        cajaModelosBuscarID.setBounds(350, 70, 180, 26);
+
+        cajaModelosBuscarNombre.setBackground(new java.awt.Color(255, 255, 255));
+        cajaModelosBuscarNombre.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        jPanel3.add(cajaModelosBuscarNombre);
+        cajaModelosBuscarNombre.setBounds(350, 70, 180, 26);
+
+        comboModelosBuscarAnio.setBackground(new java.awt.Color(227, 211, 163));
+        comboModelosBuscarAnio.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        comboModelosBuscarAnio.setForeground(new java.awt.Color(0, 0, 0));
+        comboModelosBuscarAnio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboModelosBuscarAnio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboModelosBuscarAnioActionPerformed(evt);
+            }
+        });
+        jPanel3.add(comboModelosBuscarAnio);
+        comboModelosBuscarAnio.setBounds(350, 70, 180, 26);
+
+        cajaModelosBuscarFabricante.setBackground(new java.awt.Color(255, 255, 255));
+        cajaModelosBuscarFabricante.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        jPanel3.add(cajaModelosBuscarFabricante);
+        cajaModelosBuscarFabricante.setBounds(350, 70, 180, 26);
+
+        comboModelosBuscarCilindros.setBackground(new java.awt.Color(227, 211, 163));
+        comboModelosBuscarCilindros.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        comboModelosBuscarCilindros.setForeground(new java.awt.Color(0, 0, 0));
+        comboModelosBuscarCilindros.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboModelosBuscarCilindros.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboModelosBuscarCilindrosActionPerformed(evt);
+            }
+        });
+        jPanel3.add(comboModelosBuscarCilindros);
+        comboModelosBuscarCilindros.setBounds(350, 70, 180, 26);
+
+        cajaModelosBuscarPais.setBackground(new java.awt.Color(255, 255, 255));
+        cajaModelosBuscarPais.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        jPanel3.add(cajaModelosBuscarPais);
+        cajaModelosBuscarPais.setBounds(350, 70, 180, 26);
 
         internalModelos.getContentPane().add(jPanel3);
         jPanel3.setBounds(0, 0, 760, 580);
@@ -1304,17 +1360,29 @@ public class VentanaInicio extends javax.swing.JFrame{
         comboModelosCilindrosAgregar.removeAllItems();
         comboModelosAnioActualizar.removeAllItems();
         comboModelosCilindrosActualizar.removeAllItems();
+        comboModelosBuscar.removeAllItems();
+        comboModelosBuscarAnio.removeAllItems();
+        comboModelosBuscarCilindros.removeAllItems();
 
         for (Integer anio : ComboBoxUtil.getAnios()) {
             comboModelosAnioAgregar.addItem(String.valueOf(anio));
             comboModelosAnioActualizar.addItem(String.valueOf(anio));
+            comboModelosBuscarAnio.addItem(String.valueOf(anio));
             
         }
 
         for (Integer cilindros : ComboBoxUtil.getCilindros()) {
             comboModelosCilindrosAgregar.addItem(String.valueOf(cilindros));
             comboModelosCilindrosActualizar.addItem(String.valueOf(cilindros));
+            comboModelosBuscarCilindros.addItem(String.valueOf(cilindros));
         }
+        
+        for (String opcion : ComboBoxUtil.getOpcionesBusqueda()){
+            
+            comboModelosBuscar.addItem(opcion);
+            
+        }
+        
     }
     
     private void actualizarModelo() {
@@ -1490,6 +1558,12 @@ public class VentanaInicio extends javax.swing.JFrame{
         
         tablaModelos.setRowHeight(30);
         
+        cargarCombosModelos();
+        
+        comboModelosBuscar.setSelectedItem("ID");
+        
+        mostrarCajas((String) comboModelosBuscar.getSelectedItem());
+        
         cargarTablaModelos();
         
     }//GEN-LAST:event_btnModelosActionPerformed
@@ -1592,6 +1666,65 @@ public class VentanaInicio extends javax.swing.JFrame{
         actualizarModelo();
     }//GEN-LAST:event_btnModelosActualizarActualizarActionPerformed
 
+    private void comboModelosBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboModelosBuscarActionPerformed
+        mostrarCajas((String) comboModelosBuscar.getSelectedItem());
+        
+    }//GEN-LAST:event_comboModelosBuscarActionPerformed
+
+    private void comboModelosBuscarAnioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboModelosBuscarAnioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboModelosBuscarAnioActionPerformed
+
+    private void comboModelosBuscarCilindrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboModelosBuscarCilindrosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboModelosBuscarCilindrosActionPerformed
+
+    public void ocultarComponentes(JComponent componente, JComponent... componentes){
+    
+        componente.setVisible(true);
+        
+        for(JComponent c : componentes){
+            
+            c.setVisible(false);
+            
+        }
+        
+    }
+    
+    public void mostrarCajas(String opc){
+        
+        if (opc == null) return;
+
+        if (opc.equals("ID")) {
+            
+            ocultarComponentes(cajaModelosBuscarID, cajaModelosBuscarNombre, comboModelosBuscarAnio, cajaModelosBuscarFabricante, comboModelosBuscarCilindros, cajaModelosBuscarPais);
+            
+        }else if(opc.equals("Nombre")){
+            
+            ocultarComponentes( cajaModelosBuscarNombre, cajaModelosBuscarID, comboModelosBuscarAnio, cajaModelosBuscarFabricante, comboModelosBuscarCilindros, cajaModelosBuscarPais);
+            
+        }else if(opc.equals("Año")){
+            
+            ocultarComponentes(comboModelosBuscarAnio, cajaModelosBuscarID, cajaModelosBuscarNombre,  cajaModelosBuscarFabricante, comboModelosBuscarCilindros, cajaModelosBuscarPais);
+            
+        }else if(opc.equals("Fabricante")){
+            
+            ocultarComponentes(cajaModelosBuscarFabricante, cajaModelosBuscarID, cajaModelosBuscarNombre, comboModelosBuscarAnio,  comboModelosBuscarCilindros, cajaModelosBuscarPais);
+            
+        }else if(opc.equals("Cilindros")){
+            
+            ocultarComponentes(comboModelosBuscarCilindros, cajaModelosBuscarID, cajaModelosBuscarNombre, comboModelosBuscarAnio, cajaModelosBuscarFabricante,  cajaModelosBuscarPais);
+            
+        }else if(opc.equals("País")){
+            
+            ocultarComponentes(cajaModelosBuscarPais, cajaModelosBuscarID, cajaModelosBuscarNombre, comboModelosBuscarAnio, cajaModelosBuscarFabricante, comboModelosBuscarCilindros );
+            
+        }
+        
+        
+        
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -1646,6 +1779,10 @@ public class VentanaInicio extends javax.swing.JFrame{
     private javax.swing.JButton btnVehiculosEliminadosCerrar;
     private javax.swing.JButton btnVentas;
     private javax.swing.JTextField cajaIDVentasBuscar;
+    private javax.swing.JTextField cajaModelosBuscarFabricante;
+    private javax.swing.JTextField cajaModelosBuscarID;
+    private javax.swing.JTextField cajaModelosBuscarNombre;
+    private javax.swing.JTextField cajaModelosBuscarPais;
     private javax.swing.JTextField cajaModelosColorActualizar;
     private javax.swing.JTextField cajaModelosColorAgregar;
     private javax.swing.JTextField cajaModelosFabricanteActualizar;
@@ -1667,6 +1804,9 @@ public class VentanaInicio extends javax.swing.JFrame{
     private javax.swing.JComboBox<String> comboModeloBusqueda;
     private javax.swing.JComboBox<String> comboModelosAnioActualizar;
     private javax.swing.JComboBox<String> comboModelosAnioAgregar;
+    private javax.swing.JComboBox<String> comboModelosBuscar;
+    private javax.swing.JComboBox<String> comboModelosBuscarAnio;
+    private javax.swing.JComboBox<String> comboModelosBuscarCilindros;
     private javax.swing.JComboBox<String> comboModelosCilindrosActualizar;
     private javax.swing.JComboBox<String> comboModelosCilindrosAgregar;
     private javax.swing.JComboBox<String> comboPrecioBusqueda1;
@@ -1688,7 +1828,6 @@ public class VentanaInicio extends javax.swing.JFrame{
     private javax.swing.JInternalFrame internalVehiculos;
     private javax.swing.JInternalFrame internalVehiculosEliminados;
     private javax.swing.JInternalFrame internalVentas;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
