@@ -4,10 +4,26 @@
  */
 package Repository;
 
+import Modelo.Modelo;
+import Modelo.Vehiculo;
+import java.util.List;
+
 /**
  *
  * @author Eduardo
  */
 public interface IVehiculoRepository {
+    
+    List<Vehiculo> obtenerTodos();
+    
+    void agregar(Vehiculo vehiculo);
+    
+    void eliminar(String idVehiculo);
+    
+    Modelo obtenerPorId(String idVehiculo);
+
+    void actualizar(Vehiculo vehiculo);
+ 
+    List<Modelo> buscarPorId(String id);
     
 }
