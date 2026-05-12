@@ -23,6 +23,7 @@ import java.util.List;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import util.CajasUtil;
+import util.RestablecerUtil;
 import util.TablaUtil;
 
 
@@ -55,34 +56,14 @@ public class VentanaInicio extends javax.swing.JFrame{
         internalProximamente.setVisible(false);
         
         
-        btnAgregarModelos.setBorder(new javax.swing.border.LineBorder(
-            new java.awt.Color(0, 0, 0), 2, true  // <- el "true" activa las esquinas redondeadas
-        ));
+   
         
         //=================== MODELOS =============================
-        cajaModelosBuscarID.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
-        public void insertUpdate(javax.swing.event.DocumentEvent e)  { buscarModelos(); }
-        public void removeUpdate(javax.swing.event.DocumentEvent e)  { buscarModelos(); }
-        public void changedUpdate(javax.swing.event.DocumentEvent e) { buscarModelos(); }
-        });
-
-        cajaModelosBuscarNombre.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
-        public void insertUpdate(javax.swing.event.DocumentEvent e)  { buscarModelos(); }
-        public void removeUpdate(javax.swing.event.DocumentEvent e)  { buscarModelos(); }
-        public void changedUpdate(javax.swing.event.DocumentEvent e) { buscarModelos(); }
-        });
-        
-        cajaModelosBuscarFabricante.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
-        public void insertUpdate(javax.swing.event.DocumentEvent e)  { buscarModelos(); }
-        public void removeUpdate(javax.swing.event.DocumentEvent e)  { buscarModelos(); }
-        public void changedUpdate(javax.swing.event.DocumentEvent e) { buscarModelos(); }
-        });
-        
-        cajaModelosBuscarPais.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
-        public void insertUpdate(javax.swing.event.DocumentEvent e)  { buscarModelos(); }
-        public void removeUpdate(javax.swing.event.DocumentEvent e)  { buscarModelos(); }
-        public void changedUpdate(javax.swing.event.DocumentEvent e) { buscarModelos(); }
-        });
+        eventosBusquedaCajas(cajaModelosBuscarID);
+        eventosBusquedaCajas(cajaModelosBuscarNombre);
+        eventosBusquedaCajas(cajaModelosBuscarFabricante);
+        eventosBusquedaCajas(cajaModelosBuscarPais);
+       
         
         comboModelosBuscarAnio.addActionListener(e -> buscarModelos());
         comboModelosBuscarCilindros.addActionListener(e -> buscarModelos());
@@ -1164,6 +1145,11 @@ public class VentanaInicio extends javax.swing.JFrame{
         btnModelosCancelarAgregar.setForeground(new java.awt.Color(0, 0, 0));
         btnModelosCancelarAgregar.setIcon(new javax.swing.ImageIcon("C:\\Users\\eduar\\Documents\\ITSJ\\5. Quinto Semestre\\Taller de bases de datos\\Proyecto final\\Proyecto_Final_TBD_Escritorio\\src\\main\\java\\img\\cancelar.png")); // NOI18N
         btnModelosCancelarAgregar.setText("Cancelar");
+        btnModelosCancelarAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModelosCancelarAgregarActionPerformed(evt);
+            }
+        });
         jPanel12.add(btnModelosCancelarAgregar);
         btnModelosCancelarAgregar.setBounds(290, 400, 120, 40);
 
@@ -1185,6 +1171,11 @@ public class VentanaInicio extends javax.swing.JFrame{
         btnModelosRestaurarAgregar.setForeground(new java.awt.Color(0, 0, 0));
         btnModelosRestaurarAgregar.setIcon(new javax.swing.ImageIcon("C:\\Users\\eduar\\Documents\\ITSJ\\5. Quinto Semestre\\Taller de bases de datos\\Proyecto final\\Proyecto_Final_TBD_Escritorio\\src\\main\\java\\img\\restaurar.png")); // NOI18N
         btnModelosRestaurarAgregar.setText("Restaurar");
+        btnModelosRestaurarAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModelosRestaurarAgregarActionPerformed(evt);
+            }
+        });
         jPanel12.add(btnModelosRestaurarAgregar);
         btnModelosRestaurarAgregar.setBounds(150, 400, 120, 40);
 
@@ -1389,6 +1380,16 @@ public class VentanaInicio extends javax.swing.JFrame{
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void eventosBusquedaCajas(JTextField caja){
+        
+        caja.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
+        public void insertUpdate(javax.swing.event.DocumentEvent e)  { buscarModelos(); }
+        public void removeUpdate(javax.swing.event.DocumentEvent e)  { buscarModelos(); }
+        public void changedUpdate(javax.swing.event.DocumentEvent e) { buscarModelos(); }
+        });
+        
+    }
+    
     private void cargarCombosModelos() {
         comboModelosAnioAgregar.removeAllItems();
         comboModelosCilindrosAgregar.removeAllItems();
@@ -1465,7 +1466,7 @@ public class VentanaInicio extends javax.swing.JFrame{
     
     private void actualizarTablaModelos(List<Modelo> modelos) {
         DefaultTableModel tableModel = (DefaultTableModel) tablaModelos.getModel();
-        tableModel.setRowCount(0); // limpia sin recrear el modelo
+        tableModel.setRowCount(0);
 
         for (Modelo m : modelos) {
             tableModel.addRow(new Object[]{
@@ -1557,6 +1558,7 @@ public class VentanaInicio extends javax.swing.JFrame{
             JOptionPane.showMessageDialog(this, "Modelo eliminado correctamente");
             cargarTablaModelos();
         }
+    
     }
 
     
@@ -1831,6 +1833,39 @@ public class VentanaInicio extends javax.swing.JFrame{
     private void comboModelosBuscarCilindrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboModelosBuscarCilindrosActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_comboModelosBuscarCilindrosActionPerformed
+
+    private void btnModelosRestaurarAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModelosRestaurarAgregarActionPerformed
+        
+        RestablecerUtil.restablecer(cajaModelosNombreAgregar, cajaModelosFabricanteAgregar, cajaModelosColorAgregar, 
+                comboModelosCilindrosAgregar, comboModelosAnioAgregar, cajaModelosPaisAgregar, cajaModelosPasajerosAgregar, 
+                cajaModelosPuertasAgregar, cajaModelosPesoAgregar);
+        
+    }//GEN-LAST:event_btnModelosRestaurarAgregarActionPerformed
+
+    private void btnModelosCancelarAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModelosCancelarAgregarActionPerformed
+        
+        int respuesta = JOptionPane.showConfirmDialog(
+            this,
+            "¿Estás seguro de cancelar la insercción, se perderan los datos no guardados",
+            "Confirmar calncelación",
+            JOptionPane.YES_NO_OPTION,
+            JOptionPane.WARNING_MESSAGE
+        );
+
+        if (respuesta == JOptionPane.YES_OPTION) {
+
+            internalAgregarModelos.setVisible(false);
+        
+            RestablecerUtil.restablecer(cajaModelosNombreAgregar, cajaModelosFabricanteAgregar, cajaModelosColorAgregar, 
+                comboModelosCilindrosAgregar, comboModelosAnioAgregar, cajaModelosPaisAgregar, cajaModelosPasajerosAgregar, 
+                cajaModelosPuertasAgregar, cajaModelosPesoAgregar);
+        
+        
+        }
+        
+        
+        
+    }//GEN-LAST:event_btnModelosCancelarAgregarActionPerformed
 
 
     

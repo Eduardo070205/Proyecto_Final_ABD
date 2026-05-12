@@ -16,7 +16,6 @@ UI\VentanaLogin$2.class
 UI\VentanaInicio$9.class
 Service\IModeloService.class
 UI\VentanaInicio$12.class
-UI\VentanaInicio$22.class
 UI\VentanaLogin$1.class
 UI\tabla\ButtonRenderer.class
 util\TablaUtil.class
@@ -28,6 +27,7 @@ Modelo\Modelo.class
 UI\VentanaLogin$3.class
 util\ComboBoxUtil.class
 UI\VentanaInicio$15.class
+util\RestablecerUtil.class
 com\mycompany\proyecto_final_abd_autosamistosos\Proyecto_Final_ABD_AutosAmistosos.class
 Repository\IModeloRepository.class
 UI\tabla\ButtonEditor.class
