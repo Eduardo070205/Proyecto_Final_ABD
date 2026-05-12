@@ -5,6 +5,7 @@
 package Service;
 
 import Modelo.Modelo;
+import Modelo.Vehiculo;
 import java.util.List;
 
 /**
@@ -13,7 +14,7 @@ import java.util.List;
  */
 public interface IVehiculoService {
     
-    List<Modelo> obtenerTodos();
+    List<Vehiculo> obtenerTodos();
     
 }
 

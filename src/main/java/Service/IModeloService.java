@@ -8,6 +8,7 @@ import Modelo.Modelo;
 import java.util.List;
 
 public interface IModeloService {
+    
     List<Modelo> obtenerTodos();
     
     void agregar(Modelo modelo);

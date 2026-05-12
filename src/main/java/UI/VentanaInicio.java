@@ -8,10 +8,14 @@ package UI;
 
 
 import Modelo.Modelo;
+import Modelo.Vehiculo;
 import util.ComboBoxUtil;
 import Repository.ModeloRepository;
+import Repository.VehiculoRepository;
 import Service.IModeloService;
+import Service.IVehiculoService;
 import Service.ModeloService;
+import Service.VehiculoService;
 import UI.tabla.ButtonEditor;
 import UI.tabla.ButtonRenderer;
 import static com.sun.java.accessibility.util.SwingEventMonitor.addDocumentListener;
@@ -32,6 +36,8 @@ import util.TablaUtil;
 public class VentanaInicio extends javax.swing.JFrame{
     
     private final IModeloService modeloService = new ModeloService(new ModeloRepository());
+    
+    private final IVehiculoService vehiculoService = new VehiculoService(new VehiculoRepository());
    
     private NavegacionController nav = new NavegacionController();
     
@@ -115,6 +121,8 @@ public class VentanaInicio extends javax.swing.JFrame{
         btnAgregarVehiculos = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaVehiculos = new javax.swing.JTable();
+        jLabel8 = new javax.swing.JLabel();
+        comboModelosBuscar1 = new javax.swing.JComboBox<>();
         internalModelos = new javax.swing.JInternalFrame();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -508,6 +516,24 @@ public class VentanaInicio extends javax.swing.JFrame{
 
         jPanel2.add(jScrollPane1);
         jScrollPane1.setBounds(20, 190, 720, 370);
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel8.setText("Buscar por:");
+        jPanel2.add(jLabel8);
+        jLabel8.setBounds(60, 70, 170, 30);
+
+        comboModelosBuscar1.setBackground(new java.awt.Color(227, 211, 163));
+        comboModelosBuscar1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        comboModelosBuscar1.setForeground(new java.awt.Color(0, 0, 0));
+        comboModelosBuscar1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboModelosBuscar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboModelosBuscar1ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(comboModelosBuscar1);
+        comboModelosBuscar1.setBounds(170, 70, 150, 30);
 
         internalVehiculos.getContentPane().add(jPanel2);
         jPanel2.setBounds(0, 0, 760, 580);
@@ -1434,6 +1460,73 @@ public class VentanaInicio extends javax.swing.JFrame{
         }
     
     }
+    
+    private void cargarTablaVehiculos() {
+        
+        
+        String[] columnas = {"ID", "Número de Serie", "Modelo", "Fecha de Fabricación", "Precio",
+                             "Kilometraje", "Fecha Entrada", "Tipo", "Estado", "Editar", "Eliminar"};
+
+        DefaultTableModel tableModel = new DefaultTableModel(columnas, 0){
+            
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                // Solo las columnas de botones son editables
+                return column == 9 || column == 10;
+            }
+            
+        };
+
+        for (Vehiculo v : vehiculoService.obtenerTodos()) {
+            tableModel.addRow(new Object[]{
+                v.getIdVehiculo(),
+                v.getNumeroSerie(),
+                v.getIdModelo(),
+                v.getFechaFabricacion(),
+                v.getPrecio(),
+                v.getKilometraje(),
+                v.getFechaEntrada(),
+                v.getTipo(),
+                v.getEstado(),
+                "Editar",
+                "Eliminar"    
+            });
+        }
+
+        tablaVehiculos.setModel(tableModel);
+        
+        TablaUtil.aplicarEstiloCebra(tablaVehiculos,
+            new java.awt.Color(247, 227, 178), // par - beige
+            java.awt.Color.WHITE               // impar - blanco
+        );
+        
+        ImageIcon iconoEditar = new ImageIcon(
+            new ImageIcon("C:\\Users\\eduar\\Documents\\ITSJ\\6. Sexto Semestre\\Administración de Bases de Datos\\Proyecto Final\\Proyecto_Final_ABD_AutosAmistosos\\src\\main\\java\\img\\actualizar.png")
+                .getImage().getScaledInstance(24, 24, Image.SCALE_SMOOTH)
+        );
+
+        ImageIcon iconoEliminar = new ImageIcon(
+            new ImageIcon("C:\\Users\\eduar\\Documents\\ITSJ\\6. Sexto Semestre\\Administración de Bases de Datos\\Proyecto Final\\Proyecto_Final_ABD_AutosAmistosos\\src\\main\\java\\img\\eliminar.png")
+                .getImage().getScaledInstance(24, 24, Image.SCALE_SMOOTH)
+        );
+        
+        // Columna Editar
+        tablaVehiculos.getColumnModel().getColumn(9).setCellRenderer(new ButtonRenderer(iconoEditar));
+        tablaVehiculos.getColumnModel().getColumn(9).setCellEditor(new ButtonEditor(iconoEditar, e -> {
+            int fila = tablaVehiculos.getSelectedRow();
+            int idModelo = (int) tablaVehiculos.getValueAt(fila, 0);
+            //abrirEditarModelo(idModelo);
+        }));
+
+        // Columna Eliminar
+        tablaVehiculos.getColumnModel().getColumn(10).setCellRenderer(new ButtonRenderer(iconoEliminar));
+        tablaVehiculos.getColumnModel().getColumn(10).setCellEditor(new ButtonEditor(iconoEliminar, e -> {
+            int fila = tablaVehiculos.getSelectedRow();
+            int idModelo = (int) tablaVehiculos.getValueAt(fila, 0);
+            //confirmarEliminar(idModelo);
+        }));
+        
+    }
 
     
     private void cargarTablaModelos() {
@@ -1536,7 +1629,11 @@ public class VentanaInicio extends javax.swing.JFrame{
 
         nav.marcarBotonActivo(btnVehiculos, btnHome, btnModelos, btnVentas, btnClientes, btnEmpleados, btnDocumentacion);
         
-         nav.mostrarPanel(internalVehiculos, internalHome, internalModelos, internalVentas, internalProximamente, internalVehiculosEliminados);
+        nav.mostrarPanel(internalVehiculos, internalHome, internalModelos, internalVentas, internalProximamente, internalVehiculosEliminados);
+
+        tablaVehiculos.setRowHeight(30);
+        
+        cargarTablaVehiculos();
         
     }//GEN-LAST:event_btnVehiculosActionPerformed
 
@@ -1744,7 +1841,7 @@ public class VentanaInicio extends javax.swing.JFrame{
         int respuesta = JOptionPane.showConfirmDialog(
             this,
             "¿Estás seguro de cancelar la actualización, se perderan los datos no guardados",
-            "Confirmar actualización",
+            "Confirmar cancelación",
             JOptionPane.YES_NO_OPTION,
             JOptionPane.WARNING_MESSAGE
         );
@@ -1760,6 +1857,10 @@ public class VentanaInicio extends javax.swing.JFrame{
         }
         
     }//GEN-LAST:event_btnModelosCancelarActualizarActionPerformed
+
+    private void comboModelosBuscar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboModelosBuscar1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboModelosBuscar1ActionPerformed
 
 
     
@@ -1836,6 +1937,7 @@ public class VentanaInicio extends javax.swing.JFrame{
     private javax.swing.JComboBox<String> comboModelosAnioActualizar;
     private javax.swing.JComboBox<String> comboModelosAnioAgregar;
     private javax.swing.JComboBox<String> comboModelosBuscar;
+    private javax.swing.JComboBox<String> comboModelosBuscar1;
     private javax.swing.JComboBox<String> comboModelosBuscarAnio;
     private javax.swing.JComboBox<String> comboModelosBuscarCilindros;
     private javax.swing.JComboBox<String> comboModelosCilindrosActualizar;
@@ -1893,6 +1995,7 @@ public class VentanaInicio extends javax.swing.JFrame{
     private javax.swing.JLabel jLabel61;
     private javax.swing.JLabel jLabel62;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel81;
     private javax.swing.JLabel jLabel82;
     private javax.swing.JLabel jLabel83;
