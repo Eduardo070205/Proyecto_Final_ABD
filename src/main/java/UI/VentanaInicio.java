@@ -1280,6 +1280,8 @@ public class VentanaInicio extends javax.swing.JFrame{
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    // ================================= MÉTODOS GENERALES ===============================
+    
     public void eventosBusquedaCajas(JTextField caja){
         
         caja.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
@@ -1289,6 +1291,26 @@ public class VentanaInicio extends javax.swing.JFrame{
         });
         
     }
+    
+    private void confirmarEliminar(int idModelo) {
+        int respuesta = JOptionPane.showConfirmDialog(
+            this,
+            "¿Estás seguro de eliminar el modelo con ID " + idModelo + "?",
+            "Confirmar eliminación",
+            JOptionPane.YES_NO_OPTION,
+            JOptionPane.WARNING_MESSAGE
+        );
+
+        if (respuesta == JOptionPane.YES_OPTION) {
+            modeloService.eliminar(idModelo);
+            JOptionPane.showMessageDialog(this, "Modelo eliminado correctamente");
+            cargarTablaModelos();
+        }
+    
+    }
+    
+    
+    // ================================ MODELOS ========================================
     
     private void cargarCombosModelos() {
         comboModelosAnioAgregar.removeAllItems();
@@ -1442,25 +1464,72 @@ public class VentanaInicio extends javax.swing.JFrame{
         }
     }
     
-    
+    private void cargarTablaModelos() {
+        
+        
+        String[] columnas = {"ID", "Nombre", "Año", "Fabricante", "Cilindros",
+                             "Pasajeros", "Editar", "Eliminar"};
 
-    private void confirmarEliminar(int idModelo) {
-        int respuesta = JOptionPane.showConfirmDialog(
-            this,
-            "¿Estás seguro de eliminar el modelo con ID " + idModelo + "?",
-            "Confirmar eliminación",
-            JOptionPane.YES_NO_OPTION,
-            JOptionPane.WARNING_MESSAGE
+        DefaultTableModel tableModel = new DefaultTableModel(columnas, 0){
+            
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                // Solo las columnas de botones son editables
+                return column == 6 || column == 7;
+            }
+            
+        };
+
+        for (Modelo m : modeloService.obtenerTodos()) {
+            tableModel.addRow(new Object[]{
+                m.getIdModelo(),
+                m.getNombreModelo(),
+                m.getAnioModelo(),
+                m.getFabricante(),
+                m.getNumeroCilindros(),
+                m.getCapacidadPasajeros(),
+                "Editar",
+                "Eliminar"    
+            });
+        }
+
+        tablaModelos.setModel(tableModel);
+        
+        TablaUtil.aplicarEstiloCebra(tablaModelos,
+            new java.awt.Color(247, 227, 178), // par - beige
+            java.awt.Color.WHITE               // impar - blanco
+        );
+        
+        ImageIcon iconoEditar = new ImageIcon(
+            new ImageIcon("C:\\Users\\eduar\\Documents\\ITSJ\\6. Sexto Semestre\\Administración de Bases de Datos\\Proyecto Final\\Proyecto_Final_ABD_AutosAmistosos\\src\\main\\java\\img\\actualizar.png")
+                .getImage().getScaledInstance(24, 24, Image.SCALE_SMOOTH)
         );
 
-        if (respuesta == JOptionPane.YES_OPTION) {
-            modeloService.eliminar(idModelo);
-            JOptionPane.showMessageDialog(this, "Modelo eliminado correctamente");
-            cargarTablaModelos();
-        }
-    
+        ImageIcon iconoEliminar = new ImageIcon(
+            new ImageIcon("C:\\Users\\eduar\\Documents\\ITSJ\\6. Sexto Semestre\\Administración de Bases de Datos\\Proyecto Final\\Proyecto_Final_ABD_AutosAmistosos\\src\\main\\java\\img\\eliminar.png")
+                .getImage().getScaledInstance(24, 24, Image.SCALE_SMOOTH)
+        );
+        
+        // Columna Editar
+        tablaModelos.getColumnModel().getColumn(6).setCellRenderer(new ButtonRenderer(iconoEditar));
+        tablaModelos.getColumnModel().getColumn(6).setCellEditor(new ButtonEditor(iconoEditar, e -> {
+            int fila = tablaModelos.getSelectedRow();
+            int idModelo = (int) tablaModelos.getValueAt(fila, 0);
+            abrirEditarModelo(idModelo);
+        }));
+
+        // Columna Eliminar
+        tablaModelos.getColumnModel().getColumn(7).setCellRenderer(new ButtonRenderer(iconoEliminar));
+        tablaModelos.getColumnModel().getColumn(7).setCellEditor(new ButtonEditor(iconoEliminar, e -> {
+            int fila = tablaModelos.getSelectedRow();
+            int idModelo = (int) tablaModelos.getValueAt(fila, 0);
+            confirmarEliminar(idModelo);
+        }));
+        
     }
     
+    
+    // ================================== VEHICULOS ======================================
     private void cargarTablaVehiculos() {
         
         
@@ -1529,72 +1598,10 @@ public class VentanaInicio extends javax.swing.JFrame{
     }
 
     
-    private void cargarTablaModelos() {
-        
-        
-        String[] columnas = {"ID", "Nombre", "Año", "Fabricante", "Cilindros",
-                             "Pasajeros", "Editar", "Eliminar"};
-
-        DefaultTableModel tableModel = new DefaultTableModel(columnas, 0){
-            
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                // Solo las columnas de botones son editables
-                return column == 6 || column == 7;
-            }
-            
-        };
-
-        for (Modelo m : modeloService.obtenerTodos()) {
-            tableModel.addRow(new Object[]{
-                m.getIdModelo(),
-                m.getNombreModelo(),
-                m.getAnioModelo(),
-                m.getFabricante(),
-                m.getNumeroCilindros(),
-                m.getCapacidadPasajeros(),
-                "Editar",
-                "Eliminar"    
-            });
-        }
-
-        tablaModelos.setModel(tableModel);
-        
-        TablaUtil.aplicarEstiloCebra(tablaModelos,
-            new java.awt.Color(247, 227, 178), // par - beige
-            java.awt.Color.WHITE               // impar - blanco
-        );
-        
-        ImageIcon iconoEditar = new ImageIcon(
-            new ImageIcon("C:\\Users\\eduar\\Documents\\ITSJ\\6. Sexto Semestre\\Administración de Bases de Datos\\Proyecto Final\\Proyecto_Final_ABD_AutosAmistosos\\src\\main\\java\\img\\actualizar.png")
-                .getImage().getScaledInstance(24, 24, Image.SCALE_SMOOTH)
-        );
-
-        ImageIcon iconoEliminar = new ImageIcon(
-            new ImageIcon("C:\\Users\\eduar\\Documents\\ITSJ\\6. Sexto Semestre\\Administración de Bases de Datos\\Proyecto Final\\Proyecto_Final_ABD_AutosAmistosos\\src\\main\\java\\img\\eliminar.png")
-                .getImage().getScaledInstance(24, 24, Image.SCALE_SMOOTH)
-        );
-        
-        // Columna Editar
-        tablaModelos.getColumnModel().getColumn(6).setCellRenderer(new ButtonRenderer(iconoEditar));
-        tablaModelos.getColumnModel().getColumn(6).setCellEditor(new ButtonEditor(iconoEditar, e -> {
-            int fila = tablaModelos.getSelectedRow();
-            int idModelo = (int) tablaModelos.getValueAt(fila, 0);
-            abrirEditarModelo(idModelo);
-        }));
-
-        // Columna Eliminar
-        tablaModelos.getColumnModel().getColumn(7).setCellRenderer(new ButtonRenderer(iconoEliminar));
-        tablaModelos.getColumnModel().getColumn(7).setCellEditor(new ButtonEditor(iconoEliminar, e -> {
-            int fila = tablaModelos.getSelectedRow();
-            int idModelo = (int) tablaModelos.getValueAt(fila, 0);
-            confirmarEliminar(idModelo);
-        }));
-        
-    }
+    
 
     
-    // ============================================== VENTANA VEHICULOS ================================================================
+    // ============================================== EVENTOS DE BOTONES ================================================================
     
     private void btnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionActionPerformed
 
