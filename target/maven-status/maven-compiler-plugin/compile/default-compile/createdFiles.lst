@@ -47,6 +47,7 @@ Service\IVehiculoService.class
 Repository\IModeloRepository.class
 UI\VentanaInicio$7.class
 UI\VentanaInicio$10.class
+UI\VentanaInicio$25.class
 Repository\IVehiculoRepository.class
 util\CajasUtil.class
 UI\VentanaInicio$3.class

@@ -493,6 +493,11 @@ public class VentanaInicio extends javax.swing.JFrame{
         btnAgregarVehiculos.setIcon(new javax.swing.ImageIcon("C:\\Users\\eduar\\Documents\\ITSJ\\5. Quinto Semestre\\Taller de bases de datos\\Proyecto final\\Proyecto_Final_TBD_Escritorio\\src\\main\\java\\img\\agregar.png")); // NOI18N
         btnAgregarVehiculos.setText("Agregar");
         btnAgregarVehiculos.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        btnAgregarVehiculos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarVehiculosActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -1348,7 +1353,7 @@ public class VentanaInicio extends javax.swing.JFrame{
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel12.setText("ID Modelo");
+        jLabel12.setText("Modelo");
 
         comboModeloAgregar.setBackground(new java.awt.Color(214, 198, 152));
         comboModeloAgregar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -1602,7 +1607,7 @@ public class VentanaInicio extends javax.swing.JFrame{
             comboModelosBuscarCilindros.addItem(String.valueOf(cilindros));
         }
         
-        for (String opcion : ComboBoxUtil.getOpcionesBusqueda()){
+        for (String opcion : ComboBoxUtil.getOpcionesBusquedaModelo()){
             
             comboModelosBuscar.addItem(opcion);
             
@@ -1865,7 +1870,43 @@ public class VentanaInicio extends javax.swing.JFrame{
         
     }
 
-    
+    private void cargarCombosVehiculos() {
+        comboAnioAgregar.removeAllItems();
+        comboMesAgregar.removeAllItems();
+        comboDiaAgregar.removeAllItems();
+        comboTipoAgregar.removeAllItems();
+        comboModeloAgregar.removeAllItems();
+
+        for(Integer anio : ComboBoxUtil.getAnios()) {
+            comboAnioAgregar.addItem(String.valueOf(anio));
+
+        }
+        
+        for(String mes : ComboBoxUtil.getMeses()){
+            
+            comboMesAgregar.addItem(mes);
+            
+        }
+        
+        for(Integer dia : ComboBoxUtil.getDias()){
+            
+            comboDiaAgregar.addItem(String.valueOf(dia));
+            
+        }
+        
+        for(String tipo : ComboBoxUtil.getTipo()){
+            
+            comboTipoAgregar.addItem(tipo);
+            
+        }
+        
+        for(String modelo : ComboBoxUtil.getModelo(modeloService)){
+            
+            comboModeloAgregar.addItem(modelo);
+            
+        }
+        
+    }
     
 
     
@@ -2136,6 +2177,14 @@ public class VentanaInicio extends javax.swing.JFrame{
     private void comboModelosBuscar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboModelosBuscar1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_comboModelosBuscar1ActionPerformed
+
+    private void btnAgregarVehiculosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarVehiculosActionPerformed
+        
+        nav.mostrarPanel(internalAgregarAutos);
+        
+        cargarCombosVehiculos();
+        
+    }//GEN-LAST:event_btnAgregarVehiculosActionPerformed
 
 
     
