@@ -229,6 +229,33 @@ public class VentanaInicio extends javax.swing.JFrame{
         cajaModelosPasajerosActualizar = new javax.swing.JTextField();
         cajaModelosPuertasActualizar = new javax.swing.JTextField();
         cajaModelosPesoActualizar = new javax.swing.JTextField();
+        internalAgregarAutos = new javax.swing.JInternalFrame();
+        jPanel7 = new javax.swing.JPanel();
+        jPanel8 = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        cajaNumVehiculoAgregar = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        cajaNumSerieAgregar = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        comboModeloAgregar = new javax.swing.JComboBox<>();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        comboAnioAgregar = new javax.swing.JComboBox<>();
+        comboMesAgregar = new javax.swing.JComboBox<>();
+        comboDiaAgregar = new javax.swing.JComboBox<>();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        comboTipoAgregar = new javax.swing.JComboBox<>();
+        btnAgregarAgregar = new javax.swing.JButton();
+        btnRestaurarAgregar = new javax.swing.JButton();
+        btnCancelarAgregar = new javax.swing.JButton();
+        cajaPrecioAgregar = new javax.swing.JTextField();
+        cajaKilometrajeAgregar = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Autos Amistosos");
@@ -1262,6 +1289,247 @@ public class VentanaInicio extends javax.swing.JFrame{
         jDesktopPane1.add(internalCambiosModelos);
         internalCambiosModelos.setBounds(150, 30, 440, 540);
 
+        internalAgregarAutos.setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
+        internalAgregarAutos.setTitle("Agregar Vehículo");
+        internalAgregarAutos.setMinimumSize(new java.awt.Dimension(480, 550));
+        internalAgregarAutos.setPreferredSize(new java.awt.Dimension(480, 550));
+        internalAgregarAutos.setVisible(false);
+        internalAgregarAutos.getContentPane().setLayout(null);
+
+        jPanel7.setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel8.setBackground(new java.awt.Color(214, 198, 152));
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel9.setText("Agregar Vehículo");
+
+        jLabel17.setIcon(new javax.swing.ImageIcon("C:\\Users\\eduar\\Documents\\ITSJ\\5. Quinto Semestre\\Taller de bases de datos\\Proyecto final\\Proyecto_Final_TBD_Escritorio\\src\\main\\java\\img\\logo_oscuro.png")); // NOI18N
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23))
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel10.setText("Número de Vehículo");
+
+        cajaNumVehiculoAgregar.setBackground(new java.awt.Color(255, 255, 255));
+        cajaNumVehiculoAgregar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        cajaNumVehiculoAgregar.setForeground(new java.awt.Color(0, 0, 0));
+        cajaNumVehiculoAgregar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel11.setText("Número de Serie");
+
+        cajaNumSerieAgregar.setBackground(new java.awt.Color(255, 255, 255));
+        cajaNumSerieAgregar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        cajaNumSerieAgregar.setForeground(new java.awt.Color(0, 0, 0));
+        cajaNumSerieAgregar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+
+        jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel12.setText("ID Modelo");
+
+        comboModeloAgregar.setBackground(new java.awt.Color(214, 198, 152));
+        comboModeloAgregar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        comboModeloAgregar.setForeground(new java.awt.Color(0, 0, 0));
+
+        jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel14.setText("Fecha de Fabricación");
+
+        jLabel15.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel15.setText("Año");
+
+        jLabel16.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel16.setText("Mes");
+
+        jLabel18.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel18.setText("Dia");
+
+        comboAnioAgregar.setBackground(new java.awt.Color(214, 198, 152));
+        comboAnioAgregar.setForeground(new java.awt.Color(0, 0, 0));
+
+        comboMesAgregar.setBackground(new java.awt.Color(214, 198, 152));
+        comboMesAgregar.setForeground(new java.awt.Color(0, 0, 0));
+
+        comboDiaAgregar.setBackground(new java.awt.Color(214, 198, 152));
+        comboDiaAgregar.setForeground(new java.awt.Color(0, 0, 0));
+
+        jLabel19.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel19.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel19.setText("Precio");
+
+        jLabel21.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel21.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel21.setText("Kilometraje");
+
+        jLabel22.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel22.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel22.setText("Tipo");
+
+        comboTipoAgregar.setBackground(new java.awt.Color(214, 198, 152));
+        comboTipoAgregar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        comboTipoAgregar.setForeground(new java.awt.Color(0, 0, 0));
+
+        btnAgregarAgregar.setBackground(new java.awt.Color(227, 211, 163));
+        btnAgregarAgregar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnAgregarAgregar.setForeground(new java.awt.Color(0, 0, 0));
+        btnAgregarAgregar.setIcon(new javax.swing.ImageIcon("C:\\Users\\eduar\\Documents\\ITSJ\\5. Quinto Semestre\\Taller de bases de datos\\Proyecto final\\Proyecto_Final_TBD_Escritorio\\src\\main\\java\\img\\agregar.png")); // NOI18N
+        btnAgregarAgregar.setText("Agregar");
+
+        btnRestaurarAgregar.setBackground(new java.awt.Color(227, 211, 163));
+        btnRestaurarAgregar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnRestaurarAgregar.setForeground(new java.awt.Color(0, 0, 0));
+        btnRestaurarAgregar.setIcon(new javax.swing.ImageIcon("C:\\Users\\eduar\\Documents\\ITSJ\\5. Quinto Semestre\\Taller de bases de datos\\Proyecto final\\Proyecto_Final_TBD_Escritorio\\src\\main\\java\\img\\restaurar.png")); // NOI18N
+        btnRestaurarAgregar.setText("Restaurar");
+
+        btnCancelarAgregar.setBackground(new java.awt.Color(227, 211, 163));
+        btnCancelarAgregar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnCancelarAgregar.setForeground(new java.awt.Color(0, 0, 0));
+        btnCancelarAgregar.setIcon(new javax.swing.ImageIcon("C:\\Users\\eduar\\Documents\\ITSJ\\5. Quinto Semestre\\Taller de bases de datos\\Proyecto final\\Proyecto_Final_TBD_Escritorio\\src\\main\\java\\img\\cancelar.png")); // NOI18N
+        btnCancelarAgregar.setText("Cancelar");
+
+        cajaPrecioAgregar.setBackground(new java.awt.Color(255, 255, 255));
+        cajaPrecioAgregar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        cajaPrecioAgregar.setForeground(new java.awt.Color(0, 0, 0));
+        cajaPrecioAgregar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+
+        cajaKilometrajeAgregar.setBackground(new java.awt.Color(255, 255, 255));
+        cajaKilometrajeAgregar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        cajaKilometrajeAgregar.setForeground(new java.awt.Color(0, 0, 0));
+        cajaKilometrajeAgregar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel15)
+                .addGap(83, 83, 83)
+                .addComponent(jLabel16)
+                .addGap(93, 93, 93)
+                .addComponent(jLabel18)
+                .addGap(45, 45, 45))
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cajaNumVehiculoAgregar)
+                            .addComponent(cajaNumSerieAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)
+                            .addComponent(comboModeloAgregar, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabel22, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel21, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel19, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
+                            .addGroup(jPanel7Layout.createSequentialGroup()
+                                .addComponent(btnAgregarAgregar)
+                                .addGap(12, 12, 12)))
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel7Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnRestaurarAgregar)
+                                .addGap(35, 35, 35)
+                                .addComponent(btnCancelarAgregar)
+                                .addGap(15, 15, 15))
+                            .addGroup(jPanel7Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel7Layout.createSequentialGroup()
+                                        .addComponent(comboAnioAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(comboMesAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(comboDiaAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addComponent(cajaPrecioAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)
+                                    .addComponent(comboTipoAgregar, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(cajaKilometrajeAgregar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE))))))
+                .addContainerGap())
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(cajaNumVehiculoAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(cajaNumSerieAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(comboModeloAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel15)
+                    .addComponent(jLabel18)
+                    .addComponent(jLabel16))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(comboAnioAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel14)
+                    .addComponent(comboMesAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboDiaAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel19)
+                    .addComponent(cajaPrecioAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel21)
+                    .addComponent(cajaKilometrajeAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel22)
+                    .addComponent(comboTipoAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAgregarAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCancelarAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnRestaurarAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27))
+        );
+
+        internalAgregarAutos.getContentPane().add(jPanel7);
+        jPanel7.setBounds(0, 0, 480, 520);
+
+        jDesktopPane1.add(internalAgregarAutos);
+        internalAgregarAutos.setBounds(200, 30, 490, 550);
+
         bg.add(jDesktopPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 0, 770, 610));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -1899,9 +2167,11 @@ public class VentanaInicio extends javax.swing.JFrame{
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bg;
     private javax.swing.JButton btnActualizarVentas;
+    private javax.swing.JButton btnAgregarAgregar;
     private javax.swing.JButton btnAgregarModelos;
     private javax.swing.JButton btnAgregarVehiculos;
     private javax.swing.JButton btnAgregarVentas;
+    private javax.swing.JButton btnCancelarAgregar;
     private javax.swing.JButton btnCerrarSesion;
     private javax.swing.JButton btnClientes;
     private javax.swing.JButton btnDocumentacion;
@@ -1919,10 +2189,12 @@ public class VentanaInicio extends javax.swing.JFrame{
     private javax.swing.JButton btnModelosCancelarActualizar;
     private javax.swing.JButton btnModelosCancelarAgregar;
     private javax.swing.JButton btnModelosRestaurarAgregar;
+    private javax.swing.JButton btnRestaurarAgregar;
     private javax.swing.JButton btnVehiculos;
     private javax.swing.JButton btnVehiculosEliminadosCerrar;
     private javax.swing.JButton btnVentas;
     private javax.swing.JTextField cajaIDVentasBuscar;
+    private javax.swing.JTextField cajaKilometrajeAgregar;
     private javax.swing.JTextField cajaModelosBuscarFabricante;
     private javax.swing.JTextField cajaModelosBuscarID;
     private javax.swing.JTextField cajaModelosBuscarNombre;
@@ -1941,6 +2213,13 @@ public class VentanaInicio extends javax.swing.JFrame{
     private javax.swing.JTextField cajaModelosPesoAgregar;
     private javax.swing.JTextField cajaModelosPuertasActualizar;
     private javax.swing.JTextField cajaModelosPuertasAgregar;
+    private javax.swing.JTextField cajaNumSerieAgregar;
+    private javax.swing.JTextField cajaNumVehiculoAgregar;
+    private javax.swing.JTextField cajaPrecioAgregar;
+    private javax.swing.JComboBox<String> comboAnioAgregar;
+    private javax.swing.JComboBox<String> comboDiaAgregar;
+    private javax.swing.JComboBox<String> comboMesAgregar;
+    private javax.swing.JComboBox<String> comboModeloAgregar;
     private javax.swing.JComboBox<String> comboModelosAnioActualizar;
     private javax.swing.JComboBox<String> comboModelosAnioAgregar;
     private javax.swing.JComboBox<String> comboModelosBuscar;
@@ -1949,6 +2228,7 @@ public class VentanaInicio extends javax.swing.JFrame{
     private javax.swing.JComboBox<String> comboModelosBuscarCilindros;
     private javax.swing.JComboBox<String> comboModelosCilindrosActualizar;
     private javax.swing.JComboBox<String> comboModelosCilindrosAgregar;
+    private javax.swing.JComboBox<String> comboTipoAgregar;
     private javax.swing.JComboBox<String> comboVentasClienteBuscar;
     private javax.swing.JComboBox<String> comboVentasEmpleadoBuscar;
     private javax.swing.JComboBox<String> comboVentasMesBuscar;
@@ -1958,6 +2238,7 @@ public class VentanaInicio extends javax.swing.JFrame{
     private javax.swing.ButtonGroup groupBusquedaModelos;
     private javax.swing.ButtonGroup groupBusquedaVehiculos;
     private javax.swing.ButtonGroup groupBusquedaVentas;
+    private javax.swing.JInternalFrame internalAgregarAutos;
     private javax.swing.JInternalFrame internalAgregarModelos;
     private javax.swing.JInternalFrame internalCambiosModelos;
     private javax.swing.JInternalFrame internalHome;
@@ -1968,9 +2249,20 @@ public class VentanaInicio extends javax.swing.JFrame{
     private javax.swing.JInternalFrame internalVentas;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel38;
@@ -2007,6 +2299,7 @@ public class VentanaInicio extends javax.swing.JFrame{
     private javax.swing.JLabel jLabel82;
     private javax.swing.JLabel jLabel83;
     private javax.swing.JLabel jLabel84;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
@@ -2022,6 +2315,8 @@ public class VentanaInicio extends javax.swing.JFrame{
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
