@@ -48,6 +48,8 @@ public class VentanaInicio extends javax.swing.JFrame{
     
     private int idModeloSeleccionado;
     
+    private String idVehiculoSeleccionado;
+    
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VentanaInicio.class.getName());
 
@@ -259,6 +261,39 @@ public class VentanaInicio extends javax.swing.JFrame{
         btnCancelarAgregar = new javax.swing.JButton();
         cajaPrecioAgregar = new javax.swing.JTextField();
         cajaKilometrajeAgregar = new javax.swing.JTextField();
+        internalModificarAutos = new javax.swing.JInternalFrame();
+        jPanel9 = new javax.swing.JPanel();
+        jPanel10 = new javax.swing.JPanel();
+        jLabel24 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
+        cajaNumSerieModificar = new javax.swing.JTextField();
+        jLabel27 = new javax.swing.JLabel();
+        comboModeloModificar = new javax.swing.JComboBox<>();
+        jLabel28 = new javax.swing.JLabel();
+        jLabel29 = new javax.swing.JLabel();
+        jLabel30 = new javax.swing.JLabel();
+        jLabel31 = new javax.swing.JLabel();
+        comboAnioModificar = new javax.swing.JComboBox<>();
+        comboMesModificar = new javax.swing.JComboBox<>();
+        comboDiaModificar = new javax.swing.JComboBox<>();
+        jLabel32 = new javax.swing.JLabel();
+        jLabel33 = new javax.swing.JLabel();
+        jLabel34 = new javax.swing.JLabel();
+        jLabel35 = new javax.swing.JLabel();
+        comboTipoModificar = new javax.swing.JComboBox<>();
+        comboEstadoModificar = new javax.swing.JComboBox<>();
+        btnActualizarModificar = new javax.swing.JButton();
+        btnCancelarModificar = new javax.swing.JButton();
+        comboAnioEntradaModificar = new javax.swing.JComboBox<>();
+        jLabel36 = new javax.swing.JLabel();
+        comboMesEntradaModificar = new javax.swing.JComboBox<>();
+        comboDiaEntradaModificar = new javax.swing.JComboBox<>();
+        jLabel37 = new javax.swing.JLabel();
+        jLabel63 = new javax.swing.JLabel();
+        jLabel64 = new javax.swing.JLabel();
+        cajaPrecioModificar = new javax.swing.JTextField();
+        cajaKilometrajeModificar = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Autos Amistosos");
@@ -1543,6 +1578,302 @@ public class VentanaInicio extends javax.swing.JFrame{
         jDesktopPane1.add(internalAgregarAutos);
         internalAgregarAutos.setBounds(200, 30, 490, 550);
 
+        internalModificarAutos.setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
+        internalModificarAutos.setTitle("Modificar Vehículo");
+        internalModificarAutos.setMinimumSize(new java.awt.Dimension(480, 550));
+        internalModificarAutos.setPreferredSize(new java.awt.Dimension(480, 550));
+        internalModificarAutos.setVisible(false);
+        internalModificarAutos.getContentPane().setLayout(null);
+
+        jPanel9.setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel10.setBackground(new java.awt.Color(214, 198, 152));
+
+        jLabel24.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel24.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel24.setText("Modificar Vehículo");
+
+        jLabel25.setIcon(new javax.swing.ImageIcon("C:\\Users\\eduar\\Documents\\ITSJ\\5. Quinto Semestre\\Taller de bases de datos\\Proyecto final\\Proyecto_Final_TBD_Escritorio\\src\\main\\java\\img\\logo_oscuro.png")); // NOI18N
+
+        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
+        jPanel10.setLayout(jPanel10Layout);
+        jPanel10Layout.setHorizontalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23))
+        );
+        jPanel10Layout.setVerticalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel24, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 10, Short.MAX_VALUE))
+        );
+
+        jLabel26.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel26.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel26.setText("Número de Serie");
+
+        cajaNumSerieModificar.setBackground(new java.awt.Color(255, 255, 255));
+        cajaNumSerieModificar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        cajaNumSerieModificar.setForeground(new java.awt.Color(0, 0, 0));
+        cajaNumSerieModificar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+
+        jLabel27.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel27.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel27.setText("ID Modelo");
+
+        comboModeloModificar.setBackground(new java.awt.Color(214, 198, 152));
+        comboModeloModificar.setEditable(true);
+        comboModeloModificar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        comboModeloModificar.setForeground(new java.awt.Color(0, 0, 0));
+
+        jLabel28.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel28.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel28.setText("Fecha de Fabricación");
+
+        jLabel29.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel29.setText("Año");
+
+        jLabel30.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel30.setText("Mes");
+
+        jLabel31.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel31.setText("Dia");
+
+        comboAnioModificar.setBackground(new java.awt.Color(214, 198, 152));
+        comboAnioModificar.setForeground(new java.awt.Color(0, 0, 0));
+
+        comboMesModificar.setBackground(new java.awt.Color(214, 198, 152));
+        comboMesModificar.setForeground(new java.awt.Color(0, 0, 0));
+
+        comboDiaModificar.setBackground(new java.awt.Color(214, 198, 152));
+        comboDiaModificar.setForeground(new java.awt.Color(0, 0, 0));
+
+        jLabel32.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel32.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel32.setText("Precio");
+
+        jLabel33.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel33.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel33.setText("Kilometraje");
+
+        jLabel34.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel34.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel34.setText("Tipo");
+
+        jLabel35.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel35.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel35.setText("Estado");
+
+        comboTipoModificar.setBackground(new java.awt.Color(214, 198, 152));
+        comboTipoModificar.setEditable(true);
+        comboTipoModificar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        comboTipoModificar.setForeground(new java.awt.Color(0, 0, 0));
+
+        comboEstadoModificar.setBackground(new java.awt.Color(214, 198, 152));
+        comboEstadoModificar.setEditable(true);
+        comboEstadoModificar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        comboEstadoModificar.setForeground(new java.awt.Color(0, 0, 0));
+
+        btnActualizarModificar.setBackground(new java.awt.Color(227, 211, 163));
+        btnActualizarModificar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnActualizarModificar.setForeground(new java.awt.Color(0, 0, 0));
+        btnActualizarModificar.setIcon(new javax.swing.ImageIcon("C:\\Users\\eduar\\Documents\\ITSJ\\5. Quinto Semestre\\Taller de bases de datos\\Proyecto final\\Proyecto_Final_TBD_Escritorio\\src\\main\\java\\img\\actualizar.png")); // NOI18N
+        btnActualizarModificar.setText("Actualizar");
+        btnActualizarModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarModificarActionPerformed(evt);
+            }
+        });
+        btnActualizarModificar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                btnActualizarModificarKeyReleased(evt);
+            }
+        });
+
+        btnCancelarModificar.setBackground(new java.awt.Color(227, 211, 163));
+        btnCancelarModificar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnCancelarModificar.setForeground(new java.awt.Color(0, 0, 0));
+        btnCancelarModificar.setIcon(new javax.swing.ImageIcon("C:\\Users\\eduar\\Documents\\ITSJ\\5. Quinto Semestre\\Taller de bases de datos\\Proyecto final\\Proyecto_Final_TBD_Escritorio\\src\\main\\java\\img\\cancelar.png")); // NOI18N
+        btnCancelarModificar.setText("Cancelar");
+
+        comboAnioEntradaModificar.setBackground(new java.awt.Color(214, 198, 152));
+        comboAnioEntradaModificar.setForeground(new java.awt.Color(0, 0, 0));
+
+        jLabel36.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel36.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel36.setText("Fecha de Entrada");
+
+        comboMesEntradaModificar.setBackground(new java.awt.Color(214, 198, 152));
+        comboMesEntradaModificar.setForeground(new java.awt.Color(0, 0, 0));
+
+        comboDiaEntradaModificar.setBackground(new java.awt.Color(214, 198, 152));
+        comboDiaEntradaModificar.setForeground(new java.awt.Color(0, 0, 0));
+
+        jLabel37.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel37.setText("Dia");
+
+        jLabel63.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel63.setText("Mes");
+
+        jLabel64.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel64.setText("Año");
+
+        cajaPrecioModificar.setBackground(new java.awt.Color(255, 255, 255));
+        cajaPrecioModificar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        cajaPrecioModificar.setForeground(new java.awt.Color(0, 0, 0));
+        cajaPrecioModificar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+
+        cajaKilometrajeModificar.setBackground(new java.awt.Color(255, 255, 255));
+        cajaKilometrajeModificar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        cajaKilometrajeModificar.setForeground(new java.awt.Color(0, 0, 0));
+        cajaKilometrajeModificar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+
+        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
+        jPanel9.setLayout(jPanel9Layout);
+        jPanel9Layout.setHorizontalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel29)
+                .addGap(83, 83, 83)
+                .addComponent(jLabel30)
+                .addGap(87, 87, 87)
+                .addComponent(jLabel31)
+                .addGap(64, 64, 64))
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addComponent(jLabel36, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
+                        .addGap(308, 308, 308))
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel9Layout.createSequentialGroup()
+                                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jLabel27, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel26, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cajaNumSerieModificar)
+                                    .addComponent(comboModeloModificar, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(jPanel9Layout.createSequentialGroup()
+                                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jLabel35, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel34, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel33, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel32, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel28, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(comboTipoModificar, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(comboEstadoModificar, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(cajaPrecioModificar)
+                                    .addGroup(jPanel9Layout.createSequentialGroup()
+                                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(jPanel9Layout.createSequentialGroup()
+                                                .addComponent(comboAnioModificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(comboMesModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(comboDiaModificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(jPanel9Layout.createSequentialGroup()
+                                                .addGap(6, 6, 6)
+                                                .addComponent(comboAnioEntradaModificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(comboMesEntradaModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(comboDiaEntradaModificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addComponent(cajaKilometrajeModificar, javax.swing.GroupLayout.Alignment.TRAILING)))
+                            .addGroup(jPanel9Layout.createSequentialGroup()
+                                .addGap(67, 67, 67)
+                                .addComponent(btnActualizarModificar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnCancelarModificar)
+                                .addGap(49, 49, 49)))
+                        .addContainerGap())
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel64)
+                        .addGap(83, 83, 83)
+                        .addComponent(jLabel63)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel37)
+                        .addGap(65, 65, 65))))
+        );
+        jPanel9Layout.setVerticalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel26)
+                    .addComponent(cajaNumSerieModificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel27)
+                    .addComponent(comboModeloModificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel29)
+                    .addComponent(jLabel31)
+                    .addComponent(jLabel30))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(comboAnioModificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel28)
+                    .addComponent(comboMesModificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboDiaModificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel32)
+                    .addComponent(cajaPrecioModificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel33)
+                    .addComponent(cajaKilometrajeModificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel64)
+                    .addComponent(jLabel37)
+                    .addComponent(jLabel63))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(comboAnioEntradaModificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel36)
+                    .addComponent(comboMesEntradaModificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboDiaEntradaModificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel34)
+                    .addComponent(comboTipoModificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(comboEstadoModificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel35))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnActualizarModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCancelarModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27))
+        );
+
+        internalModificarAutos.getContentPane().add(jPanel9);
+        jPanel9.setBounds(0, 0, 480, 540);
+
+        jDesktopPane1.add(internalModificarAutos);
+        internalModificarAutos.setBounds(140, 20, 490, 580);
+
         bg.add(jDesktopPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 0, 770, 610));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -1815,6 +2146,8 @@ public class VentanaInicio extends javax.swing.JFrame{
     
     // ================================== VEHICULOS ======================================
     
+    //ya se cargan los datos en el formulario, falta la actualizacion (Crear el método)
+    
     private void confirmarEliminarVehiculo(String idVehiculo) {
         int respuesta = JOptionPane.showConfirmDialog(
             this,
@@ -1832,7 +2165,86 @@ public class VentanaInicio extends javax.swing.JFrame{
     
     }
     
-    
+    private void abrirEditarVehiculo(String idVehiculo) {
+
+        Vehiculo vehiculo = vehiculoService.obtenerPorId(idVehiculo);
+
+        if (vehiculo != null) {
+
+            cargarCombosVehiculos();
+
+            idVehiculoSeleccionado = idVehiculo;
+
+            cajaNumSerieModificar.setText(
+                vehiculo.getNumeroSerie()
+            );
+
+            comboModeloModificar.setSelectedItem(
+                vehiculo.getNombreModelo()
+            );
+
+            // Convertir Date a LocalDate
+            LocalDate fecha =
+                vehiculo.getFechaFabricacion().toLocalDate();
+
+            // Año
+            comboAnioModificar.setSelectedItem(
+                String.valueOf(fecha.getYear())
+            );
+
+            // Mes
+            comboMesModificar.setSelectedIndex(
+                fecha.getMonthValue()-1
+            );
+
+            // Día
+            comboDiaModificar.setSelectedIndex(
+                fecha.getDayOfMonth()-1
+            );
+
+            cajaPrecioModificar.setText(
+                String.valueOf(vehiculo.getPrecio())
+            );
+
+            cajaKilometrajeModificar.setText(
+                String.valueOf(vehiculo.getKilometraje())
+            );
+            
+            // Convertir Date a LocalDate
+            fecha = vehiculo.getFechaEntrada().toLocalDate();
+
+            // Año
+            comboAnioEntradaModificar.setSelectedItem(
+                String.valueOf(fecha.getYear())
+            );
+
+            // Mes
+            comboMesEntradaModificar.setSelectedIndex(
+                fecha.getMonthValue()-1
+            );
+
+            // Día
+            comboDiaEntradaModificar.setSelectedIndex(
+                fecha.getDayOfMonth()-1
+            );
+
+
+            comboTipoModificar.setSelectedItem(
+                vehiculo.getTipo()
+            );
+            
+            comboEstadoModificar.setSelectedItem(
+            
+                vehiculo.getEstado()
+            
+            );
+
+            internalModificarAutos.setVisible(true);
+
+            internalModificarAutos.toFront();
+        }
+    }
+
     private void cargarTablaVehiculos() {
         
         
@@ -1886,8 +2298,8 @@ public class VentanaInicio extends javax.swing.JFrame{
         tablaVehiculos.getColumnModel().getColumn(9).setCellRenderer(new ButtonRenderer(iconoEditar));
         tablaVehiculos.getColumnModel().getColumn(9).setCellEditor(new ButtonEditor(iconoEditar, e -> {
             int fila = tablaVehiculos.getSelectedRow();
-            int idModelo = (int) tablaVehiculos.getValueAt(fila, 0);
-            //abrirEditarModelo(idModelo);
+            String idVehiculo = (String) tablaVehiculos.getValueAt(fila, 0);
+            abrirEditarVehiculo(idVehiculo);
         }));
 
         // Columna Eliminar
@@ -1899,6 +2311,8 @@ public class VentanaInicio extends javax.swing.JFrame{
         }));
         
     }
+    
+    
 
     private void cargarCombosVehiculos() {
         comboAnioAgregar.removeAllItems();
@@ -1906,33 +2320,58 @@ public class VentanaInicio extends javax.swing.JFrame{
         comboDiaAgregar.removeAllItems();
         comboTipoAgregar.removeAllItems();
         comboModeloAgregar.removeAllItems();
+        comboAnioModificar.removeAllItems();
+        comboMesModificar.removeAllItems();
+        comboDiaModificar.removeAllItems();
+        comboTipoModificar.removeAllItems();
+        comboModeloModificar.removeAllItems();
+        comboAnioEntradaModificar.removeAllItems();
+        comboMesEntradaModificar.removeAllItems();
+        comboDiaEntradaModificar.removeAllItems();
+        comboEstadoModificar.removeAllItems();
+        
+        
 
         for(Integer anio : ComboBoxUtil.getAnios()) {
             comboAnioAgregar.addItem(String.valueOf(anio));
+            comboAnioModificar.addItem(String.valueOf(anio));
+            comboAnioEntradaModificar.addItem(String.valueOf(anio));
 
         }
         
         for(String mes : ComboBoxUtil.getMeses()){
             
             comboMesAgregar.addItem(mes);
+            comboMesModificar.addItem(mes);
+            comboMesEntradaModificar.addItem(mes);
             
         }
         
         for(Integer dia : ComboBoxUtil.getDias()){
             
             comboDiaAgregar.addItem(String.valueOf(dia));
+            comboDiaModificar.addItem(String.valueOf(dia));
+            comboDiaEntradaModificar.addItem(String.valueOf(dia));
             
         }
         
         for(String tipo : ComboBoxUtil.getTipo()){
             
             comboTipoAgregar.addItem(tipo);
+            comboTipoModificar.addItem(tipo);
             
         }
         
         for(String modelo : ComboBoxUtil.getModelo(modeloService)){
             
             comboModeloAgregar.addItem(modelo);
+            comboModeloModificar.addItem(modelo);
+            
+        }
+        
+        for(String estado : ComboBoxUtil.getEstado()){
+            
+            comboEstadoModificar.addItem(estado);
             
         }
         
@@ -2251,6 +2690,14 @@ public class VentanaInicio extends javax.swing.JFrame{
         
     }//GEN-LAST:event_btnAgregarAgregarActionPerformed
 
+    private void btnActualizarModificarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnActualizarModificarKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnActualizarModificarKeyReleased
+
+    private void btnActualizarModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarModificarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnActualizarModificarActionPerformed
+
 
     
     /**
@@ -2280,12 +2727,14 @@ public class VentanaInicio extends javax.swing.JFrame{
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bg;
+    private javax.swing.JButton btnActualizarModificar;
     private javax.swing.JButton btnActualizarVentas;
     private javax.swing.JButton btnAgregarAgregar;
     private javax.swing.JButton btnAgregarModelos;
     private javax.swing.JButton btnAgregarVehiculos;
     private javax.swing.JButton btnAgregarVentas;
     private javax.swing.JButton btnCancelarAgregar;
+    private javax.swing.JButton btnCancelarModificar;
     private javax.swing.JButton btnCerrarSesion;
     private javax.swing.JButton btnClientes;
     private javax.swing.JButton btnDocumentacion;
@@ -2309,6 +2758,7 @@ public class VentanaInicio extends javax.swing.JFrame{
     private javax.swing.JButton btnVentas;
     private javax.swing.JTextField cajaIDVentasBuscar;
     private javax.swing.JTextField cajaKilometrajeAgregar;
+    private javax.swing.JTextField cajaKilometrajeModificar;
     private javax.swing.JTextField cajaModelosBuscarFabricante;
     private javax.swing.JTextField cajaModelosBuscarID;
     private javax.swing.JTextField cajaModelosBuscarNombre;
@@ -2328,12 +2778,22 @@ public class VentanaInicio extends javax.swing.JFrame{
     private javax.swing.JTextField cajaModelosPuertasActualizar;
     private javax.swing.JTextField cajaModelosPuertasAgregar;
     private javax.swing.JTextField cajaNumSerieAgregar;
+    private javax.swing.JTextField cajaNumSerieModificar;
     private javax.swing.JTextField cajaNumVehiculoAgregar;
     private javax.swing.JTextField cajaPrecioAgregar;
+    private javax.swing.JTextField cajaPrecioModificar;
     private javax.swing.JComboBox<String> comboAnioAgregar;
+    private javax.swing.JComboBox<String> comboAnioEntradaModificar;
+    private javax.swing.JComboBox<String> comboAnioModificar;
     private javax.swing.JComboBox<String> comboDiaAgregar;
+    private javax.swing.JComboBox<String> comboDiaEntradaModificar;
+    private javax.swing.JComboBox<String> comboDiaModificar;
+    private javax.swing.JComboBox<String> comboEstadoModificar;
     private javax.swing.JComboBox<String> comboMesAgregar;
+    private javax.swing.JComboBox<String> comboMesEntradaModificar;
+    private javax.swing.JComboBox<String> comboMesModificar;
     private javax.swing.JComboBox<String> comboModeloAgregar;
+    private javax.swing.JComboBox<String> comboModeloModificar;
     private javax.swing.JComboBox<String> comboModelosAnioActualizar;
     private javax.swing.JComboBox<String> comboModelosAnioAgregar;
     private javax.swing.JComboBox<String> comboModelosBuscar;
@@ -2343,6 +2803,7 @@ public class VentanaInicio extends javax.swing.JFrame{
     private javax.swing.JComboBox<String> comboModelosCilindrosActualizar;
     private javax.swing.JComboBox<String> comboModelosCilindrosAgregar;
     private javax.swing.JComboBox<String> comboTipoAgregar;
+    private javax.swing.JComboBox<String> comboTipoModificar;
     private javax.swing.JComboBox<String> comboVentasClienteBuscar;
     private javax.swing.JComboBox<String> comboVentasEmpleadoBuscar;
     private javax.swing.JComboBox<String> comboVentasMesBuscar;
@@ -2357,6 +2818,7 @@ public class VentanaInicio extends javax.swing.JFrame{
     private javax.swing.JInternalFrame internalCambiosModelos;
     private javax.swing.JInternalFrame internalHome;
     private javax.swing.JInternalFrame internalModelos;
+    private javax.swing.JInternalFrame internalModificarAutos;
     private javax.swing.JInternalFrame internalProximamente;
     private javax.swing.JInternalFrame internalVehiculos;
     private javax.swing.JInternalFrame internalVehiculosEliminados;
@@ -2378,7 +2840,21 @@ public class VentanaInicio extends javax.swing.JFrame{
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel36;
+    private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
@@ -2407,6 +2883,8 @@ public class VentanaInicio extends javax.swing.JFrame{
     private javax.swing.JLabel jLabel60;
     private javax.swing.JLabel jLabel61;
     private javax.swing.JLabel jLabel62;
+    private javax.swing.JLabel jLabel63;
+    private javax.swing.JLabel jLabel64;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel81;
@@ -2415,6 +2893,7 @@ public class VentanaInicio extends javax.swing.JFrame{
     private javax.swing.JLabel jLabel84;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
@@ -2431,6 +2910,7 @@ public class VentanaInicio extends javax.swing.JFrame{
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;

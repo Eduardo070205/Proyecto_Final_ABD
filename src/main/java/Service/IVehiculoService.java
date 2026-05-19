@@ -20,7 +20,9 @@ public interface IVehiculoService {
     
     void eliminar(String idVehiculo);
     
+    Vehiculo obtenerPorId(String idVehiculo);
     
+    void actualizar(Vehiculo vehiculo);
     
 }
 

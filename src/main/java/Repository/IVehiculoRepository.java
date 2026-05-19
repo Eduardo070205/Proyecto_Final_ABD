@@ -20,10 +20,10 @@ public interface IVehiculoRepository {
     
     void eliminar(String idVehiculo);
     
-    Modelo obtenerPorId(String idVehiculo);
+    Vehiculo obtenerPorId(String idVehiculo);
 
     void actualizar(Vehiculo vehiculo);
  
-    List<Modelo> buscarPorId(String id);
+    List<Vehiculo> buscarPorId(String id);
     
 }

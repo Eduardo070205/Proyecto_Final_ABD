@@ -64,7 +64,11 @@ public class ComboBoxUtil {
         
     }
     
-    
+    public static List<String> getEstado(){
+        
+        return List.of("Disponible", "Vendido");
+        
+    }
     
     
     public static List<String> getModelo(IModeloService modeloService) {

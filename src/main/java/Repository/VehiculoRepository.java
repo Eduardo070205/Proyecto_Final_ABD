@@ -143,18 +143,145 @@ public class VehiculoRepository implements IVehiculoRepository{
     }
 
     @Override
-    public Modelo obtenerPorId(String idVehiculo) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Vehiculo obtenerPorId(String idVehiculo) {
+
+        String sql = """
+            SELECT 
+                v.ID_Vehiculo,
+                v.Numero_Serie,
+                m.Nombre_Modelo,
+                v.Fecha_Fabricacion,
+                v.Precio,
+                v.Kilometraje,
+                v.Fecha_Entrada,
+                v.Tipo,
+                v.Estado
+            FROM Vehiculos v
+            JOIN Modelos m
+                ON v.ID_Modelo = m.ID_Modelo
+            WHERE v.ID_Vehiculo = ?
+            """;
+
+        try {
+
+            Connection con = ConexionBD.getInstancia().getConnection();
+
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            ps.setString(1, idVehiculo);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+
+                return new Vehiculo(
+
+                    rs.getString("ID_Vehiculo"),
+
+                    rs.getString("Numero_Serie"),
+
+                    rs.getString("Nombre_Modelo"),
+
+                    rs.getDate("Fecha_Fabricacion"),
+
+                    rs.getDouble("Precio"),
+
+                    rs.getInt("Kilometraje"),
+
+                    rs.getDate("Fecha_Entrada"),
+
+                    rs.getString("Tipo"),
+
+                    rs.getString("Estado")
+                );
+            }
+
+        } catch (SQLException e) {
+
+            logger.log(
+                Level.SEVERE,
+                "Error al obtener vehículo: " + e.getMessage(),
+                e
+            );
+
+            throw new RuntimeException(
+                "Error al obtener vehículo: " + e.getMessage()
+            );
+        }
+
+        return null;
     }
 
     @Override
     public void actualizar(Vehiculo vehiculo) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        
+        String sql = """
+            UPDATE Vehiculos 
+            SET 
+                Numero_Serie = ?,
+                ID_Modelo = (
+                    SELECT ID_Modelo
+                    FROM Modelos
+                    WHERE TRIM(UPPER(Nombre_Modelo)) =
+                          TRIM(UPPER(?))
+                ),
+                Fecha_Fabricacion = ?,
+                Precio = ?,
+                Kilometraje = ?,
+                Fecha_Entrada = ?,
+                Tipo = ?,
+                Estado = ?
+            WHERE ID_Vehiculo = ?
+            
+            """;
+
+        try {
+
+            Connection con = ConexionBD.getInstancia().getConnection();
+
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            ps.setString(1, vehiculo.getNumeroSerie());
+
+            // Nombre del modelo seleccionado
+            ps.setString(2, vehiculo.getNombreModelo());
+
+            ps.setDate(3, vehiculo.getFechaFabricacion());
+
+            ps.setDouble(4, vehiculo.getPrecio());
+
+            ps.setInt(5, vehiculo.getKilometraje());
+
+            ps.setDate(6, vehiculo.getFechaEntrada());
+
+            ps.setString(7, vehiculo.getTipo());
+
+            ps.setString(8, vehiculo.getEstado());
+
+            // ID del vehículo a editar
+            ps.setString(9, vehiculo.getIdVehiculo());
+
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+
+            logger.log(Level.SEVERE,
+                "Error al actualizar vehiculo: " + e.getMessage(),
+                e
+            );
+
+            throw new RuntimeException(
+                "Error al actualizar vehículo: " + e.getMessage()
+            );
+        }
+
     }
 
     @Override
-    public List<Modelo> buscarPorId(String id) {
+    public List<Vehiculo> buscarPorId(String id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
+
     
 }

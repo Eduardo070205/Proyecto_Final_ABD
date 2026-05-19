@@ -46,6 +46,23 @@ public class VehiculoService implements IVehiculoService{
         vehiculoRepository.eliminar(idVehiculo);
         
     }
+
+    @Override
+    public Vehiculo obtenerPorId(String idVehiculo) {
+        
+        return vehiculoRepository.obtenerPorId(idVehiculo);
+        
+    }
+
+    @Override
+    public void actualizar(Vehiculo vehiculo) {
+        
+        if (!ValidacionesUtil.validarCamposVehiculo(vehiculo)) {
+            throw new IllegalArgumentException("Todos los campos son obligatorios");
+        }
+        vehiculoRepository.actualizar(vehiculo);
+        
+    }
     
 
     
