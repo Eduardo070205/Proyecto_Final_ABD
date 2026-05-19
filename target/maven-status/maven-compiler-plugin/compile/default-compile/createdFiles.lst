@@ -36,6 +36,7 @@ BD\ConexionBD.class
 Repository\VehiculoRepository.class
 UI\VentanaInicio$11.class
 UI\VentanaInicio$21.class
+util\ValidacionesUtil.class
 UI\VentanaLogin$1.class
 UI\tabla\ButtonRenderer.class
 UI\VentanaInicio$17.class

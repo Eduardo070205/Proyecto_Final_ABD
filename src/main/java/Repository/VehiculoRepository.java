@@ -28,9 +28,21 @@ public class VehiculoRepository implements IVehiculoRepository{
     public List<Vehiculo> obtenerTodos() {
         
         List<Vehiculo> lista = new ArrayList<>();
-        String sql = "SELECT ID_Vehiculo, Numero_Serie, ID_Modelo, Fecha_Fabricacion, " +
-                     "Precio, Kilometraje, Fecha_Entrada, " +
-                     "Tipo, Estado FROM Vehiculos";
+        String sql = """
+            SELECT 
+                v.ID_Vehiculo,
+                v.Numero_Serie,
+                m.Nombre_Modelo AS Nombre,
+                v.Fecha_Fabricacion,
+                v.Precio,
+                v.Kilometraje,
+                v.Fecha_Entrada,
+                v.Tipo,
+                v.Estado
+            FROM Vehiculos v
+            JOIN Modelos m
+                ON v.ID_Modelo = m.ID_Modelo
+            """;
 
         try {
             Connection con = ConexionBD.getInstancia().getConnection();
@@ -41,7 +53,7 @@ public class VehiculoRepository implements IVehiculoRepository{
                 lista.add(new Vehiculo(
                     rs.getString("ID_Vehiculo"),
                     rs.getString("Numero_Serie"),
-                    rs.getInt("ID_Modelo"),
+                    rs.getString("Nombre"),
                     rs.getDate("Fecha_Fabricacion"),
                     rs.getDouble("Precio"),
                     rs.getInt("Kilometraje"),
@@ -60,7 +72,50 @@ public class VehiculoRepository implements IVehiculoRepository{
 
     @Override
     public void agregar(Vehiculo vehiculo) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+
+        String sql = """
+            INSERT INTO Vehiculos (
+                ID_Vehiculo,
+                Numero_Serie,
+                ID_Modelo,
+                Fecha_Fabricacion,
+                Precio,
+                Kilometraje,
+                Fecha_Entrada,
+                Tipo,
+                Estado
+            )
+            VALUES (
+                ?, 
+                ?, 
+                (SELECT ID_Modelo 
+                 FROM Modelos 
+                 WHERE Nombre_Modelo = ?),
+                ?, ?, ?, ?, ?, ?
+            )
+            """;
+
+        try {
+            Connection con = ConexionBD.getInstancia().getConnection();
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            ps.setString(1, vehiculo.getIdVehiculo());
+            ps.setString(2, vehiculo.getNumeroSerie());
+
+            ps.setString(3, vehiculo.getNombreModelo());
+
+            ps.setDate(4, vehiculo.getFechaFabricacion());
+            ps.setDouble(5, vehiculo.getPrecio());
+            ps.setInt(6, vehiculo.getKilometraje());
+            ps.setDate(7, vehiculo.getFechaEntrada());
+            ps.setString(8, vehiculo.getTipo());
+            ps.setString(9, vehiculo.getEstado());
+
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            logger.log(Level.SEVERE, "Error al agregar vehiculo: " + e.getMessage(), e);
+        }
     }
 
     @Override

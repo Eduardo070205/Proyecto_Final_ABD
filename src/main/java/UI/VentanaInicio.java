@@ -1823,7 +1823,7 @@ public class VentanaInicio extends javax.swing.JFrame{
             tableModel.addRow(new Object[]{
                 v.getIdVehiculo(),
                 v.getNumeroSerie(),
-                v.getIdModelo(),
+                v.getNombreModelo(),
                 v.getFechaFabricacion(),
                 v.getPrecio(),
                 v.getKilometraje(),
@@ -2055,8 +2055,7 @@ public class VentanaInicio extends javax.swing.JFrame{
         modeloService.agregar(modelo);
         JOptionPane.showMessageDialog(this, "Modelo agregado correctamente");
         internalAgregarModelos.setVisible(false);
-        cargarTablaModelos(); // refresca la tabla
-
+        cargarTablaModelos(); 
     } catch (IllegalArgumentException e) {
         JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
     }

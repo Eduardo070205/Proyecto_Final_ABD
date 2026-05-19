@@ -9,6 +9,7 @@ import Modelo.Vehiculo;
 import Repository.IModeloRepository;
 import Repository.IVehiculoRepository;
 import java.util.List;
+import util.ValidacionesUtil;
 
 /**
  *
@@ -26,6 +27,16 @@ public class VehiculoService implements IVehiculoService{
     public List<Vehiculo> obtenerTodos() {
 
         return vehiculoRepository.obtenerTodos();
+        
+    }
+
+    @Override
+    public void agregar(Vehiculo vehiculo) {
+     
+        if (!ValidacionesUtil.validarCamposVehiculo(vehiculo)) {
+            throw new IllegalArgumentException("Todos los campos son obligatorios");
+        }
+        vehiculoRepository.agregar(vehiculo);
         
     }
     

@@ -16,19 +16,21 @@ public class Vehiculo {
     
     private String idVehiculo;
     private String numeroSerie;
-    private int idModelo;
+    private String nombreModelo;
     private Date fechaFabricacion;
     private double precio;
     private int kilometraje;
     private Date fechaEntrada;
     private String tipo;
     private String estado;
+    
+    
 
 
-    public Vehiculo(String idVehiculo, String numeroSerie, int idModelo, Date fechaFabricacion, double precio, int kilometraje, Date fechaEntrada, String tipo, String estado) {
+    public Vehiculo(String idVehiculo, String numeroSerie, String nombreModelo, Date fechaFabricacion, double precio, int kilometraje, Date fechaEntrada, String tipo, String estado) {
         this.idVehiculo = idVehiculo;
         this.numeroSerie = numeroSerie;
-        this.idModelo = idModelo;
+        this.nombreModelo = nombreModelo;
         this.fechaFabricacion = fechaFabricacion;
         this.precio = precio;
         this.kilometraje = kilometraje;
@@ -45,8 +47,8 @@ public class Vehiculo {
         return numeroSerie;
     }
 
-    public int getIdModelo() {
-        return idModelo;
+    public String getNombreModelo() {
+        return nombreModelo;
     }
 
     public Date getFechaFabricacion() {
