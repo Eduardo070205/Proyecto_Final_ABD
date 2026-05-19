@@ -129,7 +129,17 @@ public class VehiculoRepository implements IVehiculoRepository{
 
     @Override
     public void eliminar(String idVehiculo) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+               
+        String sql = "DELETE FROM Vehiculos WHERE ID_Vehiculo = ?";
+        
+        try {
+            Connection con = ConexionBD.getInstancia().getConnection();
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, idVehiculo);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            logger.log(Level.SEVERE, "Error al eliminar vehiculo: " + e.getMessage(), e);
+        }
     }
 
     @Override

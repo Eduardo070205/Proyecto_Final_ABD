@@ -1573,22 +1573,7 @@ public class VentanaInicio extends javax.swing.JFrame{
         
     }
     
-    private void confirmarEliminar(int idModelo) {
-        int respuesta = JOptionPane.showConfirmDialog(
-            this,
-            "¿Estás seguro de eliminar el modelo con ID " + idModelo + "?",
-            "Confirmar eliminación",
-            JOptionPane.YES_NO_OPTION,
-            JOptionPane.WARNING_MESSAGE
-        );
 
-        if (respuesta == JOptionPane.YES_OPTION) {
-            modeloService.eliminar(idModelo);
-            JOptionPane.showMessageDialog(this, "Modelo eliminado correctamente");
-            cargarTablaModelos();
-        }
-    
-    }
     
     
     // ================================ MODELOS ========================================
@@ -1623,6 +1608,24 @@ public class VentanaInicio extends javax.swing.JFrame{
         
     }
     
+    
+        private void confirmarEliminarModelo(int idModelo) {
+        int respuesta = JOptionPane.showConfirmDialog(
+            this,
+            "¿Estás seguro de eliminar el modelo con ID " + idModelo + "?",
+            "Confirmar eliminación",
+            JOptionPane.YES_NO_OPTION,
+            JOptionPane.WARNING_MESSAGE
+        );
+
+        if (respuesta == JOptionPane.YES_OPTION) {
+            modeloService.eliminar(idModelo);
+            JOptionPane.showMessageDialog(this, "Modelo eliminado correctamente");
+            cargarTablaModelos();
+        }
+    
+    }
+        
     private void actualizarModelo() {
         try {
             Modelo modelo = new Modelo(
@@ -1804,13 +1807,32 @@ public class VentanaInicio extends javax.swing.JFrame{
         tablaModelos.getColumnModel().getColumn(7).setCellEditor(new ButtonEditor(iconoEliminar, e -> {
             int fila = tablaModelos.getSelectedRow();
             int idModelo = (int) tablaModelos.getValueAt(fila, 0);
-            confirmarEliminar(idModelo);
+            confirmarEliminarModelo(idModelo);
         }));
         
     }
     
     
     // ================================== VEHICULOS ======================================
+    
+    private void confirmarEliminarVehiculo(String idVehiculo) {
+        int respuesta = JOptionPane.showConfirmDialog(
+            this,
+            "¿Estás seguro de eliminar el vehiculo con ID " + idVehiculo + "?",
+            "Confirmar eliminación",
+            JOptionPane.YES_NO_OPTION,
+            JOptionPane.WARNING_MESSAGE
+        );
+
+        if (respuesta == JOptionPane.YES_OPTION) {
+            vehiculoService.eliminar(idVehiculo);
+            JOptionPane.showMessageDialog(this, "Vehiculo eliminado correctamente");
+            cargarTablaVehiculos();
+        }
+    
+    }
+    
+    
     private void cargarTablaVehiculos() {
         
         
@@ -1872,8 +1894,8 @@ public class VentanaInicio extends javax.swing.JFrame{
         tablaVehiculos.getColumnModel().getColumn(10).setCellRenderer(new ButtonRenderer(iconoEliminar));
         tablaVehiculos.getColumnModel().getColumn(10).setCellEditor(new ButtonEditor(iconoEliminar, e -> {
             int fila = tablaVehiculos.getSelectedRow();
-            int idModelo = (int) tablaVehiculos.getValueAt(fila, 0);
-            //confirmarEliminar(idModelo);
+            String idVehiculo = (String) tablaVehiculos.getValueAt(fila, 0);
+            confirmarEliminarVehiculo(idVehiculo);
         }));
         
     }
@@ -2203,8 +2225,6 @@ public class VentanaInicio extends javax.swing.JFrame{
         
         
         try{
-            
-            
             
             Vehiculo vehiculo = new Vehiculo(
                 cajaNumVehiculoAgregar.getText(),

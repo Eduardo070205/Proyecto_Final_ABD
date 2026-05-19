@@ -18,5 +18,9 @@ public interface IVehiculoService {
     
     void agregar(Vehiculo vehiculo);
     
+    void eliminar(String idVehiculo);
+    
+    
+    
 }
 

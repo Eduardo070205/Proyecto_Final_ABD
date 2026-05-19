@@ -39,6 +39,13 @@ public class VehiculoService implements IVehiculoService{
         vehiculoRepository.agregar(vehiculo);
         
     }
+
+    @Override
+    public void eliminar(String idVehiculo) {
+        
+        vehiculoRepository.eliminar(idVehiculo);
+        
+    }
     
 
     
