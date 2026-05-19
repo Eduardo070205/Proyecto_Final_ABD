@@ -72,6 +72,8 @@ public class VehiculoRepository implements IVehiculoRepository{
 
     @Override
     public void agregar(Vehiculo vehiculo) {
+        
+        System.out.println(vehiculo.getNombreModelo());
 
         String sql = """
             INSERT INTO Vehiculos (
@@ -88,9 +90,12 @@ public class VehiculoRepository implements IVehiculoRepository{
             VALUES (
                 ?, 
                 ?, 
-                (SELECT ID_Modelo 
-                 FROM Modelos 
-                 WHERE Nombre_Modelo = ?),
+                (
+                    SELECT ID_Modelo
+                    FROM Modelos
+                    WHERE TRIM(UPPER(Nombre_Modelo)) =
+                    TRIM(UPPER(?))
+                ),
                 ?, ?, ?, ?, ?, ?
             )
             """;
@@ -114,7 +119,11 @@ public class VehiculoRepository implements IVehiculoRepository{
             ps.executeUpdate();
 
         } catch (SQLException e) {
-            logger.log(Level.SEVERE, "Error al agregar vehiculo: " + e.getMessage(), e);
+            e.printStackTrace();
+
+            throw new RuntimeException(
+                "Error SQL: " + e.getMessage(), e
+            );
         }
     }
 

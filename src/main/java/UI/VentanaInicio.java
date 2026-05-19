@@ -20,7 +20,9 @@ import UI.tabla.ButtonEditor;
 import UI.tabla.ButtonRenderer;
 import static com.sun.java.accessibility.util.SwingEventMonitor.addDocumentListener;
 import java.awt.Image;
+import java.sql.Date;
 import java.sql.ResultSet;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
@@ -29,6 +31,7 @@ import javax.swing.table.DefaultTableModel;
 import util.CajasUtil;
 import util.RestablecerUtil;
 import util.TablaUtil;
+import java.time.ZoneId;
 
 
 
@@ -1402,6 +1405,11 @@ public class VentanaInicio extends javax.swing.JFrame{
         btnAgregarAgregar.setForeground(new java.awt.Color(0, 0, 0));
         btnAgregarAgregar.setIcon(new javax.swing.ImageIcon("C:\\Users\\eduar\\Documents\\ITSJ\\5. Quinto Semestre\\Taller de bases de datos\\Proyecto final\\Proyecto_Final_TBD_Escritorio\\src\\main\\java\\img\\agregar.png")); // NOI18N
         btnAgregarAgregar.setText("Agregar");
+        btnAgregarAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarAgregarActionPerformed(evt);
+            }
+        });
 
         btnRestaurarAgregar.setBackground(new java.awt.Color(227, 211, 163));
         btnRestaurarAgregar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -2039,27 +2047,28 @@ public class VentanaInicio extends javax.swing.JFrame{
     private void btnModelosAgregarAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModelosAgregarAgregarActionPerformed
         
         try {
-        Modelo modelo = new Modelo(
+            Modelo modelo = new Modelo(
 
-            cajaModelosNombreAgregar.getText().trim(),
-            Integer.parseInt((String) comboModelosAnioAgregar.getSelectedItem()),
-            cajaModelosFabricanteAgregar.getText().trim(),
-            Integer.parseInt((String) comboModelosCilindrosAgregar.getSelectedItem()),
-            Integer.parseInt(cajaModelosPuertasAgregar.getText().trim()),
-            Double.parseDouble(cajaModelosPesoAgregar.getText().trim()),
-            Integer.parseInt(cajaModelosPasajerosAgregar.getText().trim()),
-            cajaModelosColorAgregar.getText().trim(),
-            cajaModelosPaisAgregar.getText().trim()
-        );
+                cajaModelosNombreAgregar.getText().trim(),
+                Integer.parseInt((String) comboModelosAnioAgregar.getSelectedItem()),
+                cajaModelosFabricanteAgregar.getText().trim(),
+                Integer.parseInt((String) comboModelosCilindrosAgregar.getSelectedItem()),
+                Integer.parseInt(cajaModelosPuertasAgregar.getText().trim()),
+                Double.parseDouble(cajaModelosPesoAgregar.getText().trim()),
+                Integer.parseInt(cajaModelosPasajerosAgregar.getText().trim()),
+                cajaModelosColorAgregar.getText().trim(),
+                cajaModelosPaisAgregar.getText().trim()
+            );
 
-        modeloService.agregar(modelo);
-        JOptionPane.showMessageDialog(this, "Modelo agregado correctamente");
-        internalAgregarModelos.setVisible(false);
-        cargarTablaModelos(); 
-    } catch (IllegalArgumentException e) {
-        JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-    }
-        
+            modeloService.agregar(modelo);
+            JOptionPane.showMessageDialog(this, "Modelo agregado correctamente");
+            internalAgregarModelos.setVisible(false);
+            cargarTablaModelos(); 
+            
+        } catch (IllegalArgumentException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
     }//GEN-LAST:event_btnModelosAgregarAgregarActionPerformed
 
     private void btnModelosActualizarActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModelosActualizarActualizarActionPerformed
@@ -2184,6 +2193,43 @@ public class VentanaInicio extends javax.swing.JFrame{
         cargarCombosVehiculos();
         
     }//GEN-LAST:event_btnAgregarVehiculosActionPerformed
+
+    private void btnAgregarAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarAgregarActionPerformed
+        
+        LocalDate fechaFabricacion = LocalDate.of(
+        Integer.parseInt(comboAnioAgregar.getSelectedItem().toString()),
+        comboMesAgregar.getSelectedIndex()+1,
+        Integer.parseInt(comboDiaAgregar.getSelectedItem().toString()));
+        
+        
+        try{
+            
+            
+            
+            Vehiculo vehiculo = new Vehiculo(
+                cajaNumVehiculoAgregar.getText(),
+                cajaNumSerieAgregar.getText(),
+                (String)comboModeloAgregar.getSelectedItem(),
+                Date.valueOf(fechaFabricacion),
+                Double.parseDouble(cajaPrecioAgregar.getText()),
+                Integer.parseInt(cajaKilometrajeAgregar.getText()),
+                Date.valueOf(LocalDate.now().toString()),
+                (String)comboTipoAgregar.getSelectedItem(),
+                "Disponible"    
+            );
+            
+            vehiculoService.agregar(vehiculo);
+            JOptionPane.showMessageDialog(this, "Vehiculo agregado correctamente");
+            internalAgregarAutos.setVisible(false);
+            cargarTablaVehiculos(); 
+            
+        }catch (Exception e) {
+            
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
+    }//GEN-LAST:event_btnAgregarAgregarActionPerformed
 
 
     
