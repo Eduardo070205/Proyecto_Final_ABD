@@ -82,4 +82,16 @@ public class ComboBoxUtil {
         return nombreModelo;
     }
     
+    public static List<String> getOpcionesBusquedaVehiculo(){
+        
+        return List.of("Todos", "ID", "Modelo", "Año de Fabricación", "Precio", "Tipo", "Estado");
+        
+    }
+    
+    public static List<Integer> getPrecios(){
+        
+        return List.of(100000, 250000, 500000, 750000, 1000000);
+        
+    }
+    
 }

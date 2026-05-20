@@ -2,6 +2,7 @@ Service\VehiculoService.class
 Service\ModeloService.class
 util\TablaUtil$1.class
 UI\VentanaInicio$26.class
+UI\VentanaInicio$29.class
 UI\Colores.class
 UI\VentanaInicio$16.class
 UI\VentanaInicio$19.class
@@ -11,6 +12,7 @@ UI\VentanaInicio$6.class
 UI\VentanaLogin$2.class
 UI\VentanaInicio$9.class
 Service\IModeloService.class
+UI\VentanaInicio$32.class
 UI\VentanaInicio$12.class
 UI\VentanaInicio$22.class
 util\TablaUtil.class
@@ -24,6 +26,7 @@ UI\VentanaInicio$5.class
 UI\VentanaInicio$2.class
 UI\VentanaInicio$20.class
 Repository\ModeloRepository.class
+UI\VentanaInicio$31.class
 UI\VentanaInicio$18.class
 Modelo\Vehiculo.class
 UI\VentanaInicio$8.class
@@ -53,5 +56,8 @@ UI\VentanaInicio$10.class
 UI\VentanaInicio$25.class
 Repository\IVehiculoRepository.class
 util\CajasUtil.class
+UI\VentanaInicio$28.class
+UI\VentanaInicio$30.class
 UI\VentanaInicio$3.class
 UI\VentanaInicio$13.class
+UI\VentanaInicio$33.class

@@ -63,6 +63,40 @@ public class VehiculoService implements IVehiculoService{
         vehiculoRepository.actualizar(vehiculo);
         
     }
+
+    @Override
+    public List<Vehiculo> buscarPorId(String id) {
+        
+     
+        return vehiculoRepository.buscarPorId(id);
+    }
+
+    @Override
+    public List<Vehiculo> buscarPorModelo(String modelo) {
+        
+        return vehiculoRepository.buscarPorModelo(modelo);
+        
+    }
+
+    @Override
+    public List<Vehiculo> buscarPorAnioFab(int anio) {
+        return vehiculoRepository.buscarPorAnioFab(anio);
+    }
+
+    @Override
+    public List<Vehiculo> buscarPorPrecio(double precio) {
+        return vehiculoRepository.buscarPorPrecio(precio);
+    }
+
+    @Override
+    public List<Vehiculo> buscarPorTipo(String tipo) {
+        return vehiculoRepository.buscarPorTipo(tipo);
+    }
+
+    @Override
+    public List<Vehiculo> buscarPorEstado(String estado) {
+        return vehiculoRepository.buscarPorEstado(estado);
+    }
     
 
     

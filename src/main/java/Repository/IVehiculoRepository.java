@@ -26,4 +26,14 @@ public interface IVehiculoRepository {
  
     List<Vehiculo> buscarPorId(String id);
     
+    List<Vehiculo> buscarPorModelo(String modelo);
+    
+    List<Vehiculo> buscarPorAnioFab(int anio);
+    
+    List<Vehiculo> buscarPorPrecio(double precio);
+    
+    List<Vehiculo> buscarPorTipo(String tipo);
+    
+    List<Vehiculo> buscarPorEstado(String estado);
+    
 }

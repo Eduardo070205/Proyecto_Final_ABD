@@ -74,10 +74,23 @@ public class VentanaInicio extends javax.swing.JFrame{
         eventosBusquedaCajas(cajaModelosBuscarNombre);
         eventosBusquedaCajas(cajaModelosBuscarFabricante);
         eventosBusquedaCajas(cajaModelosBuscarPais);
-       
         
         comboModelosBuscarAnio.addActionListener(e -> buscarModelos());
         comboModelosBuscarCilindros.addActionListener(e -> buscarModelos());
+        
+        
+        //=================== VEHICULOS ==========================
+        cajaVahiculosBuscarID.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
+        public void insertUpdate(javax.swing.event.DocumentEvent e)  { buscarVehiculos(); }
+        public void removeUpdate(javax.swing.event.DocumentEvent e)  { buscarVehiculos(); }
+        public void changedUpdate(javax.swing.event.DocumentEvent e) { buscarVehiculos(); }
+        });
+        
+        comboVehiculosBuscarModelos.addActionListener(e -> buscarVehiculos());
+        comboVehiculosBuscarAnioFab.addActionListener(e -> buscarVehiculos());
+        comboVehiculosBuscarPrecio.addActionListener(e -> buscarVehiculos());
+        comboVehiculosBuscarTipo.addActionListener(e -> buscarVehiculos());
+        comboVehiculosBuscarEstado.addActionListener(e -> buscarVehiculos());
         
         pack();
        
@@ -127,7 +140,13 @@ public class VentanaInicio extends javax.swing.JFrame{
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaVehiculos = new javax.swing.JTable();
         jLabel8 = new javax.swing.JLabel();
-        comboModelosBuscar1 = new javax.swing.JComboBox<>();
+        comboVehiculosBuscar = new javax.swing.JComboBox<>();
+        cajaVahiculosBuscarID = new javax.swing.JTextField();
+        comboVehiculosBuscarModelos = new javax.swing.JComboBox<>();
+        comboVehiculosBuscarAnioFab = new javax.swing.JComboBox<>();
+        comboVehiculosBuscarPrecio = new javax.swing.JComboBox<>();
+        comboVehiculosBuscarTipo = new javax.swing.JComboBox<>();
+        comboVehiculosBuscarEstado = new javax.swing.JComboBox<>();
         internalModelos = new javax.swing.JInternalFrame();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -585,25 +604,90 @@ public class VentanaInicio extends javax.swing.JFrame{
         jScrollPane1.setViewportView(tablaVehiculos);
 
         jPanel2.add(jScrollPane1);
-        jScrollPane1.setBounds(20, 190, 720, 370);
+        jScrollPane1.setBounds(20, 140, 720, 410);
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("Buscar por:");
         jPanel2.add(jLabel8);
-        jLabel8.setBounds(60, 70, 170, 30);
+        jLabel8.setBounds(70, 80, 170, 30);
 
-        comboModelosBuscar1.setBackground(new java.awt.Color(227, 211, 163));
-        comboModelosBuscar1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        comboModelosBuscar1.setForeground(new java.awt.Color(0, 0, 0));
-        comboModelosBuscar1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        comboModelosBuscar1.addActionListener(new java.awt.event.ActionListener() {
+        comboVehiculosBuscar.setBackground(new java.awt.Color(227, 211, 163));
+        comboVehiculosBuscar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        comboVehiculosBuscar.setForeground(new java.awt.Color(0, 0, 0));
+        comboVehiculosBuscar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboVehiculosBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboModelosBuscar1ActionPerformed(evt);
+                comboVehiculosBuscarActionPerformed(evt);
             }
         });
-        jPanel2.add(comboModelosBuscar1);
-        comboModelosBuscar1.setBounds(170, 70, 150, 30);
+        jPanel2.add(comboVehiculosBuscar);
+        comboVehiculosBuscar.setBounds(180, 80, 150, 30);
+
+        cajaVahiculosBuscarID.setBackground(new java.awt.Color(255, 255, 255));
+        cajaVahiculosBuscarID.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        jPanel2.add(cajaVahiculosBuscarID);
+        cajaVahiculosBuscarID.setBounds(340, 80, 180, 26);
+
+        comboVehiculosBuscarModelos.setBackground(new java.awt.Color(227, 211, 163));
+        comboVehiculosBuscarModelos.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        comboVehiculosBuscarModelos.setForeground(new java.awt.Color(0, 0, 0));
+        comboVehiculosBuscarModelos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboVehiculosBuscarModelos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboVehiculosBuscarModelosActionPerformed(evt);
+            }
+        });
+        jPanel2.add(comboVehiculosBuscarModelos);
+        comboVehiculosBuscarModelos.setBounds(340, 80, 180, 30);
+
+        comboVehiculosBuscarAnioFab.setBackground(new java.awt.Color(227, 211, 163));
+        comboVehiculosBuscarAnioFab.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        comboVehiculosBuscarAnioFab.setForeground(new java.awt.Color(0, 0, 0));
+        comboVehiculosBuscarAnioFab.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboVehiculosBuscarAnioFab.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboVehiculosBuscarAnioFabActionPerformed(evt);
+            }
+        });
+        jPanel2.add(comboVehiculosBuscarAnioFab);
+        comboVehiculosBuscarAnioFab.setBounds(340, 80, 180, 30);
+
+        comboVehiculosBuscarPrecio.setBackground(new java.awt.Color(227, 211, 163));
+        comboVehiculosBuscarPrecio.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        comboVehiculosBuscarPrecio.setForeground(new java.awt.Color(0, 0, 0));
+        comboVehiculosBuscarPrecio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboVehiculosBuscarPrecio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboVehiculosBuscarPrecioActionPerformed(evt);
+            }
+        });
+        jPanel2.add(comboVehiculosBuscarPrecio);
+        comboVehiculosBuscarPrecio.setBounds(340, 80, 180, 30);
+
+        comboVehiculosBuscarTipo.setBackground(new java.awt.Color(227, 211, 163));
+        comboVehiculosBuscarTipo.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        comboVehiculosBuscarTipo.setForeground(new java.awt.Color(0, 0, 0));
+        comboVehiculosBuscarTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboVehiculosBuscarTipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboVehiculosBuscarTipoActionPerformed(evt);
+            }
+        });
+        jPanel2.add(comboVehiculosBuscarTipo);
+        comboVehiculosBuscarTipo.setBounds(340, 80, 180, 30);
+
+        comboVehiculosBuscarEstado.setBackground(new java.awt.Color(227, 211, 163));
+        comboVehiculosBuscarEstado.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        comboVehiculosBuscarEstado.setForeground(new java.awt.Color(0, 0, 0));
+        comboVehiculosBuscarEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboVehiculosBuscarEstado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboVehiculosBuscarEstadoActionPerformed(evt);
+            }
+        });
+        jPanel2.add(comboVehiculosBuscarEstado);
+        comboVehiculosBuscarEstado.setBounds(340, 80, 180, 30);
 
         internalVehiculos.getContentPane().add(jPanel2);
         jPanel2.setBounds(0, 0, 760, 580);
@@ -1693,11 +1777,6 @@ public class VentanaInicio extends javax.swing.JFrame{
                 btnActualizarModificarActionPerformed(evt);
             }
         });
-        btnActualizarModificar.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                btnActualizarModificarKeyReleased(evt);
-            }
-        });
 
         btnCancelarModificar.setBackground(new java.awt.Color(227, 211, 163));
         btnCancelarModificar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -2143,10 +2222,156 @@ public class VentanaInicio extends javax.swing.JFrame{
         
     }
     
+    public void mostrarCajasModelos(String opc){
+        
+        if (opc == null) return;
+
+        if (opc.equals("ID")) {
+            
+            CajasUtil.ocultarComponentes(cajaModelosBuscarID, cajaModelosBuscarNombre, comboModelosBuscarAnio, cajaModelosBuscarFabricante, comboModelosBuscarCilindros, cajaModelosBuscarPais);
+            
+        }else if(opc.equals("Nombre")){
+            
+            CajasUtil.ocultarComponentes( cajaModelosBuscarNombre, cajaModelosBuscarID, comboModelosBuscarAnio, cajaModelosBuscarFabricante, comboModelosBuscarCilindros, cajaModelosBuscarPais);
+            
+        }else if(opc.equals("Año")){
+            
+            CajasUtil.ocultarComponentes(comboModelosBuscarAnio, cajaModelosBuscarID, cajaModelosBuscarNombre,  cajaModelosBuscarFabricante, comboModelosBuscarCilindros, cajaModelosBuscarPais);
+            
+        }else if(opc.equals("Fabricante")){
+            
+            CajasUtil.ocultarComponentes(cajaModelosBuscarFabricante, cajaModelosBuscarID, cajaModelosBuscarNombre, comboModelosBuscarAnio,  comboModelosBuscarCilindros, cajaModelosBuscarPais);
+            
+        }else if(opc.equals("Cilindros")){
+            
+            CajasUtil.ocultarComponentes(comboModelosBuscarCilindros, cajaModelosBuscarID, cajaModelosBuscarNombre, comboModelosBuscarAnio, cajaModelosBuscarFabricante,  cajaModelosBuscarPais);
+            
+        }else if(opc.equals("País")){
+            
+            CajasUtil.ocultarComponentes(cajaModelosBuscarPais, cajaModelosBuscarID, cajaModelosBuscarNombre, comboModelosBuscarAnio, cajaModelosBuscarFabricante, comboModelosBuscarCilindros );
+            
+        }else if(opc.equals("Todos")){
+            
+            CajasUtil.ocultarComponentes(comboModelosBuscar, cajaModelosBuscarPais, cajaModelosBuscarID, cajaModelosBuscarNombre, comboModelosBuscarAnio, cajaModelosBuscarFabricante, comboModelosBuscarCilindros );
+            
+        }
+        
+       
+    }
+    
     
     // ================================== VEHICULOS ======================================
     
     //ya se cargan los datos en el formulario, falta la actualizacion (Crear el método)
+    
+
+    private void actualizarTablaVehiculos(List<Vehiculo> vehiculos) {
+        DefaultTableModel tableModel = (DefaultTableModel) tablaVehiculos.getModel();
+        tableModel.setRowCount(0);
+        for (Vehiculo v : vehiculos) { 
+            tableModel.addRow(new Object[]{
+                v.getIdVehiculo(),
+                v.getNumeroSerie(),
+                v.getNombreModelo(),
+                v.getFechaFabricacion(),
+                v.getPrecio(),
+                v.getKilometraje(),
+                v.getFechaEntrada(),
+                v.getTipo(),
+                v.getEstado(),
+                "Editar",
+                "Eliminar"
+            });
+        }
+    }
+    
+    private void buscarVehiculos() {
+        String criterio = (String) comboVehiculosBuscar.getSelectedItem();
+
+        if (criterio == null) return;
+
+        List<Vehiculo> resultados;
+
+        switch (criterio) {
+            case "Todos" ->{
+                
+                actualizarTablaVehiculos(vehiculoService.obtenerTodos());
+                
+            }     
+            case "ID" -> {
+                String valor = cajaVahiculosBuscarID.getText().trim();
+                resultados = valor.isEmpty()
+                    ? vehiculoService.obtenerTodos()
+                    : vehiculoService.buscarPorId(valor);
+                actualizarTablaVehiculos(resultados);
+            }
+            case "Modelo" -> {
+                String modelo = (String) comboVehiculosBuscarModelos.getSelectedItem();
+                if(modelo == null)return;
+                actualizarTablaVehiculos(vehiculoService.buscarPorModelo(modelo));
+            }
+            case "Año de Fabricación" -> {
+                String anio = (String) comboVehiculosBuscarAnioFab.getSelectedItem();
+                if(anio == null)return;
+                actualizarTablaVehiculos(vehiculoService.buscarPorAnioFab(Integer.parseInt(anio)));
+            }
+            case "Precio" -> {
+                String precio = (String) comboVehiculosBuscarPrecio.getSelectedItem();
+                if(precio == null)return;
+                actualizarTablaVehiculos(vehiculoService.buscarPorPrecio(Double.parseDouble(precio)));
+            }
+            case "Tipo" -> {
+                String tipo = (String) comboVehiculosBuscarTipo.getSelectedItem();
+                if(tipo == null)return;
+                actualizarTablaVehiculos(vehiculoService.buscarPorTipo(tipo));
+            }
+            case "Estado" -> {
+                String estado = (String) comboVehiculosBuscarEstado.getSelectedItem();
+                if(estado == null)return;
+                actualizarTablaVehiculos(vehiculoService.buscarPorEstado(estado));
+            }
+            default -> actualizarTablaVehiculos(vehiculoService.obtenerTodos());
+        }
+    }
+    
+    private void actualizarVehiculo() {
+        LocalDate fechaFabricacion = LocalDate.of(
+        Integer.parseInt(comboAnioModificar.getSelectedItem().toString()),
+        comboMesModificar.getSelectedIndex()+1,
+        Integer.parseInt(comboDiaModificar.getSelectedItem().toString()));
+        
+        LocalDate fechaEntrada = LocalDate.of(
+        Integer.parseInt(comboAnioEntradaModificar.getSelectedItem().toString()),
+        comboMesEntradaModificar.getSelectedIndex()+1,
+        Integer.parseInt(comboDiaEntradaModificar.getSelectedItem().toString()));
+        
+        
+        try{
+            
+            Vehiculo vehiculo = new Vehiculo(
+                idVehiculoSeleccionado,
+                cajaNumSerieModificar.getText(),
+                (String)comboModeloModificar.getSelectedItem(),
+                Date.valueOf(fechaFabricacion),
+                Double.parseDouble(cajaPrecioModificar.getText()),
+                Integer.parseInt(cajaKilometrajeModificar.getText()),
+                Date.valueOf(fechaEntrada.toString()),
+                (String)comboTipoModificar.getSelectedItem(),
+                (String)comboEstadoModificar.getSelectedItem()
+            );
+            
+            vehiculoService.actualizar(vehiculo);
+            JOptionPane.showMessageDialog(this, "Vehiculo actualizado correctamente");
+            internalModificarAutos.setVisible(false);
+            cargarTablaVehiculos(); 
+            
+        }catch (Exception e) {
+            
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
+    }
     
     private void confirmarEliminarVehiculo(String idVehiculo) {
         int respuesta = JOptionPane.showConfirmDialog(
@@ -2329,6 +2554,12 @@ public class VentanaInicio extends javax.swing.JFrame{
         comboMesEntradaModificar.removeAllItems();
         comboDiaEntradaModificar.removeAllItems();
         comboEstadoModificar.removeAllItems();
+        comboVehiculosBuscar.removeAllItems();
+        comboVehiculosBuscarModelos.removeAllItems();
+        comboVehiculosBuscarAnioFab.removeAllItems();
+        comboVehiculosBuscarPrecio.removeAllItems();
+        comboVehiculosBuscarTipo.removeAllItems();
+        comboVehiculosBuscarEstado.removeAllItems();
         
         
 
@@ -2336,6 +2567,7 @@ public class VentanaInicio extends javax.swing.JFrame{
             comboAnioAgregar.addItem(String.valueOf(anio));
             comboAnioModificar.addItem(String.valueOf(anio));
             comboAnioEntradaModificar.addItem(String.valueOf(anio));
+            comboVehiculosBuscarAnioFab.addItem(String.valueOf(anio));
 
         }
         
@@ -2359,6 +2591,7 @@ public class VentanaInicio extends javax.swing.JFrame{
             
             comboTipoAgregar.addItem(tipo);
             comboTipoModificar.addItem(tipo);
+            comboVehiculosBuscarTipo.addItem(tipo);
             
         }
         
@@ -2366,18 +2599,68 @@ public class VentanaInicio extends javax.swing.JFrame{
             
             comboModeloAgregar.addItem(modelo);
             comboModeloModificar.addItem(modelo);
+            comboVehiculosBuscarModelos.addItem(modelo);
             
         }
         
         for(String estado : ComboBoxUtil.getEstado()){
             
             comboEstadoModificar.addItem(estado);
+            comboVehiculosBuscarEstado.addItem(estado);
+            
+        }
+        
+        for(String opcion : ComboBoxUtil.getOpcionesBusquedaVehiculo()){
+            
+            comboVehiculosBuscar.addItem(opcion);
+            
+        }
+        
+        for(int precio : ComboBoxUtil.getPrecios()){
+            
+            comboVehiculosBuscarPrecio.addItem(String.valueOf(precio));
             
         }
         
     }
     
 
+    public void mostrarCajasVehiculos(String opc){
+        
+        if (opc == null) return;
+
+        if (opc.equals("ID")) {
+            
+            CajasUtil.ocultarComponentes(cajaVahiculosBuscarID, comboVehiculosBuscarModelos, comboVehiculosBuscarAnioFab, comboVehiculosBuscarPrecio, comboVehiculosBuscarTipo, comboVehiculosBuscarEstado);
+            
+        }else if(opc.equals("Modelo")){
+            
+            CajasUtil.ocultarComponentes(comboVehiculosBuscarModelos, cajaVahiculosBuscarID, comboVehiculosBuscarAnioFab, comboVehiculosBuscarPrecio, comboVehiculosBuscarTipo, comboVehiculosBuscarEstado);
+            
+        }else if(opc.equals("Año de Fabricación")){
+            
+            CajasUtil.ocultarComponentes(comboVehiculosBuscarAnioFab, comboVehiculosBuscarModelos, cajaVahiculosBuscarID, comboVehiculosBuscarPrecio, comboVehiculosBuscarTipo, comboVehiculosBuscarEstado);
+            
+        }else if(opc.equals("Precio")){
+            
+            CajasUtil.ocultarComponentes(comboVehiculosBuscarPrecio, comboVehiculosBuscarModelos, cajaVahiculosBuscarID, comboVehiculosBuscarAnioFab, comboVehiculosBuscarTipo, comboVehiculosBuscarEstado);
+            
+        }else if(opc.equals("Tipo")){
+            
+            CajasUtil.ocultarComponentes(comboVehiculosBuscarTipo, comboVehiculosBuscarModelos, cajaVahiculosBuscarID, comboVehiculosBuscarAnioFab, comboVehiculosBuscarPrecio, comboVehiculosBuscarEstado);
+            
+        }else if(opc.equals("Estado")){
+            
+            CajasUtil.ocultarComponentes(comboVehiculosBuscarEstado, comboVehiculosBuscarModelos, cajaVahiculosBuscarID, comboVehiculosBuscarAnioFab, comboVehiculosBuscarPrecio, comboVehiculosBuscarTipo);
+            
+        }else if(opc.equals("Todos")){
+            
+            CajasUtil.ocultarComponentes(comboVehiculosBuscar, comboVehiculosBuscarModelos, cajaVahiculosBuscarID, comboVehiculosBuscarAnioFab, comboVehiculosBuscarPrecio, comboVehiculosBuscarTipo, comboVehiculosBuscarEstado);
+            
+        }
+        
+       
+    }
     
     // ============================================== EVENTOS DE BOTONES ================================================================
     
@@ -2418,6 +2701,12 @@ public class VentanaInicio extends javax.swing.JFrame{
 
         tablaVehiculos.setRowHeight(30);
         
+        cargarCombosVehiculos();
+        
+        comboVehiculosBuscar.setSelectedItem("Todos");
+        
+        mostrarCajasVehiculos((String)comboVehiculosBuscar.getSelectedItem());
+        
         cargarTablaVehiculos();
         
     }//GEN-LAST:event_btnVehiculosActionPerformed
@@ -2434,7 +2723,7 @@ public class VentanaInicio extends javax.swing.JFrame{
         
         comboModelosBuscar.setSelectedItem("Todos");
         
-        mostrarCajas((String) comboModelosBuscar.getSelectedItem());
+        mostrarCajasModelos((String) comboModelosBuscar.getSelectedItem());
         
         cargarTablaModelos();
         
@@ -2534,47 +2823,13 @@ public class VentanaInicio extends javax.swing.JFrame{
 
     private void btnModelosActualizarActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModelosActualizarActualizarActionPerformed
         actualizarModelo();
+        
     }//GEN-LAST:event_btnModelosActualizarActualizarActionPerformed
 
-    public void mostrarCajas(String opc){
-        
-        if (opc == null) return;
-
-        if (opc.equals("ID")) {
-            
-            CajasUtil.ocultarComponentes(cajaModelosBuscarID, cajaModelosBuscarNombre, comboModelosBuscarAnio, cajaModelosBuscarFabricante, comboModelosBuscarCilindros, cajaModelosBuscarPais);
-            
-        }else if(opc.equals("Nombre")){
-            
-            CajasUtil.ocultarComponentes( cajaModelosBuscarNombre, cajaModelosBuscarID, comboModelosBuscarAnio, cajaModelosBuscarFabricante, comboModelosBuscarCilindros, cajaModelosBuscarPais);
-            
-        }else if(opc.equals("Año")){
-            
-            CajasUtil.ocultarComponentes(comboModelosBuscarAnio, cajaModelosBuscarID, cajaModelosBuscarNombre,  cajaModelosBuscarFabricante, comboModelosBuscarCilindros, cajaModelosBuscarPais);
-            
-        }else if(opc.equals("Fabricante")){
-            
-            CajasUtil.ocultarComponentes(cajaModelosBuscarFabricante, cajaModelosBuscarID, cajaModelosBuscarNombre, comboModelosBuscarAnio,  comboModelosBuscarCilindros, cajaModelosBuscarPais);
-            
-        }else if(opc.equals("Cilindros")){
-            
-            CajasUtil.ocultarComponentes(comboModelosBuscarCilindros, cajaModelosBuscarID, cajaModelosBuscarNombre, comboModelosBuscarAnio, cajaModelosBuscarFabricante,  cajaModelosBuscarPais);
-            
-        }else if(opc.equals("País")){
-            
-            CajasUtil.ocultarComponentes(cajaModelosBuscarPais, cajaModelosBuscarID, cajaModelosBuscarNombre, comboModelosBuscarAnio, cajaModelosBuscarFabricante, comboModelosBuscarCilindros );
-            
-        }else if(opc.equals("Todos")){
-            
-            CajasUtil.ocultarComponentes(comboModelosBuscar, cajaModelosBuscarPais, cajaModelosBuscarID, cajaModelosBuscarNombre, comboModelosBuscarAnio, cajaModelosBuscarFabricante, comboModelosBuscarCilindros );
-            
-        }
-        
-       
-    }
+   
     
     private void comboModelosBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboModelosBuscarActionPerformed
-        mostrarCajas((String) comboModelosBuscar.getSelectedItem());
+        mostrarCajasModelos((String) comboModelosBuscar.getSelectedItem());
         
         buscarModelos();
         
@@ -2643,9 +2898,12 @@ public class VentanaInicio extends javax.swing.JFrame{
         
     }//GEN-LAST:event_btnModelosCancelarActualizarActionPerformed
 
-    private void comboModelosBuscar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboModelosBuscar1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_comboModelosBuscar1ActionPerformed
+    private void comboVehiculosBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboVehiculosBuscarActionPerformed
+
+        mostrarCajasVehiculos((String)comboVehiculosBuscar.getSelectedItem());
+        
+        buscarVehiculos();
+    }//GEN-LAST:event_comboVehiculosBuscarActionPerformed
 
     private void btnAgregarVehiculosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarVehiculosActionPerformed
         
@@ -2690,13 +2948,31 @@ public class VentanaInicio extends javax.swing.JFrame{
         
     }//GEN-LAST:event_btnAgregarAgregarActionPerformed
 
-    private void btnActualizarModificarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnActualizarModificarKeyReleased
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnActualizarModificarKeyReleased
-
     private void btnActualizarModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarModificarActionPerformed
-        // TODO add your handling code here:
+        
+        actualizarVehiculo();
+        
     }//GEN-LAST:event_btnActualizarModificarActionPerformed
+
+    private void comboVehiculosBuscarModelosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboVehiculosBuscarModelosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboVehiculosBuscarModelosActionPerformed
+
+    private void comboVehiculosBuscarAnioFabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboVehiculosBuscarAnioFabActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboVehiculosBuscarAnioFabActionPerformed
+
+    private void comboVehiculosBuscarPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboVehiculosBuscarPrecioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboVehiculosBuscarPrecioActionPerformed
+
+    private void comboVehiculosBuscarTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboVehiculosBuscarTipoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboVehiculosBuscarTipoActionPerformed
+
+    private void comboVehiculosBuscarEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboVehiculosBuscarEstadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboVehiculosBuscarEstadoActionPerformed
 
 
     
@@ -2782,6 +3058,7 @@ public class VentanaInicio extends javax.swing.JFrame{
     private javax.swing.JTextField cajaNumVehiculoAgregar;
     private javax.swing.JTextField cajaPrecioAgregar;
     private javax.swing.JTextField cajaPrecioModificar;
+    private javax.swing.JTextField cajaVahiculosBuscarID;
     private javax.swing.JComboBox<String> comboAnioAgregar;
     private javax.swing.JComboBox<String> comboAnioEntradaModificar;
     private javax.swing.JComboBox<String> comboAnioModificar;
@@ -2797,13 +3074,18 @@ public class VentanaInicio extends javax.swing.JFrame{
     private javax.swing.JComboBox<String> comboModelosAnioActualizar;
     private javax.swing.JComboBox<String> comboModelosAnioAgregar;
     private javax.swing.JComboBox<String> comboModelosBuscar;
-    private javax.swing.JComboBox<String> comboModelosBuscar1;
     private javax.swing.JComboBox<String> comboModelosBuscarAnio;
     private javax.swing.JComboBox<String> comboModelosBuscarCilindros;
     private javax.swing.JComboBox<String> comboModelosCilindrosActualizar;
     private javax.swing.JComboBox<String> comboModelosCilindrosAgregar;
     private javax.swing.JComboBox<String> comboTipoAgregar;
     private javax.swing.JComboBox<String> comboTipoModificar;
+    private javax.swing.JComboBox<String> comboVehiculosBuscar;
+    private javax.swing.JComboBox<String> comboVehiculosBuscarAnioFab;
+    private javax.swing.JComboBox<String> comboVehiculosBuscarEstado;
+    private javax.swing.JComboBox<String> comboVehiculosBuscarModelos;
+    private javax.swing.JComboBox<String> comboVehiculosBuscarPrecio;
+    private javax.swing.JComboBox<String> comboVehiculosBuscarTipo;
     private javax.swing.JComboBox<String> comboVentasClienteBuscar;
     private javax.swing.JComboBox<String> comboVentasEmpleadoBuscar;
     private javax.swing.JComboBox<String> comboVentasMesBuscar;

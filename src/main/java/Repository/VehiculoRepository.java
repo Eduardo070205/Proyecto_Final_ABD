@@ -279,9 +279,164 @@ public class VehiculoRepository implements IVehiculoRepository{
 
     @Override
     public List<Vehiculo> buscarPorId(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return ejecutarQuery("""
+            SELECT 
+                v.ID_Vehiculo,
+                v.Numero_Serie,
+                m.Nombre_Modelo AS Nombre,
+                v.Fecha_Fabricacion,
+                v.Precio,
+                v.Kilometraje,
+                v.Fecha_Entrada,
+                v.Tipo,
+                v.Estado
+            FROM Vehiculos v
+            JOIN Modelos m
+                ON v.ID_Modelo = m.ID_Modelo
+            WHERE v.ID_Vehiculo LIKE ?
+            """, "%" + id + "%");
     }
 
+    @Override
+    public List<Vehiculo> buscarPorModelo(String modelo) {
+        return ejecutarQuery("""
+            SELECT 
+                v.ID_Vehiculo,
+                v.Numero_Serie,
+                m.Nombre_Modelo AS Nombre,
+                v.Fecha_Fabricacion,
+                v.Precio,
+                v.Kilometraje,
+                v.Fecha_Entrada,
+                v.Tipo,
+                v.Estado
+            FROM Vehiculos v
+            JOIN Modelos m
+                ON v.ID_Modelo = m.ID_Modelo
+            WHERE v.ID_Modelo = (SELECT ID_Modelo FROM Modelos WHERE TRIM(UPPER(Nombre_Modelo)) = TRIM(UPPER(?)))
+            """, modelo);
+    }
+        
+       
 
+    @Override
+    public List<Vehiculo> buscarPorAnioFab(int anio) {
+        return ejecutarQuery("""
+            SELECT 
+                v.ID_Vehiculo,
+                v.Numero_Serie,
+                m.Nombre_Modelo AS Nombre,
+                v.Fecha_Fabricacion,
+                v.Precio,
+                v.Kilometraje,
+                v.Fecha_Entrada,
+                v.Tipo,
+                v.Estado
+            FROM Vehiculos v
+            JOIN Modelos m
+                ON v.ID_Modelo = m.ID_Modelo
+            WHERE EXTRACT(YEAR FROM v.Fecha_Fabricacion) = ?
+            """, anio);
+    }
+
+    @Override
+    public List<Vehiculo> buscarPorPrecio(double precio) {
+        return ejecutarQuery("""
+            SELECT 
+                v.ID_Vehiculo,
+                v.Numero_Serie,
+                m.Nombre_Modelo AS Nombre,
+                v.Fecha_Fabricacion,
+                v.Precio,
+                v.Kilometraje,
+                v.Fecha_Entrada,
+                v.Tipo,
+                v.Estado
+            FROM Vehiculos v
+            JOIN Modelos m
+                ON v.ID_Modelo = m.ID_Modelo
+            WHERE v.Precio <= ?
+            """, precio);
+    }
+
+    @Override
+    public List<Vehiculo> buscarPorTipo(String tipo) {
+        return ejecutarQuery("""
+            SELECT 
+                v.ID_Vehiculo,
+                v.Numero_Serie,
+                m.Nombre_Modelo AS Nombre,
+                v.Fecha_Fabricacion,
+                v.Precio,
+                v.Kilometraje,
+                v.Fecha_Entrada,
+                v.Tipo,
+                v.Estado
+            FROM Vehiculos v
+            JOIN Modelos m
+                ON v.ID_Modelo = m.ID_Modelo
+            WHERE v.Tipo = ?
+            """, tipo);
+    }
+
+    @Override
+    public List<Vehiculo> buscarPorEstado(String estado) {
+        return ejecutarQuery("""
+            SELECT 
+                v.ID_Vehiculo,
+                v.Numero_Serie,
+                m.Nombre_Modelo AS Nombre,
+                v.Fecha_Fabricacion,
+                v.Precio,
+                v.Kilometraje,
+                v.Fecha_Entrada,
+                v.Tipo,
+                v.Estado
+            FROM Vehiculos v
+            JOIN Modelos m
+                ON v.ID_Modelo = m.ID_Modelo
+            WHERE v.Estado = ?
+            """, estado);
+    }
+
+    private List<Vehiculo> ejecutarQuery(String sql, Object parametro) {
+        List<Vehiculo> lista = new ArrayList<>();
+        try {
+            Connection con = ConexionBD.getInstancia().getConnection();
+            PreparedStatement ps = con.prepareStatement(sql);
+            if (parametro instanceof Integer) {
+                ps.setInt(1, (Integer) parametro);
+            }else if (parametro instanceof Double) {
+            ps.setDouble(1, (Double) parametro); 
+            }else {
+                ps.setString(1, (String) parametro);
+            }
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                lista.add(new Vehiculo(
+                    rs.getString("ID_Vehiculo"),
+                    rs.getString("Numero_Serie"),
+                    rs.getString("Nombre"),
+                    rs.getDate("Fecha_Fabricacion"),
+                    rs.getDouble("Precio"),
+                    rs.getInt("Kilometraje"),
+                    rs.getDate("Fecha_Entrada"),
+                    rs.getString("Tipo"),
+                    rs.getString("Estado")
+                ));
+            }
+        } catch (SQLException e) {
+            logger.log(
+                Level.SEVERE,
+                "Error al obtener vehículo: " + e.getMessage(),
+                e
+            );
+
+            throw new RuntimeException(
+                "Error al obtener vehículo: " + e.getMessage()
+            );
+        }
+        return lista;
+    }
     
 }
