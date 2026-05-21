@@ -37,7 +37,9 @@ public class VentaService implements IVentaService{
 
     @Override
     public void eliminar(int idVenta) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+       
+        ventaRepository.eliminar(idVenta);
+        
     }
 
     @Override

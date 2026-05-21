@@ -112,7 +112,18 @@ public class VentaRepository implements IVentaRepository{
 
     @Override
     public void eliminar(int idVenta) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+
+        String sql = "DELETE FROM Ventas WHERE ID_Venta = ?";
+        
+        try {
+            Connection con = ConexionBD.getInstancia().getConnection();
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, idVenta);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            logger.log(Level.SEVERE, "Error al eliminar venta: " + e.getMessage(), e);
+        }
+        
     }
 
     @Override

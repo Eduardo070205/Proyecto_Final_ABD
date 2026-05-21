@@ -2953,8 +2953,8 @@ public class VentanaInicio extends javax.swing.JFrame{
         tablaVentas.getColumnModel().getColumn(8).setCellRenderer(new ButtonRenderer(iconoEliminar));
         tablaVentas.getColumnModel().getColumn(8).setCellEditor(new ButtonEditor(iconoEliminar, e -> {
             int fila = tablaVentas.getSelectedRow();
-            String idVehiculo = (String) tablaVentas.getValueAt(fila, 0);
-            //confirmarEliminarVehiculo(idVehiculo);
+            int idVenta = (int) tablaVentas.getValueAt(fila, 0);
+            confirmarEliminarVenta(idVenta);
         }));
         
     }
@@ -3017,6 +3017,22 @@ public class VentanaInicio extends javax.swing.JFrame{
         
     }
     
+    private void confirmarEliminarVenta(int idVenta) {
+        int respuesta = JOptionPane.showConfirmDialog(
+            this,
+            "¿Estás seguro de eliminar la venta con ID " + idVenta + "?",
+            "Confirmar eliminación",
+            JOptionPane.YES_NO_OPTION,
+            JOptionPane.WARNING_MESSAGE
+        );
+
+        if (respuesta == JOptionPane.YES_OPTION) {
+            ventaService.eliminar(idVenta);
+            JOptionPane.showMessageDialog(this, "Venta eliminado correctamente");
+            cargarTablaVentas();
+        }
+    
+    }
     
     
     // ============================================== EVENTOS DE BOTONES ================================================================
