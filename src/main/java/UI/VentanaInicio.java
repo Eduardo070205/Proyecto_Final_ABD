@@ -100,6 +100,19 @@ public class VentanaInicio extends javax.swing.JFrame{
         comboVehiculosBuscarTipo.addActionListener(e -> buscarVehiculos());
         comboVehiculosBuscarEstado.addActionListener(e -> buscarVehiculos());
         
+        //================== VENTAS ==============================
+        cajaVentasBuscarID.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
+        public void insertUpdate(javax.swing.event.DocumentEvent e)  { buscarVentas(); }
+        public void removeUpdate(javax.swing.event.DocumentEvent e)  { buscarVentas(); }
+        public void changedUpdate(javax.swing.event.DocumentEvent e) { buscarVentas(); }
+        });
+        
+        comboVentasBuscarMes.addActionListener(e -> buscarVentas());
+        comboVentasBuscarPrecio.addActionListener(e -> buscarVentas());
+        comboVentasBuscarFormaPago.addActionListener(e -> buscarVentas());
+        comboVentasBuscarVehiculo.addActionListener(e -> buscarVentas());
+       
+        
         pack();
        
     }
@@ -2958,6 +2971,133 @@ public class VentanaInicio extends javax.swing.JFrame{
     
     // =================================================== VENTAS =====================================================================
     
+    private void actualizarTablaVentas(List<Venta> ventas) {
+
+        DefaultTableModel tableModel = (DefaultTableModel) tablaVentas.getModel();
+
+        tableModel.setRowCount(0);
+
+        for (Venta v : ventas) {
+
+            tableModel.addRow(new Object[]{
+
+                v.getIdVenta(),
+
+                v.getFechaVenta(),
+
+                v.getFormaPago(),
+
+                v.getPrecioFinal(),
+
+                v.getIdCliente(),
+
+                v.getIdEmpleado(),
+
+                v.getNombreVehiculo(),
+
+                "Editar",
+
+                "Eliminar"
+            });
+        }
+    }
+
+    private void buscarVentas() {
+
+        String criterio =
+            (String) comboVentasBuscar.getSelectedItem();
+
+        if (criterio == null) return;
+
+        List<Venta> resultados;
+
+        switch (criterio) {
+
+            case "Todos" -> {
+
+                actualizarTablaVentas(
+                    ventaService.obtenerTodos()
+                );
+            }
+
+            case "ID" -> {
+
+                String valor =
+                    cajaVentasBuscarID.getText().trim();
+
+                resultados = valor.isEmpty()
+
+                    ? ventaService.obtenerTodos()
+
+                    : ventaService.buscarPorId(
+                        Integer.parseInt(valor)
+                    );
+
+                actualizarTablaVentas(resultados);
+            }
+
+            case "Mes" -> {
+
+                String mes = String.valueOf(((int) comboVentasBuscarMes.getSelectedIndex())+1);
+
+                if (mes == null) return;
+
+                actualizarTablaVentas(
+                    ventaService.buscarPorMes(mes)
+                );
+            }
+
+            case "Precio" -> {
+
+                String precio =
+                    (String) comboVentasBuscarPrecio
+                        .getSelectedItem();
+
+                if (precio == null) return;
+
+                actualizarTablaVentas(
+                    ventaService.buscarPorPrecio(precio)
+                );
+            }
+
+            case "Forma de Pago" -> {
+
+                String formaPago =
+                    (String) comboVentasBuscarFormaPago
+                        .getSelectedItem();
+
+                if (formaPago == null) return;
+
+                actualizarTablaVentas(
+                    ventaService.buscarPorFormaPago(
+                        formaPago
+                    )
+                );
+            }
+
+            case "Vehiculo" -> {
+
+                String vehiculo =
+                    (String) comboVentasBuscarVehiculo
+                        .getSelectedItem();
+
+                if (vehiculo == null) return;
+
+                actualizarTablaVentas(
+                    ventaService.buscarPorVehiculo(
+                        vehiculo
+                    )
+                );
+            }
+
+            default ->
+
+                actualizarTablaVentas(
+                    ventaService.obtenerTodos()
+                );
+        }
+    }
+    
     private void abrirEditarVenta(int idVenta) {
 
         Venta venta = ventaService.obtenerPorId(idVenta);
@@ -3601,6 +3741,9 @@ public class VentanaInicio extends javax.swing.JFrame{
 
     private void comboVentasBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboVentasBuscarActionPerformed
         mostrarCajasVentas((String)comboVentasBuscar.getSelectedItem());
+        
+        buscarVentas();
+        
     }//GEN-LAST:event_comboVentasBuscarActionPerformed
 
     private void btnVentasAgregarAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVentasAgregarAgregarActionPerformed

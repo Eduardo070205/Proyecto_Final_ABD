@@ -262,8 +262,8 @@ public class VentaRepository implements IVentaRepository{
     }
 
     @Override
-    public List<Venta> buscarPorMes(String mes) {
 
+    public List<Venta> buscarPorMes(String mes) {
         String sql = """
             SELECT 
                 v.ID_Venta,
@@ -276,15 +276,13 @@ public class VentaRepository implements IVentaRepository{
             FROM Ventas v, Vehiculos vh, Modelos m
             WHERE v.ID_Vehiculo = vh.ID_Vehiculo
             AND vh.ID_Modelo = m.ID_Modelo
-            AND TO_CHAR(v.Fecha_Venta, 'MM') = ?
+            AND EXTRACT(MONTH FROM v.Fecha_Venta) = ?
             """;
-
-        return ejecutarQuery(sql, mes);
+        return ejecutarQuery(sql, Integer.parseInt(mes));
     }
 
     @Override
     public List<Venta> buscarPorPrecio(String precio) {
-
         String sql = """
             SELECT 
                 v.ID_Venta,
@@ -297,15 +295,13 @@ public class VentaRepository implements IVentaRepository{
             FROM Ventas v, Vehiculos vh, Modelos m
             WHERE v.ID_Vehiculo = vh.ID_Vehiculo
             AND vh.ID_Modelo = m.ID_Modelo
-            AND v.Precio_Final = ?
+            AND v.Precio_Final <= ?
             """;
-
         return ejecutarQuery(sql, Double.parseDouble(precio));
     }
 
     @Override
     public List<Venta> buscarPorFormaPago(String formaPago) {
-
         String sql = """
             SELECT 
                 v.ID_Venta,
@@ -318,16 +314,13 @@ public class VentaRepository implements IVentaRepository{
             FROM Ventas v, Vehiculos vh, Modelos m
             WHERE v.ID_Vehiculo = vh.ID_Vehiculo
             AND vh.ID_Modelo = m.ID_Modelo
-            AND TRIM(UPPER(v.Forma_Pago)) =
-                TRIM(UPPER(?))
+            AND TRIM(UPPER(v.Forma_Pago)) LIKE TRIM(UPPER(?))
             """;
-
-        return ejecutarQuery(sql, formaPago);
+        return ejecutarQuery(sql, "%" + formaPago + "%");
     }
 
     @Override
     public List<Venta> buscarPorVehiculo(String vehiculo) {
-
         String sql = """
             SELECT 
                 v.ID_Venta,
@@ -337,15 +330,18 @@ public class VentaRepository implements IVentaRepository{
                 v.ID_Cliente,
                 v.ID_Empleado,
                 m.Nombre_Modelo AS ID_Vehiculo
-            FROM Ventas v, Vehiculos vh, Modelos m
-            WHERE v.ID_Vehiculo = vh.ID_Vehiculo
-            AND vh.ID_Modelo = m.ID_Modelo
-            AND TRIM(UPPER(m.Nombre_Modelo)) =
-                TRIM(UPPER(?))
+            FROM Ventas v
+            JOIN Vehiculos vh 
+            ON v.ID_Vehiculo = vh.ID_Vehiculo
+            JOIN Modelos m
+            ON vh.ID_Modelo = m.ID_Modelo         
+            WHERE v.ID_Vehiculo = ?
+                  
             """;
-
         return ejecutarQuery(sql, vehiculo);
     }
+
+
     
     private List<Venta> ejecutarQuery(String sql, Object parametro) {
 
