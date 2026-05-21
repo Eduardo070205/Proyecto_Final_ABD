@@ -5,6 +5,7 @@
 package Service;
 
 import Modelo.Venta;
+import Repository.IVentaRepository;
 import java.util.List;
 
 /**
@@ -12,10 +13,19 @@ import java.util.List;
  * @author Eduardo
  */
 public class VentaService implements IVentaService{
+    
+    private final IVentaRepository ventaRepository;
+    
+    public VentaService(IVentaRepository ventaRepository) {
+        this.ventaRepository = ventaRepository;
+    }
+    
 
     @Override
     public List<Venta> obtenerTodos() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+       
+        return ventaRepository.obtenerTodos();
+        
     }
 
     @Override

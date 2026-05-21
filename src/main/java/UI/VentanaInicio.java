@@ -9,13 +9,17 @@ package UI;
 
 import Modelo.Modelo;
 import Modelo.Vehiculo;
+import Modelo.Venta;
 import util.ComboBoxUtil;
 import Repository.ModeloRepository;
 import Repository.VehiculoRepository;
+import Repository.VentaRepository;
 import Service.IModeloService;
 import Service.IVehiculoService;
+import Service.IVentaService;
 import Service.ModeloService;
 import Service.VehiculoService;
+import Service.VentaService;
 import UI.tabla.ButtonEditor;
 import UI.tabla.ButtonRenderer;
 import static com.sun.java.accessibility.util.SwingEventMonitor.addDocumentListener;
@@ -41,6 +45,8 @@ public class VentanaInicio extends javax.swing.JFrame{
     private final IModeloService modeloService = new ModeloService(new ModeloRepository());
     
     private final IVehiculoService vehiculoService = new VehiculoService(new VehiculoRepository());
+    
+    private final IVentaService ventaService = new VentaService(new VentaRepository());
    
     private NavegacionController nav = new NavegacionController();
     
@@ -2262,7 +2268,7 @@ public class VentanaInicio extends javax.swing.JFrame{
     
     // ================================== VEHICULOS ======================================
     
-    //ya se cargan los datos en el formulario, falta la actualizacion (Crear el método)
+  
     
 
     private void actualizarTablaVehiculos(List<Vehiculo> vehiculos) {
@@ -2662,6 +2668,72 @@ public class VentanaInicio extends javax.swing.JFrame{
     // =================================================== VENTAS =====================================================================
     
     
+    private void cargarTablaVentas() {
+        
+        
+        String[] columnas = {"ID", "Fecha", "Precio Total", "Forma de Pago",
+                            "ID Cliente", "ID Empleado", "Vehiculo (Modelo)", "Editar", "Eliminar"};
+
+        DefaultTableModel tableModel = new DefaultTableModel(columnas, 0){
+            
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                // Solo las columnas de botones son editables
+                return column == 7 || column == 8;
+            }
+            
+        };
+
+        for (Venta v : ventaService.obtenerTodos()) {
+            tableModel.addRow(new Object[]{
+                v.getIdVenta(),
+                v.getFechaVenta(),
+                v.getPrecioFinal(),
+                v.getFormaPago(),
+                v.getIdCliente(),
+                v.getIdEmpleado(),
+                v.getNombreVehiculo(),
+                "Editar",
+                "Eliminar"    
+            });
+        }
+
+        tablaVentas.setModel(tableModel);
+        
+        TablaUtil.aplicarEstiloCebra(tablaVentas,
+            new java.awt.Color(247, 227, 178), // par - beige
+            java.awt.Color.WHITE               // impar - blanco
+        );
+        
+        ImageIcon iconoEditar = new ImageIcon(
+            new ImageIcon("C:\\Users\\eduar\\Documents\\ITSJ\\6. Sexto Semestre\\Administración de Bases de Datos\\Proyecto Final\\Proyecto_Final_ABD_AutosAmistosos\\src\\main\\java\\img\\actualizar.png")
+                .getImage().getScaledInstance(24, 24, Image.SCALE_SMOOTH)
+        );
+
+        ImageIcon iconoEliminar = new ImageIcon(
+            new ImageIcon("C:\\Users\\eduar\\Documents\\ITSJ\\6. Sexto Semestre\\Administración de Bases de Datos\\Proyecto Final\\Proyecto_Final_ABD_AutosAmistosos\\src\\main\\java\\img\\eliminar.png")
+                .getImage().getScaledInstance(24, 24, Image.SCALE_SMOOTH)
+        );
+        
+        // Columna Editar
+        tablaVentas.getColumnModel().getColumn(7).setCellRenderer(new ButtonRenderer(iconoEditar));
+        tablaVentas.getColumnModel().getColumn(7).setCellEditor(new ButtonEditor(iconoEditar, e -> {
+            int fila = tablaVentas.getSelectedRow();
+            String idVehiculo = (String) tablaVentas.getValueAt(fila, 0);
+            //abrirEditarVehiculo(idVehiculo);
+        }));
+
+        // Columna Eliminar
+        tablaVentas.getColumnModel().getColumn(8).setCellRenderer(new ButtonRenderer(iconoEliminar));
+        tablaVentas.getColumnModel().getColumn(8).setCellEditor(new ButtonEditor(iconoEliminar, e -> {
+            int fila = tablaVentas.getSelectedRow();
+            String idVehiculo = (String) tablaVentas.getValueAt(fila, 0);
+            //confirmarEliminarVehiculo(idVehiculo);
+        }));
+        
+    }
+    
+    
     
     // ============================================== EVENTOS DE BOTONES ================================================================
     
@@ -2734,7 +2806,11 @@ public class VentanaInicio extends javax.swing.JFrame{
 
         nav.marcarBotonActivo(btnVentas, btnVehiculos, btnHome, btnModelos, btnClientes, btnEmpleados, btnDocumentacion);
         
-         nav.mostrarPanel(internalVentas, internalVehiculos, internalModelos, internalHome, internalProximamente, internalVehiculosEliminados);
+        nav.mostrarPanel(internalVentas, internalVehiculos, internalModelos, internalHome, internalProximamente, internalVehiculosEliminados);
+        
+        tablaVentas.setRowHeight(30);
+        
+        cargarTablaVentas();
         
     }//GEN-LAST:event_btnVentasActionPerformed
 

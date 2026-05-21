@@ -18,16 +18,19 @@ public class Venta {
     
     private String formaPago;
     
+    private double precioFinal;
+    
     private String idCliente;
     
     private String idEmpleado;
     
     private String nombreVehiculo;
 
-    public Venta(int idVenta, Date fechaVenta, String formaPago, String idCliente, String idEmpleado, String nombreVehiculo) {
+    public Venta(int idVenta, Date fechaVenta, double precioFinal, String formaPago, String idCliente, String idEmpleado, String nombreVehiculo) {
         this.idVenta = idVenta;
         this.fechaVenta = fechaVenta;
         this.formaPago = formaPago;
+        this.precioFinal = precioFinal;
         this.idCliente = idCliente;
         this.idEmpleado = idEmpleado;
         this.nombreVehiculo = nombreVehiculo;
@@ -45,6 +48,10 @@ public class Venta {
         return formaPago;
     }
 
+    public double getPrecioFinal() {
+        return precioFinal;
+    }
+
     public String getIdCliente() {
         return idCliente;
     }
@@ -56,7 +63,6 @@ public class Venta {
     public String getNombreVehiculo() {
         return nombreVehiculo;
     }
-    
-    
+
     
 }

@@ -1,9 +1,11 @@
 Service\VehiculoService.class
 Service\ModeloService.class
+Service\IVentaService.class
 util\TablaUtil$1.class
 UI\VentanaInicio$26.class
 UI\VentanaInicio$29.class
 UI\Colores.class
+Modelo\Venta.class
 UI\VentanaInicio$16.class
 UI\VentanaInicio$19.class
 com\mycompany\proyecto_final_abd_autosamistosos\Proyecto_Final_ABD_AutosAmistosos$1.class
@@ -30,8 +32,10 @@ UI\VentanaInicio$31.class
 UI\VentanaInicio$18.class
 Modelo\Vehiculo.class
 UI\VentanaInicio$8.class
+Repository\VentaRepository.class
 UI\VentanaInicio$23.class
 UI\VentanaLogin.class
+UI\VentanaInicio$34.class
 UI\VentanaInicio$1.class
 UI\VentanaInicio$14.class
 UI\VentanaInicio$24.class
@@ -41,6 +45,7 @@ Repository\VehiculoRepository.class
 UI\VentanaInicio$11.class
 UI\VentanaInicio$21.class
 UI\VentanaInicio$27.class
+Repository\IVentaRepository.class
 util\ValidacionesUtil.class
 UI\VentanaLogin$1.class
 UI\tabla\ButtonRenderer.class
@@ -55,6 +60,7 @@ UI\VentanaInicio$7.class
 UI\VentanaInicio$10.class
 UI\VentanaInicio$25.class
 Repository\IVehiculoRepository.class
+Service\VentaService.class
 util\CajasUtil.class
 UI\VentanaInicio$28.class
 UI\VentanaInicio$30.class
