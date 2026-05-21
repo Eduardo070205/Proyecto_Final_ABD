@@ -63,6 +63,31 @@ public class VentaService implements IVentaService{
         ventaRepository.actualizar(venta);
         
     }
+
+    @Override
+    public List<Venta> buscarPorId(int idVenta) {
+        return ventaRepository.buscarPorId(idVenta);
+    }
+
+    @Override
+    public List<Venta> buscarPorMes(String mes) {
+        return ventaRepository.buscarPorMes(mes);
+    }
+
+    @Override
+    public List<Venta> buscarPorPrecio(String precio) {
+        return ventaRepository.buscarPorPrecio(precio);
+    }
+
+    @Override
+    public List<Venta> buscarPorFormaPago(String formaPago) {
+        return ventaRepository.buscarPorFormaPago(formaPago);
+    }
+
+    @Override
+    public List<Venta> buscarPorVehiculo(String vehiculo) {
+        return ventaRepository.buscarPorVehiculo(vehiculo);
+    }
     
     
     

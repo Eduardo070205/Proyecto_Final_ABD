@@ -8,6 +8,7 @@ UI\Colores.class
 Modelo\Venta.class
 UI\VentanaInicio$16.class
 UI\VentanaInicio$19.class
+UI\VentanaInicio$39.class
 com\mycompany\proyecto_final_abd_autosamistosos\Proyecto_Final_ABD_AutosAmistosos$1.class
 UI\LoginController.class
 UI\VentanaInicio$6.class
@@ -17,6 +18,7 @@ Service\IModeloService.class
 UI\VentanaInicio$32.class
 UI\VentanaInicio$12.class
 UI\VentanaInicio$22.class
+UI\VentanaInicio$42.class
 util\TablaUtil.class
 UI\VentanaInicio.class
 util\ComboBoxUtil.class
@@ -31,6 +33,7 @@ UI\VentanaInicio$35.class
 Repository\ModeloRepository.class
 UI\VentanaInicio$31.class
 UI\VentanaInicio$18.class
+UI\VentanaInicio$40.class
 Modelo\Vehiculo.class
 UI\VentanaInicio$8.class
 Repository\VentaRepository.class
@@ -62,6 +65,7 @@ Repository\IModeloRepository.class
 UI\VentanaInicio$7.class
 UI\VentanaInicio$10.class
 UI\VentanaInicio$25.class
+UI\VentanaInicio$41.class
 Repository\IVehiculoRepository.class
 Service\VentaService.class
 util\CajasUtil.class

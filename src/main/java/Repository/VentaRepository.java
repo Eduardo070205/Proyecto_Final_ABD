@@ -240,4 +240,175 @@ public class VentaRepository implements IVentaRepository{
         }
     }
 
+    @Override
+    public List<Venta> buscarPorId(int idVenta) {
+
+        String sql = """
+            SELECT 
+                v.ID_Venta,
+                v.Fecha_Venta,
+                v.Forma_Pago,
+                v.Precio_Final,
+                v.ID_Cliente,
+                v.ID_Empleado,
+                m.Nombre_Modelo AS ID_Vehiculo
+            FROM Ventas v, Vehiculos vh, Modelos m
+            WHERE v.ID_Vehiculo = vh.ID_Vehiculo
+            AND vh.ID_Modelo = m.ID_Modelo
+            AND v.ID_Venta = ?
+            """;
+
+        return ejecutarQuery(sql, idVenta);
+    }
+
+    @Override
+    public List<Venta> buscarPorMes(String mes) {
+
+        String sql = """
+            SELECT 
+                v.ID_Venta,
+                v.Fecha_Venta,
+                v.Forma_Pago,
+                v.Precio_Final,
+                v.ID_Cliente,
+                v.ID_Empleado,
+                m.Nombre_Modelo AS ID_Vehiculo
+            FROM Ventas v, Vehiculos vh, Modelos m
+            WHERE v.ID_Vehiculo = vh.ID_Vehiculo
+            AND vh.ID_Modelo = m.ID_Modelo
+            AND TO_CHAR(v.Fecha_Venta, 'MM') = ?
+            """;
+
+        return ejecutarQuery(sql, mes);
+    }
+
+    @Override
+    public List<Venta> buscarPorPrecio(String precio) {
+
+        String sql = """
+            SELECT 
+                v.ID_Venta,
+                v.Fecha_Venta,
+                v.Forma_Pago,
+                v.Precio_Final,
+                v.ID_Cliente,
+                v.ID_Empleado,
+                m.Nombre_Modelo AS ID_Vehiculo
+            FROM Ventas v, Vehiculos vh, Modelos m
+            WHERE v.ID_Vehiculo = vh.ID_Vehiculo
+            AND vh.ID_Modelo = m.ID_Modelo
+            AND v.Precio_Final = ?
+            """;
+
+        return ejecutarQuery(sql, Double.parseDouble(precio));
+    }
+
+    @Override
+    public List<Venta> buscarPorFormaPago(String formaPago) {
+
+        String sql = """
+            SELECT 
+                v.ID_Venta,
+                v.Fecha_Venta,
+                v.Forma_Pago,
+                v.Precio_Final,
+                v.ID_Cliente,
+                v.ID_Empleado,
+                m.Nombre_Modelo AS ID_Vehiculo
+            FROM Ventas v, Vehiculos vh, Modelos m
+            WHERE v.ID_Vehiculo = vh.ID_Vehiculo
+            AND vh.ID_Modelo = m.ID_Modelo
+            AND TRIM(UPPER(v.Forma_Pago)) =
+                TRIM(UPPER(?))
+            """;
+
+        return ejecutarQuery(sql, formaPago);
+    }
+
+    @Override
+    public List<Venta> buscarPorVehiculo(String vehiculo) {
+
+        String sql = """
+            SELECT 
+                v.ID_Venta,
+                v.Fecha_Venta,
+                v.Forma_Pago,
+                v.Precio_Final,
+                v.ID_Cliente,
+                v.ID_Empleado,
+                m.Nombre_Modelo AS ID_Vehiculo
+            FROM Ventas v, Vehiculos vh, Modelos m
+            WHERE v.ID_Vehiculo = vh.ID_Vehiculo
+            AND vh.ID_Modelo = m.ID_Modelo
+            AND TRIM(UPPER(m.Nombre_Modelo)) =
+                TRIM(UPPER(?))
+            """;
+
+        return ejecutarQuery(sql, vehiculo);
+    }
+    
+    private List<Venta> ejecutarQuery(String sql, Object parametro) {
+
+        List<Venta> lista = new ArrayList<>();
+
+        try {
+
+            Connection con = ConexionBD.getInstancia().getConnection();
+
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            if (parametro instanceof Integer) {
+
+                ps.setInt(1, (Integer) parametro);
+
+            } else if (parametro instanceof Double) {
+
+                ps.setDouble(1, (Double) parametro);
+
+            } else {
+
+                ps.setString(1, (String) parametro);
+            }
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+
+                lista.add(
+
+                    new Venta(
+
+                        rs.getInt("ID_Venta"),
+
+                        rs.getDate("Fecha_Venta"),
+
+                        rs.getDouble("Precio_Final"),
+                            
+                        rs.getString("Forma_Pago"),
+
+                        rs.getString("ID_Cliente"),
+
+                        rs.getString("ID_Empleado"),
+
+                        rs.getString("ID_Vehiculo")
+                    )
+                );
+            }
+
+        } catch (SQLException e) {
+
+            logger.log(
+                Level.SEVERE,
+                "Error al obtener ventas: " + e.getMessage(),
+                e
+            );
+
+            throw new RuntimeException(
+                "Error al obtener ventas: " + e.getMessage()
+            );
+        }
+
+        return lista;
+    }
+
 }

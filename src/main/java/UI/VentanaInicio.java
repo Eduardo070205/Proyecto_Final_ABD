@@ -182,6 +182,11 @@ public class VentanaInicio extends javax.swing.JFrame{
         tablaVentas = new javax.swing.JTable();
         jLabel65 = new javax.swing.JLabel();
         comboVentasBuscar = new javax.swing.JComboBox<>();
+        cajaVentasBuscarID = new javax.swing.JTextField();
+        comboVentasBuscarMes = new javax.swing.JComboBox<>();
+        comboVentasBuscarPrecio = new javax.swing.JComboBox<>();
+        comboVentasBuscarFormaPago = new javax.swing.JComboBox<>();
+        comboVentasBuscarVehiculo = new javax.swing.JComboBox<>();
         internalProximamente = new javax.swing.JInternalFrame();
         jPanel5 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
@@ -928,7 +933,60 @@ public class VentanaInicio extends javax.swing.JFrame{
             }
         });
         jPanel4.add(comboVentasBuscar);
-        comboVentasBuscar.setBounds(180, 80, 150, 30);
+        comboVentasBuscar.setBounds(170, 80, 150, 30);
+
+        cajaVentasBuscarID.setBackground(new java.awt.Color(255, 255, 255));
+        cajaVentasBuscarID.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        jPanel4.add(cajaVentasBuscarID);
+        cajaVentasBuscarID.setBounds(330, 80, 180, 26);
+
+        comboVentasBuscarMes.setBackground(new java.awt.Color(227, 211, 163));
+        comboVentasBuscarMes.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        comboVentasBuscarMes.setForeground(new java.awt.Color(0, 0, 0));
+        comboVentasBuscarMes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboVentasBuscarMes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboVentasBuscarMesActionPerformed(evt);
+            }
+        });
+        jPanel4.add(comboVentasBuscarMes);
+        comboVentasBuscarMes.setBounds(330, 80, 180, 30);
+
+        comboVentasBuscarPrecio.setBackground(new java.awt.Color(227, 211, 163));
+        comboVentasBuscarPrecio.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        comboVentasBuscarPrecio.setForeground(new java.awt.Color(0, 0, 0));
+        comboVentasBuscarPrecio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboVentasBuscarPrecio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboVentasBuscarPrecioActionPerformed(evt);
+            }
+        });
+        jPanel4.add(comboVentasBuscarPrecio);
+        comboVentasBuscarPrecio.setBounds(330, 80, 180, 30);
+
+        comboVentasBuscarFormaPago.setBackground(new java.awt.Color(227, 211, 163));
+        comboVentasBuscarFormaPago.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        comboVentasBuscarFormaPago.setForeground(new java.awt.Color(0, 0, 0));
+        comboVentasBuscarFormaPago.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboVentasBuscarFormaPago.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboVentasBuscarFormaPagoActionPerformed(evt);
+            }
+        });
+        jPanel4.add(comboVentasBuscarFormaPago);
+        comboVentasBuscarFormaPago.setBounds(330, 80, 180, 30);
+
+        comboVentasBuscarVehiculo.setBackground(new java.awt.Color(227, 211, 163));
+        comboVentasBuscarVehiculo.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        comboVentasBuscarVehiculo.setForeground(new java.awt.Color(0, 0, 0));
+        comboVentasBuscarVehiculo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboVentasBuscarVehiculo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboVentasBuscarVehiculoActionPerformed(evt);
+            }
+        });
+        jPanel4.add(comboVentasBuscarVehiculo);
+        comboVentasBuscarVehiculo.setBounds(330, 80, 180, 30);
 
         internalVentas.getContentPane().add(jPanel4);
         jPanel4.setBounds(0, 0, 760, 580);
@@ -3095,6 +3153,11 @@ public class VentanaInicio extends javax.swing.JFrame{
         comboVentasAnioActualizar.removeAllItems();
         comboVentasMesActualizar.removeAllItems();
         comboVentasDiaActualizar.removeAllItems();
+        comboVentasBuscar.removeAllItems();
+        comboVentasBuscarMes.removeAllItems();
+        comboVentasBuscarPrecio.removeAllItems();
+        comboVentasBuscarFormaPago.removeAllItems();
+        comboVentasBuscarVehiculo.removeAllItems();
         
         
 
@@ -3106,7 +3169,8 @@ public class VentanaInicio extends javax.swing.JFrame{
         
         for(String mes : ComboBoxUtil.getMeses()){
             
-            comboVentasMesActualizar.addItem(mes.toString());
+            comboVentasMesActualizar.addItem((String)mes);
+            comboVentasBuscarMes.addItem((String)mes);
 
         }
         
@@ -3121,13 +3185,14 @@ public class VentanaInicio extends javax.swing.JFrame{
             
             comboVentasvehiculoAgregar.addItem(vehiculo);
             comboVentasvehiculoActualizar.addItem(vehiculo);
+            comboVentasBuscarVehiculo.addItem(vehiculo);
             
         }
         
         
         for(int precio : ComboBoxUtil.getPrecios()){
             
-            
+            comboVentasBuscarPrecio.addItem(String.valueOf(precio));
             
         }
         
@@ -3135,6 +3200,7 @@ public class VentanaInicio extends javax.swing.JFrame{
             
             comboVentasFormaAgregar.addItem(tipoPago);
             comboVentasFormaActualizar.addItem(tipoPago);
+            comboVentasBuscarFormaPago.addItem(tipoPago);
             
         }
         
@@ -3149,6 +3215,12 @@ public class VentanaInicio extends javax.swing.JFrame{
             
             comboVentasEmpleadoAgregar.addItem(empleado);
             comboVentasEmpleadoActualizar.addItem(empleado);
+            
+        }
+        
+        for(String opciones : ComboBoxUtil.getOpcionesBusquedaVentas()){
+            
+            comboVentasBuscar.addItem(opciones);
             
         }
         
@@ -3169,6 +3241,39 @@ public class VentanaInicio extends javax.swing.JFrame{
             cargarTablaVentas();
         }
     
+    }
+    
+    public void mostrarCajasVentas(String opc){
+        
+        if (opc == null) return;
+
+        if (opc.equals("ID")) {
+            
+            CajasUtil.ocultarComponentes(cajaVentasBuscarID, comboVentasBuscarMes, comboVentasBuscarPrecio, comboVentasBuscarFormaPago, comboVentasBuscarVehiculo);
+            
+        }else if(opc.equals("Mes")){
+            
+            CajasUtil.ocultarComponentes(comboVentasBuscarMes, cajaVentasBuscarID, comboVentasBuscarPrecio, comboVentasBuscarFormaPago, comboVentasBuscarVehiculo);
+            
+        }else if(opc.equals("Precio")){
+            
+            CajasUtil.ocultarComponentes(comboVentasBuscarPrecio, cajaVentasBuscarID, comboVentasBuscarMes, comboVentasBuscarFormaPago, comboVentasBuscarVehiculo);
+            
+        }else if(opc.equals("Forma de Pago")){
+            
+            CajasUtil.ocultarComponentes(comboVentasBuscarFormaPago, cajaVentasBuscarID, comboVentasBuscarMes, comboVentasBuscarPrecio, comboVentasBuscarVehiculo);
+            
+        }else if(opc.equals("Vehiculo")){
+            
+            CajasUtil.ocultarComponentes(comboVentasBuscarVehiculo, cajaVentasBuscarID, comboVentasBuscarMes, comboVentasBuscarPrecio, comboVentasBuscarFormaPago);
+            
+        }else if(opc.equals("Todos")){
+            
+            CajasUtil.ocultarComponentes(comboVentasBuscar, cajaVentasBuscarID, comboVentasBuscarMes, comboVentasBuscarPrecio, comboVentasBuscarFormaPago, comboVentasBuscarVehiculo);
+            
+        }
+        
+       
     }
     
     
@@ -3248,6 +3353,10 @@ public class VentanaInicio extends javax.swing.JFrame{
         tablaVentas.setRowHeight(30);
         
         cargarCombosVentas();
+        
+        comboVentasBuscar.setSelectedItem("Todos");
+        
+        mostrarCajasVentas((String)comboVentasBuscar.getSelectedItem());
         
         cargarTablaVentas();
         
@@ -3491,7 +3600,7 @@ public class VentanaInicio extends javax.swing.JFrame{
     }//GEN-LAST:event_comboVehiculosBuscarEstadoActionPerformed
 
     private void comboVentasBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboVentasBuscarActionPerformed
-        // TODO add your handling code here:
+        mostrarCajasVentas((String)comboVentasBuscar.getSelectedItem());
     }//GEN-LAST:event_comboVentasBuscarActionPerformed
 
     private void btnVentasAgregarAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVentasAgregarAgregarActionPerformed
@@ -3557,11 +3666,26 @@ public class VentanaInicio extends javax.swing.JFrame{
     }//GEN-LAST:event_btnAgregarVentasActionPerformed
 
     private void btnVentasActualizarActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVentasActualizarActualizarActionPerformed
-      
         
         actualizarVenta();
         
     }//GEN-LAST:event_btnVentasActualizarActualizarActionPerformed
+
+    private void comboVentasBuscarMesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboVentasBuscarMesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboVentasBuscarMesActionPerformed
+
+    private void comboVentasBuscarPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboVentasBuscarPrecioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboVentasBuscarPrecioActionPerformed
+
+    private void comboVentasBuscarFormaPagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboVentasBuscarFormaPagoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboVentasBuscarFormaPagoActionPerformed
+
+    private void comboVentasBuscarVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboVentasBuscarVehiculoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboVentasBuscarVehiculoActionPerformed
 
 
     
@@ -3650,6 +3774,7 @@ public class VentanaInicio extends javax.swing.JFrame{
     private javax.swing.JTextField cajaPrecioAgregar;
     private javax.swing.JTextField cajaPrecioModificar;
     private javax.swing.JTextField cajaVahiculosBuscarID;
+    private javax.swing.JTextField cajaVentasBuscarID;
     private javax.swing.JTextField cajaVentasPrecioActualizar1;
     private javax.swing.JTextField cajaVentasPrecioAgregar;
     private javax.swing.JComboBox<String> comboAnioAgregar;
@@ -3681,6 +3806,10 @@ public class VentanaInicio extends javax.swing.JFrame{
     private javax.swing.JComboBox<String> comboVehiculosBuscarTipo;
     private javax.swing.JComboBox<String> comboVentasAnioActualizar;
     private javax.swing.JComboBox<String> comboVentasBuscar;
+    private javax.swing.JComboBox<String> comboVentasBuscarFormaPago;
+    private javax.swing.JComboBox<String> comboVentasBuscarMes;
+    private javax.swing.JComboBox<String> comboVentasBuscarPrecio;
+    private javax.swing.JComboBox<String> comboVentasBuscarVehiculo;
     private javax.swing.JComboBox<String> comboVentasClienteActualizar;
     private javax.swing.JComboBox<String> comboVentasClienteAgregar;
     private javax.swing.JComboBox<String> comboVentasDiaActualizar;

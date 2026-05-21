@@ -23,4 +23,14 @@ public interface IVentaService {
     
     void actualizar(Venta venta);
     
+    List<Venta> buscarPorId(int idVenta);
+    
+    List<Venta> buscarPorMes(String mes);
+    
+    List<Venta> buscarPorPrecio(String precio);
+    
+    List<Venta> buscarPorFormaPago(String formaPago);
+    
+    List<Venta> buscarPorVehiculo(String vehiculo);
+    
 }

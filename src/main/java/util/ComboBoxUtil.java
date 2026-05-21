@@ -114,7 +114,7 @@ public class ComboBoxUtil {
         
     }
     
-     public static List<String> getVehiculo(IVehiculoService vehiculoService) {
+    public static List<String> getVehiculo(IVehiculoService vehiculoService) {
         
         ArrayList<String> idVehiculo = new ArrayList<>();
     
@@ -124,5 +124,12 @@ public class ComboBoxUtil {
     
         return idVehiculo;
     }
+    
+    public static List<String> getOpcionesBusquedaVentas(){
+        
+        return List.of("Todos","ID","Mes","Precio","Forma de Pago", "Vehiculo");
+        
+    }
+    
     
 }
