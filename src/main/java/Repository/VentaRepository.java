@@ -126,14 +126,118 @@ public class VentaRepository implements IVentaRepository{
         
     }
 
-    @Override
     public Venta obtenerPorId(int idVenta) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+
+        String sql = """
+            SELECT 
+                ID_Venta,
+                Fecha_Venta,              
+                Precio_Final,
+                Forma_Pago,
+                ID_Cliente,
+                ID_Empleado,
+                ID_Vehiculo
+            FROM Ventas
+            WHERE ID_Venta = ?
+            """;
+
+        try {
+
+            Connection con = ConexionBD.getInstancia().getConnection();
+
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            ps.setInt(1, idVenta);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+
+                return new Venta(
+
+                    rs.getInt("ID_Venta"),
+
+                    rs.getDate("Fecha_Venta"),
+
+                    rs.getDouble("Precio_Final"),
+                        
+                    rs.getString("Forma_Pago"),
+
+                    rs.getString("ID_Cliente"),
+
+                    rs.getString("ID_Empleado"),
+
+                    rs.getString("ID_Vehiculo")
+                );
+            }
+
+        } catch (SQLException e) {
+
+            logger.log(
+                Level.SEVERE,
+                "Error al obtener venta: " + e.getMessage(),
+                e
+            );
+
+            throw new RuntimeException(
+                "Error al obtener venta: " + e.getMessage()
+            );
+        }
+
+        return null;
     }
 
     @Override
     public void actualizar(Venta venta) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+
+        String sql = """
+            UPDATE Ventas
+            SET
+                Fecha_Venta = ?,
+                Forma_Pago = ?,
+                Precio_Final = ?,
+                ID_Cliente = ?,
+                ID_Empleado = ?,
+                ID_Vehiculo = ?
+            WHERE ID_Venta = ?
+            """;
+
+        try {
+
+            Connection con = ConexionBD.getInstancia().getConnection();
+
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            ps.setDate(1, venta.getFechaVenta());
+
+            ps.setString(2, venta.getFormaPago());
+
+            ps.setDouble(3, venta.getPrecioFinal());
+
+            ps.setString(4, venta.getIdCliente());
+
+            ps.setString(5, venta.getIdEmpleado());
+
+            // ID del vehículo
+            ps.setString(6, venta.getNombreVehiculo());
+
+            // ID de la venta a editar
+            ps.setInt(7, venta.getIdVenta());
+
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+
+            logger.log(
+                Level.SEVERE,
+                "Error al actualizar venta: " + e.getMessage(),
+                e
+            );
+
+            throw new RuntimeException(
+                "Error al actualizar venta: " + e.getMessage()
+            );
+        }
     }
-    
+
 }

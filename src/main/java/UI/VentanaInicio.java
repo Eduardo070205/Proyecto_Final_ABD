@@ -56,6 +56,8 @@ public class VentanaInicio extends javax.swing.JFrame{
     
     private String idVehiculoSeleccionado;
     
+    private int idVentaSeleccionada;
+    
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VentanaInicio.class.getName());
 
@@ -2137,6 +2139,11 @@ public class VentanaInicio extends javax.swing.JFrame{
         btnVentasActualizarActualizar.setForeground(new java.awt.Color(0, 0, 0));
         btnVentasActualizarActualizar.setIcon(new javax.swing.ImageIcon("C:\\Users\\eduar\\Documents\\ITSJ\\5. Quinto Semestre\\Taller de bases de datos\\Proyecto final\\Proyecto_Final_TBD_Escritorio\\src\\main\\java\\img\\actualizar.png")); // NOI18N
         btnVentasActualizarActualizar.setText("Actualizar");
+        btnVentasActualizarActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVentasActualizarActualizarActionPerformed(evt);
+            }
+        });
         jPanel24.add(btnVentasActualizarActualizar);
         btnVentasActualizarActualizar.setBounds(40, 280, 120, 50);
 
@@ -2893,6 +2900,122 @@ public class VentanaInicio extends javax.swing.JFrame{
     
     // =================================================== VENTAS =====================================================================
     
+    private void abrirEditarVenta(int idVenta) {
+
+        Venta venta = ventaService.obtenerPorId(idVenta);
+
+        if (venta != null) {
+
+            cargarCombosVentas();
+
+            idVentaSeleccionada = idVenta;
+
+            comboVentasClienteActualizar.setSelectedItem(
+                (String)venta.getIdCliente()
+            );
+
+            comboVentasEmpleadoActualizar.setSelectedItem(
+                (String)venta.getIdEmpleado()
+            );
+
+            cajaVentasPrecioActualizar1.setText(
+                String.valueOf(venta.getPrecioFinal())
+            );
+
+            comboVentasFormaActualizar.setSelectedItem(
+                (String)venta.getFormaPago()
+            );
+
+            comboVentasvehiculoActualizar.setSelectedItem(
+                venta.getNombreVehiculo()
+            );
+
+            // Convertir Date a LocalDate
+            LocalDate fecha =
+                venta.getFechaVenta().toLocalDate();
+
+            comboVentasAnioActualizar.setSelectedItem(
+                String.valueOf(fecha.getYear())
+            );
+
+            comboVentasMesActualizar.setSelectedIndex(
+                fecha.getMonthValue()-1
+            );
+
+            comboVentasDiaActualizar.setSelectedIndex(
+                fecha.getDayOfMonth()-1
+            );
+
+            internalActualizarVentas1.setVisible(true);
+
+            internalActualizarVentas1.toFront();
+        }
+    }
+    
+    private void actualizarVenta() {
+
+        LocalDate fechaVenta = LocalDate.of(
+
+            Integer.parseInt(
+                comboVentasAnioActualizar
+                    .getSelectedItem()
+                    .toString()
+            ),
+
+            comboVentasMesActualizar.getSelectedIndex() + 1,
+
+            Integer.parseInt(
+                comboVentasDiaActualizar
+                    .getSelectedItem()
+                    .toString()
+            )
+        );
+
+        try {
+
+            Venta venta = new Venta(
+                
+                idVentaSeleccionada,    
+
+                Date.valueOf(fechaVenta.toString()),
+
+                Double.parseDouble(
+                    cajaVentasPrecioActualizar1
+                        .getText()
+                ),
+                    
+                comboVentasFormaActualizar.getSelectedItem().toString(),
+
+                comboVentasClienteActualizar.getSelectedItem().toString(),
+
+                comboVentasEmpleadoActualizar.getSelectedItem().toString(),
+
+                comboVentasvehiculoActualizar.getSelectedItem().toString()
+            );
+
+            ventaService.actualizar(venta);
+
+            JOptionPane.showMessageDialog(
+                this,
+                "Venta actualizada correctamente"
+            );
+
+            internalActualizarVentas1.setVisible(false);
+
+            cargarTablaVentas();
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+
+            JOptionPane.showMessageDialog(
+                this,
+                e.getMessage(),
+                "Error",
+                JOptionPane.ERROR_MESSAGE
+            );
+        }
+    }
     
     private void cargarTablaVentas() {
         
@@ -2945,8 +3068,8 @@ public class VentanaInicio extends javax.swing.JFrame{
         tablaVentas.getColumnModel().getColumn(7).setCellRenderer(new ButtonRenderer(iconoEditar));
         tablaVentas.getColumnModel().getColumn(7).setCellEditor(new ButtonEditor(iconoEditar, e -> {
             int fila = tablaVentas.getSelectedRow();
-            String idVehiculo = (String) tablaVentas.getValueAt(fila, 0);
-            //abrirEditarVehiculo(idVehiculo);
+            int idVenta = (int) tablaVentas.getValueAt(fila, 0);
+            abrirEditarVenta(idVenta);
         }));
 
         // Columna Eliminar
@@ -2965,21 +3088,31 @@ public class VentanaInicio extends javax.swing.JFrame{
         comboVentasClienteAgregar.removeAllItems();
         comboVentasFormaAgregar.removeAllItems();
         comboVentasEmpleadoAgregar.removeAllItems();
+        comboVentasvehiculoActualizar.removeAllItems();
+        comboVentasClienteActualizar.removeAllItems();
+        comboVentasFormaActualizar.removeAllItems();
+        comboVentasEmpleadoActualizar.removeAllItems();
+        comboVentasAnioActualizar.removeAllItems();
+        comboVentasMesActualizar.removeAllItems();
+        comboVentasDiaActualizar.removeAllItems();
         
         
 
         for(Integer anio : ComboBoxUtil.getAnios()) {
   
+            comboVentasAnioActualizar.addItem(anio.toString());
 
         }
         
         for(String mes : ComboBoxUtil.getMeses()){
             
+            comboVentasMesActualizar.addItem(mes.toString());
 
         }
         
         for(Integer dia : ComboBoxUtil.getDias()){
  
+            comboVentasDiaActualizar.addItem(dia.toString());
             
         }
         
@@ -2987,6 +3120,7 @@ public class VentanaInicio extends javax.swing.JFrame{
         for(String vehiculo : ComboBoxUtil.getVehiculo(vehiculoService)){
             
             comboVentasvehiculoAgregar.addItem(vehiculo);
+            comboVentasvehiculoActualizar.addItem(vehiculo);
             
         }
         
@@ -3000,18 +3134,21 @@ public class VentanaInicio extends javax.swing.JFrame{
         for(String tipoPago:  ComboBoxUtil.getFormaPago()){
             
             comboVentasFormaAgregar.addItem(tipoPago);
+            comboVentasFormaActualizar.addItem(tipoPago);
             
         }
         
         for(String cliente : ComboBoxUtil.getClientes()){
             
             comboVentasClienteAgregar.addItem(cliente);
+            comboVentasClienteActualizar.addItem(cliente);
             
         }
         
         for(String empleado : ComboBoxUtil.getEmpleados()){
             
             comboVentasEmpleadoAgregar.addItem(empleado);
+            comboVentasEmpleadoActualizar.addItem(empleado);
             
         }
         
@@ -3419,6 +3556,13 @@ public class VentanaInicio extends javax.swing.JFrame{
         
     }//GEN-LAST:event_btnAgregarVentasActionPerformed
 
+    private void btnVentasActualizarActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVentasActualizarActualizarActionPerformed
+      
+        
+        actualizarVenta();
+        
+    }//GEN-LAST:event_btnVentasActualizarActualizarActionPerformed
+
 
     
     /**
@@ -3506,7 +3650,6 @@ public class VentanaInicio extends javax.swing.JFrame{
     private javax.swing.JTextField cajaPrecioAgregar;
     private javax.swing.JTextField cajaPrecioModificar;
     private javax.swing.JTextField cajaVahiculosBuscarID;
-    private javax.swing.JTextField cajaVentasPrecioActualizar;
     private javax.swing.JTextField cajaVentasPrecioActualizar1;
     private javax.swing.JTextField cajaVentasPrecioAgregar;
     private javax.swing.JComboBox<String> comboAnioAgregar;
@@ -3551,7 +3694,6 @@ public class VentanaInicio extends javax.swing.JFrame{
     private javax.swing.ButtonGroup groupBusquedaModelos;
     private javax.swing.ButtonGroup groupBusquedaVehiculos;
     private javax.swing.ButtonGroup groupBusquedaVentas;
-    private javax.swing.JInternalFrame internalActualizarVentas;
     private javax.swing.JInternalFrame internalActualizarVentas1;
     private javax.swing.JInternalFrame internalAgregarAutos;
     private javax.swing.JInternalFrame internalAgregarModelos;
@@ -3635,13 +3777,6 @@ public class VentanaInicio extends javax.swing.JFrame{
     private javax.swing.JLabel jLabel70;
     private javax.swing.JLabel jLabel71;
     private javax.swing.JLabel jLabel72;
-    private javax.swing.JLabel jLabel73;
-    private javax.swing.JLabel jLabel74;
-    private javax.swing.JLabel jLabel75;
-    private javax.swing.JLabel jLabel76;
-    private javax.swing.JLabel jLabel77;
-    private javax.swing.JLabel jLabel78;
-    private javax.swing.JLabel jLabel79;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel80;
     private javax.swing.JLabel jLabel81;
@@ -3669,9 +3804,7 @@ public class VentanaInicio extends javax.swing.JFrame{
     private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel17;
     private javax.swing.JPanel jPanel18;
-    private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel20;
     private javax.swing.JPanel jPanel21;
     private javax.swing.JPanel jPanel22;
     private javax.swing.JPanel jPanel23;

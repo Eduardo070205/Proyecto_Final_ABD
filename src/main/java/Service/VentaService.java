@@ -7,6 +7,7 @@ package Service;
 import Modelo.Venta;
 import Repository.IVentaRepository;
 import java.util.List;
+import util.ValidacionesUtil;
 
 /**
  *
@@ -31,6 +32,10 @@ public class VentaService implements IVentaService{
     @Override
     public void agregar(Venta venta) {
         
+        if (!ValidacionesUtil.validarCamposVenta(venta)) {
+            throw new IllegalArgumentException("Todos los campos son obligatorios");
+        }
+        
         ventaRepository.agregar(venta);
         
     }
@@ -44,12 +49,19 @@ public class VentaService implements IVentaService{
 
     @Override
     public Venta obtenerPorId(int idVenta) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        
+        return ventaRepository.obtenerPorId(idVenta);
+        
     }
 
     @Override
     public void actualizar(Venta venta) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        
+        if (!ValidacionesUtil.validarCamposVenta(venta)) {
+            throw new IllegalArgumentException("Todos los campos son obligatorios");
+        }
+        ventaRepository.actualizar(venta);
+        
     }
     
     
