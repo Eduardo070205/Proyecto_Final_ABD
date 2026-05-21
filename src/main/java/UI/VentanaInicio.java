@@ -2473,15 +2473,15 @@ public class VentanaInicio extends javax.swing.JFrame{
     private void cargarTablaVehiculos() {
         
         
-        String[] columnas = {"ID", "Número de Serie", "Modelo", "Fecha de Fabricación", "Precio",
-                             "Kilometraje", "Fecha Entrada", "Tipo", "Estado", "Editar", "Eliminar"};
+        String[] columnas = {"ID", "Modelo", "Fecha de Fabricación", "Precio",
+                            "Tipo", "Estado", "Editar", "Eliminar"};
 
         DefaultTableModel tableModel = new DefaultTableModel(columnas, 0){
             
             @Override
             public boolean isCellEditable(int row, int column) {
                 // Solo las columnas de botones son editables
-                return column == 9 || column == 10;
+                return column == 6 || column == 7;
             }
             
         };
@@ -2489,12 +2489,9 @@ public class VentanaInicio extends javax.swing.JFrame{
         for (Vehiculo v : vehiculoService.obtenerTodos()) {
             tableModel.addRow(new Object[]{
                 v.getIdVehiculo(),
-                v.getNumeroSerie(),
                 v.getNombreModelo(),
                 v.getFechaFabricacion(),
                 v.getPrecio(),
-                v.getKilometraje(),
-                v.getFechaEntrada(),
                 v.getTipo(),
                 v.getEstado(),
                 "Editar",
@@ -2520,16 +2517,16 @@ public class VentanaInicio extends javax.swing.JFrame{
         );
         
         // Columna Editar
-        tablaVehiculos.getColumnModel().getColumn(9).setCellRenderer(new ButtonRenderer(iconoEditar));
-        tablaVehiculos.getColumnModel().getColumn(9).setCellEditor(new ButtonEditor(iconoEditar, e -> {
+        tablaVehiculos.getColumnModel().getColumn(6).setCellRenderer(new ButtonRenderer(iconoEditar));
+        tablaVehiculos.getColumnModel().getColumn(6).setCellEditor(new ButtonEditor(iconoEditar, e -> {
             int fila = tablaVehiculos.getSelectedRow();
             String idVehiculo = (String) tablaVehiculos.getValueAt(fila, 0);
             abrirEditarVehiculo(idVehiculo);
         }));
 
         // Columna Eliminar
-        tablaVehiculos.getColumnModel().getColumn(10).setCellRenderer(new ButtonRenderer(iconoEliminar));
-        tablaVehiculos.getColumnModel().getColumn(10).setCellEditor(new ButtonEditor(iconoEliminar, e -> {
+        tablaVehiculos.getColumnModel().getColumn(7).setCellRenderer(new ButtonRenderer(iconoEliminar));
+        tablaVehiculos.getColumnModel().getColumn(7).setCellEditor(new ButtonEditor(iconoEliminar, e -> {
             int fila = tablaVehiculos.getSelectedRow();
             String idVehiculo = (String) tablaVehiculos.getValueAt(fila, 0);
             confirmarEliminarVehiculo(idVehiculo);
