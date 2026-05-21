@@ -56,7 +56,58 @@ public class VentaRepository implements IVentaRepository{
 
     @Override
     public void agregar(Venta venta) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        
+        String sql = """
+            INSERT INTO Ventas (
+                Fecha_Venta,
+                Forma_Pago,
+                Precio_Final,
+                ID_Cliente,
+                ID_Empleado,
+                ID_Vehiculo
+            )
+            VALUES (
+                ?, 
+                ?, 
+                ?, 
+                ?, 
+                ?, 
+                ?
+            )
+            """;
+
+        try {
+
+            Connection con = ConexionBD.getInstancia().getConnection();
+
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            ps.setDate(1, venta.getFechaVenta());
+
+            ps.setString(2, venta.getFormaPago());
+
+            ps.setDouble(3, venta.getPrecioFinal());
+
+            ps.setString(4, venta.getIdCliente());
+
+            ps.setString(5, venta.getIdEmpleado());
+
+            // Nombre del vehículo/modelo
+            ps.setString(6, venta.getNombreVehiculo());
+
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+
+            throw new RuntimeException(
+                "Error SQL: " + e.getMessage(),
+                e
+            );
+        }
+        
+        
     }
 
     @Override

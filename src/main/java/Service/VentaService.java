@@ -30,7 +30,9 @@ public class VentaService implements IVentaService{
 
     @Override
     public void agregar(Venta venta) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        
+        ventaRepository.agregar(venta);
+        
     }
 
     @Override

@@ -6,6 +6,7 @@ package util;
 
 import Modelo.Modelo;
 import Modelo.Vehiculo;
+import Modelo.Venta;
 
 /**
  *
@@ -48,6 +49,25 @@ public class ValidacionesUtil {
 
         && vehiculo.getEstado() != null 
             && !vehiculo.getEstado().isBlank();
+    }
+    
+    public static boolean validarCamposVenta(Venta venta) {
+
+        return venta.getFechaVenta() != null
+
+            && venta.getFormaPago() != null
+            && !venta.getFormaPago().isBlank()
+
+            && venta.getPrecioFinal() > 0
+
+            && venta.getIdCliente() != null
+            && !venta.getIdCliente().isBlank()
+
+            && venta.getIdEmpleado() != null
+            && !venta.getIdEmpleado().isBlank()
+
+            && venta.getNombreVehiculo() != null
+            && !venta.getNombreVehiculo().isBlank();
     }
     
 }

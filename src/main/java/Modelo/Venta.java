@@ -35,6 +35,15 @@ public class Venta {
         this.idEmpleado = idEmpleado;
         this.nombreVehiculo = nombreVehiculo;
     }
+    
+    public Venta(Date fechaVenta, double precioFinal, String formaPago, String idCliente, String idEmpleado, String nombreVehiculo) {
+        this.fechaVenta = fechaVenta;
+        this.formaPago = formaPago;
+        this.precioFinal = precioFinal;
+        this.idCliente = idCliente;
+        this.idEmpleado = idEmpleado;
+        this.nombreVehiculo = nombreVehiculo;
+    }
 
     public int getIdVenta() {
         return idVenta;

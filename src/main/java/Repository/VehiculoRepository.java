@@ -72,8 +72,6 @@ public class VehiculoRepository implements IVehiculoRepository{
 
     @Override
     public void agregar(Vehiculo vehiculo) {
-        
-        System.out.println(vehiculo.getNombreModelo());
 
         String sql = """
             INSERT INTO Vehiculos (

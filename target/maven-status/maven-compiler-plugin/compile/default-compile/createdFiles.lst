@@ -27,6 +27,7 @@ UI\tabla\ButtonEditor.class
 UI\VentanaInicio$5.class
 UI\VentanaInicio$2.class
 UI\VentanaInicio$20.class
+UI\VentanaInicio$35.class
 Repository\ModeloRepository.class
 UI\VentanaInicio$31.class
 UI\VentanaInicio$18.class
@@ -44,6 +45,7 @@ BD\ConexionBD.class
 Repository\VehiculoRepository.class
 UI\VentanaInicio$11.class
 UI\VentanaInicio$21.class
+UI\VentanaInicio$37.class
 UI\VentanaInicio$27.class
 Repository\IVentaRepository.class
 util\ValidacionesUtil.class
@@ -64,6 +66,7 @@ Service\VentaService.class
 util\CajasUtil.class
 UI\VentanaInicio$28.class
 UI\VentanaInicio$30.class
+UI\VentanaInicio$36.class
 UI\VentanaInicio$3.class
 UI\VentanaInicio$13.class
 UI\VentanaInicio$33.class

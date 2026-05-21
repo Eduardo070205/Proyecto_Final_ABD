@@ -5,8 +5,10 @@
 package util;
 
 import Modelo.Modelo;
+import Modelo.Vehiculo;
 import Repository.ModeloRepository;
 import Service.IModeloService;
+import Service.IVehiculoService;
 import Service.ModeloService;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -92,6 +94,35 @@ public class ComboBoxUtil {
         
         return List.of(100000, 250000, 500000, 750000, 1000000);
         
+    }
+    
+    public static List<String> getFormaPago(){
+        
+        return List.of("Contado", "Credito");
+        
+    }
+    
+    public static List<String> getClientes(){
+        
+        return List.of("CL0001","CL0002","CL0003");
+        
+    }
+    
+    public static List<String> getEmpleados() {
+        
+        return List.of("EM0001","EM0002","EM0003");
+        
+    }
+    
+     public static List<String> getVehiculo(IVehiculoService vehiculoService) {
+        
+        ArrayList<String> idVehiculo = new ArrayList<>();
+    
+        for(Vehiculo v : vehiculoService.obtenerTodos()){
+            idVehiculo.add(v.getIdVehiculo());
+        }
+    
+        return idVehiculo;
     }
     
 }
