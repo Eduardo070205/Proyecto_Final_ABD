@@ -2659,6 +2659,10 @@ public class VentanaInicio extends javax.swing.JFrame{
        
     }
     
+    // =================================================== VENTAS =====================================================================
+    
+    
+    
     // ============================================== EVENTOS DE BOTONES ================================================================
     
     private void btnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionActionPerformed
