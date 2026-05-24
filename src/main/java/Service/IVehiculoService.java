@@ -24,7 +24,7 @@ public interface IVehiculoService {
     
     void actualizar(Vehiculo vehiculo);
     
-        List<Vehiculo> buscarPorId(String id);
+    List<Vehiculo> buscarPorId(String id);
     
     List<Vehiculo> buscarPorModelo(String modelo);
     
@@ -35,6 +35,8 @@ public interface IVehiculoService {
     List<Vehiculo> buscarPorTipo(String tipo);
     
     List<Vehiculo> buscarPorEstado(String estado);
+    
+    List<Vehiculo> obtenerVehiculosDisponibles();
     
 }
 

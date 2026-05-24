@@ -26,6 +26,7 @@ import static com.sun.java.accessibility.util.SwingEventMonitor.addDocumentListe
 import java.awt.Image;
 import java.sql.Date;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.util.Arrays;
@@ -2581,12 +2582,9 @@ public class VentanaInicio extends javax.swing.JFrame{
         for (Vehiculo v : vehiculos) { 
             tableModel.addRow(new Object[]{
                 v.getIdVehiculo(),
-                v.getNumeroSerie(),
                 v.getNombreModelo(),
                 v.getFechaFabricacion(),
                 v.getPrecio(),
-                v.getKilometraje(),
-                v.getFechaEntrada(),
                 v.getTipo(),
                 v.getEstado(),
                 "Editar",
@@ -3077,9 +3075,7 @@ public class VentanaInicio extends javax.swing.JFrame{
 
             case "Vehiculo" -> {
 
-                String vehiculo =
-                    (String) comboVentasBuscarVehiculo
-                        .getSelectedItem();
+                String vehiculo = comboVentasBuscarVehiculo.getSelectedItem().toString();
 
                 if (vehiculo == null) return;
 
@@ -3101,6 +3097,7 @@ public class VentanaInicio extends javax.swing.JFrame{
     private void abrirEditarVenta(int idVenta) {
 
         Venta venta = ventaService.obtenerPorId(idVenta);
+        
 
         if (venta != null) {
 
@@ -3128,7 +3125,7 @@ public class VentanaInicio extends javax.swing.JFrame{
                 venta.getNombreVehiculo()
             );
 
-            // Convertir Date a LocalDate
+
             LocalDate fecha =
                 venta.getFechaVenta().toLocalDate();
 
@@ -3168,6 +3165,8 @@ public class VentanaInicio extends javax.swing.JFrame{
                     .toString()
             )
         );
+        
+        
 
         try {
 
@@ -3320,12 +3319,18 @@ public class VentanaInicio extends javax.swing.JFrame{
             
         }
         
-        
         for(String vehiculo : ComboBoxUtil.getVehiculo(vehiculoService)){
             
-            comboVentasvehiculoAgregar.addItem(vehiculo);
-            comboVentasvehiculoActualizar.addItem(vehiculo);
             comboVentasBuscarVehiculo.addItem(vehiculo);
+            comboVentasvehiculoActualizar.addItem(vehiculo);
+           
+        }
+        
+        
+        for(String vehiculo : ComboBoxUtil.getVehiculoDisponible(vehiculoService)){
+            
+            comboVentasvehiculoAgregar.addItem(vehiculo);
+           
             
         }
         
@@ -3748,23 +3753,43 @@ public class VentanaInicio extends javax.swing.JFrame{
 
     private void btnVentasAgregarAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVentasAgregarAgregarActionPerformed
         
+        double precioOriginal =
+            Double.parseDouble(
+                cajaVentasPrecioAgregar
+                    .getText()
+                    .trim()
+            );
+
+        String formaPago =
+            comboVentasFormaAgregar
+                .getSelectedItem()
+                .toString();
+
+        double precioFinal =
+            ventaService.calcularDescuento(
+                precioOriginal,
+                formaPago
+            );
+        
+        String[] vehiculo = comboVentasvehiculoAgregar.getSelectedItem().toString().split(" ");
+        
+        
+        
         try {
 
             Venta venta = new Venta(
 
                 Date.valueOf(LocalDate.now()),
                     
-                                    Double.parseDouble(
-                    cajaVentasPrecioAgregar.getText().trim()
-                ),
+                precioFinal,
 
-                comboVentasFormaAgregar.getSelectedItem().toString(),
+                formaPago,
 
                 comboVentasClienteAgregar.getSelectedItem().toString(),
 
                 comboVentasEmpleadoAgregar.getSelectedItem().toString(),
                     
-                comboVentasvehiculoAgregar.getSelectedItem().toString()
+                vehiculo[0]
             );
 
             ventaService.agregar(venta);
@@ -3773,27 +3798,38 @@ public class VentanaInicio extends javax.swing.JFrame{
                 this,
                 "Venta agregada correctamente"
             );
+            
+            if(formaPago.equalsIgnoreCase("Contado")){
+
+                JOptionPane.showMessageDialog(
+                    this,
+                    "Se aplicó un descuento del 10%"
+                );
+            }
 
             internalAltasVentas.setVisible(false);
 
             cargarTablaVentas();
 
-        } catch (IllegalArgumentException e) {
-
-            JOptionPane.showMessageDialog(
-                this,
-                e.getMessage(),
-                "Error",
-                JOptionPane.ERROR_MESSAGE
-            );
-
         } catch (Exception e) {
 
             e.printStackTrace();
 
+            String mensaje = "Error al registrar la venta";
+
+            Throwable causa = e.getCause();
+
+            if (causa instanceof SQLException sqlEx) {
+
+                if (sqlEx.getErrorCode() == 20001) {
+
+                    mensaje = "El vehículo ya fue vendido";
+                }
+            }
+
             JOptionPane.showMessageDialog(
                 this,
-                e.getMessage(),
+                mensaje,
                 "Error",
                 JOptionPane.ERROR_MESSAGE
             );

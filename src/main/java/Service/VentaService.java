@@ -89,6 +89,10 @@ public class VentaService implements IVentaService{
         return ventaRepository.buscarPorVehiculo(vehiculo);
     }
     
-    
+    public double calcularDescuento(double precio, String formaPago){
+       
+        return ventaRepository.calcularDescuento(precio, formaPago);
+        
+    }
     
 }

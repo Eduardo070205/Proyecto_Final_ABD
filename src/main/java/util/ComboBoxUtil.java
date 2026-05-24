@@ -131,5 +131,16 @@ public class ComboBoxUtil {
         
     }
     
+    public static List<String> getVehiculoDisponible(IVehiculoService vehiculoService) {
+        
+        ArrayList<String> idVehiculo = new ArrayList<>();
+    
+        for(Vehiculo v : vehiculoService.obtenerVehiculosDisponibles()){
+            idVehiculo.add(v.getIdVehiculo() + " " + v.getNombreModelo());
+        }
+    
+        return idVehiculo;
+    }
+    
     
 }

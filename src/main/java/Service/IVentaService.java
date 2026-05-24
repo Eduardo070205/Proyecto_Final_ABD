@@ -32,5 +32,7 @@ public interface IVentaService {
     List<Venta> buscarPorFormaPago(String formaPago);
     
     List<Venta> buscarPorVehiculo(String vehiculo);
+
+    public double calcularDescuento(double precioOriginal, String formaPago);
     
 }

@@ -97,7 +97,10 @@ public class VehiculoService implements IVehiculoService{
     public List<Vehiculo> buscarPorEstado(String estado) {
         return vehiculoRepository.buscarPorEstado(estado);
     }
-    
 
+    @Override
+    public List<Vehiculo> obtenerVehiculosDisponibles() {
+        return vehiculoRepository.obtenerVehiculosDisponibles();
+    }    
     
 }

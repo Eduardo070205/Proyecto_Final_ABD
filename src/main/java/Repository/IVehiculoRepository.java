@@ -36,4 +36,6 @@ public interface IVehiculoRepository {
     
     List<Vehiculo> buscarPorEstado(String estado);
     
+    List<Vehiculo> obtenerVehiculosDisponibles();
+    
 }

@@ -32,5 +32,10 @@ public interface IVentaRepository {
     List<Venta> buscarPorFormaPago(String formaPago);
     
     List<Venta> buscarPorVehiculo(String vehiculo);
+
+    public double calcularDescuento(double precio, String formaPago);
+    
+    
+
     
 }

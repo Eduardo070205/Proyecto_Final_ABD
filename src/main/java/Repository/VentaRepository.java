@@ -6,6 +6,7 @@ package Repository;
 
 import BD.ConexionBD;
 import Modelo.Venta;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -407,4 +408,44 @@ public class VentaRepository implements IVentaRepository{
         return lista;
     }
 
+    public double calcularDescuento(double precio, String formaPago) {
+
+        String sql =
+            "{call CalcularDescuento(?, ?, ?)}";
+
+        try {
+
+            Connection con =
+                ConexionBD.getInstancia()
+                    .getConnection();
+
+            CallableStatement cs =
+                con.prepareCall(sql);
+
+            cs.setDouble(1, precio);
+
+            cs.setString(2, formaPago);
+
+            cs.registerOutParameter(
+                3,
+                java.sql.Types.DOUBLE
+            );
+
+            cs.execute();
+
+            return cs.getDouble(3);
+
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+
+            throw new RuntimeException(
+                "Error al calcular descuento"
+            );
+        }
+    }
+
+
+    
+    
 }

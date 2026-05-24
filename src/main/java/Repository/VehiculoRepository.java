@@ -8,6 +8,7 @@ import BD.ConexionBD;
 import Modelo.Modelo;
 import Modelo.Vehiculo;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -435,6 +436,41 @@ public class VehiculoRepository implements IVehiculoRepository{
             );
         }
         return lista;
+    }
+    
+    @Override
+    public List<Vehiculo> obtenerVehiculosDisponibles() {
+        
+        List<Vehiculo> lista = new ArrayList<>();
+        String sql = "SELECT * FROM VistaVehiculosDisponibles";
+        
+        try {
+            Connection con = ConexionBD.getInstancia().getConnection();
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                lista.add(new Vehiculo(
+                    rs.getString("ID_Vehiculo"),
+                    "",
+                    rs.getString("Nombre_Modelo"),
+                    Date.valueOf("2000-01-01"),
+                    0,
+                    0,
+                    Date.valueOf("2000-01-01"),
+                    "",
+                    ""
+                ));
+            }
+            
+        }catch(Exception e){
+            
+            e.printStackTrace();
+            
+        }     
+        
+        return lista;
+    
     }
     
 }
