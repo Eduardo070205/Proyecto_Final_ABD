@@ -29,4 +29,11 @@ public class TablaUtil {
             }
         });
     }
+    
+    public static void centrarTexto(JTable tabla){
+        
+        
+        
+    }
+    
 }

@@ -35,7 +35,7 @@ public interface IVentaRepository {
 
     public double calcularDescuento(double precio, String formaPago);
     
-    
+    double calcularComision(double precio);
 
     
 }

@@ -58,6 +58,8 @@ public class VentaRepository implements IVentaRepository{
     @Override
     public void agregar(Venta venta) {
         
+        Connection con = null;
+        
         String sql = """
             INSERT INTO Ventas (
                 Fecha_Venta,
@@ -79,8 +81,10 @@ public class VentaRepository implements IVentaRepository{
 
         try {
 
-            Connection con = ConexionBD.getInstancia().getConnection();
+            con = ConexionBD.getInstancia().getConnection();
 
+            con.setAutoCommit(false);
+            
             PreparedStatement ps = con.prepareStatement(sql);
 
             ps.setDate(1, venta.getFechaVenta());
@@ -93,19 +97,37 @@ public class VentaRepository implements IVentaRepository{
 
             ps.setString(5, venta.getIdEmpleado());
 
-            // Nombre del vehículo/modelo
+
             ps.setString(6, venta.getNombreVehiculo());
 
             ps.executeUpdate();
+            
+            con.commit();
 
         } catch (SQLException e) {
 
-            e.printStackTrace();
+            if(con != null){
 
-            throw new RuntimeException(
-                "Error SQL: " + e.getMessage(),
-                e
-            );
+                try{
+
+                    con.rollback();
+
+                }catch(SQLException ex){
+
+                    ex.printStackTrace();
+
+                }
+            }
+        }finally {
+
+            if (con != null) {
+
+                try {
+                    con.setAutoCommit(true);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
         
         
@@ -445,7 +467,34 @@ public class VentaRepository implements IVentaRepository{
         }
     }
 
+    public double calcularComision(double precio) {
 
+        String sql = "SELECT CalcularComision(?) AS COMISION FROM DUAL";
+
+        try {
+
+            Connection con = ConexionBD.getInstancia().getConnection();
+
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            ps.setDouble(1, precio);
+
+            ResultSet rs = ps.executeQuery();
+
+            if(rs.next()){
+
+                return rs.getDouble("COMISION");
+
+            }
+
+        } catch(SQLException e){
+
+            throw new RuntimeException(e);
+
+        }
+
+        return 0;
+    }
     
     
 }

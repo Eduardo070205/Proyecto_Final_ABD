@@ -3806,6 +3806,20 @@ public class VentanaInicio extends javax.swing.JFrame{
                     "Se aplicó un descuento del 10%"
                 );
             }
+            
+            double comision = ventaService.calcularComision(
+                venta.getPrecioFinal()
+            );
+            
+            JOptionPane.showMessageDialog(
+                this,
+                "Venta agregada correctamente\n\n" +
+                "Empleado: " +
+                comboVentasEmpleadoAgregar.getSelectedItem() +
+                "\n" +
+                "Comisión generada: $" +
+                String.format("%.2f", comision)
+            );
 
             internalAltasVentas.setVisible(false);
 

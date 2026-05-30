@@ -94,5 +94,12 @@ public class VentaService implements IVentaService{
         return ventaRepository.calcularDescuento(precio, formaPago);
         
     }
+
+    @Override
+    public double calcularComision(double precio) {
+       
+        return ventaRepository.calcularComision(precio);
+        
+    }
     
 }

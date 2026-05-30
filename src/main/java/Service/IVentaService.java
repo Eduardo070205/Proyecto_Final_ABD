@@ -35,4 +35,6 @@ public interface IVentaService {
 
     public double calcularDescuento(double precioOriginal, String formaPago);
     
+    double calcularComision(double precio);
+    
 }
