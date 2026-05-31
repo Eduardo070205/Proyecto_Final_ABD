@@ -5,7 +5,9 @@
 package Repository;
 
 import Modelo.Venta;
+
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -36,6 +38,8 @@ public interface IVentaRepository {
     public double calcularDescuento(double precio, String formaPago);
     
     double calcularComision(double precio);
+
+    Map<String, Integer> obtenerVentasPorMes(int anio);
 
     
 }

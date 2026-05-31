@@ -6,6 +6,7 @@ package Service;
 
 import Modelo.Venta;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -36,5 +37,7 @@ public interface IVentaService {
     public double calcularDescuento(double precioOriginal, String formaPago);
     
     double calcularComision(double precio);
+    
+    Map<String, Integer> obtenerVentasPorMes(int anio);
     
 }

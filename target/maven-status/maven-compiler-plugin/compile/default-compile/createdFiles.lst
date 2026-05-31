@@ -34,6 +34,7 @@ Repository\ModeloRepository.class
 UI\VentanaInicio$31.class
 UI\VentanaInicio$18.class
 UI\VentanaInicio$40.class
+UI\VentanaInicio$46.class
 Modelo\Vehiculo.class
 UI\VentanaInicio$8.class
 Repository\VentaRepository.class
@@ -53,6 +54,7 @@ UI\VentanaInicio$11.class
 UI\VentanaInicio$21.class
 UI\VentanaInicio$37.class
 UI\VentanaInicio$27.class
+UI\VentanaInicio$47.class
 Repository\IVentaRepository.class
 util\ValidacionesUtil.class
 UI\VentanaLogin$1.class
@@ -66,6 +68,7 @@ Service\IVehiculoService.class
 Repository\IModeloRepository.class
 Service\ReporteServiceImplementacion.class
 UI\VentanaInicio$7.class
+util\GraficaUtil.class
 UI\VentanaInicio$10.class
 UI\VentanaInicio$45.class
 UI\VentanaInicio$25.class

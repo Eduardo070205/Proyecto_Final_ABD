@@ -7,6 +7,7 @@ package Service;
 import Modelo.Venta;
 import Repository.IVentaRepository;
 import java.util.List;
+import java.util.Map;
 import util.ValidacionesUtil;
 
 /**
@@ -100,6 +101,11 @@ public class VentaService implements IVentaService{
        
         return ventaRepository.calcularComision(precio);
         
+    }
+    
+    @Override
+    public Map<String, Integer> obtenerVentasPorMes(int anio) {
+        return ventaRepository.obtenerVentasPorMes(anio);
     }
     
 

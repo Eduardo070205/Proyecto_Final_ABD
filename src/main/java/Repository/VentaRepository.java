@@ -6,13 +6,16 @@ package Repository;
 
 import BD.ConexionBD;
 import Modelo.Venta;
+
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -495,6 +498,34 @@ public class VentaRepository implements IVentaRepository{
 
         return 0;
     }
+
+    @Override
+    public Map<String, Integer> obtenerVentasPorMes(int anio) {
+        Map<String, Integer> datos = new LinkedHashMap<>();
+        String sql = """
+            SELECT 
+                TO_CHAR(Fecha_Venta, 'MM') AS mes,
+                COUNT(*) AS total
+            FROM Ventas
+            WHERE EXTRACT(YEAR FROM Fecha_Venta) = ?
+            GROUP BY TO_CHAR(Fecha_Venta, 'MM')
+            ORDER BY mes
+            """;
+        try {
+            Connection con = ConexionBD.getInstancia().getConnection();
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, anio);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                datos.put(rs.getString("mes"), rs.getInt("total"));
+            }
+        } catch (SQLException e) {
+            logger.log(Level.SEVERE, "Error al obtener ventas por mes: " + e.getMessage(), e);
+        }
+        return datos;
+    }
     
+    
+
     
 }
