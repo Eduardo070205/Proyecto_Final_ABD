@@ -1,0 +1,158 @@
+<!-- Created with Jaspersoft Studio version 7.0.6.final using JasperReports Library version 7.0.6-5d2a603fdc6b3db8f842a83383e594f41891534d  -->
+<jasperReport name="ResporteVentasMes" language="java" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="91b28d57-8212-4ee9-94a8-06d5f2f85873">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="OracleAutos"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="MES" class="java.lang.Integer"/>
+	<query language="sql"><![CDATA[SELECT
+    v.ID_Venta,
+    v.Fecha_Venta,
+    m.Nombre_Modelo,
+    v.Forma_Pago,
+    v.Precio_Final,
+    v.ID_Empleado,
+    CalcularComision(v.Precio_Final) AS Comision
+FROM Ventas v,
+     Vehiculos vh,
+     Modelos m
+WHERE v.ID_Vehiculo = vh.ID_Vehiculo
+  AND vh.ID_Modelo = m.ID_Modelo
+  AND EXTRACT(MONTH FROM v.Fecha_Venta) = $P{MES}
+ORDER BY v.Fecha_Venta]]></query>
+	<field name="ID_VENTA" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="ID_VENTA"/>
+		<property name="com.jaspersoft.studio.field.label" value="ID_VENTA"/>
+	</field>
+	<field name="FECHA_VENTA" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.name" value="FECHA_VENTA"/>
+		<property name="com.jaspersoft.studio.field.label" value="FECHA_VENTA"/>
+	</field>
+	<field name="NOMBRE_MODELO" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="NOMBRE_MODELO"/>
+		<property name="com.jaspersoft.studio.field.label" value="NOMBRE_MODELO"/>
+	</field>
+	<field name="FORMA_PAGO" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="FORMA_PAGO"/>
+		<property name="com.jaspersoft.studio.field.label" value="FORMA_PAGO"/>
+	</field>
+	<field name="PRECIO_FINAL" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="PRECIO_FINAL"/>
+		<property name="com.jaspersoft.studio.field.label" value="PRECIO_FINAL"/>
+	</field>
+	<field name="ID_EMPLEADO" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="ID_EMPLEADO"/>
+		<property name="com.jaspersoft.studio.field.label" value="ID_EMPLEADO"/>
+	</field>
+	<field name="COMISION" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="COMISION"/>
+		<property name="com.jaspersoft.studio.field.label" value="COMISION"/>
+	</field>
+	<variable name="TOTAL_VENTAS" calculation="Sum" class="java.math.BigDecimal">
+		<expression><![CDATA[$F{PRECIO_FINAL}]]></expression>
+	</variable>
+	<variable name="NOMBRE_MES" class="java.lang.String">
+		<expression><![CDATA[$P{MES} == 1 ? "Enero" :
+$P{MES} == 2 ? "Febrero" :
+$P{MES} == 3 ? "Marzo" :
+$P{MES} == 4 ? "Abril" :
+$P{MES} == 5 ? "Mayo" :
+$P{MES} == 6 ? "Junio" :
+$P{MES} == 7 ? "Julio" :
+$P{MES} == 8 ? "Agosto" :
+$P{MES} == 9 ? "Septiembre" :
+$P{MES} == 10 ? "Octubre" :
+$P{MES} == 11 ? "Noviembre" :
+"Diciembre"]]></expression>
+	</variable>
+	<background splitType="Stretch"/>
+	<title height="100" splitType="Stretch">
+		<element kind="image" uuid="c07b0ef0-4bbf-42c2-8965-73a9bddd9d5a" x="12" y="6" width="60" height="88" evaluationTime="Report">
+			<expression><![CDATA["C:/Users/eduar/Documents/ITSJ/5. Quinto Semestre/Taller de bases de datos/Proyecto final/Proyecto_Final_TBD_Escritorio/src/main/java/img/LOGO_chico.png"]]></expression>
+		</element>
+		<element kind="textField" uuid="ec2edab9-1940-4cdb-8801-069f8b73b0b6" x="220" y="50" width="100" height="23" fontSize="16.0" hTextAlign="Center">
+			<expression><![CDATA["Mes: " +
+(
+$P{MES} == 1 ? "Enero" :
+$P{MES} == 2 ? "Febrero" :
+$P{MES} == 3 ? "Marzo" :
+$P{MES} == 4 ? "Abril" :
+$P{MES} == 5 ? "Mayo" :
+$P{MES} == 6 ? "Junio" :
+$P{MES} == 7 ? "Julio" :
+$P{MES} == 8 ? "Agosto" :
+$P{MES} == 9 ? "Septiembre" :
+$P{MES} == 10 ? "Octubre" :
+$P{MES} == 11 ? "Noviembre" :
+"Diciembre"
+)]]></expression>
+		</element>
+		<element kind="staticText" uuid="2bee3b02-25f0-49f2-9392-ff8f741cc6aa" x="100" y="10" width="360" height="34" fontSize="19.0" bold="true" hTextAlign="Center">
+			<text><![CDATA[REPORTE MENSUAL DE VENTAS]]></text>
+		</element>
+	</title>
+	<pageHeader height="35" splitType="Stretch"/>
+	<columnHeader height="64" splitType="Stretch">
+		<element kind="staticText" uuid="c9a4221a-c78b-4559-9550-d2ff62fb6cb1" x="17" y="20" width="50" height="30" bold="true" hTextAlign="Center">
+			<text><![CDATA[ID Venta]]></text>
+		</element>
+		<element kind="staticText" uuid="ac0c2a35-1845-4dbe-b787-b2f0c6c96ed9" x="67" y="20" width="100" height="30" bold="true" hTextAlign="Center">
+			<text><![CDATA[Fecha]]></text>
+		</element>
+		<element kind="staticText" uuid="7656c139-38f0-4a4e-b446-5cb7fd583113" x="167" y="20" width="70" height="30" bold="true" hTextAlign="Center">
+			<text><![CDATA[Vehículo]]></text>
+		</element>
+		<element kind="staticText" uuid="2356a8ef-b58a-484c-b05f-1fe9d6ecb36d" x="237" y="20" width="80" height="30" bold="true" hTextAlign="Center">
+			<text><![CDATA[Forma de Pago]]></text>
+		</element>
+		<element kind="staticText" uuid="25a1f263-dca8-4949-aaf2-947cc1910d13" x="317" y="20" width="70" height="30" bold="true" hTextAlign="Center">
+			<text><![CDATA[Precio]]></text>
+		</element>
+		<element kind="staticText" uuid="287d5564-97d8-4874-983b-1e8e8e364e0d" x="387" y="20" width="60" height="30" bold="true" hTextAlign="Center">
+			<text><![CDATA[Empleado]]></text>
+		</element>
+		<element kind="staticText" uuid="0f5eb5b6-d18e-4f5f-822e-f029f5fcf7aa" x="447" y="20" width="80" height="30" bold="true" hTextAlign="Center">
+			<text><![CDATA[Comisión]]></text>
+		</element>
+	</columnHeader>
+	<detail>
+		<band height="50" splitType="Stretch">
+			<element kind="textField" uuid="1fdb827a-4c10-4c54-80d0-50ff4d75e90d" x="30" y="10" width="50" height="30">
+				<expression><![CDATA[$F{ID_VENTA}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="765f355c-364d-4f21-8c07-d3471d27c937"/>
+			</element>
+			<element kind="textField" uuid="f905c398-61c4-4aec-968b-dae7bf1e33a3" x="80" y="10" width="100" height="30" pattern="dd/MM/yyyy">
+				<expression><![CDATA[$F{FECHA_VENTA}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d4bcbd55-c5d6-4a41-8bcf-c7145cf5712a"/>
+			</element>
+			<element kind="textField" uuid="b3a35025-402e-44a7-80a0-611a0a3c3fba" x="180" y="10" width="67" height="30">
+				<expression><![CDATA[$F{NOMBRE_MODELO}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="8ebf9cf5-3b6d-485f-baec-4004676e8aef"/>
+			</element>
+			<element kind="textField" uuid="0a7dfdc7-b211-4e78-a2cc-b1a896d28894" x="253" y="10" width="77" height="30" pattern="$ #,##0.00">
+				<expression><![CDATA[$F{FORMA_PAGO}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="072ba6e1-1448-4dc4-a78e-cdcd4ea4cd0f"/>
+			</element>
+			<element kind="textField" uuid="404c581b-8bf4-4f5f-b204-35bdab1c7443" x="330" y="10" width="70" height="30">
+				<expression><![CDATA[$F{PRECIO_FINAL}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="dfb8a70d-28ce-45d2-b51e-75a070338d23"/>
+			</element>
+			<element kind="textField" uuid="8c784816-517c-4413-b91c-db8d978c137b" x="410" y="10" width="60" height="30">
+				<expression><![CDATA[$F{ID_EMPLEADO}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="4acb794e-4e80-438e-91a4-8c6ccf71ddd1"/>
+			</element>
+			<element kind="textField" uuid="29c15764-fb1d-43e3-ad12-0beaa32233b7" x="480" y="10" width="80" height="30">
+				<expression><![CDATA[$F{COMISION}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e979c855-a06e-410c-a486-d06344f50f05"/>
+			</element>
+		</band>
+	</detail>
+	<columnFooter height="45" splitType="Stretch"/>
+	<pageFooter height="54" splitType="Stretch"/>
+	<summary height="48" splitType="Stretch">
+		<element kind="staticText" uuid="44a40e60-ca4b-4597-b3ba-5da8b760539a" x="10" y="6" width="120" height="30" fontSize="16.0">
+			<text><![CDATA[Total Vendído:]]></text>
+		</element>
+		<element kind="textField" uuid="cff8f124-ac82-43e2-ad68-0d25566f983a" x="130" y="6" width="187" height="30" markup="styled" fontSize="16.0" pattern="¤#,##0.##;¤-#,##0.##" linkType="None" linkTarget="Self">
+			<expression><![CDATA[String.valueOf($V{TOTAL_VENTAS})]]></expression>
+		</element>
+	</summary>
+</jasperReport>

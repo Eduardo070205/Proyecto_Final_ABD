@@ -45,6 +45,7 @@ UI\VentanaInicio$34.class
 UI\VentanaInicio$1.class
 UI\VentanaInicio$14.class
 UI\VentanaInicio$24.class
+UI\VentanaInicio$44.class
 UI\NavegacionController.class
 BD\ConexionBD.class
 Repository\VehiculoRepository.class
@@ -63,13 +64,16 @@ Modelo\Modelo.class
 UI\VentanaLogin$3.class
 Service\IVehiculoService.class
 Repository\IModeloRepository.class
+Service\ReporteServiceImplementacion.class
 UI\VentanaInicio$7.class
 UI\VentanaInicio$10.class
+UI\VentanaInicio$45.class
 UI\VentanaInicio$25.class
 UI\VentanaInicio$41.class
 Repository\IVehiculoRepository.class
 Service\VentaService.class
 util\CajasUtil.class
+Service\ReporteService.class
 UI\VentanaInicio$28.class
 UI\VentanaInicio$30.class
 UI\VentanaInicio$36.class

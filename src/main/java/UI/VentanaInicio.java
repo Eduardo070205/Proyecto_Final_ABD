@@ -18,6 +18,8 @@ import Service.IModeloService;
 import Service.IVehiculoService;
 import Service.IVentaService;
 import Service.ModeloService;
+import Service.ReporteService;
+import Service.ReporteServiceImplementacion;
 import Service.VehiculoService;
 import Service.VentaService;
 import UI.tabla.ButtonEditor;
@@ -48,6 +50,8 @@ public class VentanaInicio extends javax.swing.JFrame{
     private final IVehiculoService vehiculoService = new VehiculoService(new VehiculoRepository());
     
     private final IVentaService ventaService = new VentaService(new VentaRepository());
+    
+    private final ReporteService reporteService = new ReporteServiceImplementacion();
    
     private NavegacionController nav = new NavegacionController();
     
@@ -201,6 +205,7 @@ public class VentanaInicio extends javax.swing.JFrame{
         comboVentasBuscarPrecio = new javax.swing.JComboBox<>();
         comboVentasBuscarFormaPago = new javax.swing.JComboBox<>();
         comboVentasBuscarVehiculo = new javax.swing.JComboBox<>();
+        btnGenerarReporteVentas = new javax.swing.JButton();
         internalProximamente = new javax.swing.JInternalFrame();
         jPanel5 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
@@ -367,6 +372,12 @@ public class VentanaInicio extends javax.swing.JFrame{
         jLabel92 = new javax.swing.JLabel();
         jLabel93 = new javax.swing.JLabel();
         jLabel94 = new javax.swing.JLabel();
+        internalGenerarReporte = new javax.swing.JInternalFrame();
+        jPanel26 = new javax.swing.JPanel();
+        jLabel95 = new javax.swing.JLabel();
+        comboMesReporte = new javax.swing.JComboBox<>();
+        btnGenerarReporte = new javax.swing.JButton();
+        btnHomeCerrarReporte = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Autos Amistosos");
@@ -1001,6 +1012,18 @@ public class VentanaInicio extends javax.swing.JFrame{
         });
         jPanel4.add(comboVentasBuscarVehiculo);
         comboVentasBuscarVehiculo.setBounds(330, 80, 180, 30);
+
+        btnGenerarReporteVentas.setBackground(new java.awt.Color(227, 211, 163));
+        btnGenerarReporteVentas.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnGenerarReporteVentas.setForeground(new java.awt.Color(0, 0, 0));
+        btnGenerarReporteVentas.setText("Reporte Ventas");
+        btnGenerarReporteVentas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGenerarReporteVentasActionPerformed(evt);
+            }
+        });
+        jPanel4.add(btnGenerarReporteVentas);
+        btnGenerarReporteVentas.setBounds(540, 80, 190, 50);
 
         internalVentas.getContentPane().add(jPanel4);
         jPanel4.setBounds(0, 0, 760, 580);
@@ -2263,6 +2286,80 @@ public class VentanaInicio extends javax.swing.JFrame{
 
         jDesktopPane1.add(internalActualizarVentas1);
         internalActualizarVentas1.setBounds(180, 20, 440, 380);
+
+        internalGenerarReporte.setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
+        internalGenerarReporte.setTitle("Generar Reporte");
+        internalGenerarReporte.setVisible(false);
+
+        jPanel26.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel95.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel95.setText("Introduce el mes");
+
+        comboMesReporte.setBackground(new java.awt.Color(247, 227, 178));
+        comboMesReporte.setForeground(new java.awt.Color(0, 0, 0));
+
+        btnGenerarReporte.setBackground(new java.awt.Color(227, 211, 163));
+        btnGenerarReporte.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnGenerarReporte.setForeground(new java.awt.Color(0, 0, 0));
+        btnGenerarReporte.setText("Generar");
+        btnGenerarReporte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGenerarReporteActionPerformed(evt);
+            }
+        });
+
+        btnHomeCerrarReporte.setBackground(new java.awt.Color(227, 211, 163));
+        btnHomeCerrarReporte.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnHomeCerrarReporte.setForeground(new java.awt.Color(0, 0, 0));
+        btnHomeCerrarReporte.setText("Cerrar");
+
+        javax.swing.GroupLayout jPanel26Layout = new javax.swing.GroupLayout(jPanel26);
+        jPanel26.setLayout(jPanel26Layout);
+        jPanel26Layout.setHorizontalGroup(
+            jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel26Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(btnGenerarReporte, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addComponent(btnHomeCerrarReporte, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31))
+            .addGroup(jPanel26Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel95)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel26Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(comboMesReporte, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(65, 65, 65))
+        );
+        jPanel26Layout.setVerticalGroup(
+            jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel26Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel95, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24)
+                .addComponent(comboMesReporte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnGenerarReporte, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnHomeCerrarReporte, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(15, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout internalGenerarReporteLayout = new javax.swing.GroupLayout(internalGenerarReporte.getContentPane());
+        internalGenerarReporte.getContentPane().setLayout(internalGenerarReporteLayout);
+        internalGenerarReporteLayout.setHorizontalGroup(
+            internalGenerarReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel26, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        internalGenerarReporteLayout.setVerticalGroup(
+            internalGenerarReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel26, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        jDesktopPane1.add(internalGenerarReporte);
+        internalGenerarReporte.setBounds(180, 90, 280, 170);
 
         bg.add(jDesktopPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 0, 770, 610));
 
@@ -3880,6 +3977,29 @@ public class VentanaInicio extends javax.swing.JFrame{
         // TODO add your handling code here:
     }//GEN-LAST:event_comboVentasBuscarVehiculoActionPerformed
 
+    private void btnGenerarReporteVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarReporteVentasActionPerformed
+        internalGenerarReporte.setVisible(true);
+        internalGenerarReporte.toFront();
+        
+        comboMesReporte.removeAllItems();
+        
+        for(String mes : ComboBoxUtil.getMeses()){
+            
+            comboMesReporte.addItem(mes);
+            
+        }
+        
+        
+
+        
+    }//GEN-LAST:event_btnGenerarReporteVentasActionPerformed
+
+    private void btnGenerarReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarReporteActionPerformed
+        int mes = comboMesReporte.getSelectedIndex() + 1;
+
+        reporteService.generarReporteVentasMes(mes);
+    }//GEN-LAST:event_btnGenerarReporteActionPerformed
+
 
     
     /**
@@ -3920,7 +4040,10 @@ public class VentanaInicio extends javax.swing.JFrame{
     private javax.swing.JButton btnClientes;
     private javax.swing.JButton btnDocumentacion;
     private javax.swing.JButton btnEmpleados;
+    private javax.swing.JButton btnGenerarReporte;
+    private javax.swing.JButton btnGenerarReporteVentas;
     private javax.swing.JButton btnHome;
+    private javax.swing.JButton btnHomeCerrarReporte;
     private javax.swing.JButton btnHomeGrafica;
     private javax.swing.JButton btnHomeHistorialPrecios;
     private javax.swing.JButton btnHomeReporte;
@@ -3980,6 +4103,7 @@ public class VentanaInicio extends javax.swing.JFrame{
     private javax.swing.JComboBox<String> comboMesAgregar;
     private javax.swing.JComboBox<String> comboMesEntradaModificar;
     private javax.swing.JComboBox<String> comboMesModificar;
+    private javax.swing.JComboBox<String> comboMesReporte;
     private javax.swing.JComboBox<String> comboModeloAgregar;
     private javax.swing.JComboBox<String> comboModeloModificar;
     private javax.swing.JComboBox<String> comboModelosAnioActualizar;
@@ -4021,6 +4145,7 @@ public class VentanaInicio extends javax.swing.JFrame{
     private javax.swing.JInternalFrame internalAgregarModelos;
     private javax.swing.JInternalFrame internalAltasVentas;
     private javax.swing.JInternalFrame internalCambiosModelos;
+    private javax.swing.JInternalFrame internalGenerarReporte;
     private javax.swing.JInternalFrame internalHome;
     private javax.swing.JInternalFrame internalModelos;
     private javax.swing.JInternalFrame internalModificarAutos;
@@ -4116,6 +4241,7 @@ public class VentanaInicio extends javax.swing.JFrame{
     private javax.swing.JLabel jLabel92;
     private javax.swing.JLabel jLabel93;
     private javax.swing.JLabel jLabel94;
+    private javax.swing.JLabel jLabel95;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
@@ -4132,6 +4258,7 @@ public class VentanaInicio extends javax.swing.JFrame{
     private javax.swing.JPanel jPanel23;
     private javax.swing.JPanel jPanel24;
     private javax.swing.JPanel jPanel25;
+    private javax.swing.JPanel jPanel26;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
