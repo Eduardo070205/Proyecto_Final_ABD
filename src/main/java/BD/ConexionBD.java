@@ -18,8 +18,8 @@ public class ConexionBD {
 
     private static final Logger logger = Logger.getLogger(ConexionBD.class.getName());
 
-    // Datos de tu Oracle local — ajusta según tu instalación
-    private static final String URL      = "jdbc:oracle:thin:@localhost:1521:ORCL";
+    // Datos de tu Oracle local
+    public static final String URL      = "jdbc:oracle:thin:@localhost:1521:ORCL";
     private static final String USUARIO  = "bdp_autos_amistosos2";
     private static final String PASSWORD = "1234";
 
@@ -46,7 +46,7 @@ public class ConexionBD {
 
     public Connection getConnection() {
         try {
-            // Si la conexión se cayó, reconecta automáticamente
+            //  reconecta automáticamente
             if (connection == null || connection.isClosed()) {
                 connection = DriverManager.getConnection(URL, USUARIO, PASSWORD);
                 logger.info("Reconexión exitosa a Oracle");
@@ -56,4 +56,14 @@ public class ConexionBD {
         }
         return connection;
     }
+    
+    public static Connection conectarUsuario(String usuario, String password) throws SQLException {
+
+        return DriverManager.getConnection(
+                URL,
+                usuario,
+                password
+        );
+    }
+    
 }

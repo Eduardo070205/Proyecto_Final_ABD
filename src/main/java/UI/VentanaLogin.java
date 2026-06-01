@@ -227,16 +227,19 @@ public class VentanaLogin extends javax.swing.JFrame {
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
        
-        String user = cajaUsuarioLogin.getText();
-        String pass = new String(cajaContrasenaLogin.getPassword());
+        String usuario = cajaUsuarioLogin.getText().trim();
+        String contrasena = new String(cajaContrasenaLogin.getPassword()).trim();
 
-        if (loginController.validarCredenciales(user, pass)) {
-            SwingUtilities.invokeLater(() -> new VentanaInicio());
+        if (loginController.validarCredenciales(usuario, contrasena)) {
+            String rol = loginController.obtenerRol(usuario, contrasena);
+            SwingUtilities.invokeLater(() -> new VentanaInicio(rol));
             setVisible(false);
         } else {
-            JOptionPane.showMessageDialog(this, "Usuario o contraseña inválidos");
+            JOptionPane.showMessageDialog(this, 
+                "Usuario o contraseña incorrectos", 
+                "Error", 
+                JOptionPane.ERROR_MESSAGE);
         }
-        
         
     }//GEN-LAST:event_btnLoginActionPerformed
 

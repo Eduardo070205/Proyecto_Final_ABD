@@ -7,12 +7,24 @@ package util;
 import Modelo.Modelo;
 import Modelo.Vehiculo;
 import Modelo.Venta;
+import java.time.LocalDate;
+import javax.swing.JComboBox;
+import javax.swing.JComponent;
+import javax.swing.JInternalFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.*;
+import javax.swing.text.*;
 
 /**
  *
  * @author Eduardo
  */
 public class ValidacionesUtil {
+    
+    static boolean puntoDecimal = false;
+    
+    static boolean agregar = false;
     
     public static boolean validarCamposModelo(Modelo modelo) {
         return modelo.getNombreModelo() != null && !modelo.getNombreModelo().isBlank()
@@ -68,6 +80,333 @@ public class ValidacionesUtil {
 
             && venta.getNombreVehiculo() != null
             && !venta.getNombreVehiculo().isBlank();
+    }
+    
+
+    
+    public static void validarNumeros(JTextField caja, JInternalFrame internal, char accion) {
+
+        boolean esActualizacion = (accion == 'U');
+
+        ((AbstractDocument) caja.getDocument()).setDocumentFilter(new DocumentFilter() {
+
+            @Override
+            public void insertString(FilterBypass fb, int offset, String text, AttributeSet attr)
+                    throws BadLocationException {
+                replace(fb, offset, 0, text, attr);
+            }
+
+            @Override
+            public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs)
+                    throws BadLocationException {
+
+                String actual = fb.getDocument().getText(0, fb.getDocument().getLength());
+
+                String nuevo = new StringBuilder(actual)
+                        .replace(offset, offset + length, text)
+                        .toString();
+
+                if (esValido(nuevo, esActualizacion)) {
+                    super.replace(fb, offset, length, text, attrs);
+                } else {
+                    JOptionPane.showMessageDialog(internal,
+                            "Solo puedes ingresar números y un punto decimal");
+                }
+            }
+
+            private boolean esValido(String texto, boolean esActualizacion) {
+
+                if (texto.isEmpty()) return true;
+
+                boolean tienePunto = false;
+
+                for (char c : texto.toCharArray()) {
+
+                    if (Character.isDigit(c)) {
+                        continue;
+                    }
+
+                    if (c == '.') {
+
+                        //Aquí ya “toma en cuenta” actualización vs nuevo
+                        if (tienePunto) {
+                            return false;
+                        }
+
+                        // En actualización o nuevo, solo se permite uno
+                        tienePunto = true;
+                        continue;
+                    }
+
+                    return false;
+                }
+
+                return true;
+            }
+        });
+    }
+    
+    public static void validarLetrasNumeros(JTextField caja, JInternalFrame internal){
+        
+        String ultimoElemento;
+        
+        String cadena = caja.getText();
+        
+        int numeroCaracteres = (caja.getText().length());
+ 
+        
+        if(numeroCaracteres == 0){
+            
+            ultimoElemento = null;
+            
+        }else{
+       
+            ultimoElemento = String.valueOf(caja.getText().toUpperCase().charAt(numeroCaracteres-1));
+            
+        }
+        
+        
+        
+        if(ultimoElemento != null){
+            
+            if((ultimoElemento.codePointAt(0) >= 48 && ultimoElemento.codePointAt(0) <= 57) || (ultimoElemento.codePointAt(0) >= 65 && ultimoElemento.codePointAt(0) <= 90)){        
+            
+                // Son números y letras
+            
+            }else{
+
+                JOptionPane.showMessageDialog(internal, "Solo puedes ingresar letras y números");
+
+                caja.setText(cadena.substring(0, cadena.length()-1));
+
+            }
+            
+        }
+        
+    }
+    
+    public static void validarLetras(JTextField caja, JInternalFrame internal){
+        
+        
+        String ultimoElemento;
+        
+        String cadena = caja.getText();
+        
+        int numeroCaracteres = (caja.getText().length());
+ 
+        
+        if(numeroCaracteres == 0){
+            
+            ultimoElemento = null;
+            
+        }else{
+       
+            ultimoElemento = String.valueOf(caja.getText().toUpperCase().charAt(numeroCaracteres-1));
+            
+        }
+        
+        
+        
+        if(ultimoElemento != null){
+            
+            if((ultimoElemento.codePointAt(0) >= 65 && ultimoElemento.codePointAt(0) <= 90)){        
+            
+                // Son letras
+            
+            }else{
+
+                JOptionPane.showMessageDialog(internal, "Solo puedes ingresar letras");
+
+                caja.setText(cadena.substring(0, cadena.length()-1));
+
+            }
+            
+        }
+        
+    }
+    
+    public static String validarFecha(JComboBox comboAnio, JComboBox comboMes, JComboBox comboDia, JInternalFrame internal){
+        
+        agregar = true;
+        
+        LocalDate hoy = LocalDate.now();
+        
+        int diaHoy = hoy.getDayOfMonth();
+        
+        int mesHoy =  hoy.getMonthValue();
+        
+        int anioHoy = hoy.getYear();
+        
+        String anio = comboAnio.getSelectedItem().toString();
+        
+        
+        String mes, dia;
+        
+        if(String.valueOf(comboMes.getSelectedIndex()+1).length() == 1){
+           
+            mes = "0"+String.valueOf(comboMes.getSelectedIndex()+1);
+            
+        }else{
+            
+            mes = String.valueOf(comboMes.getSelectedIndex()+1);
+            
+        }
+        
+        if(comboDia.getSelectedItem().toString().length() == 1){
+            
+            dia = "0" + comboDia.getSelectedItem().toString();
+            
+        }else{
+            
+            dia = comboDia.getSelectedItem().toString();
+            
+        }
+        
+        int anioSeleccionado = Integer.parseInt(anio);
+        
+        int mesSeleccionado = Integer.parseInt(mes);
+        
+        int diaSeleccionado = Integer.parseInt(dia);
+
+        if(diaSeleccionado <= diaHoy && mesSeleccionado <= mesHoy && anioSeleccionado <= anioHoy){
+            
+            agregar = true;
+            
+            return anio + "-" + mes + "-" + dia;
+            
+        }else{
+            
+            comboAnio.setSelectedItem(String.valueOf(anioHoy));
+            
+            comboMes.setSelectedIndex(mesHoy-1);
+            
+            comboDia.setSelectedIndex(diaHoy-1);
+            
+            agregar = false;
+            
+            if(String.valueOf(mesHoy).length() == 1){
+           
+                mes = "0"+String.valueOf(mesHoy);
+
+            }else{
+
+                mes = String.valueOf(mesHoy);
+
+            }
+
+            if(String.valueOf(diaHoy).length() == 1){
+
+                dia = "0" + String.valueOf(diaHoy);
+
+            }else{
+
+                dia = String.valueOf(diaHoy);
+
+            }
+            
+            JOptionPane.showMessageDialog(internal, "Fecha invalida");
+            
+            System.err.println(anioHoy + "-" + mes + "-" + dia);
+            
+            return anioHoy + "-" + mes + "-" + dia;
+            
+        }
+        
+    }
+    
+    public static void camposVacios(JInternalFrame internal, JComponent... compoentes){
+        
+        agregar = true;
+        
+        int contadorCampos = 0;
+        
+        for(JComponent c : compoentes){
+            
+            if(c instanceof JTextField){
+                
+                if(((JTextField) c).getText().isEmpty()){
+                    
+                    contadorCampos++;
+                    
+                }
+                
+            }
+
+        }
+        
+        if(contadorCampos > 0){
+            
+            JOptionPane.showMessageDialog(internal, "Tienes " + contadorCampos + " campos vacios, verificalos");
+            
+            agregar = false;
+            
+        }
+        
+    }
+    
+    public static boolean sePuedeAgregar(){
+ 
+        return agregar;
+      
+    }
+    
+    public static void validarNumerosEnteros(JTextField caja, JInternalFrame internal){
+        
+        String ultimoElemento;
+        
+        String cadena = caja.getText();
+        
+        
+        int numeroCaracteres = (caja.getText().length());
+ 
+        
+        if(numeroCaracteres == 0){
+            
+            ultimoElemento = null;
+            
+        }else{
+       
+            ultimoElemento = String.valueOf(caja.getText().charAt(numeroCaracteres-1));
+            
+        }
+        
+
+        
+        
+        if(ultimoElemento != null){
+            
+            if((ultimoElemento.codePointAt(0) >= 48 && ultimoElemento.codePointAt(0) <= 57)){        
+            
+
+            
+            }else{
+
+                JOptionPane.showMessageDialog(internal, "Solo puedes ingresar numéros");
+
+                caja.setText(cadena.substring(0, cadena.length()-1));
+
+            }
+            
+        }
+        
+    }
+    
+    public static void contarCaracteres(JTextField caja){
+        
+        String cadena = caja.getText();
+        
+        if(cadena.length() <= 6){
+            
+            
+            
+        }else{
+         
+
+            caja.setText(cadena.substring(0, cadena.length()-1));
+            
+        }
+        
+        
     }
     
 }

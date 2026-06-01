@@ -7,6 +7,9 @@ package UI;
 
 
 
+import Factory.ModeloFactory;
+import Factory.VehiculoFactory;
+import Factory.VentaFactory;
 import Modelo.Modelo;
 import Modelo.Vehiculo;
 import Modelo.Venta;
@@ -42,7 +45,9 @@ import java.time.ZoneId;
 import java.util.Map;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
+import util.FechasUtil;
 import util.GraficaUtil;
+import util.ValidacionesUtil;
 
 
 
@@ -67,13 +72,14 @@ public class VentanaInicio extends javax.swing.JFrame{
     
     private int idVentaSeleccionada;
     
+    private final String rol;
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VentanaInicio.class.getName());
 
     /**
      * Creates new form VentanaInicio
      */
-    public VentanaInicio() {
+    public VentanaInicio(String rol) {
         initComponents();
         setVisible(true);
         setLocationRelativeTo(null);
@@ -84,7 +90,7 @@ public class VentanaInicio extends javax.swing.JFrame{
         internalProximamente.setVisible(false);
         internalGrafica.setVisible(false);
         
-        
+        this.rol = rol;
    
         
         //=================== MODELOS =============================
@@ -123,7 +129,7 @@ public class VentanaInicio extends javax.swing.JFrame{
         comboVentasBuscarVehiculo.addActionListener(e -> buscarVentas());
        
         
-        
+        configurarVistaPorRol();
         
         pack();
        
@@ -955,7 +961,7 @@ public class VentanaInicio extends javax.swing.JFrame{
         jScrollPane3.setViewportView(tablaVentas);
 
         jPanel4.add(jScrollPane3);
-        jScrollPane3.setBounds(20, 150, 720, 450);
+        jScrollPane3.setBounds(20, 150, 720, 410);
 
         jLabel65.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel65.setForeground(new java.awt.Color(0, 0, 0));
@@ -1226,24 +1232,44 @@ public class VentanaInicio extends javax.swing.JFrame{
         cajaModelosPaisAgregar.setBackground(new java.awt.Color(255, 255, 255));
         cajaModelosPaisAgregar.setForeground(new java.awt.Color(0, 0, 0));
         cajaModelosPaisAgregar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        cajaModelosPaisAgregar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                cajaModelosPaisAgregarKeyReleased(evt);
+            }
+        });
         jPanel12.add(cajaModelosPaisAgregar);
         cajaModelosPaisAgregar.setBounds(160, 320, 250, 20);
 
         cajaModelosNombreAgregar.setBackground(new java.awt.Color(255, 255, 255));
         cajaModelosNombreAgregar.setForeground(new java.awt.Color(0, 0, 0));
         cajaModelosNombreAgregar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        cajaModelosNombreAgregar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                cajaModelosNombreAgregarKeyReleased(evt);
+            }
+        });
         jPanel12.add(cajaModelosNombreAgregar);
         cajaModelosNombreAgregar.setBounds(160, 80, 250, 20);
 
         cajaModelosFabricanteAgregar.setBackground(new java.awt.Color(255, 255, 255));
         cajaModelosFabricanteAgregar.setForeground(new java.awt.Color(0, 0, 0));
         cajaModelosFabricanteAgregar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        cajaModelosFabricanteAgregar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                cajaModelosFabricanteAgregarKeyReleased(evt);
+            }
+        });
         jPanel12.add(cajaModelosFabricanteAgregar);
         cajaModelosFabricanteAgregar.setBounds(160, 140, 250, 20);
 
         cajaModelosColorAgregar.setBackground(new java.awt.Color(255, 255, 255));
         cajaModelosColorAgregar.setForeground(new java.awt.Color(0, 0, 0));
         cajaModelosColorAgregar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        cajaModelosColorAgregar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                cajaModelosColorAgregarKeyReleased(evt);
+            }
+        });
         jPanel12.add(cajaModelosColorAgregar);
         cajaModelosColorAgregar.setBounds(160, 290, 250, 20);
 
@@ -1299,18 +1325,33 @@ public class VentanaInicio extends javax.swing.JFrame{
         cajaModelosPasajerosAgregar.setBackground(new java.awt.Color(255, 255, 255));
         cajaModelosPasajerosAgregar.setForeground(new java.awt.Color(0, 0, 0));
         cajaModelosPasajerosAgregar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        cajaModelosPasajerosAgregar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                cajaModelosPasajerosAgregarKeyReleased(evt);
+            }
+        });
         jPanel12.add(cajaModelosPasajerosAgregar);
         cajaModelosPasajerosAgregar.setBounds(160, 260, 250, 20);
 
         cajaModelosPuertasAgregar.setBackground(new java.awt.Color(255, 255, 255));
         cajaModelosPuertasAgregar.setForeground(new java.awt.Color(0, 0, 0));
         cajaModelosPuertasAgregar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        cajaModelosPuertasAgregar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                cajaModelosPuertasAgregarKeyReleased(evt);
+            }
+        });
         jPanel12.add(cajaModelosPuertasAgregar);
         cajaModelosPuertasAgregar.setBounds(160, 200, 250, 20);
 
         cajaModelosPesoAgregar.setBackground(new java.awt.Color(255, 255, 255));
         cajaModelosPesoAgregar.setForeground(new java.awt.Color(0, 0, 0));
         cajaModelosPesoAgregar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        cajaModelosPesoAgregar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                cajaModelosPesoAgregarKeyReleased(evt);
+            }
+        });
         jPanel12.add(cajaModelosPesoAgregar);
         cajaModelosPesoAgregar.setBounds(160, 230, 250, 20);
 
@@ -1403,24 +1444,44 @@ public class VentanaInicio extends javax.swing.JFrame{
         cajaModelosPaisActualizar.setBackground(new java.awt.Color(255, 255, 255));
         cajaModelosPaisActualizar.setForeground(new java.awt.Color(0, 0, 0));
         cajaModelosPaisActualizar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        cajaModelosPaisActualizar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                cajaModelosPaisActualizarKeyReleased(evt);
+            }
+        });
         jPanel14.add(cajaModelosPaisActualizar);
         cajaModelosPaisActualizar.setBounds(160, 320, 250, 20);
 
         cajaModelosNombreActualizar.setBackground(new java.awt.Color(255, 255, 255));
         cajaModelosNombreActualizar.setForeground(new java.awt.Color(0, 0, 0));
         cajaModelosNombreActualizar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        cajaModelosNombreActualizar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                cajaModelosNombreActualizarKeyReleased(evt);
+            }
+        });
         jPanel14.add(cajaModelosNombreActualizar);
         cajaModelosNombreActualizar.setBounds(160, 80, 250, 20);
 
         cajaModelosFabricanteActualizar.setBackground(new java.awt.Color(255, 255, 255));
         cajaModelosFabricanteActualizar.setForeground(new java.awt.Color(0, 0, 0));
         cajaModelosFabricanteActualizar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        cajaModelosFabricanteActualizar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                cajaModelosFabricanteActualizarKeyReleased(evt);
+            }
+        });
         jPanel14.add(cajaModelosFabricanteActualizar);
         cajaModelosFabricanteActualizar.setBounds(160, 140, 250, 20);
 
         cajaModelosColorActualizar.setBackground(new java.awt.Color(255, 255, 255));
         cajaModelosColorActualizar.setForeground(new java.awt.Color(0, 0, 0));
         cajaModelosColorActualizar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        cajaModelosColorActualizar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                cajaModelosColorActualizarKeyReleased(evt);
+            }
+        });
         jPanel14.add(cajaModelosColorActualizar);
         cajaModelosColorActualizar.setBounds(160, 290, 250, 20);
 
@@ -1463,18 +1524,33 @@ public class VentanaInicio extends javax.swing.JFrame{
         cajaModelosPasajerosActualizar.setBackground(new java.awt.Color(255, 255, 255));
         cajaModelosPasajerosActualizar.setForeground(new java.awt.Color(0, 0, 0));
         cajaModelosPasajerosActualizar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        cajaModelosPasajerosActualizar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                cajaModelosPasajerosActualizarKeyReleased(evt);
+            }
+        });
         jPanel14.add(cajaModelosPasajerosActualizar);
         cajaModelosPasajerosActualizar.setBounds(160, 260, 250, 20);
 
         cajaModelosPuertasActualizar.setBackground(new java.awt.Color(255, 255, 255));
         cajaModelosPuertasActualizar.setForeground(new java.awt.Color(0, 0, 0));
         cajaModelosPuertasActualizar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        cajaModelosPuertasActualizar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                cajaModelosPuertasActualizarKeyReleased(evt);
+            }
+        });
         jPanel14.add(cajaModelosPuertasActualizar);
         cajaModelosPuertasActualizar.setBounds(160, 200, 250, 20);
 
         cajaModelosPesoActualizar.setBackground(new java.awt.Color(255, 255, 255));
         cajaModelosPesoActualizar.setForeground(new java.awt.Color(0, 0, 0));
         cajaModelosPesoActualizar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        cajaModelosPesoActualizar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                cajaModelosPesoActualizarKeyReleased(evt);
+            }
+        });
         jPanel14.add(cajaModelosPesoActualizar);
         cajaModelosPesoActualizar.setBounds(160, 230, 250, 20);
 
@@ -1531,6 +1607,11 @@ public class VentanaInicio extends javax.swing.JFrame{
         cajaNumVehiculoAgregar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         cajaNumVehiculoAgregar.setForeground(new java.awt.Color(0, 0, 0));
         cajaNumVehiculoAgregar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        cajaNumVehiculoAgregar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                cajaNumVehiculoAgregarKeyReleased(evt);
+            }
+        });
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(0, 0, 0));
@@ -1540,6 +1621,11 @@ public class VentanaInicio extends javax.swing.JFrame{
         cajaNumSerieAgregar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         cajaNumSerieAgregar.setForeground(new java.awt.Color(0, 0, 0));
         cajaNumSerieAgregar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        cajaNumSerieAgregar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                cajaNumSerieAgregarKeyReleased(evt);
+            }
+        });
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(0, 0, 0));
@@ -1564,9 +1650,19 @@ public class VentanaInicio extends javax.swing.JFrame{
 
         comboAnioAgregar.setBackground(new java.awt.Color(214, 198, 152));
         comboAnioAgregar.setForeground(new java.awt.Color(0, 0, 0));
+        comboAnioAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboAnioAgregarActionPerformed(evt);
+            }
+        });
 
         comboMesAgregar.setBackground(new java.awt.Color(214, 198, 152));
         comboMesAgregar.setForeground(new java.awt.Color(0, 0, 0));
+        comboMesAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboMesAgregarActionPerformed(evt);
+            }
+        });
 
         comboDiaAgregar.setBackground(new java.awt.Color(214, 198, 152));
         comboDiaAgregar.setForeground(new java.awt.Color(0, 0, 0));
@@ -1603,22 +1699,42 @@ public class VentanaInicio extends javax.swing.JFrame{
         btnRestaurarAgregar.setForeground(new java.awt.Color(0, 0, 0));
         btnRestaurarAgregar.setIcon(new javax.swing.ImageIcon("C:\\Users\\eduar\\Documents\\ITSJ\\5. Quinto Semestre\\Taller de bases de datos\\Proyecto final\\Proyecto_Final_TBD_Escritorio\\src\\main\\java\\img\\restaurar.png")); // NOI18N
         btnRestaurarAgregar.setText("Restaurar");
+        btnRestaurarAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRestaurarAgregarActionPerformed(evt);
+            }
+        });
 
         btnCancelarAgregar.setBackground(new java.awt.Color(227, 211, 163));
         btnCancelarAgregar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnCancelarAgregar.setForeground(new java.awt.Color(0, 0, 0));
         btnCancelarAgregar.setIcon(new javax.swing.ImageIcon("C:\\Users\\eduar\\Documents\\ITSJ\\5. Quinto Semestre\\Taller de bases de datos\\Proyecto final\\Proyecto_Final_TBD_Escritorio\\src\\main\\java\\img\\cancelar.png")); // NOI18N
         btnCancelarAgregar.setText("Cancelar");
+        btnCancelarAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarAgregarActionPerformed(evt);
+            }
+        });
 
         cajaPrecioAgregar.setBackground(new java.awt.Color(255, 255, 255));
         cajaPrecioAgregar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         cajaPrecioAgregar.setForeground(new java.awt.Color(0, 0, 0));
         cajaPrecioAgregar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        cajaPrecioAgregar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                cajaPrecioAgregarKeyReleased(evt);
+            }
+        });
 
         cajaKilometrajeAgregar.setBackground(new java.awt.Color(255, 255, 255));
         cajaKilometrajeAgregar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         cajaKilometrajeAgregar.setForeground(new java.awt.Color(0, 0, 0));
         cajaKilometrajeAgregar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        cajaKilometrajeAgregar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                cajaKilometrajeAgregarKeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -1777,6 +1893,11 @@ public class VentanaInicio extends javax.swing.JFrame{
         cajaNumSerieModificar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         cajaNumSerieModificar.setForeground(new java.awt.Color(0, 0, 0));
         cajaNumSerieModificar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        cajaNumSerieModificar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                cajaNumSerieModificarKeyReleased(evt);
+            }
+        });
 
         jLabel27.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel27.setForeground(new java.awt.Color(0, 0, 0));
@@ -1802,9 +1923,19 @@ public class VentanaInicio extends javax.swing.JFrame{
 
         comboAnioModificar.setBackground(new java.awt.Color(214, 198, 152));
         comboAnioModificar.setForeground(new java.awt.Color(0, 0, 0));
+        comboAnioModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboAnioModificarActionPerformed(evt);
+            }
+        });
 
         comboMesModificar.setBackground(new java.awt.Color(214, 198, 152));
         comboMesModificar.setForeground(new java.awt.Color(0, 0, 0));
+        comboMesModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboMesModificarActionPerformed(evt);
+            }
+        });
 
         comboDiaModificar.setBackground(new java.awt.Color(214, 198, 152));
         comboDiaModificar.setForeground(new java.awt.Color(0, 0, 0));
@@ -1851,9 +1982,19 @@ public class VentanaInicio extends javax.swing.JFrame{
         btnCancelarModificar.setForeground(new java.awt.Color(0, 0, 0));
         btnCancelarModificar.setIcon(new javax.swing.ImageIcon("C:\\Users\\eduar\\Documents\\ITSJ\\5. Quinto Semestre\\Taller de bases de datos\\Proyecto final\\Proyecto_Final_TBD_Escritorio\\src\\main\\java\\img\\cancelar.png")); // NOI18N
         btnCancelarModificar.setText("Cancelar");
+        btnCancelarModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarModificarActionPerformed(evt);
+            }
+        });
 
         comboAnioEntradaModificar.setBackground(new java.awt.Color(214, 198, 152));
         comboAnioEntradaModificar.setForeground(new java.awt.Color(0, 0, 0));
+        comboAnioEntradaModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboAnioEntradaModificarActionPerformed(evt);
+            }
+        });
 
         jLabel36.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel36.setForeground(new java.awt.Color(0, 0, 0));
@@ -1861,6 +2002,11 @@ public class VentanaInicio extends javax.swing.JFrame{
 
         comboMesEntradaModificar.setBackground(new java.awt.Color(214, 198, 152));
         comboMesEntradaModificar.setForeground(new java.awt.Color(0, 0, 0));
+        comboMesEntradaModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboMesEntradaModificarActionPerformed(evt);
+            }
+        });
 
         comboDiaEntradaModificar.setBackground(new java.awt.Color(214, 198, 152));
         comboDiaEntradaModificar.setForeground(new java.awt.Color(0, 0, 0));
@@ -1878,11 +2024,21 @@ public class VentanaInicio extends javax.swing.JFrame{
         cajaPrecioModificar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         cajaPrecioModificar.setForeground(new java.awt.Color(0, 0, 0));
         cajaPrecioModificar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        cajaPrecioModificar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                cajaPrecioModificarKeyReleased(evt);
+            }
+        });
 
         cajaKilometrajeModificar.setBackground(new java.awt.Color(255, 255, 255));
         cajaKilometrajeModificar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         cajaKilometrajeModificar.setForeground(new java.awt.Color(0, 0, 0));
         cajaKilometrajeModificar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        cajaKilometrajeModificar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                cajaKilometrajeModificarKeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -2094,6 +2250,11 @@ public class VentanaInicio extends javax.swing.JFrame{
         cajaVentasPrecioAgregar.setBackground(new java.awt.Color(255, 255, 255));
         cajaVentasPrecioAgregar.setForeground(new java.awt.Color(0, 0, 0));
         cajaVentasPrecioAgregar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        cajaVentasPrecioAgregar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                cajaVentasPrecioAgregarKeyReleased(evt);
+            }
+        });
         jPanel17.add(cajaVentasPrecioAgregar);
         cajaVentasPrecioAgregar.setBounds(170, 90, 170, 20);
 
@@ -2122,6 +2283,11 @@ public class VentanaInicio extends javax.swing.JFrame{
         btnVentasCancelarAgregar.setForeground(new java.awt.Color(0, 0, 0));
         btnVentasCancelarAgregar.setIcon(new javax.swing.ImageIcon("C:\\Users\\eduar\\Documents\\ITSJ\\5. Quinto Semestre\\Taller de bases de datos\\Proyecto final\\Proyecto_Final_TBD_Escritorio\\src\\main\\java\\img\\cancelar.png")); // NOI18N
         btnVentasCancelarAgregar.setText("Cancelar");
+        btnVentasCancelarAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVentasCancelarAgregarActionPerformed(evt);
+            }
+        });
         jPanel17.add(btnVentasCancelarAgregar);
         btnVentasCancelarAgregar.setBounds(260, 280, 109, 50);
 
@@ -2143,6 +2309,11 @@ public class VentanaInicio extends javax.swing.JFrame{
         btnVentasRestaurarAgregar.setForeground(new java.awt.Color(0, 0, 0));
         btnVentasRestaurarAgregar.setIcon(new javax.swing.ImageIcon("C:\\Users\\eduar\\Documents\\ITSJ\\5. Quinto Semestre\\Taller de bases de datos\\Proyecto final\\Proyecto_Final_TBD_Escritorio\\src\\main\\java\\img\\restaurar.png")); // NOI18N
         btnVentasRestaurarAgregar.setText("Restaurar");
+        btnVentasRestaurarAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVentasRestaurarAgregarActionPerformed(evt);
+            }
+        });
         jPanel17.add(btnVentasRestaurarAgregar);
         btnVentasRestaurarAgregar.setBounds(130, 280, 116, 50);
 
@@ -2225,6 +2396,11 @@ public class VentanaInicio extends javax.swing.JFrame{
         cajaVentasPrecioActualizar1.setBackground(new java.awt.Color(255, 255, 255));
         cajaVentasPrecioActualizar1.setForeground(new java.awt.Color(0, 0, 0));
         cajaVentasPrecioActualizar1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        cajaVentasPrecioActualizar1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                cajaVentasPrecioActualizar1KeyReleased(evt);
+            }
+        });
         jPanel24.add(cajaVentasPrecioActualizar1);
         cajaVentasPrecioActualizar1.setBounds(170, 110, 170, 20);
 
@@ -2253,6 +2429,11 @@ public class VentanaInicio extends javax.swing.JFrame{
         btnVentasCancelarActualizar.setForeground(new java.awt.Color(0, 0, 0));
         btnVentasCancelarActualizar.setIcon(new javax.swing.ImageIcon("C:\\Users\\eduar\\Documents\\ITSJ\\5. Quinto Semestre\\Taller de bases de datos\\Proyecto final\\Proyecto_Final_TBD_Escritorio\\src\\main\\java\\img\\cancelar.png")); // NOI18N
         btnVentasCancelarActualizar.setText("Cancelar");
+        btnVentasCancelarActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVentasCancelarActualizarActionPerformed(evt);
+            }
+        });
         jPanel24.add(btnVentasCancelarActualizar);
         btnVentasCancelarActualizar.setBounds(240, 280, 109, 50);
 
@@ -2282,11 +2463,21 @@ public class VentanaInicio extends javax.swing.JFrame{
 
         comboVentasAnioActualizar.setBackground(new java.awt.Color(214, 198, 152));
         comboVentasAnioActualizar.setForeground(new java.awt.Color(0, 0, 0));
+        comboVentasAnioActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboVentasAnioActualizarActionPerformed(evt);
+            }
+        });
         jPanel24.add(comboVentasAnioActualizar);
         comboVentasAnioActualizar.setBounds(150, 80, 80, 26);
 
         comboVentasMesActualizar.setBackground(new java.awt.Color(214, 198, 152));
         comboVentasMesActualizar.setForeground(new java.awt.Color(0, 0, 0));
+        comboVentasMesActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboVentasMesActualizarActionPerformed(evt);
+            }
+        });
         jPanel24.add(comboVentasMesActualizar);
         comboVentasMesActualizar.setBounds(230, 80, 130, 26);
 
@@ -2340,6 +2531,11 @@ public class VentanaInicio extends javax.swing.JFrame{
         btnHomeCerrarReporte.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnHomeCerrarReporte.setForeground(new java.awt.Color(0, 0, 0));
         btnHomeCerrarReporte.setText("Cerrar");
+        btnHomeCerrarReporte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHomeCerrarReporteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel26Layout = new javax.swing.GroupLayout(jPanel26);
         jPanel26.setLayout(jPanel26Layout);
@@ -2433,6 +2629,11 @@ public class VentanaInicio extends javax.swing.JFrame{
         btnCerrarGrafica.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnCerrarGrafica.setForeground(new java.awt.Color(0, 0, 0));
         btnCerrarGrafica.setText("Cerrar");
+        btnCerrarGrafica.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCerrarGraficaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel27Layout = new javax.swing.GroupLayout(jPanel27);
         jPanel27.setLayout(jPanel27Layout);
@@ -2510,6 +2711,30 @@ public class VentanaInicio extends javax.swing.JFrame{
         public void changedUpdate(javax.swing.event.DocumentEvent e) { buscarModelos(); }
         });
         
+    }
+    
+    private void configurarVistaPorRol() {
+        switch (rol) {
+            case "C##ROL_ADMIN" -> {
+                // ve todo, no se oculta nada
+            }
+            case "C##ROL_VENDEDOR" -> {
+                btnAgregarModelos.setVisible(false);
+                btnAgregarVehiculos.setVisible(false);
+                
+                // oculta lo que no puede ver
+            }
+            case "C##ROL_CONSULTA" -> {
+                btnModelos.setVisible(false);
+                btnVehiculos.setVisible(false);
+                // solo puede consultar
+            }
+            default -> {
+                JOptionPane.showMessageDialog(this, "Rol no reconocido");
+                new VentanaLogin();
+                setVisible(false);
+            }
+        }
     }
     
     private void mostrarGraficaVentas(int anio) {
@@ -2590,28 +2815,41 @@ public class VentanaInicio extends javax.swing.JFrame{
     }
         
     private void actualizarModelo() {
-        try {
-            Modelo modelo = new Modelo(
-                idModeloSeleccionado,  
-                cajaModelosNombreActualizar.getText().trim(),
-                Integer.parseInt((String) comboModelosAnioActualizar.getSelectedItem()),
-                cajaModelosFabricanteActualizar.getText().trim(),
-                Integer.parseInt((String) comboModelosCilindrosActualizar.getSelectedItem()),
-                Integer.parseInt(cajaModelosPuertasActualizar.getText().trim()),
-                Double.parseDouble(cajaModelosPesoActualizar.getText().trim()),
-                Integer.parseInt(cajaModelosPasajerosActualizar.getText().trim()),
-                cajaModelosColorActualizar.getText().trim(),
-                cajaModelosPaisActualizar.getText().trim()
-            );
+        ValidacionesUtil.camposVacios(internalCambiosModelos, cajaModelosNombreActualizar, cajaModelosFabricanteActualizar, cajaModelosPuertasActualizar,
+                        cajaModelosPesoActualizar, cajaModelosPasajerosActualizar, cajaModelosColorActualizar, cajaModelosPaisActualizar);
+        
+        
+        if(ValidacionesUtil.sePuedeAgregar()){
+            
+            try {
+                Modelo modelo = ModeloFactory.actualizarModelo(
+                    idModeloSeleccionado,  
+                    cajaModelosNombreActualizar.getText().trim(),
+                    Integer.parseInt((String) comboModelosAnioActualizar.getSelectedItem()),
+                    cajaModelosFabricanteActualizar.getText().trim(),
+                    Integer.parseInt((String) comboModelosCilindrosActualizar.getSelectedItem()),
+                    Integer.parseInt(cajaModelosPuertasActualizar.getText().trim()),
+                    Double.parseDouble(cajaModelosPesoActualizar.getText().trim()),
+                    Integer.parseInt(cajaModelosPasajerosActualizar.getText().trim()),
+                    cajaModelosColorActualizar.getText().trim(),
+                    cajaModelosPaisActualizar.getText().trim()
+                );
 
-            modeloService.actualizar(modelo);
-            JOptionPane.showMessageDialog(this, "Modelo actualizado correctamente");
-            internalCambiosModelos.setVisible(false);
-            cargarTablaModelos(); // refresca la tabla
+                modeloService.actualizar(modelo);
+                JOptionPane.showMessageDialog(this, "Modelo actualizado correctamente");
+                internalCambiosModelos.setVisible(false);
 
-        } catch (IllegalArgumentException e) {
-            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                RestablecerUtil.restablecer(cajaModelosNombreActualizar, cajaModelosFabricanteActualizar, cajaModelosColorActualizar, 
+                    comboModelosCilindrosActualizar, comboModelosAnioActualizar, cajaModelosPaisActualizar, cajaModelosPasajerosActualizar, 
+                    cajaModelosPuertasActualizar, cajaModelosPesoActualizar);
+
+                cargarTablaModelos(); // refresca la tabla
+
+            } catch (IllegalArgumentException e) {
+                JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
         }
+        
     }
     
     private void abrirEditarModelo(int idModelo) {
@@ -2713,65 +2951,100 @@ public class VentanaInicio extends javax.swing.JFrame{
     
     private void cargarTablaModelos() {
         
-        
-        String[] columnas = {"ID", "Nombre", "Año", "Fabricante", "Cilindros",
+        if(rol.equals("C##ROL_ADMIN")){
+            
+            String[] columnas = {"ID", "Nombre", "Año", "Fabricante", "Cilindros",
                              "Pasajeros", "Editar", "Eliminar"};
 
-        DefaultTableModel tableModel = new DefaultTableModel(columnas, 0){
-            
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                // Solo las columnas de botones son editables
-                return column == 6 || column == 7;
+            DefaultTableModel tableModel = new DefaultTableModel(columnas, 0){
+
+                @Override
+                public boolean isCellEditable(int row, int column) {
+                    // Solo las columnas de botones son editables
+                    return column == 6 || column == 7;
+                }
+
+            };
+
+            for (Modelo m : modeloService.obtenerTodos()) {
+                tableModel.addRow(new Object[]{
+                    m.getIdModelo(),
+                    m.getNombreModelo(),
+                    m.getAnioModelo(),
+                    m.getFabricante(),
+                    m.getNumeroCilindros(),
+                    m.getCapacidadPasajeros(),
+                    "Editar",
+                    "Eliminar"    
+                });
             }
+
+            tablaModelos.setModel(tableModel);
+
+            TablaUtil.aplicarEstiloCebra(tablaModelos,
+                new java.awt.Color(247, 227, 178), // par - beige
+                java.awt.Color.WHITE               // impar - blanco
+            );
+
+            ImageIcon iconoEditar = new ImageIcon(
+                new ImageIcon("C:\\Users\\eduar\\Documents\\ITSJ\\6. Sexto Semestre\\Administración de Bases de Datos\\Proyecto Final\\Proyecto_Final_ABD_AutosAmistosos\\src\\main\\java\\img\\actualizar.png")
+                    .getImage().getScaledInstance(24, 24, Image.SCALE_SMOOTH)
+            );
+
+            ImageIcon iconoEliminar = new ImageIcon(
+                new ImageIcon("C:\\Users\\eduar\\Documents\\ITSJ\\6. Sexto Semestre\\Administración de Bases de Datos\\Proyecto Final\\Proyecto_Final_ABD_AutosAmistosos\\src\\main\\java\\img\\eliminar.png")
+                    .getImage().getScaledInstance(24, 24, Image.SCALE_SMOOTH)
+            );
+
+
+
+            // Columna Editar
+            tablaModelos.getColumnModel().getColumn(6).setCellRenderer(new ButtonRenderer(iconoEditar));
+            tablaModelos.getColumnModel().getColumn(6).setCellEditor(new ButtonEditor(iconoEditar, e -> {
+                int fila = tablaModelos.getSelectedRow();
+                int idModelo = (int) tablaModelos.getValueAt(fila, 0);
+                abrirEditarModelo(idModelo);
+            }));
+
+            // Columna Eliminar
+            tablaModelos.getColumnModel().getColumn(7).setCellRenderer(new ButtonRenderer(iconoEliminar));
+            tablaModelos.getColumnModel().getColumn(7).setCellEditor(new ButtonEditor(iconoEliminar, e -> {
+                int fila = tablaModelos.getSelectedRow();
+                int idModelo = (int) tablaModelos.getValueAt(fila, 0);
+                confirmarEliminarModelo(idModelo);
+            }));
             
-        };
+        }else{
+            
+            String[] columnas = {"ID", "Nombre", "Año", "Fabricante", "Cilindros",
+                             "Pasajeros"};
 
-        for (Modelo m : modeloService.obtenerTodos()) {
-            tableModel.addRow(new Object[]{
-                m.getIdModelo(),
-                m.getNombreModelo(),
-                m.getAnioModelo(),
-                m.getFabricante(),
-                m.getNumeroCilindros(),
-                m.getCapacidadPasajeros(),
-                "Editar",
-                "Eliminar"    
-            });
+            DefaultTableModel tableModel = new DefaultTableModel(columnas, 0){
+
+                
+
+            };
+
+            for (Modelo m : modeloService.obtenerTodos()) {
+                tableModel.addRow(new Object[]{
+                    m.getIdModelo(),
+                    m.getNombreModelo(),
+                    m.getAnioModelo(),
+                    m.getFabricante(),
+                    m.getNumeroCilindros(),
+                    m.getCapacidadPasajeros() 
+                });
+            }
+
+            tablaModelos.setModel(tableModel);
+
+            TablaUtil.aplicarEstiloCebra(tablaModelos,
+                new java.awt.Color(247, 227, 178), // par - beige
+                java.awt.Color.WHITE               // impar - blanco
+            );
+            
         }
-
-        tablaModelos.setModel(tableModel);
         
-        TablaUtil.aplicarEstiloCebra(tablaModelos,
-            new java.awt.Color(247, 227, 178), // par - beige
-            java.awt.Color.WHITE               // impar - blanco
-        );
-        
-        ImageIcon iconoEditar = new ImageIcon(
-            new ImageIcon("C:\\Users\\eduar\\Documents\\ITSJ\\6. Sexto Semestre\\Administración de Bases de Datos\\Proyecto Final\\Proyecto_Final_ABD_AutosAmistosos\\src\\main\\java\\img\\actualizar.png")
-                .getImage().getScaledInstance(24, 24, Image.SCALE_SMOOTH)
-        );
-
-        ImageIcon iconoEliminar = new ImageIcon(
-            new ImageIcon("C:\\Users\\eduar\\Documents\\ITSJ\\6. Sexto Semestre\\Administración de Bases de Datos\\Proyecto Final\\Proyecto_Final_ABD_AutosAmistosos\\src\\main\\java\\img\\eliminar.png")
-                .getImage().getScaledInstance(24, 24, Image.SCALE_SMOOTH)
-        );
-        
-        // Columna Editar
-        tablaModelos.getColumnModel().getColumn(6).setCellRenderer(new ButtonRenderer(iconoEditar));
-        tablaModelos.getColumnModel().getColumn(6).setCellEditor(new ButtonEditor(iconoEditar, e -> {
-            int fila = tablaModelos.getSelectedRow();
-            int idModelo = (int) tablaModelos.getValueAt(fila, 0);
-            abrirEditarModelo(idModelo);
-        }));
-
-        // Columna Eliminar
-        tablaModelos.getColumnModel().getColumn(7).setCellRenderer(new ButtonRenderer(iconoEliminar));
-        tablaModelos.getColumnModel().getColumn(7).setCellEditor(new ButtonEditor(iconoEliminar, e -> {
-            int fila = tablaModelos.getSelectedRow();
-            int idModelo = (int) tablaModelos.getValueAt(fila, 0);
-            confirmarEliminarModelo(idModelo);
-        }));
         
     }
     
@@ -2885,40 +3158,42 @@ public class VentanaInicio extends javax.swing.JFrame{
     }
     
     private void actualizarVehiculo() {
-        LocalDate fechaFabricacion = LocalDate.of(
-        Integer.parseInt(comboAnioModificar.getSelectedItem().toString()),
-        comboMesModificar.getSelectedIndex()+1,
-        Integer.parseInt(comboDiaModificar.getSelectedItem().toString()));
         
-        LocalDate fechaEntrada = LocalDate.of(
-        Integer.parseInt(comboAnioEntradaModificar.getSelectedItem().toString()),
-        comboMesEntradaModificar.getSelectedIndex()+1,
-        Integer.parseInt(comboDiaEntradaModificar.getSelectedItem().toString()));
+        ValidacionesUtil.camposVacios(internalModificarAutos, cajaNumSerieModificar, cajaPrecioModificar, cajaKilometrajeModificar);
         
+        String fechaFabricacion = ValidacionesUtil.validarFecha(comboAnioModificar, comboMesModificar, comboDiaModificar, internalModificarAutos);
         
-        try{
+        String fechaEntrada = ValidacionesUtil.validarFecha(comboAnioEntradaModificar, comboMesEntradaModificar, comboDiaEntradaModificar, internalModificarAutos);
+         
+        if(ValidacionesUtil.sePuedeAgregar()){
+            try{
             
-            Vehiculo vehiculo = new Vehiculo(
-                idVehiculoSeleccionado,
-                cajaNumSerieModificar.getText(),
-                (String)comboModeloModificar.getSelectedItem(),
-                Date.valueOf(fechaFabricacion),
-                Double.parseDouble(cajaPrecioModificar.getText()),
-                Integer.parseInt(cajaKilometrajeModificar.getText()),
-                Date.valueOf(fechaEntrada.toString()),
-                (String)comboTipoModificar.getSelectedItem(),
-                (String)comboEstadoModificar.getSelectedItem()
-            );
-            
-            vehiculoService.actualizar(vehiculo);
-            JOptionPane.showMessageDialog(this, "Vehiculo actualizado correctamente");
-            internalModificarAutos.setVisible(false);
-            cargarTablaVehiculos(); 
-            
-        }catch (Exception e) {
-            
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                Vehiculo vehiculo = VehiculoFactory.crearVehiculo(
+                    idVehiculoSeleccionado,
+                    cajaNumSerieModificar.getText(),
+                    (String)comboModeloModificar.getSelectedItem(),
+                    Date.valueOf(fechaFabricacion),
+                    Double.parseDouble(cajaPrecioModificar.getText()),
+                    Integer.parseInt(cajaKilometrajeModificar.getText()),
+                    Date.valueOf(fechaEntrada.toString()),
+                    (String)comboTipoModificar.getSelectedItem(),
+                    (String)comboEstadoModificar.getSelectedItem()
+                );
+
+                vehiculoService.actualizar(vehiculo);
+                JOptionPane.showMessageDialog(this, "Vehiculo actualizado correctamente");
+                internalModificarAutos.setVisible(false);
+                RestablecerUtil.restablecer(cajaNumSerieModificar, comboModeloModificar, comboAnioModificar, comboMesModificar, 
+                    comboDiaModificar, comboTipoModificar, cajaPrecioModificar, cajaKilometrajeModificar, comboAnioEntradaModificar, 
+                    comboMesEntradaModificar, comboDiaEntradaModificar, comboEstadoModificar);
+                cargarTablaVehiculos(); 
+
+            }catch (Exception e) {
+
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        
         }
         
     }
@@ -3022,65 +3297,102 @@ public class VentanaInicio extends javax.swing.JFrame{
 
     private void cargarTablaVehiculos() {
         
-        
-        String[] columnas = {"ID", "Modelo", "Fecha de Fabricación", "Precio",
+        if(rol.equals("C##ROL_ADMIN")){
+            
+            String[] columnas = {"ID", "Modelo", "Fecha de Fabricación", "Precio",
                             "Tipo", "Estado", "Editar", "Eliminar"};
 
-        DefaultTableModel tableModel = new DefaultTableModel(columnas, 0){
-            
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                // Solo las columnas de botones son editables
-                return column == 6 || column == 7;
+            DefaultTableModel tableModel = new DefaultTableModel(columnas, 0){
+
+                @Override
+                public boolean isCellEditable(int row, int column) {
+                    // Solo las columnas de botones son editables
+                    return column == 6 || column == 7;
+                }
+
+            };
+
+            for (Vehiculo v : vehiculoService.obtenerTodos()) {
+                tableModel.addRow(new Object[]{
+                    v.getIdVehiculo(),
+                    v.getNombreModelo(),
+                    v.getFechaFabricacion(),
+                    v.getPrecio(),
+                    v.getTipo(),
+                    v.getEstado(),
+                    "Editar",
+                    "Eliminar"    
+                });
             }
+
+            tablaVehiculos.setModel(tableModel);
+
+            TablaUtil.aplicarEstiloCebra(tablaVehiculos,
+                new java.awt.Color(247, 227, 178), // par - beige
+                java.awt.Color.WHITE               // impar - blanco
+            );
+
+            ImageIcon iconoEditar = new ImageIcon(
+                new ImageIcon("C:\\Users\\eduar\\Documents\\ITSJ\\6. Sexto Semestre\\Administración de Bases de Datos\\Proyecto Final\\Proyecto_Final_ABD_AutosAmistosos\\src\\main\\java\\img\\actualizar.png")
+                    .getImage().getScaledInstance(24, 24, Image.SCALE_SMOOTH)
+            );
+
+            ImageIcon iconoEliminar = new ImageIcon(
+                new ImageIcon("C:\\Users\\eduar\\Documents\\ITSJ\\6. Sexto Semestre\\Administración de Bases de Datos\\Proyecto Final\\Proyecto_Final_ABD_AutosAmistosos\\src\\main\\java\\img\\eliminar.png")
+                    .getImage().getScaledInstance(24, 24, Image.SCALE_SMOOTH)
+            );
+
+            // Columna Editar
+            tablaVehiculos.getColumnModel().getColumn(6).setCellRenderer(new ButtonRenderer(iconoEditar));
+            tablaVehiculos.getColumnModel().getColumn(6).setCellEditor(new ButtonEditor(iconoEditar, e -> {
+                int fila = tablaVehiculos.getSelectedRow();
+                String idVehiculo = (String) tablaVehiculos.getValueAt(fila, 0);
+                abrirEditarVehiculo(idVehiculo);
+            }));
+
+            // Columna Eliminar
+            tablaVehiculos.getColumnModel().getColumn(7).setCellRenderer(new ButtonRenderer(iconoEliminar));
+            tablaVehiculos.getColumnModel().getColumn(7).setCellEditor(new ButtonEditor(iconoEliminar, e -> {
+                int fila = tablaVehiculos.getSelectedRow();
+                String idVehiculo = (String) tablaVehiculos.getValueAt(fila, 0);
+                confirmarEliminarVehiculo(idVehiculo);
+            }));
             
-        };
+        }else{
+            
+            
+            String[] columnas = {"ID", "Modelo", "Fecha de Fabricación", "Precio",
+                            "Tipo", "Estado"};
 
-        for (Vehiculo v : vehiculoService.obtenerTodos()) {
-            tableModel.addRow(new Object[]{
-                v.getIdVehiculo(),
-                v.getNombreModelo(),
-                v.getFechaFabricacion(),
-                v.getPrecio(),
-                v.getTipo(),
-                v.getEstado(),
-                "Editar",
-                "Eliminar"    
-            });
+            DefaultTableModel tableModel = new DefaultTableModel(columnas, 0){
+
+      
+
+            };
+
+            for (Vehiculo v : vehiculoService.obtenerTodos()) {
+                tableModel.addRow(new Object[]{
+                    v.getIdVehiculo(),
+                    v.getNombreModelo(),
+                    v.getFechaFabricacion(),
+                    v.getPrecio(),
+                    v.getTipo(),
+                    v.getEstado(),
+     
+                });
+            }
+
+            tablaVehiculos.setModel(tableModel);
+
+            TablaUtil.aplicarEstiloCebra(tablaVehiculos,
+                new java.awt.Color(247, 227, 178), // par - beige
+                java.awt.Color.WHITE               // impar - blanco
+            );
+            
         }
-
-        tablaVehiculos.setModel(tableModel);
         
-        TablaUtil.aplicarEstiloCebra(tablaVehiculos,
-            new java.awt.Color(247, 227, 178), // par - beige
-            java.awt.Color.WHITE               // impar - blanco
-        );
         
-        ImageIcon iconoEditar = new ImageIcon(
-            new ImageIcon("C:\\Users\\eduar\\Documents\\ITSJ\\6. Sexto Semestre\\Administración de Bases de Datos\\Proyecto Final\\Proyecto_Final_ABD_AutosAmistosos\\src\\main\\java\\img\\actualizar.png")
-                .getImage().getScaledInstance(24, 24, Image.SCALE_SMOOTH)
-        );
-
-        ImageIcon iconoEliminar = new ImageIcon(
-            new ImageIcon("C:\\Users\\eduar\\Documents\\ITSJ\\6. Sexto Semestre\\Administración de Bases de Datos\\Proyecto Final\\Proyecto_Final_ABD_AutosAmistosos\\src\\main\\java\\img\\eliminar.png")
-                .getImage().getScaledInstance(24, 24, Image.SCALE_SMOOTH)
-        );
         
-        // Columna Editar
-        tablaVehiculos.getColumnModel().getColumn(6).setCellRenderer(new ButtonRenderer(iconoEditar));
-        tablaVehiculos.getColumnModel().getColumn(6).setCellEditor(new ButtonEditor(iconoEditar, e -> {
-            int fila = tablaVehiculos.getSelectedRow();
-            String idVehiculo = (String) tablaVehiculos.getValueAt(fila, 0);
-            abrirEditarVehiculo(idVehiculo);
-        }));
-
-        // Columna Eliminar
-        tablaVehiculos.getColumnModel().getColumn(7).setCellRenderer(new ButtonRenderer(iconoEliminar));
-        tablaVehiculos.getColumnModel().getColumn(7).setCellEditor(new ButtonEditor(iconoEliminar, e -> {
-            int fila = tablaVehiculos.getSelectedRow();
-            String idVehiculo = (String) tablaVehiculos.getValueAt(fila, 0);
-            confirmarEliminarVehiculo(idVehiculo);
-        }));
         
     }
     
@@ -3390,135 +3702,154 @@ public class VentanaInicio extends javax.swing.JFrame{
     }
     
     private void actualizarVenta() {
-
-        LocalDate fechaVenta = LocalDate.of(
-
-            Integer.parseInt(
-                comboVentasAnioActualizar
-                    .getSelectedItem()
-                    .toString()
-            ),
-
-            comboVentasMesActualizar.getSelectedIndex() + 1,
-
-            Integer.parseInt(
-                comboVentasDiaActualizar
-                    .getSelectedItem()
-                    .toString()
-            )
-        );
         
+        ValidacionesUtil.camposVacios(internalActualizarVentas1, cajaVentasPrecioActualizar1);
         
+        String fechaVenta = ValidacionesUtil.validarFecha(comboVentasAnioActualizar, comboVentasMesActualizar, comboVentasDiaActualizar, internalActualizarVentas1);
+        
+        if(ValidacionesUtil.sePuedeAgregar()){
+            
+            try {
 
-        try {
+                Venta venta = VentaFactory.actualizarVenta(
+                    idVentaSeleccionada,
+                    fechaVenta.toString(),
+                    cajaVentasPrecioActualizar1.getText(),
+                    comboVentasFormaActualizar.getSelectedItem(),
+                    comboVentasClienteActualizar.getSelectedItem(),
+                    comboVentasEmpleadoActualizar.getSelectedItem(),
+                    comboVentasvehiculoActualizar.getSelectedItem()
+                );
+                ventaService.actualizar(venta);
 
-            Venta venta = new Venta(
-                
-                idVentaSeleccionada,    
+                JOptionPane.showMessageDialog(
+                    this,
+                    "Venta actualizada correctamente"
+                );
 
-                Date.valueOf(fechaVenta.toString()),
+                internalActualizarVentas1.setVisible(false);
 
-                Double.parseDouble(
-                    cajaVentasPrecioActualizar1
-                        .getText()
-                ),
-                    
-                comboVentasFormaActualizar.getSelectedItem().toString(),
+                RestablecerUtil.restablecer(cajaVentasPrecioActualizar1, comboVentasvehiculoActualizar, comboVentasFormaActualizar,
+                    comboVentasClienteActualizar, comboVentasEmpleadoActualizar, comboVentasAnioActualizar, comboVentasMesActualizar,
+                    comboVentasDiaActualizar);
 
-                comboVentasClienteActualizar.getSelectedItem().toString(),
+                cargarTablaVentas();
 
-                comboVentasEmpleadoActualizar.getSelectedItem().toString(),
+            } catch (Exception e) {
 
-                comboVentasvehiculoActualizar.getSelectedItem().toString()
-            );
+                e.printStackTrace();
 
-            ventaService.actualizar(venta);
-
-            JOptionPane.showMessageDialog(
-                this,
-                "Venta actualizada correctamente"
-            );
-
-            internalActualizarVentas1.setVisible(false);
-
-            cargarTablaVentas();
-
-        } catch (Exception e) {
-
-            e.printStackTrace();
-
-            JOptionPane.showMessageDialog(
-                this,
-                e.getMessage(),
-                "Error",
-                JOptionPane.ERROR_MESSAGE
-            );
+                JOptionPane.showMessageDialog(
+                    this,
+                    e.getMessage(),
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE
+                );
+            }
         }
+
+        
+        
+        
+
+        
     }
     
     private void cargarTablaVentas() {
         
-        
-        String[] columnas = {"ID", "Fecha", "Precio Total", "Forma de Pago",
+        if(rol.equals("C##ROL_ADMIN")){
+            
+            String[] columnas = {"ID", "Fecha", "Precio Total", "Forma de Pago",
                             "ID Cliente", "ID Empleado", "Vehiculo (Modelo)", "Editar", "Eliminar"};
 
-        DefaultTableModel tableModel = new DefaultTableModel(columnas, 0){
-            
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                // Solo las columnas de botones son editables
-                return column == 7 || column == 8;
+            DefaultTableModel tableModel = new DefaultTableModel(columnas, 0){
+
+                @Override
+                public boolean isCellEditable(int row, int column) {
+                    // Solo las columnas de botones son editables
+                    return column == 7 || column == 8;
+                }
+
+            };
+
+            for (Venta v : ventaService.obtenerTodos()) {
+                tableModel.addRow(new Object[]{
+                    v.getIdVenta(),
+                    v.getFechaVenta(),
+                    v.getPrecioFinal(),
+                    v.getFormaPago(),
+                    v.getIdCliente(),
+                    v.getIdEmpleado(),
+                    v.getNombreVehiculo(),
+                    "Editar",
+                    "Eliminar"    
+                });
             }
+
+            tablaVentas.setModel(tableModel);
+
+            TablaUtil.aplicarEstiloCebra(tablaVentas,
+                new java.awt.Color(247, 227, 178), // par - beige
+                java.awt.Color.WHITE               // impar - blanco
+            );
+
+            ImageIcon iconoEditar = new ImageIcon(
+                new ImageIcon("C:\\Users\\eduar\\Documents\\ITSJ\\6. Sexto Semestre\\Administración de Bases de Datos\\Proyecto Final\\Proyecto_Final_ABD_AutosAmistosos\\src\\main\\java\\img\\actualizar.png")
+                    .getImage().getScaledInstance(24, 24, Image.SCALE_SMOOTH)
+            );
+
+            ImageIcon iconoEliminar = new ImageIcon(
+                new ImageIcon("C:\\Users\\eduar\\Documents\\ITSJ\\6. Sexto Semestre\\Administración de Bases de Datos\\Proyecto Final\\Proyecto_Final_ABD_AutosAmistosos\\src\\main\\java\\img\\eliminar.png")
+                    .getImage().getScaledInstance(24, 24, Image.SCALE_SMOOTH)
+            );
+
+            // Columna Editar
+            tablaVentas.getColumnModel().getColumn(7).setCellRenderer(new ButtonRenderer(iconoEditar));
+            tablaVentas.getColumnModel().getColumn(7).setCellEditor(new ButtonEditor(iconoEditar, e -> {
+                int fila = tablaVentas.getSelectedRow();
+                int idVenta = (int) tablaVentas.getValueAt(fila, 0);
+                abrirEditarVenta(idVenta);
+            }));
+
+            // Columna Eliminar
+            tablaVentas.getColumnModel().getColumn(8).setCellRenderer(new ButtonRenderer(iconoEliminar));
+            tablaVentas.getColumnModel().getColumn(8).setCellEditor(new ButtonEditor(iconoEliminar, e -> {
+                int fila = tablaVentas.getSelectedRow();
+                int idVenta = (int) tablaVentas.getValueAt(fila, 0);
+                confirmarEliminarVenta(idVenta);
+            }));
             
-        };
+        }else{
+            
+            String[] columnas = {"ID", "Fecha", "Precio Total", "Forma de Pago",
+                            "ID Cliente", "ID Empleado", "Vehiculo (Modelo)"};
 
-        for (Venta v : ventaService.obtenerTodos()) {
-            tableModel.addRow(new Object[]{
-                v.getIdVenta(),
-                v.getFechaVenta(),
-                v.getPrecioFinal(),
-                v.getFormaPago(),
-                v.getIdCliente(),
-                v.getIdEmpleado(),
-                v.getNombreVehiculo(),
-                "Editar",
-                "Eliminar"    
-            });
+            DefaultTableModel tableModel = new DefaultTableModel(columnas, 0){  
+
+            };
+
+            for (Venta v : ventaService.obtenerTodos()) {
+                tableModel.addRow(new Object[]{
+                    v.getIdVenta(),
+                    v.getFechaVenta(),
+                    v.getPrecioFinal(),
+                    v.getFormaPago(),
+                    v.getIdCliente(),
+                    v.getIdEmpleado(),
+                    v.getNombreVehiculo()   
+                });
+            }
+
+            tablaVentas.setModel(tableModel);
+
+            TablaUtil.aplicarEstiloCebra(tablaVentas,
+                new java.awt.Color(247, 227, 178), // par - beige
+                java.awt.Color.WHITE               // impar - blanco
+            ); 
+            
         }
-
-        tablaVentas.setModel(tableModel);
         
-        TablaUtil.aplicarEstiloCebra(tablaVentas,
-            new java.awt.Color(247, 227, 178), // par - beige
-            java.awt.Color.WHITE               // impar - blanco
-        );
-        
-        ImageIcon iconoEditar = new ImageIcon(
-            new ImageIcon("C:\\Users\\eduar\\Documents\\ITSJ\\6. Sexto Semestre\\Administración de Bases de Datos\\Proyecto Final\\Proyecto_Final_ABD_AutosAmistosos\\src\\main\\java\\img\\actualizar.png")
-                .getImage().getScaledInstance(24, 24, Image.SCALE_SMOOTH)
-        );
-
-        ImageIcon iconoEliminar = new ImageIcon(
-            new ImageIcon("C:\\Users\\eduar\\Documents\\ITSJ\\6. Sexto Semestre\\Administración de Bases de Datos\\Proyecto Final\\Proyecto_Final_ABD_AutosAmistosos\\src\\main\\java\\img\\eliminar.png")
-                .getImage().getScaledInstance(24, 24, Image.SCALE_SMOOTH)
-        );
-        
-        // Columna Editar
-        tablaVentas.getColumnModel().getColumn(7).setCellRenderer(new ButtonRenderer(iconoEditar));
-        tablaVentas.getColumnModel().getColumn(7).setCellEditor(new ButtonEditor(iconoEditar, e -> {
-            int fila = tablaVentas.getSelectedRow();
-            int idVenta = (int) tablaVentas.getValueAt(fila, 0);
-            abrirEditarVenta(idVenta);
-        }));
-
-        // Columna Eliminar
-        tablaVentas.getColumnModel().getColumn(8).setCellRenderer(new ButtonRenderer(iconoEliminar));
-        tablaVentas.getColumnModel().getColumn(8).setCellEditor(new ButtonEditor(iconoEliminar, e -> {
-            int fila = tablaVentas.getSelectedRow();
-            int idVenta = (int) tablaVentas.getValueAt(fila, 0);
-            confirmarEliminarVenta(idVenta);
-        }));
-        
+            
     }
     
     private void cargarCombosVentas() {
@@ -3776,25 +4107,15 @@ public class VentanaInicio extends javax.swing.JFrame{
     }//GEN-LAST:event_btnDocumentacionActionPerformed
 
     
-    
-    
-    
-    
-    
+   
     private void btnVehiculosEliminadosCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVehiculosEliminadosCerrarActionPerformed
         
         internalVehiculosEliminados.setVisible(false);
         
     }//GEN-LAST:event_btnVehiculosEliminadosCerrarActionPerformed
 
-    // =============================== Acciones Tabla modelos =======================
-    
     private void tablaVehiculosMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaVehiculosMouseReleased
 
-
-        
-        
-        
         // TODO add your handling code here:
     }//GEN-LAST:event_tablaVehiculosMouseReleased
 
@@ -3808,33 +4129,51 @@ public class VentanaInicio extends javax.swing.JFrame{
 
     private void btnModelosAgregarAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModelosAgregarAgregarActionPerformed
         
-        try {
-            Modelo modelo = new Modelo(
-
-                cajaModelosNombreAgregar.getText().trim(),
-                Integer.parseInt((String) comboModelosAnioAgregar.getSelectedItem()),
-                cajaModelosFabricanteAgregar.getText().trim(),
-                Integer.parseInt((String) comboModelosCilindrosAgregar.getSelectedItem()),
-                Integer.parseInt(cajaModelosPuertasAgregar.getText().trim()),
-                Double.parseDouble(cajaModelosPesoAgregar.getText().trim()),
-                Integer.parseInt(cajaModelosPasajerosAgregar.getText().trim()),
-                cajaModelosColorAgregar.getText().trim(),
-                cajaModelosPaisAgregar.getText().trim()
-            );
-
-            modeloService.agregar(modelo);
-            JOptionPane.showMessageDialog(this, "Modelo agregado correctamente");
-            internalAgregarModelos.setVisible(false);
-            cargarTablaModelos(); 
+        ValidacionesUtil.camposVacios(internalAgregarModelos, cajaModelosNombreAgregar, cajaModelosFabricanteAgregar, cajaModelosColorAgregar, cajaModelosPaisAgregar,
+                                       cajaModelosPuertasAgregar, cajaModelosPesoAgregar, cajaModelosPasajerosAgregar);
+        
+        
+        if(ValidacionesUtil.sePuedeAgregar()){
             
-        } catch (IllegalArgumentException e) {
-            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            try {
+                Modelo modelo = ModeloFactory.crearModelo(
+
+                    cajaModelosNombreAgregar.getText().trim(),
+                    Integer.parseInt((String) comboModelosAnioAgregar.getSelectedItem()),
+                    cajaModelosFabricanteAgregar.getText().trim(),
+                    Integer.parseInt((String) comboModelosCilindrosAgregar.getSelectedItem()),
+                    Integer.parseInt(cajaModelosPuertasAgregar.getText().trim()),
+                    Double.parseDouble(cajaModelosPesoAgregar.getText().trim()),
+                    Integer.parseInt(cajaModelosPasajerosAgregar.getText().trim()),
+                    cajaModelosColorAgregar.getText().trim(),
+                    cajaModelosPaisAgregar.getText().trim()
+                );
+
+                modeloService.agregar(modelo);
+                JOptionPane.showMessageDialog(this, "Modelo agregado correctamente");
+                internalAgregarModelos.setVisible(false);
+                cargarTablaModelos(); 
+
+                RestablecerUtil.restablecer(cajaModelosNombreAgregar, cajaModelosFabricanteAgregar, cajaModelosColorAgregar, 
+                    comboModelosCilindrosAgregar, comboModelosAnioAgregar, cajaModelosPaisAgregar, cajaModelosPasajerosAgregar, 
+                    cajaModelosPuertasAgregar, cajaModelosPesoAgregar);
+
+            } catch (IllegalArgumentException e) {
+                JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            
+            
         }
+        
+        
+        
 
     }//GEN-LAST:event_btnModelosAgregarAgregarActionPerformed
 
     private void btnModelosActualizarActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModelosActualizarActualizarActionPerformed
         actualizarModelo();
+        
+        
         
     }//GEN-LAST:event_btnModelosActualizarActualizarActionPerformed
 
@@ -3927,36 +4266,45 @@ public class VentanaInicio extends javax.swing.JFrame{
 
     private void btnAgregarAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarAgregarActionPerformed
         
-        LocalDate fechaFabricacion = LocalDate.of(
-        Integer.parseInt(comboAnioAgregar.getSelectedItem().toString()),
-        comboMesAgregar.getSelectedIndex()+1,
-        Integer.parseInt(comboDiaAgregar.getSelectedItem().toString()));
+        ValidacionesUtil.camposVacios(internalAgregarAutos, cajaNumVehiculoAgregar, cajaNumSerieAgregar, cajaPrecioAgregar, cajaKilometrajeAgregar);
         
-        
-        try{
+        String fechaFabricacion = ValidacionesUtil.validarFecha(comboAnioAgregar, comboMesAgregar, comboDiaAgregar, internalAgregarAutos);
+                 
+        if(ValidacionesUtil.sePuedeAgregar()){
             
-            Vehiculo vehiculo = new Vehiculo(
-                cajaNumVehiculoAgregar.getText(),
-                cajaNumSerieAgregar.getText(),
-                (String)comboModeloAgregar.getSelectedItem(),
-                Date.valueOf(fechaFabricacion),
-                Double.parseDouble(cajaPrecioAgregar.getText()),
-                Integer.parseInt(cajaKilometrajeAgregar.getText()),
-                Date.valueOf(LocalDate.now().toString()),
-                (String)comboTipoAgregar.getSelectedItem(),
-                "Disponible"    
-            );
+            try{
             
-            vehiculoService.agregar(vehiculo);
-            JOptionPane.showMessageDialog(this, "Vehiculo agregado correctamente");
-            internalAgregarAutos.setVisible(false);
-            cargarTablaVehiculos(); 
+                Vehiculo vehiculo = VehiculoFactory.crearVehiculo(
+                    cajaNumVehiculoAgregar.getText().toUpperCase(),
+                    cajaNumSerieAgregar.getText(),
+                    (String)comboModeloAgregar.getSelectedItem(),
+                    Date.valueOf(fechaFabricacion),
+                    Double.parseDouble(cajaPrecioAgregar.getText()),
+                    Integer.parseInt(cajaKilometrajeAgregar.getText()),
+                    Date.valueOf(LocalDate.now().toString()),
+                    (String)comboTipoAgregar.getSelectedItem(),
+                    "Disponible"    
+                );
+
+                vehiculoService.agregar(vehiculo);
+                JOptionPane.showMessageDialog(this, "Vehiculo agregado correctamente");
+                internalAgregarAutos.setVisible(false);
+                RestablecerUtil.restablecer(cajaNumVehiculoAgregar, cajaNumSerieAgregar, comboModeloAgregar, comboAnioAgregar, comboMesAgregar, 
+                    comboDiaAgregar, comboTipoAgregar, cajaPrecioAgregar, cajaKilometrajeAgregar);
+                cargarTablaVehiculos(); 
+
+            }catch (Exception e) {
+
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
             
-        }catch (Exception e) {
-            
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
+        
+       
+        
+        
+        
         
     }//GEN-LAST:event_btnAgregarAgregarActionPerformed
 
@@ -3995,101 +4343,113 @@ public class VentanaInicio extends javax.swing.JFrame{
 
     private void btnVentasAgregarAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVentasAgregarAgregarActionPerformed
         
-        double precioOriginal =
-            Double.parseDouble(
-                cajaVentasPrecioAgregar
-                    .getText()
-                    .trim()
-            );
-
-        String formaPago =
-            comboVentasFormaAgregar
-                .getSelectedItem()
-                .toString();
-
-        double precioFinal =
-            ventaService.calcularDescuento(
-                precioOriginal,
-                formaPago
-            );
+        ValidacionesUtil.camposVacios(internalAltasVentas, cajaVentasPrecioAgregar);
         
-        String[] vehiculo = comboVentasvehiculoAgregar.getSelectedItem().toString().split(" ");
-        
-        
-        
-        try {
-
-            Venta venta = new Venta(
-
-                Date.valueOf(LocalDate.now()),
-                    
-                precioFinal,
-
-                formaPago,
-
-                comboVentasClienteAgregar.getSelectedItem().toString(),
-
-                comboVentasEmpleadoAgregar.getSelectedItem().toString(),
-                    
-                vehiculo[0]
-            );
-
-            ventaService.agregar(venta);
-
-            JOptionPane.showMessageDialog(
-                this,
-                "Venta agregada correctamente"
-            );
+        if(ValidacionesUtil.sePuedeAgregar()){
             
-            if(formaPago.equalsIgnoreCase("Contado")){
+            double precioOriginal =
+                Double.parseDouble(
+                    cajaVentasPrecioAgregar
+                        .getText()
+                        .trim()
+                );
+
+            String formaPago =
+                comboVentasFormaAgregar
+                    .getSelectedItem()
+                    .toString();
+
+            double precioFinal =
+                ventaService.calcularDescuento(
+                    precioOriginal,
+                    formaPago
+                );
+
+            String[] vehiculo = comboVentasvehiculoAgregar.getSelectedItem().toString().split(" ");
+
+
+
+            try {
+
+                Venta venta = VentaFactory.crearVenta(
+
+                    Date.valueOf(LocalDate.now()),
+
+                    precioFinal,
+
+                    formaPago,
+
+                    comboVentasClienteAgregar.getSelectedItem().toString(),
+
+                    comboVentasEmpleadoAgregar.getSelectedItem().toString(),
+
+                    vehiculo[0]
+                );
+
+                ventaService.agregar(venta);
 
                 JOptionPane.showMessageDialog(
                     this,
-                    "Se aplicó un descuento del 10%"
+                    "Venta agregada correctamente"
+                );
+
+                if(formaPago.equalsIgnoreCase("Contado")){
+
+                    JOptionPane.showMessageDialog(
+                        this,
+                        "Se aplicó un descuento del 10%"
+                    );
+                }
+
+                double comision = ventaService.calcularComision(
+                    venta.getPrecioFinal()
+                );
+
+                JOptionPane.showMessageDialog(
+                    this,
+                    "Venta agregada correctamente\n\n" +
+                    "Empleado: " +
+                    comboVentasEmpleadoAgregar.getSelectedItem() +
+                    "\n" +
+                    "Comisión generada: $" +
+                    String.format("%.2f", comision)
+                );
+
+                internalAltasVentas.setVisible(false);
+
+                RestablecerUtil.restablecer(cajaVentasPrecioAgregar, comboVentasvehiculoAgregar, comboVentasFormaAgregar,
+                    comboVentasClienteAgregar, comboVentasEmpleadoAgregar);
+
+                cargarTablaVentas();
+
+            } catch (Exception e) {
+
+                e.printStackTrace();
+
+                String mensaje = "Error al registrar la venta";
+
+                Throwable causa = e.getCause();
+
+                if (causa instanceof SQLException sqlEx) {
+
+                    if (sqlEx.getErrorCode() == 20001) {
+
+                        mensaje = "El vehículo ya fue vendido";
+                    }
+                }
+
+                JOptionPane.showMessageDialog(
+                    this,
+                    mensaje,
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE
                 );
             }
             
-            double comision = ventaService.calcularComision(
-                venta.getPrecioFinal()
-            );
-            
-            JOptionPane.showMessageDialog(
-                this,
-                "Venta agregada correctamente\n\n" +
-                "Empleado: " +
-                comboVentasEmpleadoAgregar.getSelectedItem() +
-                "\n" +
-                "Comisión generada: $" +
-                String.format("%.2f", comision)
-            );
-
-            internalAltasVentas.setVisible(false);
-
-            cargarTablaVentas();
-
-        } catch (Exception e) {
-
-            e.printStackTrace();
-
-            String mensaje = "Error al registrar la venta";
-
-            Throwable causa = e.getCause();
-
-            if (causa instanceof SQLException sqlEx) {
-
-                if (sqlEx.getErrorCode() == 20001) {
-
-                    mensaje = "El vehículo ya fue vendido";
-                }
-            }
-
-            JOptionPane.showMessageDialog(
-                this,
-                mensaje,
-                "Error",
-                JOptionPane.ERROR_MESSAGE
-            );
         }
+        
+        
+        
 
     }//GEN-LAST:event_btnVentasAgregarAgregarActionPerformed
 
@@ -4169,6 +4529,245 @@ public class VentanaInicio extends javax.swing.JFrame{
         
     }//GEN-LAST:event_btnGenerarGraficaActionPerformed
 
+    private void btnRestaurarAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestaurarAgregarActionPerformed
+        
+        RestablecerUtil.restablecer(cajaNumVehiculoAgregar, cajaNumSerieAgregar, comboModeloAgregar, comboAnioAgregar, comboMesAgregar, 
+                comboDiaAgregar, comboTipoAgregar, cajaPrecioAgregar, cajaKilometrajeAgregar);
+        
+    }//GEN-LAST:event_btnRestaurarAgregarActionPerformed
+
+    private void btnCancelarAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarAgregarActionPerformed
+        int respuesta = JOptionPane.showConfirmDialog(
+            this,
+            "¿Estás seguro de cancelar la insercción, se perderan los datos no guardados",
+            "Confirmar cancelación",
+            JOptionPane.YES_NO_OPTION,
+            JOptionPane.WARNING_MESSAGE
+        );
+
+        if (respuesta == JOptionPane.YES_OPTION) {
+
+            internalAgregarAutos.setVisible(false);
+        
+            RestablecerUtil.restablecer(cajaNumVehiculoAgregar, cajaNumSerieAgregar, comboModeloAgregar, comboAnioAgregar, comboMesAgregar, 
+                comboDiaAgregar, comboTipoAgregar, cajaPrecioAgregar, cajaKilometrajeAgregar);
+        
+        
+        }
+        
+    }//GEN-LAST:event_btnCancelarAgregarActionPerformed
+
+    private void btnCancelarModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarModificarActionPerformed
+        
+        int respuesta = JOptionPane.showConfirmDialog(
+            this,
+            "¿Estás seguro de cancelar la actualización, se perderan los datos no guardados",
+            "Confirmar cancelación",
+            JOptionPane.YES_NO_OPTION,
+            JOptionPane.WARNING_MESSAGE
+        );
+
+        if (respuesta == JOptionPane.YES_OPTION) {
+
+            internalModificarAutos.setVisible(false);
+        
+            RestablecerUtil.restablecer(cajaNumSerieModificar, comboModeloModificar, comboAnioModificar, comboMesModificar, 
+                comboDiaModificar, comboTipoModificar, cajaPrecioModificar, cajaKilometrajeModificar, comboAnioEntradaModificar, 
+                comboMesEntradaModificar, comboDiaEntradaModificar, comboEstadoModificar);
+        
+        
+        }
+        
+    }//GEN-LAST:event_btnCancelarModificarActionPerformed
+
+    private void btnVentasCancelarAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVentasCancelarAgregarActionPerformed
+        
+        
+        int respuesta = JOptionPane.showConfirmDialog(
+            this,
+            "¿Estás seguro de cancelar la insercción, se perderan los datos no guardados",
+            "Confirmar cancelación",
+            JOptionPane.YES_NO_OPTION,
+            JOptionPane.WARNING_MESSAGE
+        );
+
+        if (respuesta == JOptionPane.YES_OPTION) {
+
+            internalAltasVentas.setVisible(false);
+        
+        
+            RestablecerUtil.restablecer(cajaVentasPrecioAgregar, comboVentasvehiculoAgregar, comboVentasFormaAgregar,
+                comboVentasClienteAgregar, comboVentasEmpleadoAgregar);
+            
+        }    
+        
+    }//GEN-LAST:event_btnVentasCancelarAgregarActionPerformed
+
+    private void btnVentasRestaurarAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVentasRestaurarAgregarActionPerformed
+        
+        RestablecerUtil.restablecer(cajaVentasPrecioAgregar, comboVentasvehiculoAgregar, comboVentasFormaAgregar,
+                comboVentasClienteAgregar, comboVentasEmpleadoAgregar);
+        
+    }//GEN-LAST:event_btnVentasRestaurarAgregarActionPerformed
+
+    private void btnVentasCancelarActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVentasCancelarActualizarActionPerformed
+       
+        int respuesta = JOptionPane.showConfirmDialog(
+            this,
+            "¿Estás seguro de cancelar la insercción, se perderan los datos no guardados",
+            "Confirmar cancelación",
+            JOptionPane.YES_NO_OPTION,
+            JOptionPane.WARNING_MESSAGE
+        );
+
+        if (respuesta == JOptionPane.YES_OPTION) {
+
+            internalActualizarVentas1.setVisible(false);
+        
+            RestablecerUtil.restablecer(cajaVentasPrecioActualizar1, comboVentasvehiculoActualizar, comboVentasFormaActualizar,
+                comboVentasClienteActualizar, comboVentasEmpleadoActualizar, comboVentasAnioActualizar, comboVentasMesActualizar,
+                comboVentasDiaActualizar);
+            
+        }    
+    }//GEN-LAST:event_btnVentasCancelarActualizarActionPerformed
+
+    private void btnHomeCerrarReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeCerrarReporteActionPerformed
+        internalGenerarReporte.setVisible(false);
+        RestablecerUtil.restablecer(comboMesReporte);
+        
+    }//GEN-LAST:event_btnHomeCerrarReporteActionPerformed
+
+    private void btnCerrarGraficaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarGraficaActionPerformed
+        internalGenerarGrafica.setVisible(false);
+        RestablecerUtil.restablecer(comboAnioGrafica);
+    }//GEN-LAST:event_btnCerrarGraficaActionPerformed
+
+    private void cajaModelosNombreAgregarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cajaModelosNombreAgregarKeyReleased
+        ValidacionesUtil.validarLetrasNumeros(cajaModelosNombreAgregar, internalAgregarModelos);
+    }//GEN-LAST:event_cajaModelosNombreAgregarKeyReleased
+
+    private void cajaModelosFabricanteAgregarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cajaModelosFabricanteAgregarKeyReleased
+        ValidacionesUtil.validarLetrasNumeros(cajaModelosFabricanteAgregar, internalAgregarModelos);
+    }//GEN-LAST:event_cajaModelosFabricanteAgregarKeyReleased
+
+    private void cajaModelosPuertasAgregarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cajaModelosPuertasAgregarKeyReleased
+        ValidacionesUtil.validarNumerosEnteros(cajaModelosPuertasAgregar, internalAgregarModelos);
+        
+    }//GEN-LAST:event_cajaModelosPuertasAgregarKeyReleased
+
+    private void cajaModelosPesoAgregarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cajaModelosPesoAgregarKeyReleased
+        ValidacionesUtil.validarNumeros(cajaModelosPesoAgregar, internalAgregarModelos, 'N');
+    }//GEN-LAST:event_cajaModelosPesoAgregarKeyReleased
+
+    private void cajaModelosPasajerosAgregarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cajaModelosPasajerosAgregarKeyReleased
+        ValidacionesUtil.validarNumerosEnteros(cajaModelosPasajerosAgregar, internalAgregarModelos);
+    }//GEN-LAST:event_cajaModelosPasajerosAgregarKeyReleased
+
+    private void cajaModelosColorAgregarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cajaModelosColorAgregarKeyReleased
+        ValidacionesUtil.validarLetras(cajaModelosColorAgregar, internalAgregarModelos);
+    }//GEN-LAST:event_cajaModelosColorAgregarKeyReleased
+
+    private void cajaModelosPaisAgregarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cajaModelosPaisAgregarKeyReleased
+        ValidacionesUtil.validarLetras(cajaModelosPaisAgregar, internalAgregarModelos);
+    }//GEN-LAST:event_cajaModelosPaisAgregarKeyReleased
+
+    private void cajaModelosFabricanteActualizarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cajaModelosFabricanteActualizarKeyReleased
+        ValidacionesUtil.validarLetrasNumeros(cajaModelosFabricanteActualizar, internalCambiosModelos);
+    }//GEN-LAST:event_cajaModelosFabricanteActualizarKeyReleased
+
+    private void cajaModelosNombreActualizarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cajaModelosNombreActualizarKeyReleased
+        ValidacionesUtil.validarLetrasNumeros(cajaModelosNombreActualizar, internalCambiosModelos);
+    }//GEN-LAST:event_cajaModelosNombreActualizarKeyReleased
+
+    private void cajaModelosPuertasActualizarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cajaModelosPuertasActualizarKeyReleased
+        ValidacionesUtil.validarNumerosEnteros(cajaModelosPuertasActualizar, internalCambiosModelos);
+    }//GEN-LAST:event_cajaModelosPuertasActualizarKeyReleased
+
+    private void cajaModelosPesoActualizarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cajaModelosPesoActualizarKeyReleased
+        ValidacionesUtil.validarNumeros(cajaModelosPesoActualizar, internalCambiosModelos, 'U');
+    }//GEN-LAST:event_cajaModelosPesoActualizarKeyReleased
+
+    private void cajaModelosPasajerosActualizarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cajaModelosPasajerosActualizarKeyReleased
+        ValidacionesUtil.validarNumerosEnteros(cajaModelosPasajerosActualizar, internalCambiosModelos);
+    }//GEN-LAST:event_cajaModelosPasajerosActualizarKeyReleased
+
+    private void cajaModelosColorActualizarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cajaModelosColorActualizarKeyReleased
+        ValidacionesUtil.validarLetras(cajaModelosColorActualizar, internalCambiosModelos);
+    }//GEN-LAST:event_cajaModelosColorActualizarKeyReleased
+
+    private void cajaModelosPaisActualizarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cajaModelosPaisActualizarKeyReleased
+        ValidacionesUtil.validarLetras(cajaModelosPaisActualizar, internalCambiosModelos);
+    }//GEN-LAST:event_cajaModelosPaisActualizarKeyReleased
+
+    private void comboAnioAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboAnioAgregarActionPerformed
+        FechasUtil.cargarDias(comboAnioAgregar, comboMesAgregar, comboDiaAgregar);
+    }//GEN-LAST:event_comboAnioAgregarActionPerformed
+
+    private void comboMesAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboMesAgregarActionPerformed
+        FechasUtil.cargarDias(comboAnioAgregar, comboMesAgregar, comboDiaAgregar);
+    }//GEN-LAST:event_comboMesAgregarActionPerformed
+
+    private void cajaNumVehiculoAgregarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cajaNumVehiculoAgregarKeyReleased
+        ValidacionesUtil.contarCaracteres(cajaNumVehiculoAgregar);
+        ValidacionesUtil.validarLetrasNumeros(cajaNumVehiculoAgregar, internalAgregarAutos);
+    }//GEN-LAST:event_cajaNumVehiculoAgregarKeyReleased
+
+    private void cajaNumSerieAgregarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cajaNumSerieAgregarKeyReleased
+        ValidacionesUtil.validarLetrasNumeros(cajaNumSerieAgregar, internalAgregarAutos);
+    }//GEN-LAST:event_cajaNumSerieAgregarKeyReleased
+
+    private void cajaPrecioAgregarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cajaPrecioAgregarKeyReleased
+        ValidacionesUtil.validarNumeros(cajaPrecioAgregar, internalAgregarAutos, 'N');
+    }//GEN-LAST:event_cajaPrecioAgregarKeyReleased
+
+    private void cajaKilometrajeAgregarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cajaKilometrajeAgregarKeyReleased
+        ValidacionesUtil.validarNumerosEnteros(cajaKilometrajeAgregar, internalAgregarAutos);
+    }//GEN-LAST:event_cajaKilometrajeAgregarKeyReleased
+
+    private void cajaNumSerieModificarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cajaNumSerieModificarKeyReleased
+        ValidacionesUtil.validarLetrasNumeros(cajaNumSerieModificar, internalModificarAutos);
+    }//GEN-LAST:event_cajaNumSerieModificarKeyReleased
+
+    private void comboAnioModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboAnioModificarActionPerformed
+        FechasUtil.cargarDias(comboAnioModificar, comboMesModificar, comboDiaModificar);
+    }//GEN-LAST:event_comboAnioModificarActionPerformed
+
+    private void comboMesModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboMesModificarActionPerformed
+        FechasUtil.cargarDias(comboAnioModificar, comboMesModificar, comboDiaModificar);
+    }//GEN-LAST:event_comboMesModificarActionPerformed
+
+    private void cajaPrecioModificarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cajaPrecioModificarKeyReleased
+        ValidacionesUtil.validarNumeros(cajaPrecioModificar, internalModificarAutos, 'U');
+    }//GEN-LAST:event_cajaPrecioModificarKeyReleased
+
+    private void cajaKilometrajeModificarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cajaKilometrajeModificarKeyReleased
+        ValidacionesUtil.validarNumerosEnteros(cajaKilometrajeModificar, internalModificarAutos);
+    }//GEN-LAST:event_cajaKilometrajeModificarKeyReleased
+
+    private void comboAnioEntradaModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboAnioEntradaModificarActionPerformed
+        FechasUtil.cargarDias(comboAnioEntradaModificar, comboMesEntradaModificar, comboDiaEntradaModificar);
+    }//GEN-LAST:event_comboAnioEntradaModificarActionPerformed
+
+    private void comboMesEntradaModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboMesEntradaModificarActionPerformed
+        FechasUtil.cargarDias(comboAnioEntradaModificar, comboMesEntradaModificar, comboDiaEntradaModificar);
+    }//GEN-LAST:event_comboMesEntradaModificarActionPerformed
+
+    private void cajaVentasPrecioAgregarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cajaVentasPrecioAgregarKeyReleased
+        ValidacionesUtil.validarNumeros(cajaVentasPrecioAgregar, internalAltasVentas, 'N');
+    }//GEN-LAST:event_cajaVentasPrecioAgregarKeyReleased
+
+    private void comboVentasAnioActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboVentasAnioActualizarActionPerformed
+        FechasUtil.cargarDias(comboVentasAnioActualizar, comboVentasMesActualizar, comboVentasDiaActualizar);
+    }//GEN-LAST:event_comboVentasAnioActualizarActionPerformed
+
+    private void comboVentasMesActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboVentasMesActualizarActionPerformed
+        FechasUtil.cargarDias(comboVentasAnioActualizar, comboVentasMesActualizar, comboVentasDiaActualizar);
+    }//GEN-LAST:event_comboVentasMesActualizarActionPerformed
+
+    private void cajaVentasPrecioActualizar1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cajaVentasPrecioActualizar1KeyReleased
+        ValidacionesUtil.validarNumeros(cajaVentasPrecioActualizar1, internalActualizarVentas1, 'U');
+    }//GEN-LAST:event_cajaVentasPrecioActualizar1KeyReleased
+
 
     
     /**
@@ -4193,7 +4792,7 @@ public class VentanaInicio extends javax.swing.JFrame{
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new VentanaInicio().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new VentanaInicio("").setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
