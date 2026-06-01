@@ -14,6 +14,8 @@ import java.util.logging.Logger;
  *
  * @author Eduardo
  */
+
+//Calse para la Conexion a oracle
 public class ConexionBD {
 
     private static final Logger logger = Logger.getLogger(ConexionBD.class.getName());
@@ -36,7 +38,7 @@ public class ConexionBD {
         }
     }
 
-    // Punto de acceso global a la instancia
+    // Punto de acceso global a la instancia (Singleton)
     public static ConexionBD getInstancia() {
         if (instancia == null) {
             instancia = new ConexionBD();
@@ -44,6 +46,7 @@ public class ConexionBD {
         return instancia;
     }
 
+    // es para obtener la conexion a la bd
     public Connection getConnection() {
         try {
             //  reconecta automáticamente
@@ -57,6 +60,8 @@ public class ConexionBD {
         return connection;
     }
     
+    
+    //Inicio de sesion con roles
     public static Connection conectarUsuario(String usuario, String password) throws SQLException {
 
         return DriverManager.getConnection(

@@ -10,6 +10,8 @@ import java.sql.Date;
  *
  * @author Eduardo
  */
+
+//Clase Venta
 public class Venta {
     
     private int idVenta;
@@ -25,7 +27,9 @@ public class Venta {
     private String idEmpleado;
     
     private String nombreVehiculo;
-
+    
+    
+    //Constructor para actualizar (id)
     public Venta(int idVenta, Date fechaVenta, double precioFinal, String formaPago, String idCliente, String idEmpleado, String nombreVehiculo) {
         this.idVenta = idVenta;
         this.fechaVenta = fechaVenta;
@@ -36,6 +40,7 @@ public class Venta {
         this.nombreVehiculo = nombreVehiculo;
     }
     
+    //Cosntructor para agregar (Sin id)
     public Venta(Date fechaVenta, double precioFinal, String formaPago, String idCliente, String idEmpleado, String nombreVehiculo) {
         this.fechaVenta = fechaVenta;
         this.formaPago = formaPago;
@@ -45,6 +50,8 @@ public class Venta {
         this.nombreVehiculo = nombreVehiculo;
     }
 
+    
+    //Getters
     public int getIdVenta() {
         return idVenta;
     }

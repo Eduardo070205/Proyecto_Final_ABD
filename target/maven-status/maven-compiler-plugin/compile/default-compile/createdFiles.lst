@@ -26,7 +26,6 @@ UI\VentanaInicio$51.class
 UI\VentanaInicio$31.class
 UI\VentanaInicio$66.class
 UI\VentanaInicio$60.class
-util\ValidacionesUtil$1.class
 UI\VentanaInicio$40.class
 UI\VentanaInicio$46.class
 UI\VentanaInicio$86.class
@@ -50,9 +49,11 @@ UI\VentanaInicio$74.class
 UI\VentanaInicio$84.class
 UI\VentanaLogin$1.class
 UI\tabla\ButtonRenderer.class
+Facade\SistemaFacade.class
 UI\VentanaInicio$67.class
 UI\VentanaInicio$17.class
 UI\VentanaInicio$57.class
+Service\DescuentoCredito.class
 Repository\IModeloRepository.class
 UI\VentanaInicio$68.class
 UI\VentanaInicio$7.class
@@ -120,6 +121,7 @@ UI\VentanaInicio$25.class
 UI\VentanaInicio$41.class
 UI\VentanaInicio$81.class
 Repository\IVehiculoRepository.class
+Service\DescuentoStrategy.class
 util\CajasUtil.class
 Service\ReporteService.class
 UI\VentanaInicio$70.class

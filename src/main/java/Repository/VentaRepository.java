@@ -27,6 +27,7 @@ public class VentaRepository implements IVentaRepository{
     
     private static final Logger logger = Logger.getLogger(VentaRepository.class.getName());
 
+    //Metodo para obtener todos los registros
     @Override
     public List<Venta> obtenerTodos() {
         List<Venta> lista = new ArrayList<>();
@@ -58,6 +59,7 @@ public class VentaRepository implements IVentaRepository{
         return lista;
     }
 
+    //Metodo para agregar registros
     @Override
     public void agregar(Venta venta) {
         
@@ -136,6 +138,7 @@ public class VentaRepository implements IVentaRepository{
         
     }
 
+    //Metodo para eliminar registros
     @Override
     public void eliminar(int idVenta) {
 
@@ -152,6 +155,7 @@ public class VentaRepository implements IVentaRepository{
         
     }
 
+    //Metodo para obtener registros por id
     public Venta obtenerPorId(int idVenta) {
 
         String sql = """
@@ -213,6 +217,7 @@ public class VentaRepository implements IVentaRepository{
         return null;
     }
 
+    //Metodo para actuializar registros por id
     @Override
     public void actualizar(Venta venta) {
 
@@ -266,6 +271,7 @@ public class VentaRepository implements IVentaRepository{
         }
     }
 
+    //Metodo para obtener registros por id
     @Override
     public List<Venta> buscarPorId(int idVenta) {
 
@@ -287,8 +293,8 @@ public class VentaRepository implements IVentaRepository{
         return ejecutarQuery(sql, idVenta);
     }
 
+    //Metodo para obtener registros por mes
     @Override
-
     public List<Venta> buscarPorMes(String mes) {
         String sql = """
             SELECT 
@@ -307,6 +313,7 @@ public class VentaRepository implements IVentaRepository{
         return ejecutarQuery(sql, Integer.parseInt(mes));
     }
 
+    //Metodo para obtener registros por precio
     @Override
     public List<Venta> buscarPorPrecio(String precio) {
         String sql = """
@@ -326,6 +333,7 @@ public class VentaRepository implements IVentaRepository{
         return ejecutarQuery(sql, Double.parseDouble(precio));
     }
 
+    //Metodo para obtener registros por forma de pago
     @Override
     public List<Venta> buscarPorFormaPago(String formaPago) {
         String sql = """
@@ -345,6 +353,7 @@ public class VentaRepository implements IVentaRepository{
         return ejecutarQuery(sql, "%" + formaPago + "%");
     }
 
+    //Metodo para obtener registros por vehiculo
     @Override
     public List<Venta> buscarPorVehiculo(String vehiculo) {
         String sql = """
@@ -368,7 +377,7 @@ public class VentaRepository implements IVentaRepository{
     }
 
 
-    
+    //Metodo para consulta de busquedas
     private List<Venta> ejecutarQuery(String sql, Object parametro) {
 
         List<Venta> lista = new ArrayList<>();
@@ -433,6 +442,7 @@ public class VentaRepository implements IVentaRepository{
         return lista;
     }
 
+    //Metodo para obtener descuento por contado con el p;procedimiento almacenado
     public double calcularDescuento(double precio, String formaPago) {
 
         String sql =
@@ -470,6 +480,7 @@ public class VentaRepository implements IVentaRepository{
         }
     }
 
+    //Metodo para calcular la comision del empleado con funcion
     public double calcularComision(double precio) {
 
         String sql = "SELECT CalcularComision(?) AS COMISION FROM DUAL";
@@ -499,6 +510,7 @@ public class VentaRepository implements IVentaRepository{
         return 0;
     }
 
+    //Metodo para obtner las ventas por mes
     @Override
     public Map<String, Integer> obtenerVentasPorMes(int anio) {
         Map<String, Integer> datos = new LinkedHashMap<>();

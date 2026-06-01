@@ -14,6 +14,8 @@ import util.ValidacionesUtil;
  *
  * @author Eduardo
  */
+
+//Servicio que regresa los resultado de los respositorios
 public class VentaService implements IVentaService{
     
     private final IVentaRepository ventaRepository;

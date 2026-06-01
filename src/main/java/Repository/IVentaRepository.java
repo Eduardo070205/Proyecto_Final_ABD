@@ -13,6 +13,8 @@ import java.util.Map;
  *
  * @author Eduardo
  */
+
+//Interfaz de VentaRepository
 public interface IVentaRepository {
     
     List<Venta> obtenerTodos();

@@ -12,6 +12,7 @@ import java.util.Map;
  *
  * @author Eduardo
  */
+//Intrfaz para el servicio de la venta
 public interface IVentaService {
     
     List<Venta> obtenerTodos();

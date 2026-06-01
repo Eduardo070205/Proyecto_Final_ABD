@@ -16,6 +16,8 @@ public class ModeloRepository implements IModeloRepository {
 
     private static final Logger logger = Logger.getLogger(ModeloRepository.class.getName());
 
+    
+    //Metodo para obtener todos los registros
     @Override
     public List<Modelo> obtenerTodos() {
         List<Modelo> lista = new ArrayList<>();
@@ -48,6 +50,8 @@ public class ModeloRepository implements IModeloRepository {
 
         return lista;
     }
+    
+    //Metodo para agregar registros
 
     @Override
     public void agregar(Modelo modelo) {
@@ -75,6 +79,7 @@ public class ModeloRepository implements IModeloRepository {
         
     }    
     
+    //Metodo para eliminar registros
     @Override
     public void eliminar(int idModelo) {
         String sql = "DELETE FROM Modelos WHERE ID_Modelo = ?";
@@ -84,10 +89,13 @@ public class ModeloRepository implements IModeloRepository {
             ps.setInt(1, idModelo);
             ps.executeUpdate();
         } catch (SQLException e) {
-            logger.log(Level.SEVERE, "Error al eliminar modelo: " + e.getMessage(), e);
+            
+            throw new RuntimeException(e);
+            
         }
     }
 
+    //Metodo para obtener registros por id
     @Override
     public Modelo obtenerPorId(int idModelo) {
         String sql = "SELECT * FROM Modelos WHERE ID_Modelo = ?";
@@ -116,6 +124,7 @@ public class ModeloRepository implements IModeloRepository {
         return null;
     }
     
+    //Metodo para actualizar registros por id
     @Override
     public void actualizar(Modelo modelo) {
         String sql = "UPDATE Modelos SET Nombre_Modelo = ?, Anio_Modelo = ?, Fabricante = ?, " +
@@ -141,37 +150,44 @@ public class ModeloRepository implements IModeloRepository {
         }
     }
     
+    
+    //Metodo para obtener registros por id
     @Override
     public List<Modelo> buscarPorId(int id) {
         return ejecutarQuery("SELECT * FROM Modelos WHERE ID_Modelo = ?", id);
     }
-
+    
+    //Metodo para obtener registros por nombre
     @Override
     public List<Modelo> buscarPorNombre(String nombre) {
         return ejecutarQuery("SELECT * FROM Modelos WHERE UPPER(Nombre_Modelo) LIKE UPPER(?)", "%" + nombre + "%");
     }
 
+     //Metodo para obtener registros por año
     @Override
     public List<Modelo> buscarPorAnio(int anio) {
         return ejecutarQuery("SELECT * FROM Modelos WHERE Anio_Modelo = ?", anio);
     }
 
+     //Metodo para obtener registros por fabricante
     @Override
     public List<Modelo> buscarPorFabricante(String fabricante) {
         return ejecutarQuery("SELECT * FROM Modelos WHERE UPPER(Fabricante) LIKE UPPER(?)", "%" + fabricante + "%");
     }
 
+     //Metodo para obtener registros por cilindros
     @Override
     public List<Modelo> buscarPorCilindros(int cilindros) {
         return ejecutarQuery("SELECT * FROM Modelos WHERE Numero_Cilindros = ?", cilindros);
     }
 
+     //Metodo para obtener registros por pais
     @Override
     public List<Modelo> buscarPorPais(String pais) {
         return ejecutarQuery("SELECT * FROM Modelos WHERE UPPER(Pais_Fabricacion) LIKE UPPER(?)", "%" + pais + "%");
     }
 
-    // Método privado para no repetir código — SRP
+    // Método privado para ejecutar las conslutas de busqueda
     private List<Modelo> ejecutarQuery(String sql, Object parametro) {
         List<Modelo> lista = new ArrayList<>();
         try {

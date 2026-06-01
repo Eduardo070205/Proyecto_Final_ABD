@@ -84,66 +84,69 @@ public class ValidacionesUtil {
     
 
     
-    public static void validarNumeros(JTextField caja, JInternalFrame internal, char accion) {
-
-        boolean esActualizacion = (accion == 'U');
-
-        ((AbstractDocument) caja.getDocument()).setDocumentFilter(new DocumentFilter() {
-
-            @Override
-            public void insertString(FilterBypass fb, int offset, String text, AttributeSet attr)
-                    throws BadLocationException {
-                replace(fb, offset, 0, text, attr);
+    public static void validarNumeros(JTextField caja, JInternalFrame internal, char accion){
+        
+        String ultimoElemento;
+        
+        String cadena = caja.getText();
+        byte contPuntos = 0;
+        
+        if(accion == 'U' && caja.getText().contains(".")){
+            puntoDecimal = true;
+        }
+        
+      
+        int numeroCaracteres = (caja.getText().length());
+ 
+        
+        if(numeroCaracteres == 0){
+            
+            ultimoElemento = null;
+            
+        }else{
+       
+            ultimoElemento = String.valueOf(caja.getText().charAt(numeroCaracteres-1));
+            
+        }
+        
+        for(int i = 0; i < cadena.length(); i++){
+            
+            if(cadena.charAt(i) == 46){
+                
+                contPuntos++;
+                
             }
+            
+        }
+        
+        if(contPuntos == 0){
+            
+            puntoDecimal = false;
+            
+        }
+        
+        
+        
+        if(ultimoElemento != null){
+            
+            if((ultimoElemento.codePointAt(0) >= 48 && ultimoElemento.codePointAt(0) <= 57) || (ultimoElemento.charAt(0) == 46 && puntoDecimal == false)){        
+            
+                if(ultimoElemento.charAt(0) == 46){
 
-            @Override
-            public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs)
-                    throws BadLocationException {
+                    puntoDecimal = true;
 
-                String actual = fb.getDocument().getText(0, fb.getDocument().getLength());
-
-                String nuevo = new StringBuilder(actual)
-                        .replace(offset, offset + length, text)
-                        .toString();
-
-                if (esValido(nuevo, esActualizacion)) {
-                    super.replace(fb, offset, length, text, attrs);
-                } else {
-                    JOptionPane.showMessageDialog(internal,
-                            "Solo puedes ingresar números y un punto decimal");
                 }
+            
+            }else{
+
+                JOptionPane.showMessageDialog(internal, "Solo puedes ingresar numéros");
+
+                caja.setText(cadena.substring(0, cadena.length()-1));
+
             }
-
-            private boolean esValido(String texto, boolean esActualizacion) {
-
-                if (texto.isEmpty()) return true;
-
-                boolean tienePunto = false;
-
-                for (char c : texto.toCharArray()) {
-
-                    if (Character.isDigit(c)) {
-                        continue;
-                    }
-
-                    if (c == '.') {
-
-                        //Aquí ya “toma en cuenta” actualización vs nuevo
-                        if (tienePunto) {
-                            return false;
-                        }
-
-                        // En actualización o nuevo, solo se permite uno
-                        tienePunto = true;
-                        continue;
-                    }
-
-                    return false;
-                }
-
-                return true;
-            }
-        });
+            
+        }
+            
     }
     
     public static void validarLetrasNumeros(JTextField caja, JInternalFrame internal){

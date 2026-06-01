@@ -10,6 +10,8 @@ import java.awt.Color;
  *
  * @author Eduardo
  */
+
+//clase de colores usados
 public class Colores {
     
     public static final Color COLOR_PRINCIPAL = new Color(247,227,178);

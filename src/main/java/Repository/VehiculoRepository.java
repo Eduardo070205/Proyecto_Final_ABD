@@ -25,6 +25,7 @@ public class VehiculoRepository implements IVehiculoRepository{
     
     private static final Logger logger = Logger.getLogger(VehiculoRepository.class.getName());
 
+    //Metodo para obtener todos los registros
     @Override
     public List<Vehiculo> obtenerTodos() {
         
@@ -70,7 +71,8 @@ public class VehiculoRepository implements IVehiculoRepository{
         return lista;
        
     }
-
+    
+    //Metodo para agregar registros
     @Override
     public void agregar(Vehiculo vehiculo) {
 
@@ -126,6 +128,7 @@ public class VehiculoRepository implements IVehiculoRepository{
         }
     }
 
+    //Metodo para eliminar registros
     @Override
     public void eliminar(String idVehiculo) {
                
@@ -137,10 +140,13 @@ public class VehiculoRepository implements IVehiculoRepository{
             ps.setString(1, idVehiculo);
             ps.executeUpdate();
         } catch (SQLException e) {
-            logger.log(Level.SEVERE, "Error al eliminar vehiculo: " + e.getMessage(), e);
+
+            throw new RuntimeException(e);
+
         }
     }
 
+    //Metodo para obtener registros por id
     @Override
     public Vehiculo obtenerPorId(String idVehiculo) {
 
@@ -211,6 +217,7 @@ public class VehiculoRepository implements IVehiculoRepository{
         return null;
     }
 
+    //Metodo para actualizar registros por id
     @Override
     public void actualizar(Vehiculo vehiculo) {
         
@@ -276,6 +283,7 @@ public class VehiculoRepository implements IVehiculoRepository{
 
     }
 
+    //Metodo para buscar registros por id
     @Override
     public List<Vehiculo> buscarPorId(String id) {
         return ejecutarQuery("""
@@ -296,6 +304,7 @@ public class VehiculoRepository implements IVehiculoRepository{
             """, "%" + id + "%");
     }
 
+    //Metodo para buscar registros por modelo
     @Override
     public List<Vehiculo> buscarPorModelo(String modelo) {
         return ejecutarQuery("""
@@ -317,7 +326,7 @@ public class VehiculoRepository implements IVehiculoRepository{
     }
         
        
-
+    //Metodo para buscar registros por año de fabricación
     @Override
     public List<Vehiculo> buscarPorAnioFab(int anio) {
         return ejecutarQuery("""
@@ -338,6 +347,7 @@ public class VehiculoRepository implements IVehiculoRepository{
             """, anio);
     }
 
+    //Metodo para buscar registros por precio
     @Override
     public List<Vehiculo> buscarPorPrecio(double precio) {
         return ejecutarQuery("""
@@ -357,7 +367,8 @@ public class VehiculoRepository implements IVehiculoRepository{
             WHERE v.Precio <= ?
             """, precio);
     }
-
+    
+    //Metodo para buscar registros por tipo
     @Override
     public List<Vehiculo> buscarPorTipo(String tipo) {
         return ejecutarQuery("""
@@ -378,6 +389,7 @@ public class VehiculoRepository implements IVehiculoRepository{
             """, tipo);
     }
 
+    //Metodo para buscar registros por Estado
     @Override
     public List<Vehiculo> buscarPorEstado(String estado) {
         return ejecutarQuery("""
@@ -398,6 +410,8 @@ public class VehiculoRepository implements IVehiculoRepository{
             """, estado);
     }
 
+    
+    //Metodo para realizar las conslutas de busqueda
     private List<Vehiculo> ejecutarQuery(String sql, Object parametro) {
         List<Vehiculo> lista = new ArrayList<>();
         try {
@@ -438,6 +452,7 @@ public class VehiculoRepository implements IVehiculoRepository{
         return lista;
     }
     
+    //Metodo para obtener los vehiculos disponible con joins (vista)
     @Override
     public List<Vehiculo> obtenerVehiculosDisponibles() {
         

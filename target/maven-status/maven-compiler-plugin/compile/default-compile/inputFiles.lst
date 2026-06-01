@@ -1,5 +1,6 @@
 C:\Users\eduar\Documents\ITSJ\6. Sexto Semestre\Administración de Bases de Datos\Proyecto Final\Proyecto_Final_ABD_AutosAmistosos\src\main\java\BD\ConexionBD.java
 C:\Users\eduar\Documents\ITSJ\6. Sexto Semestre\Administración de Bases de Datos\Proyecto Final\Proyecto_Final_ABD_AutosAmistosos\src\main\java\com\mycompany\proyecto_final_abd_autosamistosos\Proyecto_Final_ABD_AutosAmistosos.java
+C:\Users\eduar\Documents\ITSJ\6. Sexto Semestre\Administración de Bases de Datos\Proyecto Final\Proyecto_Final_ABD_AutosAmistosos\src\main\java\Facade\SistemaFacade.java
 C:\Users\eduar\Documents\ITSJ\6. Sexto Semestre\Administración de Bases de Datos\Proyecto Final\Proyecto_Final_ABD_AutosAmistosos\src\main\java\Factory\ModeloFactory.java
 C:\Users\eduar\Documents\ITSJ\6. Sexto Semestre\Administración de Bases de Datos\Proyecto Final\Proyecto_Final_ABD_AutosAmistosos\src\main\java\Factory\VehiculoFactory.java
 C:\Users\eduar\Documents\ITSJ\6. Sexto Semestre\Administración de Bases de Datos\Proyecto Final\Proyecto_Final_ABD_AutosAmistosos\src\main\java\Factory\VentaFactory.java
@@ -12,6 +13,8 @@ C:\Users\eduar\Documents\ITSJ\6. Sexto Semestre\Administración de Bases de Dato
 C:\Users\eduar\Documents\ITSJ\6. Sexto Semestre\Administración de Bases de Datos\Proyecto Final\Proyecto_Final_ABD_AutosAmistosos\src\main\java\Repository\ModeloRepository.java
 C:\Users\eduar\Documents\ITSJ\6. Sexto Semestre\Administración de Bases de Datos\Proyecto Final\Proyecto_Final_ABD_AutosAmistosos\src\main\java\Repository\VehiculoRepository.java
 C:\Users\eduar\Documents\ITSJ\6. Sexto Semestre\Administración de Bases de Datos\Proyecto Final\Proyecto_Final_ABD_AutosAmistosos\src\main\java\Repository\VentaRepository.java
+C:\Users\eduar\Documents\ITSJ\6. Sexto Semestre\Administración de Bases de Datos\Proyecto Final\Proyecto_Final_ABD_AutosAmistosos\src\main\java\Service\DescuentoCredito.java
+C:\Users\eduar\Documents\ITSJ\6. Sexto Semestre\Administración de Bases de Datos\Proyecto Final\Proyecto_Final_ABD_AutosAmistosos\src\main\java\Service\DescuentoStrategy.java
 C:\Users\eduar\Documents\ITSJ\6. Sexto Semestre\Administración de Bases de Datos\Proyecto Final\Proyecto_Final_ABD_AutosAmistosos\src\main\java\Service\IModeloService.java
 C:\Users\eduar\Documents\ITSJ\6. Sexto Semestre\Administración de Bases de Datos\Proyecto Final\Proyecto_Final_ABD_AutosAmistosos\src\main\java\Service\IVehiculoService.java
 C:\Users\eduar\Documents\ITSJ\6. Sexto Semestre\Administración de Bases de Datos\Proyecto Final\Proyecto_Final_ABD_AutosAmistosos\src\main\java\Service\IVentaService.java

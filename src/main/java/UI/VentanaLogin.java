@@ -18,10 +18,7 @@ import javax.swing.SwingUtilities;
 public class VentanaLogin extends javax.swing.JFrame {
     
     LoginController loginController = new LoginController();
-    
-
-
-
+   
     
     //ConexionBD con;
     
@@ -227,6 +224,8 @@ public class VentanaLogin extends javax.swing.JFrame {
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
        
+        //Acciones del boton login
+        
         String usuario = cajaUsuarioLogin.getText().trim();
         String contrasena = new String(cajaContrasenaLogin.getPassword()).trim();
 

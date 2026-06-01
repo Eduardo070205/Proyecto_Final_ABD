@@ -8,7 +8,7 @@ import javax.swing.*;
 import javax.swing.table.TableCellRenderer;
 import java.awt.*;
 
-// SRP: solo se encarga de renderizar el botón en la celda
+// Render del boton de la tabla
 public class ButtonRenderer extends JButton implements TableCellRenderer {
 
     

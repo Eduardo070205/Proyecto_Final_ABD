@@ -11,6 +11,8 @@ import java.util.List;
  *
  * @author Eduardo
  */
+
+//Interfaz de ModeloRepository
 public interface IModeloRepository {
     
     List<Modelo> obtenerTodos();

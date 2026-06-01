@@ -11,6 +11,8 @@ import javax.swing.*;
  *
  * @author Eduardo
  */
+
+//Calse para contrloar los clores de los botones del menu
 public class NavegacionController {
     
     public void mostrarPanel(JInternalFrame visible, JInternalFrame... otros) {

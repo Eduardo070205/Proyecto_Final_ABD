@@ -7,6 +7,7 @@ package Service;
 import Modelo.Modelo;
 import java.util.List;
 
+//Intrfaz para el servicio del modelo
 public interface IModeloService {
     
     List<Modelo> obtenerTodos();

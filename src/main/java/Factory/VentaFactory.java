@@ -11,45 +11,47 @@ import java.sql.Date;
  *
  * @author Eduardo
  */
+
+//Factory Method (Venta)
 public class VentaFactory {
 
     public static Venta actualizarVenta(
             int idVenta,
-            String fecha,
-            String precio,
-            Object formaPago,
-            Object cliente,
-            Object empleado,
-            Object vehiculo
+            Date fecha,
+            double precio,
+            String formaPago,
+            String cliente,
+            String empleado,
+            String vehiculo
     ) {
 
         return new Venta(
-                idVenta,
-                java.sql.Date.valueOf(fecha),
-                Double.parseDouble(precio),
-                formaPago.toString(),
-                cliente.toString(),
-                empleado.toString(),
-                vehiculo.toString()
+            idVenta,
+            fecha,
+            precio,
+            formaPago,
+            cliente,
+            empleado,
+            vehiculo
         );
     }
     
     public static Venta crearVenta(
             Date fecha,
-            Object formaPago,
-            String precio,
-            Object cliente,
-            Object empleado,
-            Object vehiculo
+            double precio,
+            String formaPago,
+            String cliente,
+            String empleado,
+            String vehiculo
     ) {
 
         return new Venta(
                 fecha,
-                Double.parseDouble(precio),
-                formaPago.toString(),
-                cliente.toString(),
-                empleado.toString(),
-                vehiculo.toString()
+                precio,
+                formaPago,
+                cliente,
+                empleado,
+                vehiculo
         );
     }
 }

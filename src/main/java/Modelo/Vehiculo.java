@@ -13,6 +13,8 @@ import java.time.LocalDate;
  *
  * @author Eduardo
  */
+
+//Clase vehiculo
 public class Vehiculo {
     
     private String idVehiculo;
@@ -27,7 +29,7 @@ public class Vehiculo {
     
     
 
-
+    //Cosntructor
     public Vehiculo(String idVehiculo, String numeroSerie, String nombreModelo, Date fechaFabricacion, double precio, int kilometraje, Date fechaEntrada, String tipo, String estado) {
         this.idVehiculo = idVehiculo;
         this.numeroSerie = numeroSerie;
@@ -39,6 +41,8 @@ public class Vehiculo {
         this.tipo = tipo;
         this.estado = estado;
     }
+    
+    //Getters
 
     public String getIdVehiculo() {
         return idVehiculo;

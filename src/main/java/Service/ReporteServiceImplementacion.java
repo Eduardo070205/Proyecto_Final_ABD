@@ -16,6 +16,8 @@ import net.sf.jasperreports.view.JasperViewer;
  *
  * @author Eduardo
  */
+
+//clase para generar el reporte
 public class ReporteServiceImplementacion implements ReporteService{
 
     @Override

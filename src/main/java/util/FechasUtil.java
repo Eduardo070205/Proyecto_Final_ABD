@@ -10,6 +10,8 @@ import javax.swing.JComboBox;
  *
  * @author Eduardo
  */
+
+//Clase para configurar las fechas
 public class FechasUtil {
     
     public static void cargarDias(JComboBox comboAnio,

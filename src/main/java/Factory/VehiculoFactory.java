@@ -11,6 +11,8 @@ import java.sql.Date;
  *
  * @author Eduardo
  */
+
+//Factory Method (Vehiculo)
 public class VehiculoFactory {
 
     public static Vehiculo crearVehiculo(

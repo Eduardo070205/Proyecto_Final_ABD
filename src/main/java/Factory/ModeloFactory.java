@@ -10,6 +10,8 @@ import Modelo.Modelo;
  *
  * @author Eduardo
  */
+
+//Factory Method pratron de diseño creacional (Modelo)
 public class ModeloFactory {
 
     public static Modelo actualizarModelo(

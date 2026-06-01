@@ -13,6 +13,8 @@ import util.ValidacionesUtil;
  *
  * @author Eduardo
  */
+
+//Servicio que regredsa los resultado de los respositorios
 public class ModeloService implements IModeloService {
 
     // DIP: depende de la interfaz, no de la implementación concreta

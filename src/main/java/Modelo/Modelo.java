@@ -8,7 +8,11 @@ package Modelo;
  *
  * @author Eduardo
  */
+
+//Case modelo 
 public class Modelo {
+    
+    //Atributos
     private int idModelo;
     private String nombreModelo;
     private int anioModelo;
@@ -20,6 +24,8 @@ public class Modelo {
     private String colorBase;
     private String paisFabricacion;
     
+    
+    //Construcctor con id para actualizaciones
     public Modelo(int idModelo, String nombreModelo, int anioModelo, String fabricante,
                   int numeroCilindros, int numeroPuertas, double pesoKg,
                   int capacidadPasajeros, String colorBase, String paisFabricacion) {
@@ -34,6 +40,8 @@ public class Modelo {
         this.colorBase = colorBase;
         this.paisFabricacion = paisFabricacion;
     }
+    
+    //Constructor sin id para agregaciones
 
     public Modelo(String nombreModelo, int anioModelo, String fabricante,
                   int numeroCilindros, int numeroPuertas, double pesoKg,

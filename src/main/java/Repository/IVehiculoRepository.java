@@ -12,6 +12,8 @@ import java.util.List;
  *
  * @author Eduardo
  */
+
+//Interfaz de vehiculoRepository
 public interface IVehiculoRepository {
     
     List<Vehiculo> obtenerTodos();

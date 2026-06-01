@@ -8,7 +8,7 @@ import javax.swing.table.TableCellEditor;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
-// SRP: solo se encarga de manejar el clic del botón en la celda
+// Edicion de los botones de la tabla
 public class ButtonEditor extends AbstractCellEditor implements TableCellEditor {
 
    private final JButton boton;

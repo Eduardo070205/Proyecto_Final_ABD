@@ -15,8 +15,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+
+//Clase del controlador de login
 public class LoginController {
 
+    //Verificar
     public boolean validarCredenciales(String usuario, String contrasena) {
         try {
             Connection con = ConexionBD.conectarUsuario(usuario, contrasena);
@@ -27,6 +30,7 @@ public class LoginController {
         }
     }
 
+    //Obtener el rol de Oracle
     public String obtenerRol(String usuario, String contrasena) {
         String sql = "SELECT GRANTED_ROLE FROM USER_ROLE_PRIVS";
         try {

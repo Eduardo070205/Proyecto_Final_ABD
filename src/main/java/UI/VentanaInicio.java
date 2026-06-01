@@ -7,6 +7,7 @@ package UI;
 
 
 
+import Facade.SistemaFacade;
 import Factory.ModeloFactory;
 import Factory.VehiculoFactory;
 import Factory.VentaFactory;
@@ -17,6 +18,8 @@ import util.ComboBoxUtil;
 import Repository.ModeloRepository;
 import Repository.VehiculoRepository;
 import Repository.VentaRepository;
+import Service.DescuentoStrategy;
+import Service.DescuentoCredito;
 import Service.IModeloService;
 import Service.IVehiculoService;
 import Service.IVentaService;
@@ -32,6 +35,7 @@ import java.awt.Image;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.util.Arrays;
@@ -2713,6 +2717,8 @@ public class VentanaInicio extends javax.swing.JFrame{
         
     }
     
+    
+    //Metodo para configurar la vista de aucrdo al rol
     private void configurarVistaPorRol() {
         switch (rol) {
             case "C##ROL_ADMIN" -> {
@@ -2737,6 +2743,7 @@ public class VentanaInicio extends javax.swing.JFrame{
         }
     }
     
+    //Metodo para mostra la grafica de ventas
     private void mostrarGraficaVentas(int anio) {
         
 
@@ -2807,9 +2814,42 @@ public class VentanaInicio extends javax.swing.JFrame{
         );
 
         if (respuesta == JOptionPane.YES_OPTION) {
-            modeloService.eliminar(idModelo);
-            JOptionPane.showMessageDialog(this, "Modelo eliminado correctamente");
-            cargarTablaModelos();
+            
+            try{
+               
+                modeloService.eliminar(idModelo);
+                JOptionPane.showMessageDialog(this, "Modelo eliminado correctamente");
+                cargarTablaModelos();
+            }catch (Exception e) {
+
+                e.printStackTrace();
+
+                String mensaje = "Error al eliminar el modelo";
+
+                Throwable t = e;
+
+                while (t != null) {
+
+                    if (t instanceof SQLException sqlEx) {
+
+                        if (sqlEx.getErrorCode() == 2292) {
+
+                            mensaje = "No se puede eliminar el modelo porque el esta relacionado a vehículo que tienen ventas relacionadas.";
+                            break;
+                        }
+                    }
+
+                    t = t.getCause();
+                }
+
+                JOptionPane.showMessageDialog(
+                    this,
+                    mensaje,
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE
+                );
+            }
+            
         }
     
     }
@@ -2824,15 +2864,15 @@ public class VentanaInicio extends javax.swing.JFrame{
             try {
                 Modelo modelo = ModeloFactory.actualizarModelo(
                     idModeloSeleccionado,  
-                    cajaModelosNombreActualizar.getText().trim(),
+                    cajaModelosNombreActualizar.getText().trim().toUpperCase(),
                     Integer.parseInt((String) comboModelosAnioActualizar.getSelectedItem()),
-                    cajaModelosFabricanteActualizar.getText().trim(),
+                    cajaModelosFabricanteActualizar.getText().trim().toUpperCase(),
                     Integer.parseInt((String) comboModelosCilindrosActualizar.getSelectedItem()),
-                    Integer.parseInt(cajaModelosPuertasActualizar.getText().trim()),
-                    Double.parseDouble(cajaModelosPesoActualizar.getText().trim()),
-                    Integer.parseInt(cajaModelosPasajerosActualizar.getText().trim()),
-                    cajaModelosColorActualizar.getText().trim(),
-                    cajaModelosPaisActualizar.getText().trim()
+                    Integer.parseInt(cajaModelosPuertasActualizar.getText().trim().toUpperCase()),
+                    Double.parseDouble(cajaModelosPesoActualizar.getText().trim().toUpperCase()),
+                    Integer.parseInt(cajaModelosPasajerosActualizar.getText().trim().toUpperCase()),
+                    cajaModelosColorActualizar.getText().trim().toUpperCase(),
+                    cajaModelosPaisActualizar.getText().trim().toUpperCase()
                 );
 
                 modeloService.actualizar(modelo);
@@ -3170,12 +3210,12 @@ public class VentanaInicio extends javax.swing.JFrame{
             
                 Vehiculo vehiculo = VehiculoFactory.crearVehiculo(
                     idVehiculoSeleccionado,
-                    cajaNumSerieModificar.getText(),
+                    cajaNumSerieModificar.getText().toUpperCase(),
                     (String)comboModeloModificar.getSelectedItem(),
                     Date.valueOf(fechaFabricacion),
                     Double.parseDouble(cajaPrecioModificar.getText()),
                     Integer.parseInt(cajaKilometrajeModificar.getText()),
-                    Date.valueOf(fechaEntrada.toString()),
+                    Date.valueOf(fechaEntrada),
                     (String)comboTipoModificar.getSelectedItem(),
                     (String)comboEstadoModificar.getSelectedItem()
                 );
@@ -3208,9 +3248,42 @@ public class VentanaInicio extends javax.swing.JFrame{
         );
 
         if (respuesta == JOptionPane.YES_OPTION) {
-            vehiculoService.eliminar(idVehiculo);
-            JOptionPane.showMessageDialog(this, "Vehiculo eliminado correctamente");
-            cargarTablaVehiculos();
+            
+            try{
+                vehiculoService.eliminar(idVehiculo);
+                JOptionPane.showMessageDialog(this, "Vehiculo eliminado correctamente");
+                cargarTablaVehiculos();
+                
+            }catch (Exception e) {
+
+                e.printStackTrace();
+
+                String mensaje = "Error al eliminar el vehículo";
+
+                Throwable t = e;
+
+                while (t != null) {
+
+                    if (t instanceof SQLException sqlEx) {
+
+                        if (sqlEx.getErrorCode() == 2292) {
+
+                            mensaje = "No se puede eliminar el vehículo porque tiene ventas registradas.";
+                            break;
+                        }
+                    }
+
+                    t = t.getCause();
+                }
+
+                JOptionPane.showMessageDialog(
+                    this,
+                    mensaje,
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE
+                );
+            }   
+            
         }
     
     }
@@ -3713,12 +3786,12 @@ public class VentanaInicio extends javax.swing.JFrame{
 
                 Venta venta = VentaFactory.actualizarVenta(
                     idVentaSeleccionada,
-                    fechaVenta.toString(),
-                    cajaVentasPrecioActualizar1.getText(),
-                    comboVentasFormaActualizar.getSelectedItem(),
-                    comboVentasClienteActualizar.getSelectedItem(),
-                    comboVentasEmpleadoActualizar.getSelectedItem(),
-                    comboVentasvehiculoActualizar.getSelectedItem()
+                    Date.valueOf(fechaVenta),
+                    Double.parseDouble(cajaVentasPrecioActualizar1.getText()),
+                    comboVentasFormaActualizar.getSelectedItem().toString(),
+                    comboVentasClienteActualizar.getSelectedItem().toString(),
+                    comboVentasEmpleadoActualizar.getSelectedItem().toString(),
+                    comboVentasvehiculoActualizar.getSelectedItem().toString()
                 );
                 ventaService.actualizar(venta);
 
@@ -4129,6 +4202,8 @@ public class VentanaInicio extends javax.swing.JFrame{
 
     private void btnModelosAgregarAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModelosAgregarAgregarActionPerformed
         
+        SistemaFacade facade = new SistemaFacade();
+        
         ValidacionesUtil.camposVacios(internalAgregarModelos, cajaModelosNombreAgregar, cajaModelosFabricanteAgregar, cajaModelosColorAgregar, cajaModelosPaisAgregar,
                                        cajaModelosPuertasAgregar, cajaModelosPesoAgregar, cajaModelosPasajerosAgregar);
         
@@ -4136,20 +4211,20 @@ public class VentanaInicio extends javax.swing.JFrame{
         if(ValidacionesUtil.sePuedeAgregar()){
             
             try {
-                Modelo modelo = ModeloFactory.crearModelo(
+                
+                facade.agregarModelo(
 
-                    cajaModelosNombreAgregar.getText().trim(),
+                    cajaModelosNombreAgregar.getText().trim().toUpperCase(),
                     Integer.parseInt((String) comboModelosAnioAgregar.getSelectedItem()),
                     cajaModelosFabricanteAgregar.getText().trim(),
                     Integer.parseInt((String) comboModelosCilindrosAgregar.getSelectedItem()),
                     Integer.parseInt(cajaModelosPuertasAgregar.getText().trim()),
                     Double.parseDouble(cajaModelosPesoAgregar.getText().trim()),
                     Integer.parseInt(cajaModelosPasajerosAgregar.getText().trim()),
-                    cajaModelosColorAgregar.getText().trim(),
-                    cajaModelosPaisAgregar.getText().trim()
+                    cajaModelosColorAgregar.getText().trim().toUpperCase(),
+                    cajaModelosPaisAgregar.getText().trim().toUpperCase()
                 );
-
-                modeloService.agregar(modelo);
+            
                 JOptionPane.showMessageDialog(this, "Modelo agregado correctamente");
                 internalAgregarModelos.setVisible(false);
                 cargarTablaModelos(); 
@@ -4266,6 +4341,8 @@ public class VentanaInicio extends javax.swing.JFrame{
 
     private void btnAgregarAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarAgregarActionPerformed
         
+        SistemaFacade facade = new SistemaFacade();
+        
         ValidacionesUtil.camposVacios(internalAgregarAutos, cajaNumVehiculoAgregar, cajaNumSerieAgregar, cajaPrecioAgregar, cajaKilometrajeAgregar);
         
         String fechaFabricacion = ValidacionesUtil.validarFecha(comboAnioAgregar, comboMesAgregar, comboDiaAgregar, internalAgregarAutos);
@@ -4274,9 +4351,9 @@ public class VentanaInicio extends javax.swing.JFrame{
             
             try{
             
-                Vehiculo vehiculo = VehiculoFactory.crearVehiculo(
+                facade.agregarVehiculo(
                     cajaNumVehiculoAgregar.getText().toUpperCase(),
-                    cajaNumSerieAgregar.getText(),
+                    cajaNumSerieAgregar.getText().toUpperCase(),
                     (String)comboModeloAgregar.getSelectedItem(),
                     Date.valueOf(fechaFabricacion),
                     Double.parseDouble(cajaPrecioAgregar.getText()),
@@ -4286,8 +4363,9 @@ public class VentanaInicio extends javax.swing.JFrame{
                     "Disponible"    
                 );
 
-                vehiculoService.agregar(vehiculo);
                 JOptionPane.showMessageDialog(this, "Vehiculo agregado correctamente");
+                
+                
                 internalAgregarAutos.setVisible(false);
                 RestablecerUtil.restablecer(cajaNumVehiculoAgregar, cajaNumSerieAgregar, comboModeloAgregar, comboAnioAgregar, comboMesAgregar, 
                     comboDiaAgregar, comboTipoAgregar, cajaPrecioAgregar, cajaKilometrajeAgregar);
@@ -4296,7 +4374,33 @@ public class VentanaInicio extends javax.swing.JFrame{
             }catch (Exception e) {
 
                 e.printStackTrace();
-                JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+
+                String mensaje = "Error al agregar vehículo";
+
+                Throwable t = e;
+
+                while (t != null) {
+
+                    if (t instanceof SQLException sqlEx) {
+
+                        if (sqlEx.getErrorCode() == 1) {
+
+                            mensaje = "Ya existe un vehículo con ese ID";
+                            break;
+
+                        }
+
+                    }
+
+                    t = t.getCause();
+                }
+
+                JOptionPane.showMessageDialog(
+                    this,
+                    mensaje,
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE
+                );
             }
             
         }
@@ -4342,6 +4446,9 @@ public class VentanaInicio extends javax.swing.JFrame{
     }//GEN-LAST:event_comboVentasBuscarActionPerformed
 
     private void btnVentasAgregarAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVentasAgregarAgregarActionPerformed
+        
+        SistemaFacade facade = new SistemaFacade();
+
         
         ValidacionesUtil.camposVacios(internalAltasVentas, cajaVentasPrecioAgregar);
         
@@ -4399,6 +4506,15 @@ public class VentanaInicio extends javax.swing.JFrame{
                         this,
                         "Se aplicó un descuento del 10%"
                     );
+                }else{
+                    
+                    DescuentoStrategy estrategia = new DescuentoCredito();;
+                
+                    JOptionPane.showMessageDialog(
+                        this,
+                        estrategia.obtenerMensaje()
+                    );
+
                 }
 
                 double comision = ventaService.calcularComision(

@@ -17,6 +17,8 @@ import java.util.List;
  *
  * @author Eduardo
  */
+
+//Clase para rellenar los combobox 
 public class ComboBoxUtil {
     
     private ComboBoxUtil() {} 

@@ -14,6 +14,8 @@ import javax.swing.JTextField;
  *
  * @author Eduardo
  */
+
+//Clase para solo restablecer componentes
 public class RestablecerUtil {
     
         public static void restablecer(JComponent... componentes){

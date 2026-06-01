@@ -10,6 +10,8 @@ import javax.swing.JComponent;
  *
  * @author Eduardo
  */
+
+//Clase para opciones de las cajas de texto
 public class CajasUtil {
     
         public static void ocultarComponentes(JComponent componente, JComponent... componentes){

@@ -15,6 +15,8 @@ import util.ValidacionesUtil;
  *
  * @author Eduardo
  */
+
+//Servicio que regresa los resultado de los respositorios
 public class VehiculoService implements IVehiculoService{
     
     private final IVehiculoRepository vehiculoRepository;

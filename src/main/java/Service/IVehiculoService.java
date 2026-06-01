@@ -12,6 +12,7 @@ import java.util.List;
  *
  * @author Eduardo
  */
+//Intrfaz para el servicio del vehiculo
 public interface IVehiculoService {
     
     List<Vehiculo> obtenerTodos();

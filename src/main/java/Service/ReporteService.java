@@ -8,6 +8,8 @@ package Service;
  *
  * @author Eduardo
  */
+
+//Interfaz del reporte
 public interface ReporteService {
     void generarReporteVentasMes(int mes);
 }
